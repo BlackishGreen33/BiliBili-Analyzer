@@ -1,16 +1,16 @@
 {
-  "name": "zhixuetupu",
+  "name": "bilibili-analyzer",
   "version": "0.1.0",
   "private": true,
-  "description": "智学图谱 - 学习分析系统(软工导论)",
+  "description": "哔哩哔哩近期热门视频分类检索分析系统 - 数据库大作业",
   "author": "BlackishGreen33 <s5460703@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BlackishGreen33/ZhiXueTuPu.git"
+    "url": "git+https://github.com/BlackishGreen33/BiliBili-Analyzer.git"
   },
   "bugs": {
-    "url": "https://github.com/BlackishGreen33/ZhiXueTuPu/issues"
+    "url": "https://github.com/BlackishGreen33/BiliBili-Analyzer/issues"
   },
   "scripts": {
     "dev": "next dev",
