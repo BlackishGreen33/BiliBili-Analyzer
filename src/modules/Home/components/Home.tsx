@@ -262,6 +262,7 @@ const Home: React.FC = React.memo(() => {
                         width={200}
                         height={200}
                         loading="lazy"
+                        referrerPolicy="no-referrer"
                       />
                     }
                   >
@@ -301,6 +302,7 @@ const Home: React.FC = React.memo(() => {
                           width={20}
                           height={20}
                           loading="lazy"
+                          referrerPolicy="no-referrer"
                         />
                         {item.UP}
                       </div>
