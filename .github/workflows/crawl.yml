@@ -34,10 +34,14 @@ jobs:
           git checkout --orphan result
           git pull origin result
           git reset
-      - name: Install dependencies
-        run: npm install
+      - name: pnpm setup
+        uses: pnpm/action-setup@v3
+        with:
+          version: '9.1.2'
+      - name: Install node modules
+        run: pnpm install
       - name: Crawl data
-        run: npm run start
+        run: pnpm run crawldata
       - name: Push to result branch
         run: |
           git add result/* -f

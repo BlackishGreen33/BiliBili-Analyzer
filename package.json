@@ -18,7 +18,8 @@
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "crawldata": "node CrawlData.cjs"
   },
   "dependencies": {
     "@ant-design/pro-components": "^2.7.9",
