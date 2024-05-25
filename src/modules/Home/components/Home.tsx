@@ -14,8 +14,11 @@ import {
   Tag,
   Typography,
 } from 'antd';
+import { ThemeProvider } from 'antd-style';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+
+import useStore from '@/common/hooks/useStore';
 
 const { Text, Title, Paragraph } = Typography;
 
@@ -44,6 +47,8 @@ const Home: React.FC = React.memo(() => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const [form] = ProForm.useForm();
+
+  const { currentColor, currentMode } = useStore();
 
   useEffect(() => {
     setLoading(true);
@@ -166,134 +171,143 @@ const Home: React.FC = React.memo(() => {
 
   return (
     <>
-      <ConfigProvider
+      <ThemeProvider
+        themeMode={currentMode === 'Light' ? 'light' : 'dark'}
         theme={{
-          components: {
-            Cascader: {
-              controlItemWidth: 200,
-              dropdownHeight: 500,
-            },
+          token: {
+            colorPrimary: currentColor,
           },
         }}
       >
-        <div className={'box'}>
-          <Title level={3}>哔哩哔哩热门视频分类检索系统</Title>
-          <Card>
-            <Space size="large">
-              <Card.Meta
-                description={
-                  <Text>
-                    数据更新于：
-                    {new Date(videoData?.time || 0).toLocaleString()}
-                  </Text>
-                }
-              />
-              <Select
-                size="large"
-                style={{ width: 250 }}
-                options={dataList}
-                value={selectedTime}
-                onSelect={(value) => {
-                  changeTime(value);
-                }}
-              />
-            </Space>
-            {/* 搜索和分区选择表单 */}
-            <ProForm
-              form={form}
-              onReset={handleFilterChange}
-              onFinish={handleFilterChange}
-              submitter={{ onSubmit: handleFilterChange }}
-            >
-              <ProFormText
-                name="search"
-                label="搜索"
-                placeholder={'请输入视频标题、UP主名称或视频标签'}
-                fieldProps={{ size: 'large' }}
-              ></ProFormText>
-              <ProFormCascader
-                name="channel"
-                label="分区"
-                placeholder={'请选择分区'}
-                fieldProps={{
-                  options: channelOptions,
-                  // @ts-ignore
-                  multiple: true,
-                  maxTagCount: 'responsive',
-                }}
-              />
-            </ProForm>
-          </Card>
-        </div>
-        {/* 视频列表 */}
-        <div className="box">
-          <List
-            rowKey={(item) => item.url}
-            loading={loading}
-            pagination={{ pageSize: 12, showSizeChanger: false }}
-            dataSource={filteredData}
-            grid={{ gutter: 30, column: 4 }}
-            renderItem={(item) => (
-              <List.Item>
-                <Card
-                  hoverable
-                  cover={
-                    <Image
-                      alt={item.title}
-                      src={item.cover}
-                      width={200}
-                      height={200}
-                      loading="lazy"
-                    />
+        <ConfigProvider
+          theme={{
+            components: {
+              Cascader: {
+                controlItemWidth: 200,
+                dropdownHeight: 500,
+              },
+            },
+          }}
+        >
+          <div className={'box'}>
+            <Title level={3}>哔哩哔哩热门视频分类检索系统</Title>
+            <Card>
+              <Space size="large">
+                <Card.Meta
+                  description={
+                    <Text>
+                      数据更新于：
+                      {new Date(videoData?.time || 0).toLocaleString()}
+                    </Text>
                   }
-                >
-                  <Card.Meta
-                    title={
-                      <a href={item.url} target={'_blank'}>
-                        {item.title}
-                      </a>
-                    }
-                    description={
-                      <Paragraph
-                        ellipsis={{
-                          rows: 3,
-                        }}
-                      >
-                        {/* 视频标签 */}
-                        <Tag bordered={false} color="red">
-                          {item.tags.firstChannel}
-                        </Tag>
-                        <Tag bordered={false} color="green">
-                          {item.tags.secondChannel}
-                        </Tag>
-                        {item.tags.ordinaryTags.map((tag) => (
-                          <Tag key={tag} bordered={false}>
-                            {tag}
-                          </Tag>
-                        ))}
-                      </Paragraph>
-                    }
-                  />
-                  <div className="card-content">
-                    <div>
-                      {/* UP主信息 */}
+                />
+                <Select
+                  size="large"
+                  style={{ width: 250 }}
+                  options={dataList}
+                  value={selectedTime}
+                  onSelect={(value) => {
+                    changeTime(value);
+                  }}
+                />
+              </Space>
+              {/* 搜索和分区选择表单 */}
+              <ProForm
+                form={form}
+                onReset={handleFilterChange}
+                onFinish={handleFilterChange}
+                submitter={{ onSubmit: handleFilterChange }}
+              >
+                <ProFormText
+                  name="search"
+                  label="搜索"
+                  placeholder={'请输入视频标题、UP主名称或视频标签'}
+                  fieldProps={{ size: 'large' }}
+                ></ProFormText>
+                <ProFormCascader
+                  name="channel"
+                  label="分区"
+                  placeholder={'请选择分区'}
+                  fieldProps={{
+                    options: channelOptions,
+                    // @ts-ignore
+                    multiple: true,
+                    maxTagCount: 'responsive',
+                  }}
+                />
+              </ProForm>
+            </Card>
+          </div>
+          {/* 视频列表 */}
+          <div className="box">
+            <List
+              rowKey={(item) => item.url}
+              loading={loading}
+              pagination={{ pageSize: 12, showSizeChanger: false }}
+              dataSource={filteredData}
+              grid={{ gutter: 30, column: 4 }}
+              renderItem={(item) => (
+                <List.Item>
+                  <Card
+                    hoverable
+                    cover={
                       <Image
-                        src="https://s1.hdslb.com/bfs/static/jinkela/popular/assets/icon_up.png"
-                        alt="up"
-                        width={20}
-                        height={20}
+                        alt={item.title}
+                        src={item.cover}
+                        width={200}
+                        height={200}
                         loading="lazy"
                       />
-                      {item.UP}
+                    }
+                  >
+                    <Card.Meta
+                      title={
+                        <a href={item.url} target={'_blank'}>
+                          {item.title}
+                        </a>
+                      }
+                      description={
+                        <Paragraph
+                          ellipsis={{
+                            rows: 3,
+                          }}
+                        >
+                          {/* 视频标签 */}
+                          <Tag bordered={false} color="red">
+                            {item.tags.firstChannel}
+                          </Tag>
+                          <Tag bordered={false} color="green">
+                            {item.tags.secondChannel}
+                          </Tag>
+                          {item.tags.ordinaryTags.map((tag) => (
+                            <Tag key={tag} bordered={false}>
+                              {tag}
+                            </Tag>
+                          ))}
+                        </Paragraph>
+                      }
+                    />
+                    <div className="card-content">
+                      <div>
+                        {/* UP主信息 */}
+                        <Image
+                          src="https://s1.hdslb.com/bfs/static/jinkela/popular/assets/icon_up.png"
+                          alt="up"
+                          width={20}
+                          height={20}
+                          loading="lazy"
+                        />
+                        {item.UP}
+                      </div>
+                      <div>播放量：{item.views}</div>
                     </div>
-                    <div>播放量：{item.views}</div>
-                  </div>
-                </Card>
-              </List.Item>
-            )}
-          />
-        </div>
-      </ConfigProvider>
+                  </Card>
+                </List.Item>
+              )}
+            />
+          </div>
+        </ConfigProvider>
+      </ThemeProvider>
     </>
   );
 });
