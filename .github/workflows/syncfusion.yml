@@ -1,0 +1,24 @@
+name: Syncfusion License
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v4
+      - name: pnpm setup
+        uses: pnpm/action-setup@v3
+        with:
+          version: '9.1.2'
+      - name: Install node modules
+        run: pnpm install
+      - name: Activate Syncfusion License
+        run: npx syncfusion-license activate
+        env:
+          SYNCFUSION_LICENSE: ${{ secrets.SYNCFUSION_LICENSE }}
