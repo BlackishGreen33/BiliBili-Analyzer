@@ -1,11 +1,11 @@
 import { NextPage } from 'next';
 
-import Ecommerce from '@/modules/dashboard/Ecommerce';
+import Home from '@/modules/Home';
 
 const HomePage: NextPage = () => {
   return (
     <>
-      <Ecommerce />
+      <Home />
     </>
   );
 };

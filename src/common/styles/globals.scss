@@ -168,3 +168,19 @@ h6 {
 .e-input-group.e-control-wrapper.e-error:not(.e-float-icon-left) {
   border: none;
 }
+
+.box {
+  width: 70vw;
+  margin: 0 auto 50px;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  height: 20px;
+}
+
+.card-content > div {
+  display: flex;
+  line-height: 20px;
+}

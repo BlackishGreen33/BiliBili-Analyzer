@@ -18,12 +18,17 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'i.ibb.co',
+        hostname: 'i0.hdslb.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 's1.hdslb.com',
         port: '',
         pathname: '/**',
       },
     ],
-    formats: ['image/avif', 'image/webp'],
   },
 };
 
