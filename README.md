@@ -1,19 +1,19 @@
 <div align="center">
-  <h1 align="center">智学图谱</h1>
-  <h3>学习分析系统</h3>
-  <a href="https://github.com/BlackishGreen33/ZhiXueTuPu"><strong>探索项目文档 »</strong></a>
+  <h1 align="center">BiliBili-Analyzer</h1>
+  <h3>哔哩哔哩近期热门视频分类检索分析系统</h3>
+  <a href="https://github.com/BlackishGreen33/BiliBili-Analyzer"><strong>探索项目文档 »</strong></a>
   <br />
   <br />
 
-![license](https://img.shields.io/github/license/BlackishGreen33/ZhiXueTuPu)
-![language](https://img.shields.io/github/languages/top/BlackishGreen33/ZhiXueTuPu)
-![last](https://img.shields.io/github/last-commit/BlackishGreen33/ZhiXueTuPu)
+![license](https://img.shields.io/github/license/BlackishGreen33/BiliBili-Analyzer)
+![language](https://img.shields.io/github/languages/top/BlackishGreen33/BiliBili-Analyzer)
+![last](https://img.shields.io/github/last-commit/BlackishGreen33/BiliBili-Analyzer)
 
-<a href="https://zhixuetupu.vercel.app/" target="_blank">在线体验</a>
+<a href="https://bilibili-analyzer.vercel.app/" target="_blank">在线体验</a>
 ·
-<a href="https://github.com/BlackishGreen33/ZhiXueTuPu/issues">报告Bug</a>
+<a href="https://github.com/BlackishGreen33/BiliBili-Analyzer/issues">报告Bug</a>
 ·
-<a href="https://github.com/BlackishGreen33/ZhiXueTuPu/issues">提出新特性</a>
+<a href="https://github.com/BlackishGreen33/BiliBili-Analyzer/issues">提出新特性</a>
 
 </div>
 
@@ -37,8 +37,8 @@
 ### 💻 本地调试
 
 ```bash
-$ git clone https://github.com/BlackishGreen33/ZhiXueTuPu.git
-$ cd ZhiXueTuPu
+$ git clone https://github.com/BlackishGreen33/BiliBili-Analyzer.git
+$ cd BiliBili-Analyzer
 $ pnpm install
 $ pnpm run dev
 ```
