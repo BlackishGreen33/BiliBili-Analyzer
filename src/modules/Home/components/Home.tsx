@@ -161,6 +161,11 @@ const Home: React.FC = React.memo(() => {
     setLoading(false);
   };
 
+  const fetchVideoInfo = async (url: string) => {
+    const response = await axios.post('/api/videoInfo', { url: url });
+    console.log(response.data);
+  };
+
   return (
     <div className="m-2 mt-24 p-2 md:m-10 md:p-10">
       <ThemeProvider
@@ -182,7 +187,9 @@ const Home: React.FC = React.memo(() => {
           }}
         >
           <div className="mx-auto mb-[50px] mt-0 w-[70vw]">
-            <Title level={3} className='m-auto'>哔哩哔哩热门视频分类检索系统</Title>
+            <Title level={3} className="m-auto">
+              哔哩哔哩热门视频分类检索系统
+            </Title>
             <Card>
               <Space size="large" className="flex flex-col md:flex-row">
                 <Card.Meta
@@ -247,7 +254,7 @@ const Home: React.FC = React.memo(() => {
                         : 4,
               }}
               renderItem={(item) => (
-                <List.Item>
+                <List.Item onClick={() => fetchVideoInfo(item.url)}>
                   <Card
                     hoverable
                     cover={
