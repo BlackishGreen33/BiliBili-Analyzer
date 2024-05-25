@@ -23,7 +23,6 @@ import useStore from '@/common/hooks/useStore';
 
 const { Text, Title, Paragraph } = Typography;
 
-// 定义VideoData类型，用于存储视频的相关信息
 type VideoData = {
   url: string;
   cover: string;
@@ -32,7 +31,7 @@ type VideoData = {
   views: string;
   tags: { firstChannel: string; secondChannel: string; ordinaryTags: string[] };
 };
-// 定义数据的类型，包括时间和视频数组
+
 type Data = {
   time: number;
   video: VideoData[];
@@ -43,13 +42,13 @@ const Home: React.FC = React.memo(() => {
     []
   );
   const [selectedTime, setSelectedTime] = useState('');
-  const [videoData, setVideoData] = useState<Data>(); // 视频数据
-  const [filteredData, setFilteredData] = useState<VideoData[]>([]); // 过滤后的视频数据
+  const [videoData, setVideoData] = useState<Data>();
+  const [filteredData, setFilteredData] = useState<VideoData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const [form] = ProForm.useForm();
 
-  const { currentColor, currentMode } = useStore();
+  const { currentColor, currentMode, screenSize } = useStore();
 
   useEffect(() => {
     setLoading(true);
@@ -84,10 +83,8 @@ const Home: React.FC = React.memo(() => {
       });
   }, []);
 
-  // 根据选择的数据，展示视频
   const changeTime = (filename: string) => {
     setLoading(true);
-    // 获取数据，更新 videoData 和 filteredData 状态
     axios
       .get(
         `https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result/${filename}.json`
@@ -101,40 +98,32 @@ const Home: React.FC = React.memo(() => {
       });
   };
 
-  // 定义分区选择器的选项类型
-  interface Option {
+  type Option = {
     value: string;
     label: string;
     children?: Option[];
-  }
+  };
 
-  // 构建分区选择器的选项数组
   const channelOptions: Option[] = [];
-  // 遍历视频数据，构建分区选择器的选项
   videoData?.video.forEach((v) => {
     if (v.tags.firstChannel && v.tags.secondChannel) {
-      // 查找选项数组中是否已经存在该一级分区
       const existingChannel = channelOptions.find(
         (entry) => entry.label === v.tags.firstChannel
       );
 
-      // 如果已经存在
       if (existingChannel) {
         existingChannel.children = existingChannel.children || [];
-        // 查找子选项数组中是否已经存在该二级分区
         const existingSecondChannel = existingChannel.children.find(
           (child) => child.label === v.tags.secondChannel
         );
 
         if (!existingSecondChannel) {
-          // 将该二级分区添加到子选项数组中
           existingChannel.children.push({
             label: v.tags.secondChannel,
             value: v.tags.secondChannel,
           });
         }
       } else {
-        // 如果不存在，将该一级分区和二级分区添加到选项数组中
         channelOptions.push({
           label: v.tags.firstChannel,
           value: v.tags.firstChannel,
@@ -149,10 +138,8 @@ const Home: React.FC = React.memo(() => {
     }
   });
 
-  // 处理分区和搜索条件的变化
   const handleFilterChange = async (values: any): Promise<void> => {
     setLoading(true);
-    // 根据分区和搜索条件过滤结果
     const filteredResults = videoData?.video.filter((item) => {
       const matchesChannel =
         !values.channel ||
@@ -175,7 +162,7 @@ const Home: React.FC = React.memo(() => {
   };
 
   return (
-    <>
+    <div className="m-2 mt-24 p-2 md:m-10 md:p-10">
       <ThemeProvider
         themeMode={currentMode === 'Light' ? 'light' : 'dark'}
         theme={{
@@ -194,10 +181,10 @@ const Home: React.FC = React.memo(() => {
             },
           }}
         >
-          <div className={'box'}>
-            <Title level={3}>哔哩哔哩热门视频分类检索系统</Title>
+          <div className="mx-auto mb-[50px] mt-0 w-[70vw]">
+            <Title level={3} className='m-auto'>哔哩哔哩热门视频分类检索系统</Title>
             <Card>
-              <Space size="large">
+              <Space size="large" className="flex flex-col md:flex-row">
                 <Card.Meta
                   description={
                     <Text>
@@ -216,7 +203,6 @@ const Home: React.FC = React.memo(() => {
                   }}
                 />
               </Space>
-              {/* 搜索和分区选择表单 */}
               <ProForm
                 form={form}
                 onReset={handleFilterChange}
@@ -243,14 +229,23 @@ const Home: React.FC = React.memo(() => {
               </ProForm>
             </Card>
           </div>
-          {/* 视频列表 */}
-          <div className="box">
+          <div className="mx-auto mb-[50px] mt-0 w-[70vw]">
             <List
               rowKey={(item) => item.url}
               loading={loading}
               pagination={{ pageSize: 12, showSizeChanger: false }}
               dataSource={filteredData}
-              grid={{ gutter: 30, column: 4 }}
+              grid={{
+                gutter: 30,
+                column:
+                  screenSize! <= 768
+                    ? 1
+                    : screenSize! <= 1024
+                      ? 2
+                      : screenSize! <= 1280
+                        ? 3
+                        : 4,
+              }}
               renderItem={(item) => (
                 <List.Item>
                   <Card
@@ -278,7 +273,6 @@ const Home: React.FC = React.memo(() => {
                             rows: 3,
                           }}
                         >
-                          {/* 视频标签 */}
                           <Tag bordered={false} color="red">
                             {item.tags.firstChannel}
                           </Tag>
@@ -293,9 +287,8 @@ const Home: React.FC = React.memo(() => {
                         </Paragraph>
                       }
                     />
-                    <div className="card-content">
-                      <div>
-                        {/* UP主信息 */}
+                    <div className="mb-4 flex h-5 justify-between">
+                      <div className="flex gap-1">
                         <Image
                           src="https://s1.hdslb.com/bfs/static/jinkela/popular/assets/icon_up.png"
                           alt="up"
@@ -315,7 +308,7 @@ const Home: React.FC = React.memo(() => {
           </div>
         </ConfigProvider>
       </ThemeProvider>
-    </>
+    </div>
   );
 });
 
