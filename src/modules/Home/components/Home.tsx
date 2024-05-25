@@ -15,6 +15,7 @@ import {
   Typography,
 } from 'antd';
 import { ThemeProvider } from 'antd-style';
+import axios from 'axios';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
@@ -52,29 +53,33 @@ const Home: React.FC = React.memo(() => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(
-      'https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result/list.json'
-    )
-      .then((res) => res.json())
-      .then((list) => {
-        const lists = list.map((fileName: string) => {
-          return { value: fileName, label: fileName };
-        });
+    axios
+      .get(
+        'https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result/list.json'
+      )
+      .then((response) => {
+        const lists = response.data.map((fileName: string) => ({
+          value: fileName,
+          label: fileName,
+        }));
         setDataList(lists);
-        return list[0];
+        return response.data[0];
       })
       .then((filename) => {
-        // 获取数据，更新 videoData 和 filteredData 状态
-        fetch(
-          `https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result/${filename}.json`
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            setVideoData(data);
-            setFilteredData(data.video);
+        axios
+          .get(
+            `https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result/${filename}.json`
+          )
+          .then((dataResponse) => {
+            setVideoData(dataResponse.data);
+            setFilteredData(dataResponse.data.video);
             setLoading(false);
             setSelectedTime(filename);
             form.resetFields();
+          })
+          .catch((error) => {
+            console.error('There was an error fetching the data:', error);
+            setLoading(false);
           });
       });
   }, []);
@@ -83,13 +88,13 @@ const Home: React.FC = React.memo(() => {
   const changeTime = (filename: string) => {
     setLoading(true);
     // 获取数据，更新 videoData 和 filteredData 状态
-    fetch(
-      `https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result/${filename}.json`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setVideoData(data);
-        setFilteredData(data.video);
+    axios
+      .get(
+        `https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result/${filename}.json`
+      )
+      .then((dataResponse) => {
+        setVideoData(dataResponse.data);
+        setFilteredData(dataResponse.data.video);
         setLoading(false);
         setSelectedTime(filename);
         form.resetFields();
