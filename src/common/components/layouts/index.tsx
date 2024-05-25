@@ -25,6 +25,21 @@ const Layout: React.FC<LayoutProps> = React.memo(({ children }) => {
     setThemeSettings,
   } = useStore();
 
+  const chatbotScript = `
+  <script>
+window.embeddedChatbotConfig = {
+chatbotId: "WWELx6VqHYeHPfUGO8a2J",
+domain: "www.chatbase.co"
+}
+</script>
+<script
+src="https://www.chatbase.co/embed.min.js"
+chatbotId="WWELx6VqHYeHPfUGO8a2J"
+domain="www.chatbase.co"
+defer>
+</script>
+`;
+
   useEffect(() => {
     const currentThemeColor = localStorage.getItem('colorMode');
     const currentThemeMode =
@@ -39,7 +54,7 @@ const Layout: React.FC<LayoutProps> = React.memo(({ children }) => {
     <>
       <div className={currentMode === 'Dark' ? 'dark' : ''}>
         <div className="relative flex dark:bg-main-dark-bg">
-          <div className="fixed bottom-4 right-4" style={{ zIndex: '1000' }}>
+          <div className="fixed bottom-20 right-4" style={{ zIndex: '1000' }}>
             <TooltipComponent content="Settings">
               <button
                 type="button"
@@ -73,6 +88,7 @@ const Layout: React.FC<LayoutProps> = React.memo(({ children }) => {
               {themeSettings && <ThemeSettings />}
               {children}
             </div>
+            <div dangerouslySetInnerHTML={{ __html: chatbotScript }} />
             <Footer />
           </div>
         </div>
