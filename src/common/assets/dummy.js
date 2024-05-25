@@ -12,7 +12,6 @@ import {
   BsChatLeft,
   BsCurrencyDollar,
   BsKanban,
-  BsRobot,
   BsShield,
 } from 'react-icons/bs';
 import {
@@ -565,10 +564,6 @@ export const links = [
       {
         name: 'colorpicker',
         icon: <BiColorFill />,
-      },
-      {
-        name: 'chatbot',
-        icon: <BsRobot />,
       },
     ],
   },
