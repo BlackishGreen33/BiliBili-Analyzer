@@ -12,8 +12,8 @@ import GlobalStyles from '@/common/styles/GlobalStyles';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: '智慧图谱',
-  description: '学习分析系统',
+  title: '哔哩哔哩近期热门视频分类检索分析系统',
+  description: '哔哩哔哩近期热门视频分类检索分析系统',
 };
 
 export default function RootLayout({
