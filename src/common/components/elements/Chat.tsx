@@ -2,8 +2,8 @@ import Image from 'next/image';
 import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 
-import { chatData } from '@/common/assets/dummy';
 import useStore from '@/common/hooks/useStore';
+import { chatData } from '../../dummy/dummy';
 
 import { Button } from '.';
 

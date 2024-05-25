@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-import { links } from '@/common/assets/dummy';
 import useStore from '@/common/hooks/useStore';
+import { links } from '../../dummy/dummy';
 
 import NavLink from '../elements/NavLink';
 
@@ -25,8 +25,8 @@ const Navigation: React.FC = React.memo(() => {
           </p>
           {item.links.map((link) => (
             <NavLink
-              href={`/${link.name}`}
-              key={link.name}
+              href={`/${link.nav}`}
+              key={link.nav}
               onClick={handleCloseSideBar}
               currentColor={currentColor}
             >

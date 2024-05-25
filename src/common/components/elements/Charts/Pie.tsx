@@ -10,9 +10,8 @@ import {
   Inject,
   PieSeries,
 } from '@syncfusion/ej2-react-charts';
+import { useTheme } from 'next-themes';
 import React from 'react';
-
-import useStore from '@/common/hooks/useStore';
 
 interface PieProps {
   id: string;
@@ -23,14 +22,14 @@ interface PieProps {
 
 const Pie: React.FC<PieProps> = React.memo(
   ({ id, data, legendVisiblity, height }) => {
-    const { currentMode } = useStore();
+    const { theme } = useTheme();
 
     return (
       <AccumulationChartComponent
         id={id}
         legendSettings={{ visible: legendVisiblity, background: 'white' }}
         height={height}
-        background={currentMode === 'Dark' ? '#33373E' : '#fff'}
+        background={theme === 'dark' ? '#33373E' : '#fff'}
         tooltip={{ enable: true }}
       >
         <Inject
