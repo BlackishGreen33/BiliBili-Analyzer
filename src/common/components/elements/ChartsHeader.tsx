@@ -9,7 +9,7 @@ const ChartsHeader: React.FC<ChartsHeaderProps> = React.memo(
   ({ category, title }) => (
     <div className=" mb-10">
       <div>
-        <p className="text-lg text-gray-400">Chart</p>
+        <p className="text-lg text-gray-400">统计图表</p>
         <p className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-gray-200">
           {category}
         </p>
