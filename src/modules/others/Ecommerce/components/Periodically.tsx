@@ -11,7 +11,7 @@ import {
   weeklyStats,
 } from '../../../../common/dummy/dummy';
 
-import product9 from '@/common/assets/product9.jpg';
+const product9 = './assets/product9.jpg';
 
 const Periodically: React.FC = () => {
   const { currentColor } = useStore();
