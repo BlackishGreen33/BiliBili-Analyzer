@@ -20,7 +20,12 @@ interface NavLinkProps {
 const NavLink: React.FC<NavLinkProps> = React.memo(
   ({ href, exact = false, children, currentColor, ...props }) => {
     const pathname = usePathname();
-    const isActive = exact ? pathname === href : pathname.startsWith(href);
+    const isActive =
+      pathname === '/' && href === '/search'
+        ? true
+        : exact
+          ? pathname === href
+          : pathname.startsWith(href);
 
     const newProps = {
       ...props,

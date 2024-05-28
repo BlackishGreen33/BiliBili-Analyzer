@@ -5,7 +5,7 @@ import {
   AiOutlineShoppingCart,
   AiOutlineStock,
 } from 'react-icons/ai';
-import { BiColorFill } from 'react-icons/bi';
+import { BiColorFill, BiCommentDetail } from 'react-icons/bi';
 import {
   BsBarChart,
   BsBoxSeam,
@@ -27,6 +27,7 @@ import { GiLouvrePyramid } from 'react-icons/gi';
 import { GrLocation } from 'react-icons/gr';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { IoMdContacts } from 'react-icons/io';
+import { LuSearch } from 'react-icons/lu';
 import { MdOutlineSupervisorAccount } from 'react-icons/md';
 import { RiContactsLine, RiStockLine } from 'react-icons/ri';
 import { TiTick } from 'react-icons/ti';
@@ -520,87 +521,103 @@ export const employeesGrid = [
 
 export const links = [
   {
-    title: 'Dashboard',
+    title: '检索系统',
     links: [
       {
-        name: 'ecommerce',
-        icon: <FiShoppingBag />,
+        name: '热门视频分类检索',
+        nav: 'search',
+        icon: <LuSearch />,
+      },
+      {
+        name: '视频详细信息',
+        nav: 'details',
+        icon: <BiCommentDetail />,
       },
     ],
   },
 
   {
-    title: 'Pages',
+    title: '其它',
     links: [
       {
+        name: 'ecommerce',
+        nav: 'ecommerce',
+        icon: <FiShoppingBag />,
+      },
+      {
         name: 'orders',
+        nav: 'orders',
         icon: <AiOutlineShoppingCart />,
       },
       {
         name: 'employees',
+        nav: 'employees',
         icon: <IoMdContacts />,
       },
       {
         name: 'customers',
+        nav: 'customers',
         icon: <RiContactsLine />,
       },
-    ],
-  },
-  {
-    title: 'Apps',
-    links: [
       {
         name: 'calendar',
+        nav: 'calendar',
         icon: <AiOutlineCalendar />,
       },
       {
         name: 'kanban',
+        nav: 'kanban',
         icon: <BsKanban />,
       },
       {
         name: 'editor',
+        nav: 'editor',
         icon: <FiEdit />,
       },
       {
         name: 'colorpicker',
+        nav: 'colorpicker',
         icon: <BiColorFill />,
       },
-    ],
-  },
-  {
-    title: 'Charts',
-    links: [
       {
         name: 'line',
+        nav: 'line',
         icon: <AiOutlineStock />,
       },
       {
         name: 'area',
+        nav: 'area',
         icon: <AiOutlineAreaChart />,
       },
 
       {
         name: 'bar',
+        nav: 'bar',
         icon: <AiOutlineBarChart />,
       },
       {
         name: 'pie',
+        nav: 'pie',
         icon: <FiPieChart />,
       },
       {
         name: 'financial',
+        nav: 'financial',
         icon: <RiStockLine />,
       },
       {
         name: 'colormapping',
+        nav: 'colormapping',
         icon: <BsBarChart />,
       },
       {
         name: 'pyramid',
+        nav: 'pyramid',
         icon: <GiLouvrePyramid />,
       },
       {
         name: 'stacked',
+        nav: 'stacked',
         icon: <AiOutlineBarChart />,
       },
     ],

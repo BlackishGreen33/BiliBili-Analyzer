@@ -25,8 +25,8 @@ const Navigation: React.FC = React.memo(() => {
           </p>
           {item.links.map((link) => (
             <NavLink
-              href={`/${link.name}`}
-              key={link.name}
+              href={`/${link.nav}`}
+              key={link.nav}
               onClick={handleCloseSideBar}
               currentColor={currentColor}
             >
