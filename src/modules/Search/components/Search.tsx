@@ -15,8 +15,10 @@ import {
   Typography,
 } from 'antd';
 import { ThemeProvider } from 'antd-style';
-import axios from 'axios';import { useTheme } from 'next-themes';
+import axios from 'axios';
+import { useTheme } from 'next-themes';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 import useStore from '@/common/hooks/useStore';
@@ -50,6 +52,7 @@ const Home: React.FC = React.memo(() => {
 
   const { currentColor, screenSize } = useStore();
   const { theme } = useTheme();
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(true);
@@ -162,9 +165,15 @@ const Home: React.FC = React.memo(() => {
     setLoading(false);
   };
 
-  const fetchVideoInfo = async (url: string) => {
-    const response = await axios.post('/api/videoInfo', { url: url });
-    console.log(response.data);
+  const handleClicked = async (url: string) => {
+    const pattern = /video\/([a-zA-Z0-9]+)/;
+    const matchResult = url.match(pattern);
+    if (matchResult && matchResult[1]) {
+      const bvid = matchResult[1];
+      router.push('/details?bvid=' + bvid);
+    } else {
+      console.error('无法从 URL 中提取 BV 号');
+    }
   };
 
   return (
@@ -255,7 +264,7 @@ const Home: React.FC = React.memo(() => {
                         : 4,
               }}
               renderItem={(item) => (
-                <List.Item onClick={() => fetchVideoInfo(item.url)}>
+                <List.Item onClick={() => handleClicked(item.url)}>
                   <Card
                     hoverable
                     cover={

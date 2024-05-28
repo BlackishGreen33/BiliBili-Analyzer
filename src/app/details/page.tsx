@@ -1,9 +1,11 @@
 import { NextPage } from 'next';
 
+import Detail from '@/modules/Detail';
+
 const Page: NextPage = () => {
   return (
     <>
-      123
+      <Detail />
     </>
   );
 };
