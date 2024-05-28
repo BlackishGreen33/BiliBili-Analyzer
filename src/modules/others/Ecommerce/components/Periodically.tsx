@@ -101,7 +101,8 @@ const Periodically: React.FC = () => {
                 className="h-8 w-8 rounded-full"
                 src={item.image}
                 alt=""
-                loading="lazy"
+                loading="lazy"width={200}
+                height={200}
               />
             ))}
           </div>
@@ -130,7 +131,8 @@ const Periodically: React.FC = () => {
             className="h-50 md:w-96 "
             src={product9}
             alt=""
-            loading="lazy"
+            loading="lazy"width={200}
+            height={200}
           />
           <div className="mt-8">
             <p className="text-lg font-semibold">React 18 coming soon!</p>
