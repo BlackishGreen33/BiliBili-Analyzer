@@ -14,12 +14,12 @@ import {
 import { useTheme } from 'next-themes';
 import React from 'react';
 
+import { ChartsHeader } from '@/common/components/elements';
 import {
   barCustomSeries,
   barPrimaryXAxis,
   barPrimaryYAxis,
-} from '@/common/assets/dummy';
-import { ChartsHeader } from '@/common/components/elements';
+} from '../../../../common/dummy/dummy';
 
 const Bar: React.FC = React.memo(() => {
   const { theme } = useTheme();

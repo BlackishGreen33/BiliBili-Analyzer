@@ -3,13 +3,13 @@
 import Image from 'next/image';
 import { IoIosMore } from 'react-icons/io';
 
-import {
-  medicalproBranding,
-  SparklineAreaData,
-  weeklyStats,
-} from '@/common/assets/dummy';
 import { Button, SparkLine } from '@/common/components/elements';
 import useStore from '@/common/hooks/useStore';
+import {
+  SparklineAreaData,
+  medicalproBranding,
+  weeklyStats,
+} from '../../../../common/dummy/dummy';
 
 import product9 from '@/common/assets/product9.jpg';
 

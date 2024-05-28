@@ -2,9 +2,12 @@
 
 import { GoDotFill } from 'react-icons/go';
 
-import { ecomPieChartData, SparklineAreaData } from '@/common/assets/dummy';
 import { Button, Pie, SparkLine, Stacked } from '@/common/components/elements';
 import useStore from '@/common/hooks/useStore';
+import {
+  SparklineAreaData,
+  ecomPieChartData,
+} from '../../../../common/dummy/dummy';
 
 const Revenue: React.FC = () => {
   const { currentColor } = useStore();

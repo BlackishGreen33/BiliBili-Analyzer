@@ -32,17 +32,17 @@ import { RiContactsLine, RiStockLine } from 'react-icons/ri';
 import { TiTick } from 'react-icons/ti';
 
 import Image from 'next/image';
-import avatar from './avatar.jpg';
-import avatar2 from './avatar2.jpg';
-import avatar3 from './avatar3.png';
-import avatar4 from './avatar4.jpg';
-import product1 from './product1.jpg';
-import product2 from './product2.jpg';
-import product3 from './product3.jpg';
-import product4 from './product4.jpg';
-import product5 from './product5.jpg';
-import product6 from './product6.jpg';
-import product7 from './product7.jpg';
+const avatar = './assets/avatar.jpg';
+const avatar2 = './assets/avatar2.jpg';
+const avatar3 = './assets/avatar3.png';
+const avatar4 = './assets/avatar4.jpg';
+const product1 = './assets/product1.jpg';
+const product2 = './assets/product2.jpg';
+const product3 = './assets/product3.jpg';
+const product4 = './assets/product4.jpg';
+const product5 = './assets/product5.jpg';
+const product6 = './assets/product6.jpg';
+const product7 = './assets/product7.jpg';
 
 export const gridOrderImage = (props) => (
   <div>

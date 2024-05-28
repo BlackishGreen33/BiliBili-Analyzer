@@ -2,9 +2,9 @@
 
 import { BsCurrencyDollar } from 'react-icons/bs';
 
-import { earningData } from '@/common/assets/dummy';
 import { Button } from '@/common/components/elements';
 import useStore from '@/common/hooks/useStore';
+import { earningData } from '../../../../common/dummy/dummy';
 
 const Earnings: React.FC = () => {
   const { currentColor } = useStore();

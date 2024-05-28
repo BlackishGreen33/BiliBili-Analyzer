@@ -16,12 +16,12 @@ import {
 } from '@syncfusion/ej2-react-grids';
 import React from 'react';
 
+import Header from '@/common/components/elements/Header';
 import {
   contextMenuItems,
   ordersData,
   ordersGrid,
-} from '@/common/assets/dummy';
-import Header from '@/common/components/elements/Header';
+} from '../../../../common/dummy/dummy';
 
 const Orders: React.FC = React.memo(() => {
   const editing = { allowDeleting: true, allowEditing: true };

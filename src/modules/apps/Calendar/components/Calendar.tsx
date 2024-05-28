@@ -16,8 +16,8 @@ import {
 } from '@syncfusion/ej2-react-schedule';
 import React, { useState } from 'react';
 
-import { scheduleData } from '@/common/assets/dummy';
 import Header from '@/common/components/elements/Header';
+import { scheduleData } from '../../../../common/dummy/dummy';
 
 type CalendarProps = {};
 

@@ -17,7 +17,7 @@ import {
   lineCustomSeries,
   LinePrimaryXAxis,
   LinePrimaryYAxis,
-} from '@/common/assets/dummy';
+} from '../../../dummy/dummy';
 
 const LineChart: React.FC = React.memo(() => {
   const { theme } = useTheme();

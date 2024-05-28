@@ -1,7 +1,7 @@
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import React from 'react';
 
-import { dropdownData } from '@/common/assets/dummy';
+import { dropdownData } from '../../../../common/dummy/dummy';
 
 interface DropDownProps {
   currentMode: string;

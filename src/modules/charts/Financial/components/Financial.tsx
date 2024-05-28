@@ -15,12 +15,12 @@ import {
 import { useTheme } from 'next-themes';
 import React from 'react';
 
+import { ChartsHeader } from '@/common/components/elements';
 import {
   financialChartData,
   FinancialPrimaryXAxis,
   FinancialPrimaryYAxis,
-} from '@/common/assets/dummy';
-import { ChartsHeader } from '@/common/components/elements';
+} from '../../../../common/dummy/dummy';
 
 const date1 = new Date('2017, 1, 1');
 

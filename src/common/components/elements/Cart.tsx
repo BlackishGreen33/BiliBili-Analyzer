@@ -5,8 +5,8 @@ import React from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { MdOutlineCancel } from 'react-icons/md';
 
-import { cartData } from '@/common/assets/dummy';
 import useStore from '@/common/hooks/useStore';
+import { cartData } from '../../dummy/dummy';
 
 import { Button } from '.';
 

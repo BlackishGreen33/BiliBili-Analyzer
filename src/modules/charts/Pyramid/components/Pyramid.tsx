@@ -14,8 +14,8 @@ import {
 import { useTheme } from 'next-themes';
 import React from 'react';
 
-import { PyramidData } from '@/common/assets/dummy';
 import { ChartsHeader } from '@/common/components/elements';
+import { PyramidData } from '../../../../common/dummy/dummy';
 
 const Pyramid: React.FC = React.memo(() => {
   const { theme } = useTheme();

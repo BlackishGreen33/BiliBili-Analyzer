@@ -14,8 +14,8 @@ import {
 } from '@syncfusion/ej2-react-grids';
 import React from 'react';
 
-import { customersData, customersGrid } from '@/common/assets/dummy';
 import Header from '@/common/components/elements/Header';
+import { customersData, customersGrid } from '../../../../common/dummy/dummy';
 
 const Customers: React.FC = React.memo(() => {
   const selectionsettings = { persistSelection: true };

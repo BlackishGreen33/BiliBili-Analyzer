@@ -6,8 +6,8 @@ import React from 'react';
 import { BsCheck } from 'react-icons/bs';
 import { MdOutlineCancel } from 'react-icons/md';
 
-import { themeColors } from '@/common/assets/dummy';
 import useStore from '@/common/hooks/useStore';
+import { themeColors } from '../../dummy/dummy';
 
 const ThemeSettings = React.memo(() => {
   const { setCurrentColor, currentColor, setThemeSettings } = useStore();

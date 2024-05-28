@@ -2,9 +2,9 @@
 
 import { useTheme } from 'next-themes';
 
-import { recentTransactions } from '@/common/assets/dummy';
 import { Button, LineChart } from '@/common/components/elements';
 import useStore from '@/common/hooks/useStore';
+import { recentTransactions } from '../../../../common/dummy/dummy';
 
 import DropDown from './DropDown';
 

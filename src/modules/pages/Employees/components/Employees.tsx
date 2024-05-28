@@ -11,8 +11,8 @@ import {
 } from '@syncfusion/ej2-react-grids';
 import React from 'react';
 
-import { employeesData, employeesGrid } from '@/common/assets/dummy';
 import Header from '@/common/components/elements/Header';
+import { employeesData, employeesGrid } from '../../../../common/dummy/dummy';
 
 const Employees: React.FC = React.memo(() => {
   const toolbarOptions = ['Search'];
