@@ -26,7 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/common/dummy/dummy.js"
-, "src/common/dummy/AnalizationData.js"  ],
+    "src/common/dummy/dummy.js",
+    "src/common/dummy/AnalizationData.js"
+  ],
   "exclude": ["node_modules"]
 }

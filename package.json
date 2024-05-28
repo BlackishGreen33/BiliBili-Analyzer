@@ -19,7 +19,7 @@
     "lint": "next lint",
     "prettier": "prettier --write .",
     "prepare": "husky install",
-    "crawldata": "node CrawlData.cjs"
+    "crawldata": "node CrawlPopular.cjs"
   },
   "dependencies": {
     "@ant-design/pro-components": "^2.7.9",
@@ -60,7 +60,7 @@
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.10.0",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
     "eslint": "^9.3.0",
     "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",

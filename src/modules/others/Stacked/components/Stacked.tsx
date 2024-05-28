@@ -7,7 +7,7 @@ const Stacked = () => (
   <div className="m-4 mt-24 rounded-3xl bg-white p-10 dark:bg-secondary-dark-bg md:m-10">
     <ChartsHeader category="Stacked" title="Revenue Breakdown" />
     <div className="w-full">
-      <StackedChart />
+      <StackedChart stackedCustomSeries={[]} />
     </div>
   </div>
 );
