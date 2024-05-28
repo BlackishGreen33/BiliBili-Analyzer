@@ -42,6 +42,8 @@ const Chat: React.FC = React.memo(() => {
                 src={item.image}
                 alt={item.message}
                 loading="lazy"
+                width={200}
+                height={200}
               />
               <span
                 // @ts-ignore

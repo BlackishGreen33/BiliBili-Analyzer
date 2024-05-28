@@ -35,6 +35,8 @@ const Cart: React.FC = React.memo(() => {
                   src={item.image}
                   alt=""
                   loading="lazy"
+                  width={200}
+                  height={200}
                 />
                 <div>
                   <p className="font-semibold ">{item.name}</p>

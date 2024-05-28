@@ -46,6 +46,8 @@ const Notification: React.FC = React.memo(() => {
               src={item.image}
               alt={item.message}
               loading="lazy"
+              width={200}
+              height={200}
             />
             <div>
               <p className="font-semibold dark:text-gray-200">{item.message}</p>

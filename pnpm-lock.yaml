@@ -14,6 +14,9 @@ importers:
       '@emotion/styled':
         specifier: ^11.11.5
         version: 11.11.5(@emotion/react@11.11.4(@types/react@18.3.3)(react@18.3.1))(@types/react@18.3.3)(react@18.3.1)
+      '@iframe-resizer/react':
+        specifier: ^5.0.1
+        version: 5.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-icons':
         specifier: ^1.3.0
         version: 1.3.0(react@18.3.1)
@@ -435,6 +438,15 @@ packages:
   '@humanwhocodes/retry@0.3.0':
     resolution: {integrity: sha512-d2CGZR2o7fS6sWB7DG/3a95bGKQyHMACZ5aW8qGkkqQpUoZV6C0X7Pc7l4ZNMZkfNBf4VWNe9E1jRsf0G146Ew==}
     engines: {node: '>=18.18'}
+
+  '@iframe-resizer/core@5.0.1':
+    resolution: {integrity: sha512-djvVOADixEseQHQkBaBxRpCA8zo4GxIbTcjI851s3OzcMfscjwvVouevdSqdKkBRNQOxwEcCWqjC2JeU0Une3A==}
+
+  '@iframe-resizer/react@5.0.1':
+    resolution: {integrity: sha512-G6X1YStacNGx3W4LYu6IJ9aUFtYwVb9ykUC2LhRzCllMoU/wVErttezzMIOpC9j6+tu/Q+lVqV2DEgJNjaq16w==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -3705,6 +3717,15 @@ snapshots:
   '@humanwhocodes/object-schema@2.0.3': {}
 
   '@humanwhocodes/retry@0.3.0': {}
+
+  '@iframe-resizer/core@5.0.1': {}
+
+  '@iframe-resizer/react@5.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@iframe-resizer/core': 5.0.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      warning: 4.0.3
 
   '@isaacs/cliui@8.0.2':
     dependencies:
