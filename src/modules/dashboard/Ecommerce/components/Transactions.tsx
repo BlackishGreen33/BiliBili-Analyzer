@@ -1,5 +1,7 @@
 'use client';
 
+import { useTheme } from 'next-themes';
+
 import { recentTransactions } from '@/common/assets/dummy';
 import { Button, LineChart } from '@/common/components/elements';
 import useStore from '@/common/hooks/useStore';
@@ -7,14 +9,15 @@ import useStore from '@/common/hooks/useStore';
 import DropDown from './DropDown';
 
 const Transactions: React.FC = () => {
-  const { currentColor, currentMode } = useStore();
+  const { currentColor } = useStore();
+  const { theme } = useTheme();
 
   return (
     <div className="m-4 flex flex-wrap justify-center gap-10">
       <div className="rounded-2xl bg-white p-6 dark:bg-secondary-dark-bg dark:text-gray-200">
         <div className="flex items-center justify-between gap-2">
           <p className="text-xl font-semibold">Recent Transactions</p>
-          <DropDown currentMode={currentMode} />
+          <DropDown currentMode={theme!} />
         </div>
         <div className="mt-10 w-72 md:w-400">
           {recentTransactions.map((item) => (
@@ -55,7 +58,7 @@ const Transactions: React.FC = () => {
       <div className="w-96 rounded-2xl bg-white p-6 dark:bg-secondary-dark-bg dark:text-gray-200 md:w-760">
         <div className="mb-10 flex items-center justify-between gap-2">
           <p className="text-xl font-semibold">Sales Overview</p>
-          <DropDown currentMode={currentMode} />
+          <DropDown currentMode={theme!} />
         </div>
         <div className="overflow-auto md:w-full">
           <LineChart />

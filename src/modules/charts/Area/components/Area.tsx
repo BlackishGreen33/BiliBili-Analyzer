@@ -9,6 +9,7 @@ import {
   SeriesDirective,
   SplineAreaSeries,
 } from '@syncfusion/ej2-react-charts';
+import { useTheme } from 'next-themes';
 import React from 'react';
 
 import {
@@ -17,10 +18,9 @@ import {
   areaPrimaryYAxis,
 } from '@/common/assets/dummy';
 import { ChartsHeader } from '@/common/components/elements';
-import useStore from '@/common/hooks/useStore';
 
 const Area: React.FC = React.memo(() => {
-  const { currentMode } = useStore();
+  const { theme } = useTheme();
 
   return (
     <div className="m-4 mt-24 rounded-3xl bg-white p-10 dark:bg-secondary-dark-bg md:m-10">
@@ -32,7 +32,7 @@ const Area: React.FC = React.memo(() => {
           primaryXAxis={areaPrimaryXAxis}
           primaryYAxis={areaPrimaryYAxis}
           chartArea={{ border: { width: 0 } }}
-          background={currentMode === 'Dark' ? '#33373E' : '#fff'}
+          background={theme === 'dark' ? '#33373E' : '#fff'}
           legendSettings={{ background: 'white' }}
         >
           <Inject services={[SplineAreaSeries, DateTime, Legend]} />

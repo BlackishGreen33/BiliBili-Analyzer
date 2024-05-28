@@ -1,6 +1,7 @@
 'use client';
 
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
+import { useTheme } from 'next-themes';
 import React from 'react';
 import { BsCheck } from 'react-icons/bs';
 import { MdOutlineCancel } from 'react-icons/md';
@@ -9,13 +10,8 @@ import { themeColors } from '@/common/assets/dummy';
 import useStore from '@/common/hooks/useStore';
 
 const ThemeSettings = React.memo(() => {
-  const {
-    setCurrentColor,
-    setCurrentMode,
-    currentMode,
-    currentColor,
-    setThemeSettings,
-  } = useStore();
+  const { setCurrentColor, currentColor, setThemeSettings } = useStore();
+  const { setTheme, theme } = useTheme();
 
   return (
     <div className="nav-item fixed right-0 top-0 w-screen bg-half-transparent">
@@ -38,12 +34,12 @@ const ThemeSettings = React.memo(() => {
               type="radio"
               id="light"
               name="theme"
-              value="Light"
+              value="light"
               className="cursor-pointer"
               onChange={(e) =>
-                setCurrentMode(e.target.value === 'Light' ? 'Light' : 'Dark')
+                setTheme(e.target.value === 'light' ? 'light' : 'dark')
               }
-              checked={currentMode === 'Light'}
+              checked={theme === 'light'}
             />
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="light" className="text-md ml-2 cursor-pointer">
@@ -55,12 +51,12 @@ const ThemeSettings = React.memo(() => {
               type="radio"
               id="dark"
               name="theme"
-              value="Dark"
+              value="dark"
               onChange={(e) =>
-                setCurrentMode(e.target.value === 'Light' ? 'Light' : 'Dark')
+                setTheme(e.target.value === 'light' ? 'light' : 'dark')
               }
               className="cursor-pointer"
-              checked={currentMode === 'Dark'}
+              checked={theme === 'dark'}
             />
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="dark" className="text-md ml-2 cursor-pointer">

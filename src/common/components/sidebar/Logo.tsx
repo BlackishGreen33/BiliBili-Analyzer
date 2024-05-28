@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import React from 'react';
-import { SiShopware } from 'react-icons/si';
 import { FaBilibili } from 'react-icons/fa6';
 
 import useStore from '@/common/hooks/useStore';
@@ -23,7 +22,7 @@ const Logo: React.FC = React.memo(() => {
       className="ml-3 mt-6 flex items-center gap-3 text-xl font-extrabold tracking-tight"
       style={{ color: currentColor }}
     >
-      < FaBilibili /> <span>分类检索系统</span>
+      <FaBilibili /> <span>分类检索系统</span>
     </Link>
   );
 });

@@ -11,14 +11,14 @@ import {
   Inject,
   PyramidSeries,
 } from '@syncfusion/ej2-react-charts';
+import { useTheme } from 'next-themes';
 import React from 'react';
 
 import { PyramidData } from '@/common/assets/dummy';
 import { ChartsHeader } from '@/common/components/elements';
-import useStore from '@/common/hooks/useStore';
 
 const Pyramid: React.FC = React.memo(() => {
-  const { currentMode } = useStore();
+  const { theme } = useTheme();
 
   return (
     <div className="m-4 mt-24 rounded-3xl  bg-white p-10 dark:bg-secondary-dark-bg md:m-10">
@@ -28,7 +28,7 @@ const Pyramid: React.FC = React.memo(() => {
           id="pyramid-chart"
           legendSettings={{ background: 'white' }}
           tooltip={{ enable: true }}
-          background={currentMode === 'Dark' ? '#33373E' : '#fff'}
+          background={theme === 'dark' ? '#33373E' : '#fff'}
         >
           <Inject
             services={[

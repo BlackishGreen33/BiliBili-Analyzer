@@ -10,6 +10,7 @@ import {
   StackingColumnSeries,
   Tooltip,
 } from '@syncfusion/ej2-react-charts';
+import { useTheme } from 'next-themes';
 import React from 'react';
 
 import {
@@ -17,7 +18,6 @@ import {
   stackedPrimaryXAxis,
   stackedPrimaryYAxis,
 } from '@/common/assets/dummy';
-import useStore from '@/common/hooks/useStore';
 
 interface StackedProps {
   width?: string;
@@ -25,7 +25,7 @@ interface StackedProps {
 }
 
 const Stacked: React.FC<StackedProps> = React.memo(({ width, height }) => {
-  const { currentMode } = useStore();
+  const { theme } = useTheme();
 
   return (
     <ChartComponent
@@ -37,7 +37,7 @@ const Stacked: React.FC<StackedProps> = React.memo(({ width, height }) => {
       height={height}
       chartArea={{ border: { width: 0 } }}
       tooltip={{ enable: true }}
-      background={currentMode === 'Dark' ? '#33373E' : '#fff'}
+      background={theme === 'dark' ? '#33373E' : '#fff'}
       legendSettings={{ background: 'white' }}
     >
       <Inject services={[StackingColumnSeries, Category, Legend, Tooltip]} />

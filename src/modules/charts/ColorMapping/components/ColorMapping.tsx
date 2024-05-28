@@ -12,6 +12,7 @@ import {
   SeriesDirective,
   Tooltip,
 } from '@syncfusion/ej2-react-charts';
+import { useTheme } from 'next-themes';
 import React from 'react';
 
 import {
@@ -21,10 +22,9 @@ import {
   rangeColorMapping,
 } from '@/common/assets/dummy';
 import { ChartsHeader } from '@/common/components/elements';
-import useStore from '@/common/hooks/useStore';
 
 const ColorMapping: React.FC = React.memo(() => {
-  const { currentMode } = useStore();
+  const { theme } = useTheme();
 
   return (
     <div className="m-4 mt-24 rounded-3xl bg-white p-10 dark:bg-secondary-dark-bg md:m-10">
@@ -41,7 +41,7 @@ const ColorMapping: React.FC = React.memo(() => {
           chartArea={{ border: { width: 0 } }}
           legendSettings={{ mode: 'Range', background: 'white' }}
           tooltip={{ enable: true }}
-          background={currentMode === 'Dark' ? '#33373E' : '#fff'}
+          background={theme === 'dark' ? '#33373E' : '#fff'}
         >
           <Inject services={[ColumnSeries, Tooltip, Category, Legend]} />
           <SeriesCollectionDirective>

@@ -15,7 +15,7 @@ import {
   Typography,
 } from 'antd';
 import { ThemeProvider } from 'antd-style';
-import axios from 'axios';
+import axios from 'axios';import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
@@ -48,7 +48,8 @@ const Home: React.FC = React.memo(() => {
 
   const [form] = ProForm.useForm();
 
-  const { currentColor, currentMode, screenSize } = useStore();
+  const { currentColor, screenSize } = useStore();
+  const { theme } = useTheme();
 
   useEffect(() => {
     setLoading(true);
@@ -169,7 +170,7 @@ const Home: React.FC = React.memo(() => {
   return (
     <div className="m-2 mt-24 p-2 md:m-10 md:p-10">
       <ThemeProvider
-        themeMode={currentMode === 'Light' ? 'light' : 'dark'}
+        themeMode={theme === 'light' ? 'light' : 'dark'}
         theme={{
           token: {
             colorPrimary: currentColor,

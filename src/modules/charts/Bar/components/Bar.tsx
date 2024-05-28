@@ -11,6 +11,7 @@ import {
   SeriesDirective,
   Tooltip,
 } from '@syncfusion/ej2-react-charts';
+import { useTheme } from 'next-themes';
 import React from 'react';
 
 import {
@@ -19,10 +20,9 @@ import {
   barPrimaryYAxis,
 } from '@/common/assets/dummy';
 import { ChartsHeader } from '@/common/components/elements';
-import useStore from '@/common/hooks/useStore';
 
 const Bar: React.FC = React.memo(() => {
-  const { currentMode } = useStore();
+  const { theme } = useTheme();
 
   return (
     <div className="m-4 mt-24 rounded-3xl bg-white p-10 dark:bg-secondary-dark-bg md:m-10">
@@ -35,7 +35,7 @@ const Bar: React.FC = React.memo(() => {
           primaryYAxis={barPrimaryYAxis}
           chartArea={{ border: { width: 0 } }}
           tooltip={{ enable: true }}
-          background={currentMode === 'Dark' ? '#33373E' : '#fff'}
+          background={theme === 'dark' ? '#33373E' : '#fff'}
           legendSettings={{ background: 'white' }}
         >
           <Inject

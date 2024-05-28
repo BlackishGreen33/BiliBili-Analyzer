@@ -10,6 +10,7 @@ import {
   SeriesDirective,
   Tooltip,
 } from '@syncfusion/ej2-react-charts';
+import { useTheme } from 'next-themes';
 import React from 'react';
 
 import {
@@ -17,10 +18,9 @@ import {
   LinePrimaryXAxis,
   LinePrimaryYAxis,
 } from '@/common/assets/dummy';
-import useStore from '@/common/hooks/useStore';
 
 const LineChart: React.FC = React.memo(() => {
-  const { currentMode } = useStore();
+  const { theme } = useTheme();
 
   return (
     <ChartComponent
@@ -32,7 +32,7 @@ const LineChart: React.FC = React.memo(() => {
       primaryYAxis={LinePrimaryYAxis}
       chartArea={{ border: { width: 0 } }}
       tooltip={{ enable: true }}
-      background={currentMode === 'Dark' ? '#33373E' : '#fff'}
+      background={theme === 'dark' ? '#33373E' : '#fff'}
       legendSettings={{ background: 'white' }}
     >
       <Inject services={[LineSeries, DateTime, Legend, Tooltip]} />

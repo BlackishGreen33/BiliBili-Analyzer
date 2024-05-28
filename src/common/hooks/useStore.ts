@@ -3,7 +3,6 @@ import { create } from 'zustand';
 interface State {
   screenSize: undefined | number;
   currentColor: string;
-  currentMode: 'Light' | 'Dark';
   themeSettings: boolean;
   activeMenu: boolean;
   isClicked: {
@@ -14,7 +13,6 @@ interface State {
   };
   setScreenSize: (size: undefined | number) => void;
   setCurrentColor: (color: string) => void;
-  setCurrentMode: (mode: 'Light' | 'Dark') => void;
   setActiveMenu: (active: boolean) => void;
   setIsClicked: (clicked: {
     chat: boolean;
@@ -36,7 +34,6 @@ export const initialState = {
 const useStore = create<State>((set) => ({
   screenSize: undefined,
   currentColor: '#03C9D7',
-  currentMode: 'Light',
   themeSettings: false,
   activeMenu: true,
   isClicked: initialState,
@@ -45,10 +42,6 @@ const useStore = create<State>((set) => ({
   setCurrentColor: (color) => {
     set({ currentColor: color });
     localStorage.setItem('colorMode', color);
-  },
-  setCurrentMode: (mode) => {
-    set({ currentMode: mode });
-    localStorage.setItem('themeMode', mode);
   },
   setActiveMenu: (active) => set({ activeMenu: active }),
   setIsClicked: (clicked) => {

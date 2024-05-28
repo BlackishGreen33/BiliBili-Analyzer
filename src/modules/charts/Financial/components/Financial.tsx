@@ -12,6 +12,7 @@ import {
   Tooltip,
   Zoom,
 } from '@syncfusion/ej2-react-charts';
+import { useTheme } from 'next-themes';
 import React from 'react';
 
 import {
@@ -20,7 +21,6 @@ import {
   FinancialPrimaryYAxis,
 } from '@/common/assets/dummy';
 import { ChartsHeader } from '@/common/components/elements';
-import useStore from '@/common/hooks/useStore';
 
 const date1 = new Date('2017, 1, 1');
 
@@ -34,7 +34,7 @@ function filterValue(value) {
 const returnValue = financialChartData.filter(filterValue);
 
 const Financial: React.FC = React.memo(() => {
-  const { currentMode } = useStore();
+  const { theme } = useTheme();
 
   return (
     <div className="m-4 mt-24 rounded-3xl bg-white p-10 dark:bg-secondary-dark-bg md:m-10">
@@ -48,7 +48,7 @@ const Financial: React.FC = React.memo(() => {
           chartArea={{ border: { width: 0 } }}
           tooltip={{ enable: true, shared: true }}
           crosshair={{ enable: true, lineType: 'Vertical', line: { width: 0 } }}
-          background={currentMode === 'Dark' ? '#33373E' : '#fff'}
+          background={theme === 'dark' ? '#33373E' : '#fff'}
         >
           <Inject
             services={[
