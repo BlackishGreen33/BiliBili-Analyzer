@@ -1,0 +1,16 @@
+{
+	"manifest_version": 3,
+	"name": "BiliBili Search",
+	"version": "1.0.0",
+	"description": "获取 B 站视频信息",
+	"icons": {
+		"16": "img/logo.png",
+		"32": "img/logo.png",
+		"48": "img/logo.png",
+		"128": "img/logo.png"
+	},
+	"background": {
+		"service_worker": "background.js"
+	},
+	"permissions": ["tabs", "contextMenus"]
+}
