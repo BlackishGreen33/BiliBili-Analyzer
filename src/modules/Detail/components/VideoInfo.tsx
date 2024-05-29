@@ -49,7 +49,6 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
       });
     });
 
-    console.log('tags:', tags);
     return result;
   };
 
@@ -60,10 +59,7 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
 
   const getVideoTags = async () => {
     const res = await axios.post('/api/videoTags', { bvid: bvid });
-    setGetTags(res.data.data);
-    console.log('res:', res);
-    console.log('res.data:', res.data);
-    console.log('res.data.data:', res.data.data);
+    setGetTags(res.data);
   };
 
   useEffect(() => {
@@ -71,7 +67,6 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
       fetchVideoInfo();
       getVideoTags();
       if (getTags) {
-        console.log('createTagsArray(getTags):', createTagsArray(getTags));
         setTagProps(createTagsArray(getTags));
       }
     }
