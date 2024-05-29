@@ -59,7 +59,7 @@ const Navbar: React.FC = React.memo(() => {
   return (
     <div className="relative flex justify-between p-2 md:ml-6 md:mr-6">
       <NavButton
-        title="Menu"
+        title="菜单"
         customFunc={handleActiveMenu}
         color={currentColor}
         icon={<AiOutlineMenu />}

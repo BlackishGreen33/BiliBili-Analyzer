@@ -1,35 +1,21 @@
+import { BiCommentDetail } from 'react-icons/bi';
 import {
-  AiOutlineAreaChart,
-  AiOutlineBarChart,
-  AiOutlineCalendar,
-  AiOutlineShoppingCart,
-  AiOutlineStock,
-} from 'react-icons/ai';
-import { BiColorFill, BiCommentDetail } from 'react-icons/bi';
-import {
-  BsBarChart,
   BsBoxSeam,
   BsChatLeft,
   BsCurrencyDollar,
-  BsKanban,
   BsShield,
 } from 'react-icons/bs';
 import {
   FiBarChart,
   FiCreditCard,
-  FiEdit,
-  FiPieChart,
-  FiShoppingBag,
+  FiSettings,
   FiShoppingCart,
   FiStar,
 } from 'react-icons/fi';
-import { GiLouvrePyramid } from 'react-icons/gi';
 import { GrLocation } from 'react-icons/gr';
 import { HiOutlineRefresh } from 'react-icons/hi';
-import { IoMdContacts } from 'react-icons/io';
 import { LuSearch } from 'react-icons/lu';
 import { MdOutlineSupervisorAccount } from 'react-icons/md';
-import { RiContactsLine, RiStockLine } from 'react-icons/ri';
 import { TiTick } from 'react-icons/ti';
 
 import Image from 'next/image';
@@ -532,6 +518,16 @@ export const links = [
         name: '视频详细信息',
         nav: 'details',
         icon: <BiCommentDetail />,
+      },
+    ],
+  },
+  {
+    title: '个性化',
+    links: [
+      {
+        name: '设置中心',
+        nav: 'settings',
+        icon: <FiSettings />,
       },
     ],
   },
