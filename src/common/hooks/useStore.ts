@@ -6,9 +6,6 @@ interface State {
   themeSettings: boolean;
   activeMenu: boolean;
   isClicked: {
-    chat: boolean;
-    cart: boolean;
-    userProfile: boolean;
     notification: boolean;
   };
   setScreenSize: (size: undefined | number) => void;
