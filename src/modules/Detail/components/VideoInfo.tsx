@@ -22,9 +22,9 @@ type TagsData = {
 const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
   const [videoInfo, setVideoInfo] = useState(null);
   const [getTags, setGetTags] = useState<TagsData>({
-    firstChannel: '生活',
-    secondChannel: '搞笑',
-    ordinaryTags: ['勇敢哥特', '这是一个悲伤的故事'],
+    firstChannel: '',
+    secondChannel: '',
+    ordinaryTags: [''],
   });
   const [tagProps, setTagProps] = useState<{ text: string; value: number }[]>([
     { text: '', value: 0 },
@@ -35,16 +35,13 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
   ): { text: string; value: number }[] => {
     const result: { text: string; value: number }[] = [];
     result.push({
-      // @ts-ignore
       text: tags.firstChannel,
       value: 300,
     });
     result.push({
-      // @ts-ignore
       text: tags.secondChannel,
       value: 200,
     });
-    // @ts-ignore
     tags.ordinaryTags.forEach((tag) => {
       result.push({
         text: tag,
@@ -52,6 +49,7 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
       });
     });
 
+    console.log(result);
     return result;
   };
 
@@ -74,7 +72,7 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
         setTagProps(createTagsArray(getTags));
       }
     }
-  }, [bvid]);
+  }, [bvid, getTags]);
 
   return (
     videoInfo && (
@@ -89,7 +87,7 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
           <Base videoInfo={videoInfo} />
         </div>
         <div className="flex flex-col gap-[2vh] xl:flex-row">
-          <WordCloud formattedTopics={tagProps!} />
+          <WordCloud formattedTopics={tagProps} />
           <StackedChart videoInfo={videoInfo} />
         </div>
         <Earnings videoInfo={videoInfo} />

@@ -27,7 +27,6 @@ export async function POST(req: Request, res: Response) {
     }
     const dataRes = await axios.get(`${githubResultBranch}/${filename}.json`);
     const allData = dataRes.data;
-    console.log(allData.video[0].url, url);
 
     video = allData.video.find((obj: VideoData) => obj.url === url);
 
