@@ -49,7 +49,6 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
       });
     });
 
-    console.log(result);
     return result;
   };
 
@@ -69,6 +68,7 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
       fetchVideoInfo();
       getVideoTags();
       if (getTags) {
+        console.log(createTagsArray(getTags));
         setTagProps(createTagsArray(getTags));
       }
     }
