@@ -70,7 +70,7 @@ const Revenue: React.FC = () => {
             </div>
           </div>
           <div>
-            <Stacked width="320px" height="360px" />
+            <Stacked width="320px" height="360px" stackedCustomSeries={[]} />
           </div>
         </div>
       </div>
