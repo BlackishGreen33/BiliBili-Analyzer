@@ -10,6 +10,7 @@ import useStore from '@/common/hooks/useStore';
 import { Footer, ThemeSettings } from '../elements';
 import Navbar from '../navbar/Navbar';
 import Sidebar from '../sidebar/Sidebar';
+import { Toaster } from '../ui/toaster';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -90,6 +91,7 @@ defer>
             </div>
             <div dangerouslySetInnerHTML={{ __html: chatbotScript }} />
             <Footer />
+            <Toaster />
           </div>
         </div>
       </div>

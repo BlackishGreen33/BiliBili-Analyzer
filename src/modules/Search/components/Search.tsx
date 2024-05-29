@@ -21,6 +21,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
+import { ToastAction } from '@/common/components/ui/toast';
+import { toast } from '@/common/components/ui/use-toast';
 import useStore from '@/common/hooks/useStore';
 
 const { Text, Title, Paragraph } = Typography;
@@ -81,7 +83,12 @@ const Home: React.FC = React.memo(() => {
             form.resetFields();
           })
           .catch((error) => {
-            console.error('There was an error fetching the data:', error);
+            toast({
+              variant: 'destructive',
+              title: '无法获取到数据。',
+              description: '发生了一些意料之外的错误。',
+              action: <ToastAction altText="Try again">再试一次</ToastAction>,
+            });
             setLoading(false);
           });
       });
@@ -172,7 +179,12 @@ const Home: React.FC = React.memo(() => {
       const bvid = matchResult[1];
       router.push('/details?bvid=' + bvid);
     } else {
-      console.error('无法从 URL 中提取 BV 号');
+      toast({
+        variant: 'destructive',
+        title: '无法从 URL 中获取 BV 号',
+        description: '请确认输入的链接是否正确。',
+        action: <ToastAction altText="Try again">再试一次</ToastAction>,
+      });
     }
   };
 
