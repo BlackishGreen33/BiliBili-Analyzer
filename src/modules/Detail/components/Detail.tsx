@@ -33,11 +33,7 @@ const Detail: React.FC = React.memo(() => {
     <div className="m-2 mt-24 p-2 md:m-10 md:p-10">
       <div className="flex flex-col gap-[2vh] xl:flex-row">
         {videoInfo && ( // 条件渲染
-          <Video
-            bvid={bvid!}
-            cid={videoCid}
-            className="xl:flex-1"
-          />
+          <Video bvid={bvid!} cid={videoCid} className="xl:flex-1" />
         )}
         {videoInfo && ( // 条件渲染
           <Base videoInfo={videoInfo} />

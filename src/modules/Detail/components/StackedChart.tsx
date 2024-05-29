@@ -36,7 +36,7 @@ const Stacked: React.FC<StackedChartProps> = React.memo(({ videoInfo }) => {
     <div className="m-4 mt-24 rounded-3xl bg-white p-10 dark:bg-secondary-dark-bg md:m-10">
       <ChartsHeader category="长条图" title="视频统计数据图表" />
       <div className="w-full">
-        <StackedChart stackedCustomSeries={stackedCustomSeries}/>
+        <StackedChart stackedCustomSeries={stackedCustomSeries} />
       </div>
     </div>
   );
