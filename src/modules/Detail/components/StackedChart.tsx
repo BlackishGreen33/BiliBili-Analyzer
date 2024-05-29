@@ -1,9 +1,13 @@
 import React from 'react';
 
+import { Stacked as StackedChart } from '@/common/components/elements';
 import {
-  ChartsHeader,
-  Stacked as StackedChart,
-} from '@/common/components/elements';
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/common/components/ui/card';
 
 interface StackedChartProps {
   videoInfo: any;
@@ -33,12 +37,17 @@ const Stacked: React.FC<StackedChartProps> = React.memo(({ videoInfo }) => {
   ];
 
   return (
-    <div className="m-4 mt-24 rounded-3xl bg-white p-10 dark:bg-secondary-dark-bg md:m-10">
-      <ChartsHeader category="长条图" title="视频统计数据图表" />
-      <div className="w-full">
-        <StackedChart stackedCustomSeries={stackedCustomSeries} />
-      </div>
-    </div>
+    <Card className="flex-1">
+      <CardHeader>
+        <CardTitle>长条图</CardTitle>
+        <CardDescription>视频统计数据图表</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="w-full">
+          <StackedChart stackedCustomSeries={stackedCustomSeries} />
+        </div>
+      </CardContent>
+    </Card>
   );
 });
 
