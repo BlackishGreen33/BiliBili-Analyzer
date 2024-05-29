@@ -24,7 +24,7 @@ interface StackedProps {
   stackedCustomSeries: any[];
 }
 
-const Stacked: React.FC<StackedProps> = React.memo(
+export const Stacked: React.FC<StackedProps> = React.memo(
   ({ width, height, stackedCustomSeries }) => {
     const { theme } = useTheme();
 
@@ -52,5 +52,3 @@ const Stacked: React.FC<StackedProps> = React.memo(
     );
   }
 );
-
-export default Stacked;

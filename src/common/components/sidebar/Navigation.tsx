@@ -5,7 +5,7 @@ import React from 'react';
 import { links } from '@/common/dummy/dummy';
 import useStore from '@/common/hooks/useStore';
 
-import NavLink from '../elements/NavLink';
+import NavLink from '../navbar/NavLink';
 
 const Navigation: React.FC = React.memo(() => {
   const {
@@ -38,6 +38,7 @@ const Navigation: React.FC = React.memo(() => {
           {item.links.map((link) =>
             link.nav === 'settings' ? (
               <div
+                key={link.nav}
                 className={
                   themeSettings ? `${activeSettings} active` : normalSettings
                 }
