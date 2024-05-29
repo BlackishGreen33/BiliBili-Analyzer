@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Stacked as StackedChart } from '@/common/components/elements';
 import {
   Card,
   CardContent,
@@ -8,6 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/common/components/ui/card';
+
+import { Stacked as StackedChart } from './Stacked';
 
 interface StackedChartProps {
   videoInfo: any;

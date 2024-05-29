@@ -7,7 +7,7 @@ import { BsCheck } from 'react-icons/bs';
 import { MdOutlineCancel } from 'react-icons/md';
 
 import useStore from '@/common/hooks/useStore';
-import { themeColors } from '../../dummy/dummy';
+import { ThemeColors } from '../../dummy/ThemeColors';
 
 const ThemeSettings = React.memo(() => {
   const { setCurrentColor, currentColor, setThemeSettings } = useStore();
@@ -67,7 +67,7 @@ const ThemeSettings = React.memo(() => {
         <div className="ml-4 border-t-1 border-color p-4">
           <p className="text-xl font-semibold ">主题颜色</p>
           <div className="flex gap-3">
-            {themeColors.map((item, index) => (
+            {ThemeColors.map((item, index) => (
               <TooltipComponent
                 key={index}
                 content={item.name}
