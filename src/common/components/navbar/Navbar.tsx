@@ -1,27 +1,19 @@
 'use client';
 
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
-import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useCallback, useEffect } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { BsChatLeft } from 'react-icons/bs';
-import { FiShoppingCart } from 'react-icons/fi';
-import { MdKeyboardArrowDown } from 'react-icons/md';
-import { RiNotification3Line } from 'react-icons/ri';
+import { CiLocationArrow1 } from 'react-icons/ci';
+import { FaDownload, FaGithub } from 'react-icons/fa';
 
-import {
-  Cart,
-  Chat,
-  Notification,
-  UserProfile,
-} from '@/common/components/elements';
+import { Notification } from '@/common/components/elements';
 import useStore from '@/common/hooks/useStore';
 
 import NavButton from './NavButton';
 
 const Navbar: React.FC = React.memo(() => {
-  const avatar = './assets/avatar.jpg';
-
+  const router = useRouter();
   const {
     currentColor,
     activeMenu,
@@ -66,51 +58,27 @@ const Navbar: React.FC = React.memo(() => {
       />
       <div className="flex">
         <NavButton
-          title="Cart"
-          customFunc={() => handleClick('cart')}
-          color={currentColor}
-          icon={<FiShoppingCart />}
-        />
-        <NavButton
-          title="Chat"
-          dotColor="#03C9D7"
-          customFunc={() => handleClick('chat')}
-          color={currentColor}
-          icon={<BsChatLeft />}
-        />
-        <NavButton
-          title="Notification"
+          title="下载应用"
           dotColor="rgb(254, 201, 15)"
           customFunc={() => handleClick('notification')}
           color={currentColor}
-          icon={<RiNotification3Line />}
+          icon={<FaDownload />}
         />
-        <TooltipComponent content="Profile" position="BottomCenter">
+        <TooltipComponent content="GitHub 仓库" position="BottomCenter">
           <div
             className="flex cursor-pointer items-center gap-2 rounded-lg p-1 hover:bg-light-gray"
-            onClick={() => handleClick('userProfile')}
+            onClick={() => router.push('https://github.com/BlackishGreen33/BiliBili-Analyzer')}
           >
-            <Image
-              className="h-8 w-8 rounded-full"
-              src={avatar}
-              alt="user-profile"
-              loading="lazy"
-              width={200}
-              height={200}
-            />
+            <FaGithub className="h-8 w-8 rounded-full" />
             <p>
-              <span className="text-14 text-gray-400">您好,</span>{' '}
-              <span className="text-14 ml-1 font-bold text-gray-400">
-                何婷婷
+              <span className="ml-1 text-lg font-bold text-gray-400">
+                GitHub
               </span>
             </p>
-            <MdKeyboardArrowDown className="text-14 text-gray-400" />
+            <CiLocationArrow1 className="text-md text-gray-400" />
           </div>
         </TooltipComponent>
-        {isClicked.cart && <Cart />}
-        {isClicked.chat && <Chat />}
         {isClicked.notification && <Notification />}
-        {isClicked.userProfile && <UserProfile />}
       </div>
     </div>
   );
