@@ -1,9 +1,7 @@
 'use client';
 
-import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { useTheme } from 'next-themes';
 import React, { useEffect } from 'react';
-import { FiSettings } from 'react-icons/fi';
 
 import useStore from '@/common/hooks/useStore';
 
@@ -55,21 +53,6 @@ defer>
     <>
       <div className={theme === 'Dark' ? 'dark' : ''}>
         <div className="relative flex dark:bg-main-dark-bg">
-          <div className="fixed bottom-20 right-4" style={{ zIndex: '1000' }}>
-            <TooltipComponent content="Settings">
-              <button
-                type="button"
-                onClick={() => setThemeSettings(true)}
-                style={{
-                  background: currentColor,
-                  borderRadius: '50%',
-                }}
-                className="p-3 text-3xl text-white hover:bg-light-gray hover:drop-shadow-xl"
-              >
-                <FiSettings />
-              </button>
-            </TooltipComponent>
-          </div>
           <div
             className={`dark:bg-secondary-dark-bg ${activeMenu ? 'sidebar fixed w-72 bg-white' : 'w-0'}`}
           >
