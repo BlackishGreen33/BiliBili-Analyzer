@@ -4,106 +4,7 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@ant-design/pro-components':
-    specifier: ^2.7.9
-    version: 2.7.9(antd@5.17.4)(rc-field-form@1.44.0)(react-dom@18.3.1)(react@18.3.1)
-  '@emotion/styled':
-    specifier: ^11.11.5
-    version: 11.11.5(@emotion/react@11.11.4)(@types/react@18.3.3)(react@18.3.1)
-  '@iframe-resizer/react':
-    specifier: ^5.0.1
-    version: 5.0.1(react-dom@18.3.1)(react@18.3.1)
-  '@radix-ui/react-icons':
-    specifier: ^1.3.0
-    version: 1.3.0(react@18.3.1)
-  '@syncfusion/ej2':
-    specifier: ^25.2.6
-    version: 25.2.6
-  '@syncfusion/ej2-base':
-    specifier: ^25.2.5
-    version: 25.2.5
-  '@syncfusion/ej2-react-calendars':
-    specifier: ^25.2.5
-    version: 25.2.5
-  '@syncfusion/ej2-react-charts':
-    specifier: ^25.2.6
-    version: 25.2.6
-  '@syncfusion/ej2-react-dropdowns':
-    specifier: ^25.2.5
-    version: 25.2.6
-  '@syncfusion/ej2-react-grids':
-    specifier: ^25.2.5
-    version: 25.2.6
-  '@syncfusion/ej2-react-inputs':
-    specifier: ^25.2.5
-    version: 25.2.6
-  '@syncfusion/ej2-react-kanban':
-    specifier: ^25.2.3
-    version: 25.2.6
-  '@syncfusion/ej2-react-popups':
-    specifier: ^25.2.6
-    version: 25.2.6
-  '@syncfusion/ej2-react-richtexteditor':
-    specifier: ^25.2.5
-    version: 25.2.6
-  '@syncfusion/ej2-react-schedule':
-    specifier: ^25.2.6
-    version: 25.2.6
-  antd:
-    specifier: ^5.17.4
-    version: 5.17.4(react-dom@18.3.1)(react@18.3.1)
-  antd-style:
-    specifier: ^3.6.2
-    version: 3.6.2(@types/react@18.3.3)(antd@5.17.4)(react-dom@18.3.1)(react@18.3.1)
-  axios:
-    specifier: ^1.7.2
-    version: 1.7.2
-  cheerio:
-    specifier: 1.0.0-rc.12
-    version: 1.0.0-rc.12
-  class-variance-authority:
-    specifier: ^0.7.0
-    version: 0.7.0
-  clsx:
-    specifier: ^2.1.1
-    version: 2.1.1
-  next:
-    specifier: 14.2.3
-    version: 14.2.3(react-dom@18.3.1)(react@18.3.1)(sass@1.77.2)
-  next-themes:
-    specifier: ^0.3.0
-    version: 0.3.0(react-dom@18.3.1)(react@18.3.1)
-  puppeteer:
-    specifier: ^22.10.0
-    version: 22.10.0(typescript@5.4.5)
-  react:
-    specifier: ^18.3.1
-    version: 18.3.1
-  react-dom:
-    specifier: ^18.3.1
-    version: 18.3.1(react@18.3.1)
-  react-icons:
-    specifier: ^5.2.1
-    version: 5.2.1(react@18.3.1)
-  sass:
-    specifier: ^1.77.2
-    version: 1.77.2
-  styled-components:
-    specifier: ^6.1.11
-    version: 6.1.11(react-dom@18.3.1)(react@18.3.1)
-  tailwind-merge:
-    specifier: ^2.3.0
-    version: 2.3.0
-  tailwind-scrollbar-hide:
-    specifier: ^1.1.7
-    version: 1.1.7
-  tailwindcss-animate:
-    specifier: ^1.0.7
-    version: 1.0.7(tailwindcss@3.4.3)
-  zustand:
-    specifier: ^4.5.2
-    version: 4.5.2(@types/react@18.3.3)(react@18.3.1)
+importers:
 
   .:
     dependencies:
@@ -129,7 +30,7 @@ dependencies:
         specifier: ^25.2.5
         version: 25.2.5
       '@syncfusion/ej2-react-charts':
-        specifier: ^25.2.5
+        specifier: ^25.2.6
         version: 25.2.6
       '@syncfusion/ej2-react-dropdowns':
         specifier: ^25.2.5
@@ -150,7 +51,7 @@ dependencies:
         specifier: ^25.2.5
         version: 25.2.6
       '@syncfusion/ej2-react-schedule':
-        specifier: ^25.2.4
+        specifier: ^25.2.6
         version: 25.2.6
       antd:
         specifier: ^5.17.4
