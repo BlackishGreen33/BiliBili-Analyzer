@@ -14,7 +14,7 @@ type VideoData = {
   tags: { firstChannel: string; secondChannel: string; ordinaryTags: string[] };
 };
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   try {
     const { bvid } = await req.json();
     const url = preUrl + bvid;
@@ -36,7 +36,7 @@ export async function POST(req: Request, res: Response) {
 
     return NextResponse.json(video.tags);
   } catch (error) {
-    console.error('POPULAR_VIDEO_POST', error);
+    console.error('VIDEO_TAGS_POST', error);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }

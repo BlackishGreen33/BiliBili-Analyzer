@@ -13,7 +13,7 @@ type VideoData = {
   tags: { firstChannel: string; secondChannel: string; ordinaryTags: string[] };
 };
 
-export async function GET(req: Request, res: Response) {
+export async function GET(req: Request) {
   try {
     let video: VideoData | undefined;
 
@@ -41,7 +41,7 @@ export async function GET(req: Request, res: Response) {
       console.error('无法从 URL 中获取 BV 号');
     }
   } catch (error) {
-    console.error('POPULAR_VIDEO_POST', error);
+    console.error('RANDOM_BVID_POST', error);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }

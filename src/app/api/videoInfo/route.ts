@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 const infoApi = 'https://api.bilibili.com/x/web-interface/view?bvid=';
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   try {
     const { bvid } = await req.json();
 
@@ -16,8 +16,7 @@ export async function POST(req: Request, res: Response) {
     const response = await axios.get(infoApi + bvid, { headers });
     return NextResponse.json(response.data);
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('LOGIN_POST', error);
+    console.error('VIDEO_INFO_POST', error);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
