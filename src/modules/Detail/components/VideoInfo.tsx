@@ -54,11 +54,13 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
 
   const fetchVideoInfo = async () => {
     const res = await axios.post('/api/videoInfo', { bvid: bvid });
+    console.log('fetchVideoInfo:', res.data.data);
     setVideoInfo(res.data.data);
   };
 
   const getVideoTags = async () => {
     const res = await axios.post('/api/videoTags', { bvid: bvid });
+    console.log('getVideoTags:', res.data);
     setGetTags(res.data);
   };
 
