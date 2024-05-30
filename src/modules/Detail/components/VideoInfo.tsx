@@ -53,12 +53,12 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
   };
 
   const fetchVideoInfo = async () => {
-    const res = await axios.post('/api/videoInfo', { bvid: bvid });
+    const res = await axios.post('https://bilibili-analyzer.vercel.app/api/videoInfo', { bvid: bvid });
     setVideoInfo(res.data.data);
   };
 
   const getVideoTags = async () => {
-    const res = await axios.post('/api/videoTags', { bvid: bvid });
+    const res = await axios.post('https://bilibili-analyzer.vercel.app/api/videoTags', { bvid: bvid });
     setGetTags(res.data);
   };
 
