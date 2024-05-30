@@ -21,6 +21,7 @@ import {
 interface StackedProps {
   width?: string;
   height?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   stackedCustomSeries: any[];
 }
 
@@ -31,7 +32,8 @@ export const Stacked: React.FC<StackedProps> = React.memo(
     return (
       <ChartComponent
         id="charts"
-        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         primaryXAxis={stackedPrimaryXAxis}
         primaryYAxis={stackedPrimaryYAxis}
         width={width}

@@ -29,7 +29,7 @@ const Navigation: React.FC = React.memo(() => {
     'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2 cursor-pointer';
 
   return (
-    <div className="mt-10 ">
+    <div className="mt-10">
       {links.map((item) => (
         <div key={item.title}>
           <p className="m-3 mt-4 uppercase text-gray-400 dark:text-gray-400">
@@ -48,7 +48,7 @@ const Navigation: React.FC = React.memo(() => {
                 }}
               >
                 {link.icon}
-                <span className="capitalize ">{link.name}</span>
+                <span className="capitalize">{link.name}</span>
               </div>
             ) : (
               <NavLink
@@ -58,7 +58,7 @@ const Navigation: React.FC = React.memo(() => {
                 currentColor={currentColor}
               >
                 {link.icon}
-                <span className="capitalize ">{link.name}</span>
+                <span className="capitalize">{link.name}</span>
               </NavLink>
             )
           )}

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { MdDateRange, MdOutlineAccessTime, MdSubtitles } from 'react-icons/md';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type BaseProps = { videoInfo: any };
 
 const Base: React.FC<BaseProps> = React.memo(({ videoInfo }) => {

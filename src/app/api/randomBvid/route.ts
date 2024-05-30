@@ -15,8 +15,6 @@ type VideoData = {
 
 export async function GET(req: Request) {
   try {
-    let video: VideoData | undefined;
-
     const listRes = await axios.get(githubResultBranch + '/list.json');
     const filename = listRes.data[0];
     if (!filename) {
@@ -26,7 +24,7 @@ export async function GET(req: Request) {
     const allData = dataRes.data;
 
     const randomIndex = Math.floor(Math.random() * allData.video.length);
-    video = allData.video[randomIndex];
+    const video = allData.video[randomIndex];
 
     if (!video) {
       throw new Error('Video data not found');

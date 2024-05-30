@@ -18,7 +18,6 @@ export async function POST(req: Request) {
   try {
     const { bvid } = await req.json();
     const url = preUrl + bvid;
-    let video: VideoData | undefined;
 
     const listRes = await axios.get(githubResultBranch + '/list.json');
     const filename = listRes.data[0];
@@ -28,7 +27,7 @@ export async function POST(req: Request) {
     const dataRes = await axios.get(`${githubResultBranch}/${filename}.json`);
     const allData = dataRes.data;
 
-    video = allData.video.find((obj: VideoData) => obj.url === url);
+    const video = allData.video.find((obj: VideoData) => obj.url === url);
 
     if (!video) {
       throw new Error('Video data not found');

@@ -27,7 +27,7 @@ const Download: React.FC = React.memo(() => {
           borderRadius="50%"
         />
       </div>
-      <div className="mt-5 ">
+      <div className="mt-5">
         <Image
           src="/qrcode.png"
           alt="qrcode"

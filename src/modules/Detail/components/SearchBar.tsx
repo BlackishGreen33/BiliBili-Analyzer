@@ -10,12 +10,10 @@ import { Input } from '@/common/components/ui/input';
 import { ToastAction } from '@/common/components/ui/toast';
 import { useToast } from '@/common/components/ui/use-toast';
 import useStore from '@/common/hooks/useStore';
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-type SearchBarProps = {};
-
-const SearchBar: React.FC<SearchBarProps> = React.memo(() => {
+const SearchBar: React.FC = React.memo(() => {
   const router = useRouter();
   const imageRef = useRef(null);
 
