@@ -11,6 +11,7 @@ import { ToastAction } from '@/common/components/ui/toast';
 import { useToast } from '@/common/components/ui/use-toast';
 import useStore from '@/common/hooks/useStore';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 type SearchBarProps = {};
 
@@ -37,6 +38,11 @@ const SearchBar: React.FC<SearchBarProps> = React.memo(() => {
         action: <ToastAction altText="Try again">再试一次</ToastAction>,
       });
     }
+  };
+
+  const getVideoTags = async () => {
+    const res = await axios.get('/api/randomBvid');
+    router.push('/details?bvid=' + res.data);
   };
 
   return (
@@ -76,6 +82,7 @@ const SearchBar: React.FC<SearchBarProps> = React.memo(() => {
           <Button
             className="flex h-[4vh] gap-2 text-[1.6vh]"
             style={{ backgroundColor: currentColor }}
+            onClick={getVideoTags}
           >
             <FaDice />
             随机
