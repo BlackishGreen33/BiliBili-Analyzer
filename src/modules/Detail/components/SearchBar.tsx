@@ -41,7 +41,7 @@ const SearchBar: React.FC<SearchBarProps> = React.memo(() => {
   };
 
   const getVideoTags = async () => {
-    const res = await axios.get('https://bilibili-analyzer.vercel.app/api/randomBvid');
+    const res = await axios.get('/api/randomBvid');
     router.push('/details?bvid=' + res.data);
   };
 
