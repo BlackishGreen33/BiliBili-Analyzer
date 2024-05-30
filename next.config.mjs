@@ -8,7 +8,7 @@ const nextConfig = {
     styledComponents: true,
   },
   swcMinify: true,
-  // output: "standalone",
+  output: "export",
   images: {
     unoptimized: true,
     remotePatterns: [
