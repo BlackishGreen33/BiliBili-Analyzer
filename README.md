@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="130" src="https://github.com/BlackishGreen33/BiliBili-Analyzer/blob/main/public/images/header/logo.png?raw=true" alt="BiliBili-Analyzer logo">
+  <img width="130" src="https://github.com/BlackishGreen33/BiliBili-Analyzer/blob/main/public/icon.png?raw=true" alt="BiliBili-Analyzer logo">
   <h1 align="center">BiliBili-Analyzer</h1>
   <h3>哔哩哔哩近期热门视频分类检索分析系统</h3>
   <a href="https://github.com/BlackishGreen33/BiliBili-Analyzer"><strong>探索项目文档 »</strong></a>
