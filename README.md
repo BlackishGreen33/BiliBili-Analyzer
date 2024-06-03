@@ -37,6 +37,12 @@
 
 ### 💻 本地调试
 
+记得先配置环境变量：
+```env
+SYNCFUSION_LICENSE=
+```
+
+接着拉取代码和安装依赖：
 ```bash
 $ git clone https://github.com/BlackishGreen33/BiliBili-Analyzer.git
 $ cd BiliBili-Analyzer
