@@ -18,9 +18,7 @@ const Layout: React.FC<LayoutProps> = React.memo(({ children }) => {
   const {
     setCurrentColor,
     activeMenu,
-    currentColor,
     themeSettings,
-    setThemeSettings,
   } = useStore();
   const { setTheme, theme } = useTheme();
 
