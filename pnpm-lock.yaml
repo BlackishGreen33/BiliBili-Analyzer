@@ -51,8 +51,8 @@ dependencies:
     specifier: ^26.1.35
     version: 26.1.35
   '@syncfusion/ej2-react-grids':
-    specifier: ^25.2.7
-    version: 25.2.7
+    specifier: ^26.1.35
+    version: 26.1.35
   '@syncfusion/ej2-react-inputs':
     specifier: ^25.2.6
     version: 25.2.6
@@ -2649,12 +2649,12 @@ packages:
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-react-grids@25.2.7:
-    resolution: {integrity: sha512-Z0cZQDTAamZsJL3um6kpznsi/llphgeCtR3L11tpy0we5sTKVddztX/LJGblIUEeAKtG/fZGObU1FVFcls4POA==}
+  /@syncfusion/ej2-react-grids@26.1.35:
+    resolution: {integrity: sha512-sEmEuBXTY7afLzXf8ULO/CCYEAjXVccefDtbpr0a3BpAETjqi1C/KRoGUG9ZTwpsUubVVSLwyOF5z1/v0RyTqw==}
     dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-grids': 25.2.7
-      '@syncfusion/ej2-react-base': 25.2.6
+      '@syncfusion/ej2-base': 26.1.35
+      '@syncfusion/ej2-grids': 26.1.35
+      '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
   /@syncfusion/ej2-react-inputs@25.2.6:
