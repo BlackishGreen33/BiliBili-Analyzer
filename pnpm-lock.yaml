@@ -10,13 +10,13 @@ dependencies:
     version: 2.7.10(antd@5.18.0)(rc-field-form@1.44.0)(react-dom@18.3.1)(react@18.3.1)
   '@capacitor/android':
     specifier: ^6.0.0
-    version: 6.0.0(@capacitor/core@6.0.0)
+    version: 6.0.0(@capacitor/core@6.1.0)
   '@capacitor/core':
-    specifier: ^6.0.0
-    version: 6.0.0
+    specifier: ^6.1.0
+    version: 6.1.0
   '@capacitor/ios':
     specifier: ^6.0.0
-    version: 6.0.0(@capacitor/core@6.0.0)
+    version: 6.0.0(@capacitor/core@6.1.0)
   '@emotion/styled':
     specifier: ^11.11.5
     version: 11.11.5(@emotion/react@11.11.4)(@types/react@18.3.3)(react@18.3.1)
@@ -720,12 +720,12 @@ packages:
       to-fast-properties: 2.0.0
     dev: false
 
-  /@capacitor/android@6.0.0(@capacitor/core@6.0.0):
+  /@capacitor/android@6.0.0(@capacitor/core@6.1.0):
     resolution: {integrity: sha512-NwL87VO9F1WY/EgvJZN9pIhjejq688k2fRW6XWNLVe3cgGE6nUb9J34KI68fhx3139cf2LVGPUYs+mwZC8esiQ==}
     peerDependencies:
       '@capacitor/core': ^6.0.0
     dependencies:
-      '@capacitor/core': 6.0.0
+      '@capacitor/core': 6.1.0
     dev: false
 
   /@capacitor/cli@6.0.0:
@@ -755,18 +755,18 @@ packages:
       - supports-color
     dev: true
 
-  /@capacitor/core@6.0.0:
-    resolution: {integrity: sha512-NvxIQsJcMiIV+Le1DilR2GGyQQbDInfXK1UywGROQ5mycdFlW5XoAPZ+MKnFGB123RoEgE3uhDGgwTXUmSlX9A==}
+  /@capacitor/core@6.1.0:
+    resolution: {integrity: sha512-Kt4ONm0X9xxJXn9Q73oBaKdzep5B/VJw3VjXa2eGul4cD2k37mJwgjpXSMRnLH0Aju5bCiRL8J/hMAfTlokO6A==}
     dependencies:
       tslib: 2.6.3
     dev: false
 
-  /@capacitor/ios@6.0.0(@capacitor/core@6.0.0):
+  /@capacitor/ios@6.0.0(@capacitor/core@6.1.0):
     resolution: {integrity: sha512-7mAs3gjWiE5DPM4AGPduqFSDGXCPwwqQRMzbohVway7/cTWnHomHV8mIojMZE4GILeWO2fILbyu3C8q9pHg2vg==}
     peerDependencies:
       '@capacitor/core': ^6.0.0
     dependencies:
-      '@capacitor/core': 6.0.0
+      '@capacitor/core': 6.1.0
     dev: false
 
   /@chenshuai2144/sketch-color@1.0.9(react@18.3.1):
