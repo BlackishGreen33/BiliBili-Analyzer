@@ -54,8 +54,8 @@ dependencies:
     specifier: ^26.1.35
     version: 26.1.35
   '@syncfusion/ej2-react-inputs':
-    specifier: ^25.2.6
-    version: 25.2.6
+    specifier: ^26.1.35
+    version: 26.1.35
   '@syncfusion/ej2-react-kanban':
     specifier: ^25.2.3
     version: 25.2.6
@@ -2657,12 +2657,12 @@ packages:
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-react-inputs@25.2.6:
-    resolution: {integrity: sha512-KDqqk9dmtUlCzbwjQiewgn6j6ac5r61i7n+Cg5x/UIHtMpUeZ4SJucXgtlEX5+fiPB8twWgLNdQn+vacd8hZrA==}
+  /@syncfusion/ej2-react-inputs@26.1.35:
+    resolution: {integrity: sha512-Nh+acYt5nrpnami5jOdLr2wmVusBYVeO0NBCka7gQAUDJTNp7oE0BixkDQgGoF8FDPdGpLQTih8LiSvddPYNKA==}
     dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-inputs': 25.2.6
-      '@syncfusion/ej2-react-base': 25.2.6
+      '@syncfusion/ej2-base': 26.1.35
+      '@syncfusion/ej2-inputs': 26.1.35
+      '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
   /@syncfusion/ej2-react-kanban@25.2.6:
