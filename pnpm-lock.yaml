@@ -57,8 +57,8 @@ dependencies:
     specifier: ^26.1.35
     version: 26.1.35
   '@syncfusion/ej2-react-kanban':
-    specifier: ^25.2.3
-    version: 25.2.6
+    specifier: ^26.1.35
+    version: 26.1.35
   '@syncfusion/ej2-react-popups':
     specifier: ^26.1.35
     version: 26.1.35
@@ -2380,20 +2380,6 @@ packages:
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-kanban@25.2.6:
-    resolution: {integrity: sha512-ti3lhSxoCXIprm1wck1HOokwDjrSfe7QWTiDQ6VFRHqnBoltzx//cvFftbIkf5s6wZIhOHpXn3k80DjHe51cdw==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-buttons': 25.2.7
-      '@syncfusion/ej2-data': 25.2.3
-      '@syncfusion/ej2-dropdowns': 25.2.7
-      '@syncfusion/ej2-inputs': 25.2.6
-      '@syncfusion/ej2-layouts': 25.2.3
-      '@syncfusion/ej2-navigations': 25.2.6
-      '@syncfusion/ej2-notifications': 25.2.3
-      '@syncfusion/ej2-popups': 25.2.7
-    dev: false
-
   /@syncfusion/ej2-kanban@26.1.35:
     resolution: {integrity: sha512-/tPxaDZ13siszpQunN3JL0/QgqjLBQV6z8A4Sv5UCmNjh6O0f/DVmkl8d+a2IBUTAJhShvkFCx0QoktMfzsSFw==}
     dependencies:
@@ -2407,12 +2393,6 @@ packages:
       '@syncfusion/ej2-notifications': 26.1.35
       '@syncfusion/ej2-popups': 26.1.35
       '@types/requirejs': 2.1.37
-    dev: false
-
-  /@syncfusion/ej2-layouts@25.2.3:
-    resolution: {integrity: sha512-n0M5IirG4/ciFYdCF/KSD1vprInm2F25vEP/Rrxbkl6DhEVsYbdMMR8rNwuNhlLGvgmguBH6i9A9dlNoZbV4Bw==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
     dev: false
 
   /@syncfusion/ej2-layouts@26.1.35:
@@ -2649,12 +2629,12 @@ packages:
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-react-kanban@25.2.6:
-    resolution: {integrity: sha512-87ZIV162sJ0SdqYhwI+lDXeTWBmQTlGsQI0vk7xqVJLg4xzo9KlGBD3hCUzvfXw0JMZarOXaiDLICsdYT/zkpQ==}
+  /@syncfusion/ej2-react-kanban@26.1.35:
+    resolution: {integrity: sha512-EWf2Y0FcStETiBopLKTKibmmY15gymWauOsNbGJqB83ULXS2ukHlWCkA8r1ovn1w4dV4K8EflNRr0mWEyY/Ubw==}
     dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-kanban': 25.2.6
-      '@syncfusion/ej2-react-base': 25.2.6
+      '@syncfusion/ej2-base': 26.1.35
+      '@syncfusion/ej2-kanban': 26.1.35
+      '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
   /@syncfusion/ej2-react-popups@26.1.35:
