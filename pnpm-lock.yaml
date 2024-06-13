@@ -45,8 +45,8 @@ dependencies:
     specifier: ^26.1.35
     version: 26.1.35
   '@syncfusion/ej2-react-charts':
-    specifier: ^25.2.6
-    version: 25.2.6
+    specifier: ^26.1.35
+    version: 26.1.35
   '@syncfusion/ej2-react-dropdowns':
     specifier: ^26.1.35
     version: 26.1.35
@@ -2134,18 +2134,6 @@ packages:
       '@syncfusion/ej2-popups': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-charts@25.2.6:
-    resolution: {integrity: sha512-G8xUF85BuXK1NYnPoS4SMa7oxHbMdr384cHkLZ8CMtAzgyh+9qQeyV5EJPqvSeaz4b8FY2h4/FC/tWaXNQTv4w==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-calendars': 25.2.7
-      '@syncfusion/ej2-data': 25.2.3
-      '@syncfusion/ej2-excel-export': 25.2.3
-      '@syncfusion/ej2-navigations': 25.2.6
-      '@syncfusion/ej2-pdf-export': 25.2.3
-      '@syncfusion/ej2-svg-base': 25.2.5
-    dev: false
-
   /@syncfusion/ej2-charts@26.1.35:
     resolution: {integrity: sha512-DNUoipZtl5Cg/EA4VzgE7WFXrCrbMGLzoHVjv/ZFWCwKhgdhrD+ZBLa+sj0gU011xAn/bCzj1bLPnpOB3OiH1g==}
     dependencies:
@@ -2522,12 +2510,6 @@ packages:
       '@syncfusion/ej2-charts': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-pdf-export@25.2.3:
-    resolution: {integrity: sha512-2TN6YbkPrvqGX3CQUMgUq/rQ0995POMoUiTklIxK7ylmIvD6Wc0gtKsHnEqepUN59s89Uxj4fKw/g5U+cB2kcA==}
-    dependencies:
-      '@syncfusion/ej2-compression': 25.2.3
-    dev: false
-
   /@syncfusion/ej2-pdf-export@26.1.35:
     resolution: {integrity: sha512-oGUGHR0x5Z/M3w4VXqfx75rZSuqeIzqsas4YCV3r0gFFn2Vj1m9OqTTgoTZaSuF6SFqiq4Jgoivai7LE/16lsw==}
     dependencies:
@@ -2635,12 +2617,12 @@ packages:
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-react-charts@25.2.6:
-    resolution: {integrity: sha512-/IiQzAYAunLTuLpQCDNK74G0TO01ZiI7BECYe2C6pNunqc1eFaMmpR6/BvLrTqeDlHdLiaRtpl2V6soLFgSjVw==}
+  /@syncfusion/ej2-react-charts@26.1.35:
+    resolution: {integrity: sha512-slpDl0sutowl9GJiwTcliBxMVFmcfNcutzcEEAtIEJ6/l5qwNTZmoomVquBKgbUKEHkJ+U0t54qzqwmAv6IF5Q==}
     dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-charts': 25.2.6
-      '@syncfusion/ej2-react-base': 25.2.6
+      '@syncfusion/ej2-base': 26.1.35
+      '@syncfusion/ej2-charts': 26.1.35
+      '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
   /@syncfusion/ej2-react-dropdowns@26.1.35:
@@ -2776,12 +2758,6 @@ packages:
       '@syncfusion/ej2-dropdowns': 26.1.35
       '@syncfusion/ej2-grids': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
-    dev: false
-
-  /@syncfusion/ej2-svg-base@25.2.5:
-    resolution: {integrity: sha512-EPsZ1cuCqnYaAKL7gE1OoKDzJ1PWSTXF7Dzgnx8aR8sJ7frIiBDE5/Qau+H/mWDHs4hmU5dWAGU2QaedgWkyRg==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
     dev: false
 
   /@syncfusion/ej2-svg-base@26.1.35:
