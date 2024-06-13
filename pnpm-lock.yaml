@@ -131,8 +131,8 @@ dependencies:
 
 devDependencies:
   '@capacitor/cli':
-    specifier: ^6.0.0
-    version: 6.0.0
+    specifier: ^6.1.0
+    version: 6.1.0
   '@types/node':
     specifier: ^20.14.2
     version: 20.14.2
@@ -728,8 +728,8 @@ packages:
       '@capacitor/core': 6.1.0
     dev: false
 
-  /@capacitor/cli@6.0.0:
-    resolution: {integrity: sha512-6z30P0mr53l0VXPwFjzDVuKIt1991bqUSSfShTT2efWN+rBSGSAH2bPID6qSZornH1n5R5Lh/UHq/aGuW523MQ==}
+  /@capacitor/cli@6.1.0:
+    resolution: {integrity: sha512-HEKDh3+FuNZKFHmSDZ7nAnaX3bzhtznYk9GsZBMac1y4CTAxIykPX9wzZ3DzLeM/EbMBGFClUbefkIkimAyfYg==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
