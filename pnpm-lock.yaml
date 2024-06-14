@@ -176,8 +176,8 @@ devDependencies:
     specifier: ^3.2.4
     version: 3.2.4(prettier@3.3.2)(typescript@5.4.5)
   prettier-plugin-tailwindcss:
-    specifier: ^0.6.3
-    version: 0.6.3(prettier-plugin-organize-imports@3.2.4)(prettier@3.3.2)
+    specifier: ^0.6.4
+    version: 0.6.4(prettier-plugin-organize-imports@3.2.4)(prettier@3.3.2)
   tailwindcss:
     specifier: ^3.4.4
     version: 3.4.4
@@ -2088,24 +2088,11 @@ packages:
       '@syncfusion/ej2-data': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-base@25.2.7:
-    resolution: {integrity: sha512-sbZ8IVEg4UkD5wXV3GXLyoH6q4sYpCVP3HJ1FwlJ+/+rgAQ2h7NaQhBmljg0o+ZfXEB7UuIZ59AzNQqc0eL6Eg==}
-    hasBin: true
-    dependencies:
-      '@syncfusion/ej2-icons': 25.2.3
-    dev: false
-
   /@syncfusion/ej2-base@26.1.36:
     resolution: {integrity: sha512-5VOxPDhjY9u6Mpzh+3cMsVu7xNlq7S5WB1qmGWFSqbwpO530Nlg3oN8ZrdREOkzGa5GbiK2PjvcjlcytHa82FQ==}
     hasBin: true
     dependencies:
       '@syncfusion/ej2-icons': 26.1.35
-    dev: false
-
-  /@syncfusion/ej2-buttons@25.2.7:
-    resolution: {integrity: sha512-Jn+YN83XKH+sEWy1s8FVKVaiQZxwDf+Rwf2JxCNzIEz1cZA9HV8NT/W0YuxwFIoXBaz11OOiqG4ETqLE8JtX0Q==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
     dev: false
 
   /@syncfusion/ej2-buttons@26.1.35:
@@ -2150,12 +2137,6 @@ packages:
       '@syncfusion/ej2-file-utils': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-data@25.2.3:
-    resolution: {integrity: sha512-lzULJdW4ok79opA+FGppfPx1nUGiDwIA2KGr8XBOLmShW1o+Jt+KNOx3EVkW2r3VqRX3E0Pg5OlNk3uHFPe7sw==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-    dev: false
-
   /@syncfusion/ej2-data@26.1.35:
     resolution: {integrity: sha512-dlg+Ag+7lvU1wrfAtSF1pHABIC7PyD5RsAI5ju1io00z3cxfuoY6ctGamHLx2IYTDdM3q5WaPB13dayTBjuU4g==}
     dependencies:
@@ -2195,18 +2176,6 @@ packages:
     dependencies:
       '@syncfusion/ej2-base': 26.1.36
       '@syncfusion/ej2-data': 26.1.35
-    dev: false
-
-  /@syncfusion/ej2-dropdowns@25.2.7:
-    resolution: {integrity: sha512-pkmEHoqxBoPQ0LR9aq579musNw2/55gjGsxuDVvBWHeF8Akh49tnGXP2mqhwpi0BbmL4S0CrnA15aSXc6el/XA==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-data': 25.2.3
-      '@syncfusion/ej2-inputs': 25.2.6
-      '@syncfusion/ej2-lists': 25.2.3
-      '@syncfusion/ej2-navigations': 25.2.6
-      '@syncfusion/ej2-notifications': 25.2.3
-      '@syncfusion/ej2-popups': 25.2.7
     dev: false
 
   /@syncfusion/ej2-dropdowns@26.1.35:
@@ -2298,10 +2267,6 @@ packages:
       '@syncfusion/ej2-svg-base': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-icons@25.2.3:
-    resolution: {integrity: sha512-WptrAR3YShA8S+mushGCojRmBgLUCYpsYq1Nw1S1ynWNRcijlZgdil5L7LjaGA8H6CA/mFG5BMBDCmZ76hYX1A==}
-    dev: false
-
   /@syncfusion/ej2-icons@26.1.35:
     resolution: {integrity: sha512-rhaJDhN+vDBai+7xSw+xMnzAvLtG75vYoWvVA7wgUawA4boA4ODtkEgNYbMPJOEbtYaEQO7s3b7nzzWbXI3v+Q==}
     dev: false
@@ -2333,15 +2298,6 @@ packages:
       '@syncfusion/ej2-popups': 26.1.35
       '@syncfusion/ej2-richtexteditor': 26.1.35
       '@syncfusion/ej2-splitbuttons': 26.1.35
-    dev: false
-
-  /@syncfusion/ej2-inputs@25.2.6:
-    resolution: {integrity: sha512-DjhOU6ZH55JA92zb2PORSRPui6xBrx4VKQFO0Pkb2kVNixFK2AvmeeGMG33i+GdECLBFI5Vevl/qaQ+kttBwkg==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-buttons': 25.2.7
-      '@syncfusion/ej2-popups': 25.2.7
-      '@syncfusion/ej2-splitbuttons': 25.2.4
     dev: false
 
   /@syncfusion/ej2-inputs@26.1.35:
@@ -2382,15 +2338,6 @@ packages:
       '@syncfusion/ej2-svg-base': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-lists@25.2.3:
-    resolution: {integrity: sha512-IunnsCjkHsDRMOgJ20wclxpB0UJsDDwsLTwlNqIi6ddDkluBmZBlviS8Zb16YthUO020YNTLN10HgP7JRevvlA==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-buttons': 25.2.7
-      '@syncfusion/ej2-data': 25.2.3
-      '@syncfusion/ej2-popups': 25.2.7
-    dev: false
-
   /@syncfusion/ej2-lists@26.1.35:
     resolution: {integrity: sha512-XVLm+u11+63dpudZVrgrocK/DihYyAq9jTamfKQ1HkAV27gPTyilV+6ywizGmZmSystgMB+0YBKRDjqv85D1+A==}
     dependencies:
@@ -2419,17 +2366,6 @@ packages:
       '@syncfusion/ej2-grids': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-navigations@25.2.6:
-    resolution: {integrity: sha512-tTDrGdbEAsk26BdEzj2ufGGpeNXwNfy3exrDIZs9cyUpX8YdUASRoCJBuUkwrHIs2NQe1Ds6M/AIQrZKv7SBBw==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-buttons': 25.2.7
-      '@syncfusion/ej2-data': 25.2.3
-      '@syncfusion/ej2-inputs': 25.2.6
-      '@syncfusion/ej2-lists': 25.2.3
-      '@syncfusion/ej2-popups': 25.2.7
-    dev: false
-
   /@syncfusion/ej2-navigations@26.1.35:
     resolution: {integrity: sha512-Of8XARkcCydkiJXNEwEffUW7eSlxf782w845hQ0H+v+XyDBXM4YOn8buQ555yH8AJVNow6sZTocBMLIfikqn9g==}
     dependencies:
@@ -2439,14 +2375,6 @@ packages:
       '@syncfusion/ej2-inputs': 26.1.35
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-popups': 26.1.35
-    dev: false
-
-  /@syncfusion/ej2-notifications@25.2.3:
-    resolution: {integrity: sha512-V3p5qvWYasCPfUqr5vyOIKSRs5jpIXEtYZR5b0QY7dv/RkssXyaTRjIVYrV7Zd7qUYMFZxsku15mc9M5NypE+A==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-buttons': 25.2.7
-      '@syncfusion/ej2-popups': 25.2.7
     dev: false
 
   /@syncfusion/ej2-notifications@26.1.35:
@@ -2516,13 +2444,6 @@ packages:
       '@syncfusion/ej2-svg-base': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-popups@25.2.7:
-    resolution: {integrity: sha512-H8nVRXE7kkifZgif6bjs3POS+f7FZQPf7cTZog+OP526guDMWfKTbxNlRmpcRLSG5wvnFn340/KEVRVjeLpRLw==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-buttons': 25.2.7
-    dev: false
-
   /@syncfusion/ej2-popups@26.1.35:
     resolution: {integrity: sha512-mSODpl8SBpctspUKDR8qJeNiiyC0cx2nhSW3SA9VYOfayT8O+ojlOW+2Qg5q0OHNJselya+xx5lc5QXjP1f1NA==}
     dependencies:
@@ -2548,12 +2469,6 @@ packages:
       '@syncfusion/ej2-dropdowns': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.35
       '@syncfusion/ej2-splitbuttons': 26.1.35
-    dev: false
-
-  /@syncfusion/ej2-react-base@25.2.6:
-    resolution: {integrity: sha512-Mltemrof6wIGAFaBg9JsGFrWzM8Df2src9DsMSnvW36HG4rgcfVFGJI5Satu/ewbBAXzdvxYvo3qtBzl1xf2yA==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
     dev: false
 
   /@syncfusion/ej2-react-base@26.1.35:
@@ -2605,7 +2520,7 @@ packages:
   /@syncfusion/ej2-react-kanban@26.1.35:
     resolution: {integrity: sha512-EWf2Y0FcStETiBopLKTKibmmY15gymWauOsNbGJqB83ULXS2ukHlWCkA8r1ovn1w4dV4K8EflNRr0mWEyY/Ubw==}
     dependencies:
-      '@syncfusion/ej2-base': 26.1.35
+      '@syncfusion/ej2-base': 26.1.36
       '@syncfusion/ej2-kanban': 26.1.35
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
@@ -2629,7 +2544,7 @@ packages:
   /@syncfusion/ej2-react-schedule@26.1.35:
     resolution: {integrity: sha512-V5h8jAQPzkdiz4S9yYEB3ZslhXLzA/dUBj06apO0xuHthQdmyLSftrRTPd5YYAR4UAsKYqHn0FTwjnu3g8dbOw==}
     dependencies:
-      '@syncfusion/ej2-base': 26.1.35
+      '@syncfusion/ej2-base': 26.1.36
       '@syncfusion/ej2-react-base': 26.1.35
       '@syncfusion/ej2-schedule': 26.1.35
     dev: false
@@ -2672,13 +2587,6 @@ packages:
       '@syncfusion/ej2-navigations': 26.1.35
       '@syncfusion/ej2-popups': 26.1.35
       '@types/requirejs': 2.1.37
-    dev: false
-
-  /@syncfusion/ej2-splitbuttons@25.2.4:
-    resolution: {integrity: sha512-9C3sXLg9+fCJPX3tdQPKUJfxMw7FKFm4lLRGHliSVqbnK6dsSw2NzR8yt5gtTDgQgSGCCwL87e9g1QCAc7GTAQ==}
-    dependencies:
-      '@syncfusion/ej2-base': 25.2.7
-      '@syncfusion/ej2-popups': 25.2.7
     dev: false
 
   /@syncfusion/ej2-splitbuttons@26.1.35:
@@ -6363,8 +6271,8 @@ packages:
       typescript: 5.4.5
     dev: true
 
-  /prettier-plugin-tailwindcss@0.6.3(prettier-plugin-organize-imports@3.2.4)(prettier@3.3.2):
-    resolution: {integrity: sha512-GeJ9bqXN4APAP0V5T2a1J/o6a50MWevEUCPWxijpdXFDQkBCoAfz4pQfv+YMXSqZ5GXLMDYio0mUOfrYL7gf4w==}
+  /prettier-plugin-tailwindcss@0.6.4(prettier-plugin-organize-imports@3.2.4)(prettier@3.3.2):
+    resolution: {integrity: sha512-3vhbIvlKyAWPaw9bUr2cw6M1BGx2Oy9CCLJyv+nxEiBGCTcL69WcAz2IFMGqx8IXSzQCInGSo2ujAByg9poHLQ==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'
