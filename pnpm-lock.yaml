@@ -54,8 +54,8 @@ dependencies:
     specifier: ^26.1.35
     version: 26.1.35
   '@syncfusion/ej2-react-inputs':
-    specifier: ^26.1.35
-    version: 26.1.35
+    specifier: ^26.1.38
+    version: 26.1.38
   '@syncfusion/ej2-react-kanban':
     specifier: ^26.1.35
     version: 26.1.35
@@ -2316,6 +2316,15 @@ packages:
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
 
+  /@syncfusion/ej2-inputs@26.1.38:
+    resolution: {integrity: sha512-sEq9deDyjwWn435xTz9MjdoYwAXPaAGLQeUdKKN9RdK0mJK8QJsr8+U1OmmBZujC0eJcSjYF1N5JTuEppOjtUg==}
+    dependencies:
+      '@syncfusion/ej2-base': 26.1.37
+      '@syncfusion/ej2-buttons': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
+      '@syncfusion/ej2-splitbuttons': 26.1.35
+    dev: false
+
   /@syncfusion/ej2-kanban@26.1.35:
     resolution: {integrity: sha512-/tPxaDZ13siszpQunN3JL0/QgqjLBQV6z8A4Sv5UCmNjh6O0f/DVmkl8d+a2IBUTAJhShvkFCx0QoktMfzsSFw==}
     dependencies:
@@ -2458,6 +2467,13 @@ packages:
       '@syncfusion/ej2-buttons': 26.1.35
     dev: false
 
+  /@syncfusion/ej2-popups@26.1.38:
+    resolution: {integrity: sha512-XwXrB9EKZghX6xJNel5bDbeB6y/SdBonvLwGVxp2b+CYymdc+T03lQaDYO7FAtU2JlnaICsmx7OvoIIoYY+e3Q==}
+    dependencies:
+      '@syncfusion/ej2-base': 26.1.37
+      '@syncfusion/ej2-buttons': 26.1.35
+    dev: false
+
   /@syncfusion/ej2-progressbar@26.1.35:
     resolution: {integrity: sha512-DTYtOV8EwyHoR7vbCw/yvvzE6WZiX81RWeaFVNcJnczd2r3tpa8QZIkuiAMN3aiobNmfnfOK5dad2MjTOGQdmQ==}
     dependencies:
@@ -2516,11 +2532,11 @@ packages:
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-react-inputs@26.1.35:
-    resolution: {integrity: sha512-Nh+acYt5nrpnami5jOdLr2wmVusBYVeO0NBCka7gQAUDJTNp7oE0BixkDQgGoF8FDPdGpLQTih8LiSvddPYNKA==}
+  /@syncfusion/ej2-react-inputs@26.1.38:
+    resolution: {integrity: sha512-/mh0ZeUVtEvyzW54d8b0CGrNdLP36x7IQGRFJnZ3bIBRrJRxgHsCht2P2UZ2jvQhcQ7VZ+zVDTABnbl/6g5mOQ==}
     dependencies:
       '@syncfusion/ej2-base': 26.1.37
-      '@syncfusion/ej2-inputs': 26.1.35
+      '@syncfusion/ej2-inputs': 26.1.38
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
@@ -2600,7 +2616,7 @@ packages:
     resolution: {integrity: sha512-c+iUzD+9rvbriglYzQGJRFAijZ0vRHxnsUNo5whSdDoQCjZnE8avuz/6cJpkY/HyGNIzTpDEayQXB4Z+JgMRqw==}
     dependencies:
       '@syncfusion/ej2-base': 26.1.37
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
     dev: false
 
   /@syncfusion/ej2-spreadsheet@26.1.35:
