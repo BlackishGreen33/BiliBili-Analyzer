@@ -60,8 +60,8 @@ dependencies:
     specifier: ^26.1.35
     version: 26.1.35
   '@syncfusion/ej2-react-popups':
-    specifier: ^26.1.35
-    version: 26.1.35
+    specifier: ^26.1.38
+    version: 26.1.38
   '@syncfusion/ej2-react-richtexteditor':
     specifier: ^26.1.35
     version: 26.1.35
@@ -2115,7 +2115,7 @@ packages:
       '@syncfusion/ej2-buttons': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.35
       '@syncfusion/ej2-lists': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
     dev: false
 
   /@syncfusion/ej2-charts@26.1.35:
@@ -2159,7 +2159,7 @@ packages:
       '@syncfusion/ej2-inputs': 26.1.35
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
     dev: false
 
   /@syncfusion/ej2-documenteditor@26.1.35:
@@ -2174,7 +2174,7 @@ packages:
       '@syncfusion/ej2-inputs': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
       '@syncfusion/ej2-office-chart': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
 
@@ -2194,7 +2194,7 @@ packages:
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
       '@syncfusion/ej2-notifications': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
     dev: false
 
   /@syncfusion/ej2-excel-export@26.1.35:
@@ -2219,7 +2219,7 @@ packages:
       '@syncfusion/ej2-layouts': 26.1.35
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
 
@@ -2237,7 +2237,7 @@ packages:
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
       '@syncfusion/ej2-notifications': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-richtexteditor': 26.1.35
       '@syncfusion/ej2-svg-base': 26.1.35
       '@syncfusion/ej2-treegrid': 26.1.35
@@ -2259,7 +2259,7 @@ packages:
       '@syncfusion/ej2-navigations': 26.1.35
       '@syncfusion/ej2-notifications': 26.1.35
       '@syncfusion/ej2-pdf-export': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
 
@@ -2286,7 +2286,7 @@ packages:
       '@syncfusion/ej2-dropdowns': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
 
@@ -2302,7 +2302,7 @@ packages:
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
       '@syncfusion/ej2-notifications': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-richtexteditor': 26.1.35
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
@@ -2312,7 +2312,7 @@ packages:
     dependencies:
       '@syncfusion/ej2-base': 26.1.37
       '@syncfusion/ej2-buttons': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
 
@@ -2336,7 +2336,7 @@ packages:
       '@syncfusion/ej2-layouts': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
       '@syncfusion/ej2-notifications': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@types/requirejs': 2.1.37
     dev: false
 
@@ -2360,7 +2360,7 @@ packages:
       '@syncfusion/ej2-base': 26.1.37
       '@syncfusion/ej2-buttons': 26.1.35
       '@syncfusion/ej2-data': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
     dev: false
 
   /@syncfusion/ej2-maps@26.1.35:
@@ -2390,7 +2390,7 @@ packages:
       '@syncfusion/ej2-data': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.35
       '@syncfusion/ej2-lists': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
     dev: false
 
   /@syncfusion/ej2-notifications@26.1.35:
@@ -2398,7 +2398,7 @@ packages:
     dependencies:
       '@syncfusion/ej2-base': 26.1.37
       '@syncfusion/ej2-buttons': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
     dev: false
 
   /@syncfusion/ej2-office-chart@26.1.35:
@@ -2435,7 +2435,7 @@ packages:
       '@syncfusion/ej2-navigations': 26.1.35
       '@syncfusion/ej2-notifications': 26.1.35
       '@syncfusion/ej2-pdf': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
     dev: false
 
   /@syncfusion/ej2-pivotview@26.1.35:
@@ -2455,7 +2455,7 @@ packages:
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
       '@syncfusion/ej2-pdf-export': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
       '@syncfusion/ej2-svg-base': 26.1.35
     dev: false
@@ -2548,11 +2548,11 @@ packages:
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-react-popups@26.1.35:
-    resolution: {integrity: sha512-CcrSrqqZKnBAcL/6g2ZQCZ0zzznnW8OvQJhV734sEAJ0iavrX0+8CTO7Coj6GVB9T46dW3HNAx6DzVFQFvafvQ==}
+  /@syncfusion/ej2-react-popups@26.1.38:
+    resolution: {integrity: sha512-YUzlbpWCVTTh6elQbghQQUM8EREwneLZHcyyhOj7AnXa5CAo4oxqtgG9XtPGZFSJeTIlx/5Fzeq4MI9v5nnGww==}
     dependencies:
       '@syncfusion/ej2-base': 26.1.37
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
@@ -2580,7 +2580,7 @@ packages:
       '@syncfusion/ej2-dropdowns': 26.1.35
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
 
@@ -2592,7 +2592,7 @@ packages:
       '@syncfusion/ej2-filemanager': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
 
@@ -2608,7 +2608,7 @@ packages:
       '@syncfusion/ej2-inputs': 26.1.35
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
       '@types/requirejs': 2.1.37
     dev: false
 
@@ -2641,7 +2641,7 @@ packages:
       '@syncfusion/ej2-base': 26.1.37
       '@syncfusion/ej2-data': 26.1.35
       '@syncfusion/ej2-grids': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
     dev: false
 
   /@syncfusion/ej2-treemap@26.1.35:
