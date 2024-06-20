@@ -21,8 +21,8 @@ dependencies:
     specifier: ^11.11.5
     version: 11.11.5(@emotion/react@11.11.4)(@types/react@18.3.3)(react@18.3.1)
   '@iframe-resizer/react':
-    specifier: ^5.1.0
-    version: 5.1.0(react-dom@18.3.1)(react@18.3.1)
+    specifier: ^5.1.2
+    version: 5.1.2(react-dom@18.3.1)(react@18.3.1)
   '@million/lint':
     specifier: 1.0.0-rc.26
     version: 1.0.0-rc.26(react@18.3.1)
@@ -1287,17 +1287,17 @@ packages:
     engines: {node: '>=18.18'}
     dev: true
 
-  /@iframe-resizer/core@5.1.0:
-    resolution: {integrity: sha512-zYMVS1El3c+zMc6d1Lm6ZrRLg1Lx12H4g78Uu6kKfilEes5y5/3i+AaiqMJRhwRGCVRKO2a4ccBSiq7W+NAa7w==}
+  /@iframe-resizer/core@5.1.2:
+    resolution: {integrity: sha512-IXcDX3j0qBXBEUrZ4zU7XEiiN6BcxUa585Fqg78PoJHQHkxCfr6MsmLzQy7YJCAuCkzmX6wTRy8V/S708ECq0w==}
     dev: false
 
-  /@iframe-resizer/react@5.1.0(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-5isu0zaHbHbF02ORXtYqlGuR6Pwhj34fGzOYe/yU2zA/tV8es6vX85fqSbEVzx2Kt9mWqEP9by3+L7b4bddj7A==}
+  /@iframe-resizer/react@5.1.2(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-/BikX75I73AWMB5YqFOrqCAHDshufCkHms9HkfIRM/znJgjWJGzFuF1OhYbxJLCjfJhrT8bEyBuereAVPun44A==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@iframe-resizer/core': 5.1.0
+      '@iframe-resizer/core': 5.1.2
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       warning: 4.0.3
