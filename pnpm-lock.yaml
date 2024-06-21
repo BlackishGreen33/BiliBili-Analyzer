@@ -48,8 +48,8 @@ dependencies:
     specifier: ^26.1.35
     version: 26.1.35
   '@syncfusion/ej2-react-dropdowns':
-    specifier: ^26.1.35
-    version: 26.1.35
+    specifier: ^26.1.38
+    version: 26.1.38
   '@syncfusion/ej2-react-grids':
     specifier: ^26.1.38
     version: 26.1.38
@@ -2227,18 +2227,6 @@ packages:
       '@syncfusion/ej2-data': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-dropdowns@26.1.35:
-    resolution: {integrity: sha512-Y5IQphVob5+DGT+UZ/VfB6dF5pXgUp+/tK6bT+OvefmaDf3S4vcyTOqnJwRTcI8I6nn8M+BbryMUePPrH/DNTQ==}
-    dependencies:
-      '@syncfusion/ej2-base': 26.1.37
-      '@syncfusion/ej2-data': 26.1.35
-      '@syncfusion/ej2-inputs': 26.1.38
-      '@syncfusion/ej2-lists': 26.1.35
-      '@syncfusion/ej2-navigations': 26.1.38
-      '@syncfusion/ej2-notifications': 26.1.35
-      '@syncfusion/ej2-popups': 26.1.38
-    dev: false
-
   /@syncfusion/ej2-dropdowns@26.1.38:
     resolution: {integrity: sha512-hAFZ1tMSIgDynpdz+gMP4L5Qew5jh4EyjpmehFUPIj6DaVmfk3A+fWZjmdo355noqzFYrToEx36jVLqAD+yPyw==}
     dependencies:
@@ -2554,11 +2542,11 @@ packages:
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-react-dropdowns@26.1.35:
-    resolution: {integrity: sha512-JCnszADy9tIg/xVLA47ffYPS78Nh2aDFEwQr01vmxXRhq9a0ZvrhtPhPE0g8RN6cG/d2qIGsdumoKti6TMLSUg==}
+  /@syncfusion/ej2-react-dropdowns@26.1.38:
+    resolution: {integrity: sha512-0B01xxyAgbtjiK/foaxtwWWQdjR/Pl9rkKSbiZbyu9dhk0SbIvOgpx7C/bZgQ1TA+KNg4ElBw9A6s+dlY8IhGA==}
     dependencies:
       '@syncfusion/ej2-base': 26.1.37
-      '@syncfusion/ej2-dropdowns': 26.1.35
+      '@syncfusion/ej2-dropdowns': 26.1.38
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
