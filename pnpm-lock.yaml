@@ -51,8 +51,8 @@ dependencies:
     specifier: ^26.1.35
     version: 26.1.35
   '@syncfusion/ej2-react-grids':
-    specifier: ^26.1.35
-    version: 26.1.35
+    specifier: ^26.1.38
+    version: 26.1.38
   '@syncfusion/ej2-react-inputs':
     specifier: ^26.1.38
     version: 26.1.38
@@ -2131,6 +2131,16 @@ packages:
       '@syncfusion/ej2-popups': 26.1.38
     dev: false
 
+  /@syncfusion/ej2-calendars@26.1.38:
+    resolution: {integrity: sha512-cRcbf1Fvrcc5d1MdTxvlO527mftmc+Oussn0e79khNwNC9LZTlHN1rThq+GOXqXkwXqb37rGUiZSAmO5QvRl3g==}
+    dependencies:
+      '@syncfusion/ej2-base': 26.1.37
+      '@syncfusion/ej2-buttons': 26.1.35
+      '@syncfusion/ej2-inputs': 26.1.38
+      '@syncfusion/ej2-lists': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
+    dev: false
+
   /@syncfusion/ej2-charts@26.1.35:
     resolution: {integrity: sha512-DNUoipZtl5Cg/EA4VzgE7WFXrCrbMGLzoHVjv/ZFWCwKhgdhrD+ZBLa+sj0gU011xAn/bCzj1bLPnpOB3OiH1g==}
     dependencies:
@@ -2138,7 +2148,7 @@ packages:
       '@syncfusion/ej2-calendars': 26.1.35
       '@syncfusion/ej2-data': 26.1.35
       '@syncfusion/ej2-excel-export': 26.1.35
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
       '@syncfusion/ej2-pdf-export': 26.1.35
       '@syncfusion/ej2-svg-base': 26.1.35
     dev: false
@@ -2171,7 +2181,7 @@ packages:
       '@syncfusion/ej2-data': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.38
       '@syncfusion/ej2-lists': 26.1.35
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
       '@syncfusion/ej2-popups': 26.1.38
     dev: false
 
@@ -2185,7 +2195,7 @@ packages:
       '@syncfusion/ej2-dropdowns': 26.1.35
       '@syncfusion/ej2-file-utils': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.38
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
       '@syncfusion/ej2-office-chart': 26.1.35
       '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
@@ -2200,6 +2210,18 @@ packages:
 
   /@syncfusion/ej2-dropdowns@26.1.35:
     resolution: {integrity: sha512-Y5IQphVob5+DGT+UZ/VfB6dF5pXgUp+/tK6bT+OvefmaDf3S4vcyTOqnJwRTcI8I6nn8M+BbryMUePPrH/DNTQ==}
+    dependencies:
+      '@syncfusion/ej2-base': 26.1.37
+      '@syncfusion/ej2-data': 26.1.35
+      '@syncfusion/ej2-inputs': 26.1.38
+      '@syncfusion/ej2-lists': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
+      '@syncfusion/ej2-notifications': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
+    dev: false
+
+  /@syncfusion/ej2-dropdowns@26.1.38:
+    resolution: {integrity: sha512-hAFZ1tMSIgDynpdz+gMP4L5Qew5jh4EyjpmehFUPIj6DaVmfk3A+fWZjmdo355noqzFYrToEx36jVLqAD+yPyw==}
     dependencies:
       '@syncfusion/ej2-base': 26.1.37
       '@syncfusion/ej2-data': 26.1.35
@@ -2248,7 +2270,7 @@ packages:
       '@syncfusion/ej2-inputs': 26.1.38
       '@syncfusion/ej2-layouts': 26.1.35
       '@syncfusion/ej2-lists': 26.1.35
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
       '@syncfusion/ej2-notifications': 26.1.35
       '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-richtexteditor': 26.1.35
@@ -2265,6 +2287,26 @@ packages:
       '@syncfusion/ej2-compression': 26.1.35
       '@syncfusion/ej2-data': 26.1.35
       '@syncfusion/ej2-dropdowns': 26.1.35
+      '@syncfusion/ej2-excel-export': 26.1.35
+      '@syncfusion/ej2-file-utils': 26.1.35
+      '@syncfusion/ej2-inputs': 26.1.38
+      '@syncfusion/ej2-lists': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
+      '@syncfusion/ej2-notifications': 26.1.35
+      '@syncfusion/ej2-pdf-export': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
+      '@syncfusion/ej2-splitbuttons': 26.1.35
+    dev: false
+
+  /@syncfusion/ej2-grids@26.1.38:
+    resolution: {integrity: sha512-iHcmsF/PdUKjSo1Ub/nEUcP7s/3wXnw1AILnox57g4vMP7VLP3bA47aBTEgzMJ992O5f799wl+2ZAjJnVIIu8w==}
+    dependencies:
+      '@syncfusion/ej2-base': 26.1.37
+      '@syncfusion/ej2-buttons': 26.1.35
+      '@syncfusion/ej2-calendars': 26.1.38
+      '@syncfusion/ej2-compression': 26.1.35
+      '@syncfusion/ej2-data': 26.1.35
+      '@syncfusion/ej2-dropdowns': 26.1.38
       '@syncfusion/ej2-excel-export': 26.1.35
       '@syncfusion/ej2-file-utils': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.38
@@ -2298,7 +2340,7 @@ packages:
       '@syncfusion/ej2-buttons': 26.1.35
       '@syncfusion/ej2-dropdowns': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.38
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
       '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
@@ -2313,7 +2355,7 @@ packages:
       '@syncfusion/ej2-dropdowns': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.38
       '@syncfusion/ej2-lists': 26.1.35
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
       '@syncfusion/ej2-notifications': 26.1.35
       '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-richtexteditor': 26.1.35
@@ -2347,7 +2389,7 @@ packages:
       '@syncfusion/ej2-dropdowns': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.38
       '@syncfusion/ej2-layouts': 26.1.35
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
       '@syncfusion/ej2-notifications': 26.1.35
       '@syncfusion/ej2-popups': 26.1.38
       '@types/requirejs': 2.1.37
@@ -2456,7 +2498,7 @@ packages:
       '@syncfusion/ej2-inplace-editor': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.38
       '@syncfusion/ej2-lists': 26.1.35
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
       '@syncfusion/ej2-notifications': 26.1.35
       '@syncfusion/ej2-pdf': 26.1.35
       '@syncfusion/ej2-popups': 26.1.38
@@ -2477,7 +2519,7 @@ packages:
       '@syncfusion/ej2-grids': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.38
       '@syncfusion/ej2-lists': 26.1.35
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
       '@syncfusion/ej2-pdf-export': 26.1.35
       '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
@@ -2548,11 +2590,11 @@ packages:
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
-  /@syncfusion/ej2-react-grids@26.1.35:
-    resolution: {integrity: sha512-sEmEuBXTY7afLzXf8ULO/CCYEAjXVccefDtbpr0a3BpAETjqi1C/KRoGUG9ZTwpsUubVVSLwyOF5z1/v0RyTqw==}
+  /@syncfusion/ej2-react-grids@26.1.38:
+    resolution: {integrity: sha512-r1a+qdRKx3aYvglseEP4LlyWiN8vfaidkMnv8F00JK4+L614sB4NPAZ0uKvcT0Dpwj7MY22mJXvrvvVWt5Odxw==}
     dependencies:
       '@syncfusion/ej2-base': 26.1.37
-      '@syncfusion/ej2-grids': 26.1.35
+      '@syncfusion/ej2-grids': 26.1.38
       '@syncfusion/ej2-react-base': 26.1.35
     dev: false
 
@@ -2603,7 +2645,7 @@ packages:
       '@syncfusion/ej2-buttons': 26.1.35
       '@syncfusion/ej2-dropdowns': 26.1.35
       '@syncfusion/ej2-lists': 26.1.35
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
       '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
@@ -2615,7 +2657,7 @@ packages:
       '@syncfusion/ej2-buttons': 26.1.35
       '@syncfusion/ej2-filemanager': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.38
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
       '@syncfusion/ej2-popups': 26.1.38
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
@@ -2643,7 +2685,7 @@ packages:
       '@syncfusion/ej2-excel-export': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.38
       '@syncfusion/ej2-lists': 26.1.35
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
       '@syncfusion/ej2-popups': 26.1.38
       '@types/requirejs': 2.1.37
     dev: false
@@ -2662,7 +2704,7 @@ packages:
       '@syncfusion/ej2-charts': 26.1.35
       '@syncfusion/ej2-dropdowns': 26.1.35
       '@syncfusion/ej2-grids': 26.1.35
-      '@syncfusion/ej2-navigations': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.38
     dev: false
 
   /@syncfusion/ej2-svg-base@26.1.35:
