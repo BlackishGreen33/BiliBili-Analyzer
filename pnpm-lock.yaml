@@ -134,8 +134,8 @@ devDependencies:
     specifier: ^6.1.0
     version: 6.1.0
   '@types/node':
-    specifier: ^20.14.7
-    version: 20.14.7
+    specifier: ^20.14.8
+    version: 20.14.8
   '@types/react':
     specifier: ^18.3.3
     version: 18.3.3
@@ -2440,7 +2440,7 @@ packages:
     dependencies:
       '@syncfusion/ej2-base': 26.1.37
       '@syncfusion/ej2-compression': 26.1.35
-      '@types/node': 20.14.7
+      '@types/node': 20.14.8
     dev: false
 
   /@syncfusion/ej2-pdfviewer@26.1.38:
@@ -2732,15 +2732,15 @@ packages:
   /@types/fs-extra@8.1.5:
     resolution: {integrity: sha512-0dzKcwO+S8s2kuF5Z9oUWatQJj5Uq/iqphEtE3GQJVRRYm/tD1LglU2UnXi2A8jLq5umkGouOXOR9y0n613ZwQ==}
     dependencies:
-      '@types/node': 20.14.7
+      '@types/node': 20.14.8
     dev: true
 
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node@20.14.7:
-    resolution: {integrity: sha512-uTr2m2IbJJucF3KUxgnGOZvYbN0QgkGyWxG6973HCpMYFy2KfcgYuIwkJQMQkt1VbBMlvWRbpshFTLxnxCZjKQ==}
+  /@types/node@20.14.8:
+    resolution: {integrity: sha512-DO+2/jZinXfROG7j7WKFn/3C6nFwxy2lLpgLjEXJz+0XKphZlTLJ14mo8Vfg8X5BWN6XjyESXq+LcYdT7tR3bA==}
     dependencies:
       undici-types: 5.26.5
 
@@ -2778,7 +2778,7 @@ packages:
     resolution: {integrity: sha512-oJoftv0LSuaDZE3Le4DbKX+KS9G36NzOeSap90UIK0yMA/NhKJhqlSGtNDORNRaIbQfzjXDrQa0ytJ6mNRGz/Q==}
     requiresBuild: true
     dependencies:
-      '@types/node': 20.14.7
+      '@types/node': 20.14.8
     dev: false
     optional: true
 
