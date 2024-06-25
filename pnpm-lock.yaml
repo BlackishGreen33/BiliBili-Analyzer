@@ -66,8 +66,8 @@ dependencies:
     specifier: ^26.1.38
     version: 26.1.38
   '@syncfusion/ej2-react-schedule':
-    specifier: ^26.1.38
-    version: 26.1.38
+    specifier: ^26.1.39
+    version: 26.1.39
   antd:
     specifier: ^5.18.3
     version: 5.18.3(react-dom@18.3.1)(react@18.3.1)
@@ -2144,7 +2144,7 @@ packages:
     dependencies:
       '@syncfusion/ej2-base': 26.1.37
       '@syncfusion/ej2-buttons': 26.1.35
-      '@syncfusion/ej2-inputs': 26.1.38
+      '@syncfusion/ej2-inputs': 26.1.39
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-popups': 26.1.38
     dev: false
@@ -2224,6 +2224,18 @@ packages:
       '@syncfusion/ej2-inputs': 26.1.38
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.38
+      '@syncfusion/ej2-notifications': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
+    dev: false
+
+  /@syncfusion/ej2-dropdowns@26.1.39:
+    resolution: {integrity: sha512-9SUvo0JPr3oICiyE4Z3R362/dnvG27RuXfa7eEp75MUNJ/Ia32Oy950iBnTCOkw1JeXWX7IvaUJH/HmpLOUJ0A==}
+    dependencies:
+      '@syncfusion/ej2-base': 26.1.37
+      '@syncfusion/ej2-data': 26.1.35
+      '@syncfusion/ej2-inputs': 26.1.39
+      '@syncfusion/ej2-lists': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.39
       '@syncfusion/ej2-notifications': 26.1.35
       '@syncfusion/ej2-popups': 26.1.38
     dev: false
@@ -2347,6 +2359,15 @@ packages:
       '@syncfusion/ej2-splitbuttons': 26.1.35
     dev: false
 
+  /@syncfusion/ej2-inputs@26.1.39:
+    resolution: {integrity: sha512-lXtKfFc9qlE8SoDODeXPY5Oo25xLkFpbvGbOVHkohlWFyorU7OPuduW/Tu+tEcvYHUOu59r9Jrb1/OU9CmsL5Q==}
+    dependencies:
+      '@syncfusion/ej2-base': 26.1.37
+      '@syncfusion/ej2-buttons': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
+      '@syncfusion/ej2-splitbuttons': 26.1.35
+    dev: false
+
   /@syncfusion/ej2-kanban@26.1.35:
     resolution: {integrity: sha512-/tPxaDZ13siszpQunN3JL0/QgqjLBQV6z8A4Sv5UCmNjh6O0f/DVmkl8d+a2IBUTAJhShvkFCx0QoktMfzsSFw==}
     dependencies:
@@ -2411,6 +2432,17 @@ packages:
       '@syncfusion/ej2-buttons': 26.1.35
       '@syncfusion/ej2-data': 26.1.35
       '@syncfusion/ej2-inputs': 26.1.38
+      '@syncfusion/ej2-lists': 26.1.35
+      '@syncfusion/ej2-popups': 26.1.38
+    dev: false
+
+  /@syncfusion/ej2-navigations@26.1.39:
+    resolution: {integrity: sha512-t5LaC2rxkYtYzgRI4CDxCmfIaEIS3LeDb+2LhpxoyMk3F2Lr/v0wE7yCaic47EdoL4OsPgBBT2pCUjZaWWWGog==}
+    dependencies:
+      '@syncfusion/ej2-base': 26.1.37
+      '@syncfusion/ej2-buttons': 26.1.35
+      '@syncfusion/ej2-data': 26.1.35
+      '@syncfusion/ej2-inputs': 26.1.39
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-popups': 26.1.38
     dev: false
@@ -2579,12 +2611,12 @@ packages:
       '@syncfusion/ej2-richtexteditor': 26.1.38
     dev: false
 
-  /@syncfusion/ej2-react-schedule@26.1.38:
-    resolution: {integrity: sha512-ONmKpdUWiVO8jFKEdtBOqqZ9SwIbAqDik+Ubh3vVpwqYILeefm8CHsr5bZIEtBZSsJIvyzwnN2TP9vxY2JoePw==}
+  /@syncfusion/ej2-react-schedule@26.1.39:
+    resolution: {integrity: sha512-8dXCFg/TOPdq3vDKz3/J6oO7kG24fe6sZtH0gpMKK5okx2g/CzjZkBge2qiwu9C0w7ulNFey9qmx0pknJYqyPA==}
     dependencies:
       '@syncfusion/ej2-base': 26.1.37
       '@syncfusion/ej2-react-base': 26.1.35
-      '@syncfusion/ej2-schedule': 26.1.38
+      '@syncfusion/ej2-schedule': 26.1.39
     dev: false
 
   /@syncfusion/ej2-ribbon@26.1.38:
@@ -2623,6 +2655,22 @@ packages:
       '@syncfusion/ej2-inputs': 26.1.38
       '@syncfusion/ej2-lists': 26.1.35
       '@syncfusion/ej2-navigations': 26.1.38
+      '@syncfusion/ej2-popups': 26.1.38
+      '@types/requirejs': 2.1.37
+    dev: false
+
+  /@syncfusion/ej2-schedule@26.1.39:
+    resolution: {integrity: sha512-uicdbmdWEM1jqNEjGNNTzzDkHLV1enycQ56L+44qEeEYAN4FNX7NnIiPF0d1DI2b4FAuRSo6YVp3O9WBoVYzsw==}
+    dependencies:
+      '@syncfusion/ej2-base': 26.1.37
+      '@syncfusion/ej2-buttons': 26.1.35
+      '@syncfusion/ej2-calendars': 26.1.38
+      '@syncfusion/ej2-data': 26.1.35
+      '@syncfusion/ej2-dropdowns': 26.1.39
+      '@syncfusion/ej2-excel-export': 26.1.35
+      '@syncfusion/ej2-inputs': 26.1.39
+      '@syncfusion/ej2-lists': 26.1.35
+      '@syncfusion/ej2-navigations': 26.1.39
       '@syncfusion/ej2-popups': 26.1.38
       '@types/requirejs': 2.1.37
     dev: false
