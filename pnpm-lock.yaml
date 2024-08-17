@@ -117,7 +117,7 @@ importers:
         specifier: ^1.77.6
         version: 1.77.8
       styled-components:
-        specifier: ^6.1.11
+        specifier: ^6.1.12
         version: 6.1.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-merge:
         specifier: ^2.5.2
