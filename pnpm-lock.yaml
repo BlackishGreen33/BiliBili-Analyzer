@@ -45,8 +45,8 @@ importers:
         specifier: ^26.1.37
         version: 26.2.5
       '@syncfusion/ej2-react-calendars':
-        specifier: ^26.1.40
-        version: 26.2.5
+        specifier: ^26.2.8
+        version: 26.2.8
       '@syncfusion/ej2-react-charts':
         specifier: ^26.1.40
         version: 26.2.5
@@ -1269,8 +1269,8 @@ packages:
   '@syncfusion/ej2-react-base@26.2.9':
     resolution: {integrity: sha512-Ej0kbDqK4xMTPR6p1+iWlSMz5rkvcOleOlaXcNeMAr2CFBFjXmX6y7zv/Sy2Ne+SztIFx7Ct9mpU5ht2s26EuQ==}
 
-  '@syncfusion/ej2-react-calendars@26.2.5':
-    resolution: {integrity: sha512-v2jn1VVtFD1NhPIAT6+z0WypS9s3ndau5yFuXUNt7vUGXpk8ZVkQPZO9GDxLwpCeJg8j6YDl7u3grtm/CXWBew==}
+  '@syncfusion/ej2-react-calendars@26.2.8':
+    resolution: {integrity: sha512-HvXy5CL6i91uHtEv1QY5a4RYW/7wYBsWwIAry4lsmyMFgZR7UHqskiacMIYY5EtHsiwILCl8ogCL+Cbuhu004A==}
 
   '@syncfusion/ej2-react-charts@26.2.5':
     resolution: {integrity: sha512-zro043FnvjxDroxd6PuQw+YuEIStdDFgb8RJ3p3gS1k8LEjAq7yeu7Nls0I3hTUNruXCnPTAmFht/CUN1IIyyQ==}
@@ -5507,7 +5507,7 @@ snapshots:
   '@syncfusion/ej2-charts@26.2.5':
     dependencies:
       '@syncfusion/ej2-base': 26.2.5
-      '@syncfusion/ej2-calendars': 26.2.5
+      '@syncfusion/ej2-calendars': 26.2.8
       '@syncfusion/ej2-data': 26.2.5
       '@syncfusion/ej2-excel-export': 26.2.5
       '@syncfusion/ej2-navigations': 26.2.7
@@ -5546,7 +5546,7 @@ snapshots:
     dependencies:
       '@syncfusion/ej2-base': 26.2.5
       '@syncfusion/ej2-buttons': 26.2.7
-      '@syncfusion/ej2-calendars': 26.2.5
+      '@syncfusion/ej2-calendars': 26.2.8
       '@syncfusion/ej2-compression': 26.2.5
       '@syncfusion/ej2-dropdowns': 26.2.7
       '@syncfusion/ej2-file-utils': 26.2.5
@@ -5605,7 +5605,7 @@ snapshots:
     dependencies:
       '@syncfusion/ej2-base': 26.2.5
       '@syncfusion/ej2-buttons': 26.2.7
-      '@syncfusion/ej2-calendars': 26.2.5
+      '@syncfusion/ej2-calendars': 26.2.8
       '@syncfusion/ej2-data': 26.2.5
       '@syncfusion/ej2-dropdowns': 26.2.7
       '@syncfusion/ej2-grids': 26.2.7
@@ -5623,7 +5623,7 @@ snapshots:
     dependencies:
       '@syncfusion/ej2-base': 26.2.5
       '@syncfusion/ej2-buttons': 26.2.7
-      '@syncfusion/ej2-calendars': 26.2.5
+      '@syncfusion/ej2-calendars': 26.2.8
       '@syncfusion/ej2-compression': 26.2.5
       '@syncfusion/ej2-data': 26.2.5
       '@syncfusion/ej2-dropdowns': 26.2.7
@@ -5680,7 +5680,7 @@ snapshots:
     dependencies:
       '@syncfusion/ej2-base': 26.2.5
       '@syncfusion/ej2-buttons': 26.2.7
-      '@syncfusion/ej2-calendars': 26.2.5
+      '@syncfusion/ej2-calendars': 26.2.8
       '@syncfusion/ej2-data': 26.2.5
       '@syncfusion/ej2-dropdowns': 26.2.7
       '@syncfusion/ej2-inputs': 26.2.5
@@ -5800,7 +5800,7 @@ snapshots:
     dependencies:
       '@syncfusion/ej2-base': 26.2.5
       '@syncfusion/ej2-buttons': 26.2.7
-      '@syncfusion/ej2-calendars': 26.2.5
+      '@syncfusion/ej2-calendars': 26.2.8
       '@syncfusion/ej2-charts': 26.2.5
       '@syncfusion/ej2-compression': 26.2.5
       '@syncfusion/ej2-data': 26.2.5
@@ -5837,7 +5837,7 @@ snapshots:
     dependencies:
       '@syncfusion/ej2-base': 26.2.5
       '@syncfusion/ej2-buttons': 26.2.7
-      '@syncfusion/ej2-calendars': 26.2.5
+      '@syncfusion/ej2-calendars': 26.2.8
       '@syncfusion/ej2-dropdowns': 26.2.7
       '@syncfusion/ej2-inputs': 26.2.5
       '@syncfusion/ej2-splitbuttons': 26.2.5
@@ -5850,11 +5850,11 @@ snapshots:
     dependencies:
       '@syncfusion/ej2-base': 26.2.5
 
-  '@syncfusion/ej2-react-calendars@26.2.5':
+  '@syncfusion/ej2-react-calendars@26.2.8':
     dependencies:
       '@syncfusion/ej2-base': 26.2.5
-      '@syncfusion/ej2-calendars': 26.2.5
-      '@syncfusion/ej2-react-base': 26.2.5
+      '@syncfusion/ej2-calendars': 26.2.8
+      '@syncfusion/ej2-react-base': 26.2.9
 
   '@syncfusion/ej2-react-charts@26.2.5':
     dependencies:
@@ -5928,7 +5928,7 @@ snapshots:
     dependencies:
       '@syncfusion/ej2-base': 26.2.5
       '@syncfusion/ej2-buttons': 26.2.7
-      '@syncfusion/ej2-calendars': 26.2.5
+      '@syncfusion/ej2-calendars': 26.2.8
       '@syncfusion/ej2-data': 26.2.5
       '@syncfusion/ej2-dropdowns': 26.2.7
       '@syncfusion/ej2-excel-export': 26.2.5
