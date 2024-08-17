@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@ant-design/pro-components':
-        specifier: ^2.7.10
+        specifier: ^2.7.15
         version: 2.7.15(antd@5.20.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(rc-field-form@2.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@capacitor/android':
         specifier: ^6.1.2
