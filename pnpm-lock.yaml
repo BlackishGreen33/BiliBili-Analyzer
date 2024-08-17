@@ -12,8 +12,8 @@ importers:
         specifier: ^2.7.10
         version: 2.7.15(antd@5.20.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(rc-field-form@2.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@capacitor/android':
-        specifier: ^6.1.0
-        version: 6.1.1(@capacitor/core@6.1.1)
+        specifier: ^6.1.2
+        version: 6.1.2(@capacitor/core@6.1.1)
       '@capacitor/core':
         specifier: ^6.1.0
         version: 6.1.1
@@ -402,8 +402,8 @@ packages:
     resolution: {integrity: sha512-YTnYtra7W9e6/oAZEHj0bJehPRUlLH9/fbpT5LfB0NhQXyALCRkRs3zH9v07IYhkgpqX6Z78FnuccZr/l4Fs4Q==}
     engines: {node: '>=6.9.0'}
 
-  '@capacitor/android@6.1.1':
-    resolution: {integrity: sha512-rhO/nH6NJizGV5KizoIoGxCmkos3HnyUzI9TNv8IVy/C8h6lPM5Gt9cxGclb6k0OBTtgv6iJVo654+m4kzv0Qg==}
+  '@capacitor/android@6.1.2':
+    resolution: {integrity: sha512-Yh0gQDY1bgRrL25J6ecIlvvs2kF8iNSwIPXjyw6Yz9mnwYxBazF5KZbjpKtGPnJgicJhFkYGsqOkEtxrve0EoQ==}
     peerDependencies:
       '@capacitor/core': ^6.1.0
 
@@ -4691,7 +4691,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
 
-  '@capacitor/android@6.1.1(@capacitor/core@6.1.1)':
+  '@capacitor/android@6.1.2(@capacitor/core@6.1.1)':
     dependencies:
       '@capacitor/core': 6.1.1
 
