@@ -24,8 +24,8 @@ importers:
         specifier: ^11.13.0
         version: 11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@18.3.1))(@types/react@18.3.3)(react@18.3.1)
       '@iframe-resizer/react':
-        specifier: ^5.2.4
-        version: 5.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^5.2.6
+        version: 5.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@million/lint':
         specifier: 1.0.0-rc.84
         version: 1.0.0-rc.84
@@ -386,6 +386,10 @@ packages:
     resolution: {integrity: sha512-7dRy4DwXwtzBrPbZflqxnvfxLF8kdZXPkhymtDeFoFqE6ldzjQFgYTtYIFARcLEYDrqfBfYcZt1WqFxRoyC9Rw==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/runtime@7.25.4':
+    resolution: {integrity: sha512-DSgLeL/FNcpXuzav5wfYvHCGvynXkJbn3Zvc3823AEe9nPwW9IK4UoCSS5yGymmQzN0pCPvivtgS6/8U2kkm1w==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/template@7.25.0':
     resolution: {integrity: sha512-aOOgh1/5XzKvg1jvVz7AVrx2piJ2XBi227DHmbY6y+bM9H2FlN+IfecYu4Xl0cNiiVejlsCri89LUsbj8vJD9Q==}
     engines: {node: '>=6.9.0'}
@@ -721,11 +725,11 @@ packages:
     resolution: {integrity: sha512-d2CGZR2o7fS6sWB7DG/3a95bGKQyHMACZ5aW8qGkkqQpUoZV6C0X7Pc7l4ZNMZkfNBf4VWNe9E1jRsf0G146Ew==}
     engines: {node: '>=18.18'}
 
-  '@iframe-resizer/core@5.2.4':
-    resolution: {integrity: sha512-axabR3S6zWHTGIWD3BBjzRY2UKJgZWN1xLuG788+tI4MlAkTCyeXydIQaG89xy+F4aUwkrVRabY81VN6u/7Ziw==}
+  '@iframe-resizer/core@5.2.6':
+    resolution: {integrity: sha512-lKt25OAYfZIak2HAfvfg4jT24P9Ap++uru8tujmkcn7aZFTHOMHPv9zxvG6OgzHCAI26EvMbRv9OpX8Ng3BV9w==}
 
-  '@iframe-resizer/react@5.2.4':
-    resolution: {integrity: sha512-f0Tl/F8Jxr+Tu75oUIvo/3nDSF3Lng0jHCk19uS0FdP005fFFzvvVWcaLt+TuxS7lxlM0nWrcoaLntUxWE5AYg==}
+  '@iframe-resizer/react@5.2.6':
+    resolution: {integrity: sha512-jnZrisf7X7aBYzb41xQk7yNRrGiNDG1U5dvnkSFdrCleY302srp75cSGzJaCWRjkm33kNqGbQx6QxIx5tVCFpQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0  || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0  || ^19.0.0
@@ -4842,6 +4846,10 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
+  '@babel/runtime@7.25.4':
+    dependencies:
+      regenerator-runtime: 0.14.1
+
   '@babel/template@7.25.0':
     dependencies:
       '@babel/code-frame': 7.24.7
@@ -5180,12 +5188,12 @@ snapshots:
 
   '@humanwhocodes/retry@0.3.0': {}
 
-  '@iframe-resizer/core@5.2.4': {}
+  '@iframe-resizer/core@5.2.6': {}
 
-  '@iframe-resizer/react@5.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@iframe-resizer/react@5.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.25.0
-      '@iframe-resizer/core': 5.2.4
+      '@babel/runtime': 7.25.4
+      '@iframe-resizer/core': 5.2.6
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       warning: 4.0.3
