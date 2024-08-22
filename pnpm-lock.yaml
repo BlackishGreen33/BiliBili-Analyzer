@@ -24,8 +24,8 @@ importers:
         specifier: ^11.13.0
         version: 11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@18.3.1))(@types/react@18.3.3)(react@18.3.1)
       '@iframe-resizer/react':
-        specifier: ^5.1.4
-        version: 5.2.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^5.2.4
+        version: 5.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@million/lint':
         specifier: 1.0.0-rc.84
         version: 1.0.0-rc.84
@@ -721,14 +721,14 @@ packages:
     resolution: {integrity: sha512-d2CGZR2o7fS6sWB7DG/3a95bGKQyHMACZ5aW8qGkkqQpUoZV6C0X7Pc7l4ZNMZkfNBf4VWNe9E1jRsf0G146Ew==}
     engines: {node: '>=18.18'}
 
-  '@iframe-resizer/core@5.2.2':
-    resolution: {integrity: sha512-ARarWxjkRGOqZ/ja6wXYO2V/1M7638oUYxEwNwznMvnS2bUR3SyVoiGFmPeymp6RpPol2Lmi9n4LiD2I8IDOrA==}
+  '@iframe-resizer/core@5.2.4':
+    resolution: {integrity: sha512-axabR3S6zWHTGIWD3BBjzRY2UKJgZWN1xLuG788+tI4MlAkTCyeXydIQaG89xy+F4aUwkrVRabY81VN6u/7Ziw==}
 
-  '@iframe-resizer/react@5.2.2':
-    resolution: {integrity: sha512-agxarn4txR5E6YHB/BFi9re2sExzXJa8tOoUMCu7XsKJo1PbdbNiPf8OvNRLKNRqfR6xZ34r6NgCNdPQTQV9MA==}
+  '@iframe-resizer/react@5.2.4':
+    resolution: {integrity: sha512-f0Tl/F8Jxr+Tu75oUIvo/3nDSF3Lng0jHCk19uS0FdP005fFFzvvVWcaLt+TuxS7lxlM0nWrcoaLntUxWE5AYg==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0  || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0  || ^19.0.0
 
   '@ionic/cli-framework-output@2.2.8':
     resolution: {integrity: sha512-TshtaFQsovB4NWRBydbNFawql6yul7d5bMiW1WYYf17hd99V6xdDdk3vtF51bw6sLkxON3bDQpWsnUc9/hVo3g==}
@@ -5192,12 +5192,12 @@ snapshots:
 
   '@humanwhocodes/retry@0.3.0': {}
 
-  '@iframe-resizer/core@5.2.2': {}
+  '@iframe-resizer/core@5.2.4': {}
 
-  '@iframe-resizer/react@5.2.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@iframe-resizer/react@5.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.25.0
-      '@iframe-resizer/core': 5.2.2
+      '@iframe-resizer/core': 5.2.4
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       warning: 4.0.3
