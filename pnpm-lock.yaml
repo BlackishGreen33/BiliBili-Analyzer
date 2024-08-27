@@ -54,8 +54,8 @@ importers:
         specifier: ^26.2.10
         version: 26.2.10
       '@syncfusion/ej2-react-grids':
-        specifier: ^26.2.10
-        version: 26.2.10
+        specifier: ^26.2.11
+        version: 26.2.11
       '@syncfusion/ej2-react-inputs':
         specifier: ^26.2.10
         version: 26.2.10
@@ -1310,8 +1310,8 @@ packages:
   '@syncfusion/ej2-react-dropdowns@26.2.10':
     resolution: {integrity: sha512-T15haFw21x5Cx3x0zCZSIMva0gVsKjra3sagGUVudvbvWcgRaxR5NF4QydtAxPVyPVJd5l2Alq59pEsGYow0pA==}
 
-  '@syncfusion/ej2-react-grids@26.2.10':
-    resolution: {integrity: sha512-lFbLASYjacIr/DYe5mblXBeJXJaC0toU00IYbqrDr41fXFsUl0haRFv+8TKeQU99FcS/oJxKCZfbbe9yRkEfBQ==}
+  '@syncfusion/ej2-react-grids@26.2.11':
+    resolution: {integrity: sha512-HHP7LH2+aemnpTV4oeNcV2MrJmafHk+AaJgPBuTR1a16yz9AKKWjWCM6iHwFJCatAL2hxp+Mb+K9YtpyeFBwOA==}
 
   '@syncfusion/ej2-react-inputs@26.2.10':
     resolution: {integrity: sha512-YkRwj3kul0rU+oqGVp5PNvAGcQHIYEHrcwRcrXDCMZ9JGAkUMGWS44ZtEltm8Gdgc2mmeNpj7a9UlNfQosGEyQ==}
@@ -6151,10 +6151,10 @@ snapshots:
       '@syncfusion/ej2-dropdowns': 26.2.10
       '@syncfusion/ej2-react-base': 26.2.10
 
-  '@syncfusion/ej2-react-grids@26.2.10':
+  '@syncfusion/ej2-react-grids@26.2.11':
     dependencies:
       '@syncfusion/ej2-base': 26.2.10
-      '@syncfusion/ej2-grids': 26.2.10
+      '@syncfusion/ej2-grids': 26.2.11
       '@syncfusion/ej2-react-base': 26.2.10
 
   '@syncfusion/ej2-react-inputs@26.2.10':
