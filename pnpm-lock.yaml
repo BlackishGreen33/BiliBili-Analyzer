@@ -57,8 +57,8 @@ importers:
         specifier: ^26.2.11
         version: 26.2.11
       '@syncfusion/ej2-react-inputs':
-        specifier: ^26.2.10
-        version: 26.2.10
+        specifier: ^26.2.11
+        version: 26.2.11
       '@syncfusion/ej2-react-kanban':
         specifier: ^26.2.10
         version: 26.2.10
@@ -1223,9 +1223,6 @@ packages:
   '@syncfusion/ej2-inplace-editor@26.2.10':
     resolution: {integrity: sha512-d+y7/leMfwI/+GG0qo1Tx7lQfHIloW2MTCOVu/dxhHfeSTD4N57ER5hgWhxQ0HKRFRhHD1RojYYiYKsHdMimQw==}
 
-  '@syncfusion/ej2-inputs@26.2.10':
-    resolution: {integrity: sha512-L9WlPlkuxPiiSKbj08o93WneHCpAh+zx+eYnu8k6SU1nsZZGexwhtlhOxfE9ia2m0gItNjgeSOYpZEYYNFKiBw==}
-
   '@syncfusion/ej2-inputs@26.2.11':
     resolution: {integrity: sha512-t/QCmSqyKCQLGs8H4szhox/vlyvCezkZC4kFLlGA7AbU6iW5lidREvsK2xpYrNRvKdwVV9laFPuu7uBkZfKaNg==}
 
@@ -1292,8 +1289,8 @@ packages:
   '@syncfusion/ej2-react-grids@26.2.11':
     resolution: {integrity: sha512-HHP7LH2+aemnpTV4oeNcV2MrJmafHk+AaJgPBuTR1a16yz9AKKWjWCM6iHwFJCatAL2hxp+Mb+K9YtpyeFBwOA==}
 
-  '@syncfusion/ej2-react-inputs@26.2.10':
-    resolution: {integrity: sha512-YkRwj3kul0rU+oqGVp5PNvAGcQHIYEHrcwRcrXDCMZ9JGAkUMGWS44ZtEltm8Gdgc2mmeNpj7a9UlNfQosGEyQ==}
+  '@syncfusion/ej2-react-inputs@26.2.11':
+    resolution: {integrity: sha512-DkpkCsV4Yx4Df/63/IFSV6ql+4i4dXIukjI/6T1C8AAF0oAGqyJQkzqFcsl9AETBaNaUllCvTciTjOgLoqDSzQ==}
 
   '@syncfusion/ej2-react-kanban@26.2.10':
     resolution: {integrity: sha512-SLywrhA2ml9fjC7cNmLgEa+pWB8xNb8tlNw/gItvIKZ8w4xsjwihPZrE6Mqu8oAfYoFCpd7ET+1Ds/Ac4jqnfQ==}
@@ -5902,13 +5899,6 @@ snapshots:
       '@syncfusion/ej2-richtexteditor': 26.2.11
       '@syncfusion/ej2-splitbuttons': 26.2.10
 
-  '@syncfusion/ej2-inputs@26.2.10':
-    dependencies:
-      '@syncfusion/ej2-base': 26.2.10
-      '@syncfusion/ej2-buttons': 26.2.10
-      '@syncfusion/ej2-popups': 26.2.11
-      '@syncfusion/ej2-splitbuttons': 26.2.10
-
   '@syncfusion/ej2-inputs@26.2.11':
     dependencies:
       '@syncfusion/ej2-base': 26.2.10
@@ -6074,10 +6064,10 @@ snapshots:
       '@syncfusion/ej2-grids': 26.2.11
       '@syncfusion/ej2-react-base': 26.2.10
 
-  '@syncfusion/ej2-react-inputs@26.2.10':
+  '@syncfusion/ej2-react-inputs@26.2.11':
     dependencies:
       '@syncfusion/ej2-base': 26.2.10
-      '@syncfusion/ej2-inputs': 26.2.10
+      '@syncfusion/ej2-inputs': 26.2.11
       '@syncfusion/ej2-react-base': 26.2.10
 
   '@syncfusion/ej2-react-kanban@26.2.10':
