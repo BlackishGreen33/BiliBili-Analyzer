@@ -69,8 +69,8 @@ importers:
         specifier: ^26.2.13
         version: 26.2.13
       '@syncfusion/ej2-react-schedule':
-        specifier: ^26.2.12
-        version: 26.2.12
+        specifier: ^26.2.14
+        version: 26.2.14
       antd:
         specifier: ^5.20.6
         version: 5.20.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1315,8 +1315,8 @@ packages:
   '@syncfusion/ej2-react-richtexteditor@26.2.13':
     resolution: {integrity: sha512-Y22UyrW+q274n1/a+86xzt0mXfcksNQ7G28ujwk1LHcSfWUD0U0c9gFMoCd8lKAGKhNQbiBdYsjuRS57Co5AmA==}
 
-  '@syncfusion/ej2-react-schedule@26.2.12':
-    resolution: {integrity: sha512-GSg2rfO/vx6Vsd3ID+PSd7gnhRO6TtUudaWEcHRPIE39bS9HtGibjXYnLMJNomGj4CMvgOaFo/RgHeS4FpfQVA==}
+  '@syncfusion/ej2-react-schedule@26.2.14':
+    resolution: {integrity: sha512-Af9KQynQw2Kjk/kA86P6w+l9uK79zpJLliXQGSUUj7MBYqeXeHOglrJiZz2rijzsQSIKmSdqS8qbrj57de/4hw==}
 
   '@syncfusion/ej2-ribbon@26.2.10':
     resolution: {integrity: sha512-dRSC6yZiKeZPXa/EPXr/vQcG1N8dfR/ax8hxNdo9eSG84Wi1YRU46h+0rm9HQb6v4JkC3xYp1iYO18bX9tGJgw==}
@@ -6180,11 +6180,11 @@ snapshots:
       '@syncfusion/ej2-react-base': 26.2.10
       '@syncfusion/ej2-richtexteditor': 26.2.13
 
-  '@syncfusion/ej2-react-schedule@26.2.12':
+  '@syncfusion/ej2-react-schedule@26.2.14':
     dependencies:
       '@syncfusion/ej2-base': 26.2.10
       '@syncfusion/ej2-react-base': 26.2.10
-      '@syncfusion/ej2-schedule': 26.2.12
+      '@syncfusion/ej2-schedule': 26.2.14
 
   '@syncfusion/ej2-ribbon@26.2.10':
     dependencies:
