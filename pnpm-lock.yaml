@@ -51,8 +51,8 @@ importers:
         specifier: ^26.2.14
         version: 26.2.14
       '@syncfusion/ej2-react-dropdowns':
-        specifier: ^26.2.13
-        version: 26.2.13
+        specifier: ^27.1.48
+        version: 27.1.48(sinon@1.17.7)
       '@syncfusion/ej2-react-grids':
         specifier: ^27.1.48
         version: 27.1.48(sinon@1.17.7)
@@ -1340,8 +1340,8 @@ packages:
   '@syncfusion/ej2-react-charts@26.2.14':
     resolution: {integrity: sha512-Laa+E4m0WW0Mtcr6Ubgf0ae8M0aVuMHjln8L/xDjoRbCDRtfPoe4klHrRkStQAKq6xFCWd/hOszua2OJf+emGw==}
 
-  '@syncfusion/ej2-react-dropdowns@26.2.13':
-    resolution: {integrity: sha512-kq4tgErPrmb8P7dXTwU9ItO3yEnmEUPT4+WgEUfTHR5CFEfTqqqOpDiA3W3TbwK0tbZqT0M5wOn739FusrwMhA==}
+  '@syncfusion/ej2-react-dropdowns@27.1.48':
+    resolution: {integrity: sha512-ZKJznqTTwtToVnS7R0ZXup5C/8Sy/cDQTmkXF0KYgQvfJaHS1m76B9NaDUrJc4UFFWieOtoYTsJhO/s50yc0Uw==}
 
   '@syncfusion/ej2-react-grids@27.1.48':
     resolution: {integrity: sha512-cXVb/bUK+xDny8bQ59XZqKr7om4vS7DReVGIGdTtE6jFNskI7mSX1ShDWzqk9edYWgOpaebRbnQFeqZMZzxULg==}
@@ -6537,11 +6537,13 @@ snapshots:
       '@syncfusion/ej2-charts': 26.2.14
       '@syncfusion/ej2-react-base': 26.2.10
 
-  '@syncfusion/ej2-react-dropdowns@26.2.13':
+  '@syncfusion/ej2-react-dropdowns@27.1.48(sinon@1.17.7)':
     dependencies:
-      '@syncfusion/ej2-base': 26.2.10
-      '@syncfusion/ej2-dropdowns': 26.2.13
-      '@syncfusion/ej2-react-base': 26.2.10
+      '@syncfusion/ej2-base': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-dropdowns': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-react-base': 27.1.48(sinon@1.17.7)
+    transitivePeerDependencies:
+      - sinon
 
   '@syncfusion/ej2-react-grids@27.1.48(sinon@1.17.7)':
     dependencies:
