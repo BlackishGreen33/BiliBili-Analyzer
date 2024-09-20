@@ -60,8 +60,8 @@ importers:
         specifier: ^27.1.48
         version: 27.1.48(sinon@1.17.7)
       '@syncfusion/ej2-react-kanban':
-        specifier: ^26.2.10
-        version: 26.2.10
+        specifier: ^27.1.48
+        version: 27.1.48(sinon@1.17.7)
       '@syncfusion/ej2-react-popups':
         specifier: ^26.2.11
         version: 26.2.11
@@ -1256,8 +1256,14 @@ packages:
   '@syncfusion/ej2-kanban@26.2.10':
     resolution: {integrity: sha512-yRLzkjtstpw1lJ6mjxY19GK+bvJr718+e/Fco1kpqGkKc+i7R1xAE14YvrmK3W2U1RUGy1gsiUENotVnrQKMQw==}
 
+  '@syncfusion/ej2-kanban@27.1.48':
+    resolution: {integrity: sha512-H2jkBF3HKo6kydNhW+CS8D9s0y5FXh4+AOXUCuRZCLtKqte4r2m0bX4yWQxHnowD6SO0qXb/xtI7OXIUf/8d6w==}
+
   '@syncfusion/ej2-layouts@26.2.10':
     resolution: {integrity: sha512-th8PkTAvfsgPsMFLfukE15opWS4Bwfpv4bkPFnaqmuqDKG22qxAHlDKjcH0waXAvL0g6siN+VRMfbqba8VlQxA==}
+
+  '@syncfusion/ej2-layouts@27.1.48':
+    resolution: {integrity: sha512-pHCwYVvwVk4za0UJmPrtmcLV1CZONHzE2UYZ05eGUuVQmsyvzVO8gdfkPRxyRlEfeTFg+jmfC7XJZQ1FfebTxA==}
 
   '@syncfusion/ej2-lineargauge@26.2.10':
     resolution: {integrity: sha512-MPxXytIhcCnHtua8I4U2u0QeWpbmwWo96hbLNZA/LjJgVt+SqA6MnzAi5vtKBrbdIrGN6hK+GMiEDnsA9+UMuQ==}
@@ -1334,8 +1340,8 @@ packages:
   '@syncfusion/ej2-react-inputs@27.1.48':
     resolution: {integrity: sha512-cNrHN5Vmk0/Q1qCC76QQ5sMFt+vwz0Y1KM9iPwtOfy67opEQPYzV9N+P/sM7CG/Ins/SgOsv888ShwWbY3U1HA==}
 
-  '@syncfusion/ej2-react-kanban@26.2.10':
-    resolution: {integrity: sha512-SLywrhA2ml9fjC7cNmLgEa+pWB8xNb8tlNw/gItvIKZ8w4xsjwihPZrE6Mqu8oAfYoFCpd7ET+1Ds/Ac4jqnfQ==}
+  '@syncfusion/ej2-react-kanban@27.1.48':
+    resolution: {integrity: sha512-HKv35nDP/9xD8lfSVBs/Wa4i/q851ief+OI1IvQiJ56WAZHDC0zCMcgWCQAv8kR3fcUf+cGt6YLc5auyuALJXA==}
 
   '@syncfusion/ej2-react-popups@26.2.11':
     resolution: {integrity: sha512-/IabnvqV4srIKMVCeN9g3wVS9mCzxDAslVBWZ5ijmw/dLYcTSLBJmDGBhSiq05yJ3wmrA7/l9/zheX8JkiFBfg==}
@@ -6274,9 +6280,31 @@ snapshots:
       '@syncfusion/ej2-popups': 26.2.11
       '@types/requirejs': 2.1.37
 
+  '@syncfusion/ej2-kanban@27.1.48(sinon@1.17.7)':
+    dependencies:
+      '@syncfusion/ej2-base': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-buttons': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-data': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-dropdowns': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-inputs': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-layouts': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-navigations': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-notifications': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-popups': 27.1.48(sinon@1.17.7)
+      '@types/requirejs': 2.1.37
+    transitivePeerDependencies:
+      - sinon
+
   '@syncfusion/ej2-layouts@26.2.10':
     dependencies:
       '@syncfusion/ej2-base': 26.2.10
+
+  '@syncfusion/ej2-layouts@27.1.48(sinon@1.17.7)':
+    dependencies:
+      '@syncfusion/ej2-base': 27.1.48(sinon@1.17.7)
+      markdown-spellcheck: 1.3.1(sinon@1.17.7)
+    transitivePeerDependencies:
+      - sinon
 
   '@syncfusion/ej2-lineargauge@26.2.10':
     dependencies:
@@ -6472,11 +6500,13 @@ snapshots:
     transitivePeerDependencies:
       - sinon
 
-  '@syncfusion/ej2-react-kanban@26.2.10':
+  '@syncfusion/ej2-react-kanban@27.1.48(sinon@1.17.7)':
     dependencies:
-      '@syncfusion/ej2-base': 26.2.10
-      '@syncfusion/ej2-kanban': 26.2.10
-      '@syncfusion/ej2-react-base': 26.2.10
+      '@syncfusion/ej2-base': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-kanban': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-react-base': 27.1.48(sinon@1.17.7)
+    transitivePeerDependencies:
+      - sinon
 
   '@syncfusion/ej2-react-popups@26.2.11':
     dependencies:
