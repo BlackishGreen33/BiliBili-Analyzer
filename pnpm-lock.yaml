@@ -42,8 +42,8 @@ importers:
         specifier: ^26.2.14
         version: 26.2.14
       '@syncfusion/ej2-base':
-        specifier: ^26.2.5
-        version: 26.2.10
+        specifier: ^27.1.48
+        version: 27.1.48(sinon@1.17.7)
       '@syncfusion/ej2-react-calendars':
         specifier: ^27.1.48
         version: 27.1.48(sinon@1.17.7)
