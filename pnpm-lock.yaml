@@ -57,8 +57,8 @@ importers:
         specifier: ^26.2.14
         version: 26.2.14
       '@syncfusion/ej2-react-inputs':
-        specifier: ^26.2.14
-        version: 26.2.14
+        specifier: ^27.1.48
+        version: 27.1.48(sinon@1.17.7)
       '@syncfusion/ej2-react-kanban':
         specifier: ^26.2.10
         version: 26.2.10
@@ -1331,8 +1331,8 @@ packages:
   '@syncfusion/ej2-react-grids@26.2.14':
     resolution: {integrity: sha512-v5EcX7iWC60I1hJnhB1EpP5zyZauCKpKf6gXimX7rwt3vtxV74DR84rlm6j0Vqq2UGVxNRaQrNeLdaxizXYgGQ==}
 
-  '@syncfusion/ej2-react-inputs@26.2.14':
-    resolution: {integrity: sha512-KVY6sjruYMcpQOimezvxv5REArAgbuWHziYBpwgVnSle173UD2qbk0pyjQEgOik72lTKgr2xA5OabdOllHKqBw==}
+  '@syncfusion/ej2-react-inputs@27.1.48':
+    resolution: {integrity: sha512-cNrHN5Vmk0/Q1qCC76QQ5sMFt+vwz0Y1KM9iPwtOfy67opEQPYzV9N+P/sM7CG/Ins/SgOsv888ShwWbY3U1HA==}
 
   '@syncfusion/ej2-react-kanban@26.2.10':
     resolution: {integrity: sha512-SLywrhA2ml9fjC7cNmLgEa+pWB8xNb8tlNw/gItvIKZ8w4xsjwihPZrE6Mqu8oAfYoFCpd7ET+1Ds/Ac4jqnfQ==}
@@ -6464,11 +6464,13 @@ snapshots:
       '@syncfusion/ej2-grids': 26.2.14
       '@syncfusion/ej2-react-base': 26.2.10
 
-  '@syncfusion/ej2-react-inputs@26.2.14':
+  '@syncfusion/ej2-react-inputs@27.1.48(sinon@1.17.7)':
     dependencies:
-      '@syncfusion/ej2-base': 26.2.10
-      '@syncfusion/ej2-inputs': 26.2.14
-      '@syncfusion/ej2-react-base': 26.2.10
+      '@syncfusion/ej2-base': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-inputs': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-react-base': 27.1.48(sinon@1.17.7)
+    transitivePeerDependencies:
+      - sinon
 
   '@syncfusion/ej2-react-kanban@26.2.10':
     dependencies:
