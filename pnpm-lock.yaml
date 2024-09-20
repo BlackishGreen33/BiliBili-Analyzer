@@ -54,8 +54,8 @@ importers:
         specifier: ^26.2.13
         version: 26.2.13
       '@syncfusion/ej2-react-grids':
-        specifier: ^26.2.14
-        version: 26.2.14
+        specifier: ^27.1.48
+        version: 27.1.48(sinon@1.17.7)
       '@syncfusion/ej2-react-inputs':
         specifier: ^27.1.48
         version: 27.1.48(sinon@1.17.7)
@@ -1232,6 +1232,9 @@ packages:
   '@syncfusion/ej2-grids@26.2.14':
     resolution: {integrity: sha512-2dmXpp3z2dFMKKy6aCyXmtGpBHA2vRH8ygd0aRm+YwVX1H3HLeHHhkODyCDDzUpN2TX9Pt0/0qzX1tP3Crnnwg==}
 
+  '@syncfusion/ej2-grids@27.1.48':
+    resolution: {integrity: sha512-9aPWbLbEyKxsJ0R/zCkz1utgX/1Fpev6Nvk2VodbkbGjF+C0VQRK+79hJrVIPS4WtqkmdVeGw5bpiDVcRW1l2g==}
+
   '@syncfusion/ej2-heatmap@26.2.10':
     resolution: {integrity: sha512-P1d3Eea2ziF5ctT99mACKRGXa/VBP7wD8dOQ270LmTBlLNEsMqM+u6e1nK2y9dl4X2QTiqJLwkfYcjQvnSadqg==}
 
@@ -1292,6 +1295,9 @@ packages:
   '@syncfusion/ej2-pdf-export@26.2.14':
     resolution: {integrity: sha512-sO2F2jUgmm8uNx1dAyFp+cz00UAU7mMM5p1ulQi8K2Km+mN90A9eZNcKzCBABX21anJqaXOgaicZHhOrqP2BTg==}
 
+  '@syncfusion/ej2-pdf-export@27.1.48':
+    resolution: {integrity: sha512-v3ayOhsjn2z1rSP2Ef+5H7D+QjEItdA16NT5srYJxhNs4943lgBxiSyHE5sgJbLn0KwbcxaHtx+LrNVhNqbmrA==}
+
   '@syncfusion/ej2-pdf@26.2.14':
     resolution: {integrity: sha512-Oz9NJRytz+xwDj6cJ97MgNcYmfIxpw+4fybIQdpInGqbbHNM4uRUWDVROTI4KPdA7hcm8EkI+lkOgk+00zq5RA==}
 
@@ -1328,8 +1334,8 @@ packages:
   '@syncfusion/ej2-react-dropdowns@26.2.13':
     resolution: {integrity: sha512-kq4tgErPrmb8P7dXTwU9ItO3yEnmEUPT4+WgEUfTHR5CFEfTqqqOpDiA3W3TbwK0tbZqT0M5wOn739FusrwMhA==}
 
-  '@syncfusion/ej2-react-grids@26.2.14':
-    resolution: {integrity: sha512-v5EcX7iWC60I1hJnhB1EpP5zyZauCKpKf6gXimX7rwt3vtxV74DR84rlm6j0Vqq2UGVxNRaQrNeLdaxizXYgGQ==}
+  '@syncfusion/ej2-react-grids@27.1.48':
+    resolution: {integrity: sha512-cXVb/bUK+xDny8bQ59XZqKr7om4vS7DReVGIGdTtE6jFNskI7mSX1ShDWzqk9edYWgOpaebRbnQFeqZMZzxULg==}
 
   '@syncfusion/ej2-react-inputs@27.1.48':
     resolution: {integrity: sha512-cNrHN5Vmk0/Q1qCC76QQ5sMFt+vwz0Y1KM9iPwtOfy67opEQPYzV9N+P/sM7CG/Ins/SgOsv888ShwWbY3U1HA==}
@@ -6206,6 +6212,27 @@ snapshots:
       '@syncfusion/ej2-popups': 26.2.11
       '@syncfusion/ej2-splitbuttons': 26.2.10
 
+  '@syncfusion/ej2-grids@27.1.48(sinon@1.17.7)':
+    dependencies:
+      '@syncfusion/ej2-base': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-buttons': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-calendars': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-compression': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-data': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-dropdowns': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-excel-export': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-file-utils': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-inputs': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-lists': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-navigations': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-notifications': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-pdf-export': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-popups': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-splitbuttons': 27.1.48(sinon@1.17.7)
+      markdown-spellcheck: 1.3.1(sinon@1.17.7)
+    transitivePeerDependencies:
+      - sinon
+
   '@syncfusion/ej2-heatmap@26.2.10':
     dependencies:
       '@syncfusion/ej2-base': 26.2.10
@@ -6359,6 +6386,13 @@ snapshots:
     dependencies:
       '@syncfusion/ej2-compression': 26.2.10
 
+  '@syncfusion/ej2-pdf-export@27.1.48(sinon@1.17.7)':
+    dependencies:
+      '@syncfusion/ej2-compression': 27.1.48(sinon@1.17.7)
+      markdown-spellcheck: 1.3.1(sinon@1.17.7)
+    transitivePeerDependencies:
+      - sinon
+
   '@syncfusion/ej2-pdf@26.2.14':
     dependencies:
       '@syncfusion/ej2-base': 26.2.10
@@ -6458,11 +6492,13 @@ snapshots:
       '@syncfusion/ej2-dropdowns': 26.2.13
       '@syncfusion/ej2-react-base': 26.2.10
 
-  '@syncfusion/ej2-react-grids@26.2.14':
+  '@syncfusion/ej2-react-grids@27.1.48(sinon@1.17.7)':
     dependencies:
-      '@syncfusion/ej2-base': 26.2.10
-      '@syncfusion/ej2-grids': 26.2.14
-      '@syncfusion/ej2-react-base': 26.2.10
+      '@syncfusion/ej2-base': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-grids': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-react-base': 27.1.48(sinon@1.17.7)
+    transitivePeerDependencies:
+      - sinon
 
   '@syncfusion/ej2-react-inputs@27.1.48(sinon@1.17.7)':
     dependencies:
