@@ -45,8 +45,8 @@ importers:
         specifier: ^26.2.5
         version: 26.2.10
       '@syncfusion/ej2-react-calendars':
-        specifier: ^26.2.12
-        version: 26.2.12
+        specifier: ^27.1.48
+        version: 27.1.48(sinon@1.17.7)
       '@syncfusion/ej2-react-charts':
         specifier: ^26.2.14
         version: 26.2.14
@@ -1331,8 +1331,8 @@ packages:
   '@syncfusion/ej2-react-base@27.1.48':
     resolution: {integrity: sha512-DfKPE/uxHnsLkxHncP2yf1Ymw/N5jIjv/YHx/nthg193QGn8hSRUaVMV249EkM/J/wIqGZ5HU/bs9XeCyLzoWg==}
 
-  '@syncfusion/ej2-react-calendars@26.2.12':
-    resolution: {integrity: sha512-3/YkedIjBEXu81rTkzP4EpybwatucJQZrR+yaKKK9MpuGd3SocvwGndfBC8D4iGDNi0z1hTAwFmhzc3V3HciCQ==}
+  '@syncfusion/ej2-react-calendars@27.1.48':
+    resolution: {integrity: sha512-k/5izBWD3RguSD+LD8Hz2Xx2XK3Ay2Yvzp8h7ZlAW9xYsX7RAXpJBGxBIejIuyKubRIQ0fbGrS2bVsZddsxNKA==}
 
   '@syncfusion/ej2-react-charts@26.2.14':
     resolution: {integrity: sha512-Laa+E4m0WW0Mtcr6Ubgf0ae8M0aVuMHjln8L/xDjoRbCDRtfPoe4klHrRkStQAKq6xFCWd/hOszua2OJf+emGw==}
@@ -6505,11 +6505,13 @@ snapshots:
     transitivePeerDependencies:
       - sinon
 
-  '@syncfusion/ej2-react-calendars@26.2.12':
+  '@syncfusion/ej2-react-calendars@27.1.48(sinon@1.17.7)':
     dependencies:
-      '@syncfusion/ej2-base': 26.2.10
-      '@syncfusion/ej2-calendars': 26.2.12
-      '@syncfusion/ej2-react-base': 26.2.10
+      '@syncfusion/ej2-base': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-calendars': 27.1.48(sinon@1.17.7)
+      '@syncfusion/ej2-react-base': 27.1.48(sinon@1.17.7)
+    transitivePeerDependencies:
+      - sinon
 
   '@syncfusion/ej2-react-charts@26.2.14':
     dependencies:
