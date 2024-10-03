@@ -27,8 +27,8 @@ importers:
         specifier: ^5.3.1
         version: 5.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@million/lint':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.0.8
+        version: 1.0.8
       '@radix-ui/react-icons':
         specifier: ^1.3.0
         version: 1.3.0(react@18.3.1)
@@ -798,12 +798,12 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@million/install@1.0.3':
-    resolution: {integrity: sha512-UGA5zQYLsCnQItmmh/yiaGcdS2TE3NeSqaFxWkQJSpB0ajsgWdzLU9+YR3imJ6HGXRqoOYNPr0WR83D7vwlnwg==}
+  '@million/install@1.0.8':
+    resolution: {integrity: sha512-v3hAMjE1BvPh4UMRTpwx2okj4XOsNTOIvX3MEyscP5mLKXwNiBjhS+aiHFhNU8BSTRBhlIrrX3sebrSVx/AywA==}
     hasBin: true
 
-  '@million/lint@1.0.0':
-    resolution: {integrity: sha512-0vCj48cJba2S+/WS1CPgoXHPb5vFHKwETquonAPv3+TJSYUXiShhSwj54PWVGBSLZZ9Uzxl5Ll5zw0IkcsJR6A==}
+  '@million/lint@1.0.8':
+    resolution: {integrity: sha512-DrdqkNdKamxb3YjOcDeVe1tt6SWpxVvbw9y9LxeIvJVOP4YvFHg2ZzfEX5o0we/xFDTip4D05YWvmAZl76gPhQ==}
     hasBin: true
 
   '@napi-rs/nice-android-arm-eabi@1.0.1':
@@ -5370,7 +5370,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@million/install@1.0.3':
+  '@million/install@1.0.8':
     dependencies:
       '@antfu/ni': 0.21.12
       '@axiomhq/js': 1.0.0-rc.3
@@ -5384,13 +5384,13 @@ snapshots:
       recast: 0.23.9
       xycolors: 0.1.2
 
-  '@million/lint@1.0.0':
+  '@million/lint@1.0.8':
     dependencies:
       '@axiomhq/js': 1.0.0-rc.3
       '@babel/core': 7.25.2
       '@babel/types': 7.25.2
       '@hono/node-server': 1.13.1(hono@4.6.3)
-      '@million/install': 1.0.3
+      '@million/install': 1.0.8
       '@rollup/pluginutils': 5.1.2
       '@rrweb/types': 2.0.0-alpha.16
       babel-plugin-syntax-hermes-parser: 0.21.1
