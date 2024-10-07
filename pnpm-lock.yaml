@@ -99,8 +99,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       puppeteer:
-        specifier: ^23.5.0
-        version: 23.5.0(typescript@5.6.2)
+        specifier: ^23.5.1
+        version: 23.5.1(typescript@5.6.2)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -806,8 +806,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@million/install@1.0.8':
-    resolution: {integrity: sha512-v3hAMjE1BvPh4UMRTpwx2okj4XOsNTOIvX3MEyscP5mLKXwNiBjhS+aiHFhNU8BSTRBhlIrrX3sebrSVx/AywA==}
+  '@million/install@1.0.9':
+    resolution: {integrity: sha512-tJk7azrjsIkHl/xTppFw8K7M/CIrqa1y9J75By+dtW6jZBQi51DQlsp5J1SuAcTR89XwpGEuhN29HOvHosblPw==}
     hasBin: true
 
   '@million/lint@1.0.8':
@@ -3512,12 +3512,12 @@ packages:
     resolution: {integrity: sha512-l1jNAspIBSFqbT+y+5FosojNpVpF94nlI+wDUpqP9enwOTfHx9f0gh5nB96vl+6yTpsJsypeNrwfzPrKuHB41A==}
     engines: {node: '>=8'}
 
-  puppeteer-core@23.5.0:
-    resolution: {integrity: sha512-+5ed+625GuQ2emRHqYec8khT9LP14FWzv8hYl0HiM6hnnlNzdVU9uDJIPHeCPLIWxq15ost9MeF8kBk4R3eiFw==}
+  puppeteer-core@23.5.1:
+    resolution: {integrity: sha512-We6xKCSZaZ23+GAYckeNfeDeJIVuhxOBsh/gZkbULu/XLFJ3umSiiQ8Ey927h3g/XrCCr8CnSZ5fvP5v2vB5Yw==}
     engines: {node: '>=18'}
 
-  puppeteer@23.5.0:
-    resolution: {integrity: sha512-jnUx5M0YtFva7vXr39qqsxgB46JiwXJavuM1Hgsqbd9WWiGTEUt9klGpTxyHi+ZQf3NUgleDhNsnI10IK8Ebsg==}
+  puppeteer@23.5.1:
+    resolution: {integrity: sha512-9WUnrCx7nB/GEMbJdKiSSU6G4t6Nzn39BBochWYyhK2wWxKwibZDwEF71AUP9D17Byn6OoPifsXhyvnqN/D4mQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -5385,7 +5385,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@million/install@1.0.8':
+  '@million/install@1.0.9':
     dependencies:
       '@antfu/ni': 0.21.12
       '@axiomhq/js': 1.0.0-rc.3
@@ -5405,7 +5405,7 @@ snapshots:
       '@babel/core': 7.25.2
       '@babel/types': 7.25.2
       '@hono/node-server': 1.13.1(hono@4.6.3)
-      '@million/install': 1.0.8
+      '@million/install': 1.0.9
       '@rollup/pluginutils': 5.1.2
       '@rrweb/types': 2.0.0-alpha.16
       babel-plugin-syntax-hermes-parser: 0.21.1
@@ -8640,7 +8640,7 @@ snapshots:
     dependencies:
       escape-goat: 2.1.1
 
-  puppeteer-core@23.5.0:
+  puppeteer-core@23.5.1:
     dependencies:
       '@puppeteer/browsers': 2.4.0
       chromium-bidi: 0.8.0(devtools-protocol@0.0.1342118)
@@ -8653,13 +8653,13 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  puppeteer@23.5.0(typescript@5.6.2):
+  puppeteer@23.5.1(typescript@5.6.2):
     dependencies:
       '@puppeteer/browsers': 2.4.0
       chromium-bidi: 0.8.0(devtools-protocol@0.0.1342118)
       cosmiconfig: 9.0.0(typescript@5.6.2)
       devtools-protocol: 0.0.1342118
-      puppeteer-core: 23.5.0
+      puppeteer-core: 23.5.1
       typed-query-selector: 2.12.0
     transitivePeerDependencies:
       - bufferutil
