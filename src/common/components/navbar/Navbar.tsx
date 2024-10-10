@@ -67,7 +67,11 @@ const Navbar: React.FC = React.memo(() => {
         <TooltipComponent content="GitHub 仓库" position="BottomCenter">
           <div
             className="flex cursor-pointer items-center gap-2 rounded-lg p-1 hover:bg-light-gray"
-            onClick={() => router.push('https://github.com/BlackishGreen33/BiliBili-Analyzer')}
+            onClick={() =>
+              router.push(
+                'https://github.com/BlackishGreen33/BiliBili-Analyzer'
+              )
+            }
           >
             <FaGithub className="h-8 w-8 rounded-full" />
             <p>

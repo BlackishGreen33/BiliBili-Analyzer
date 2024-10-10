@@ -48,18 +48,18 @@ const UserProfile: React.FC = React.memo(() => {
         {userProfileData.map((item, index) => (
           <div
             key={index}
-            className="flex cursor-pointer gap-5 border-b-1 border-color p-4 hover:bg-light-gray  dark:hover:bg-[#42464D]"
+            className="flex cursor-pointer gap-5 border-b-1 border-color p-4 hover:bg-light-gray dark:hover:bg-[#42464D]"
           >
             <button
               type="button"
               style={{ color: item.iconColor, backgroundColor: item.iconBg }}
-              className=" rounded-lg p-3 text-xl hover:bg-light-gray"
+              className="rounded-lg p-3 text-xl hover:bg-light-gray"
             >
               {item.icon}
             </button>
 
             <div>
-              <p className="font-semibold dark:text-gray-200 ">{item.title}</p>
+              <p className="font-semibold dark:text-gray-200">{item.title}</p>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {' '}
                 {item.desc}{' '}

@@ -15,11 +15,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = React.memo(({ children }) => {
-  const {
-    setCurrentColor,
-    activeMenu,
-    themeSettings,
-  } = useStore();
+  const { setCurrentColor, activeMenu, themeSettings } = useStore();
   const { setTheme, theme } = useTheme();
 
   const chatbotScript = `
@@ -59,11 +55,11 @@ defer>
           <div
             className={
               activeMenu
-                ? 'min-h-screen w-full bg-main-bg dark:bg-main-dark-bg md:ml-72  '
-                : 'flex-2 min-h-screen  w-full bg-main-bg dark:bg-main-dark-bg '
+                ? 'min-h-screen w-full bg-main-bg dark:bg-main-dark-bg md:ml-72'
+                : 'flex-2 min-h-screen w-full bg-main-bg dark:bg-main-dark-bg'
             }
           >
-            <div className="navbar fixed w-full bg-main-bg dark:bg-main-dark-bg md:static ">
+            <div className="navbar fixed w-full bg-main-bg dark:bg-main-dark-bg md:static">
               <Navbar />
             </div>
             <div>

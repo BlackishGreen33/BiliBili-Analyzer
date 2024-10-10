@@ -85,17 +85,17 @@ const Analization: React.FC<AnalizationProps> = React.memo(({ videoInfo }) => {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center lg:flex-nowrap ">
+    <div className="flex flex-wrap justify-center lg:flex-nowrap">
       <div className="m-3 flex flex-wrap items-center justify-center gap-1">
         {AnalizationData.map((item) => (
           <Card
             key={item.title}
-            className="h-44 rounded-2xl bg-white p-4 pt-9  dark:bg-secondary-dark-bg dark:text-gray-200 md:w-56 "
+            className="h-44 rounded-2xl bg-white p-4 pt-9 dark:bg-secondary-dark-bg dark:text-gray-200 md:w-56"
           >
             <button
               type="button"
               style={{ color: item.iconColor, backgroundColor: item.iconBg }}
-              className="opacity-0.9 rounded-full p-4  text-2xl hover:drop-shadow-xl"
+              className="opacity-0.9 rounded-full p-4 text-2xl hover:drop-shadow-xl"
             >
               {item.icon}
             </button>
@@ -105,7 +105,7 @@ const Analization: React.FC<AnalizationProps> = React.memo(({ videoInfo }) => {
                 {item.percentage}
               </span>
             </p>
-            <p className="mt-1 text-sm  text-gray-400">{item.title}</p>
+            <p className="mt-1 text-sm text-gray-400">{item.title}</p>
           </Card>
         ))}
       </div>

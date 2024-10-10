@@ -15,7 +15,7 @@ const ThemeSettings = React.memo(() => {
 
   return (
     <div className="nav-item fixed right-0 top-0 w-screen bg-half-transparent">
-      <div className="float-right h-screen w-400  bg-white dark:bg-[#484B52] dark:text-gray-200">
+      <div className="float-right h-screen w-400 bg-white dark:bg-[#484B52] dark:text-gray-200">
         <div className="ml-4 flex items-center justify-between p-4">
           <p className="text-lg font-semibold">设定</p>
           <button
@@ -28,7 +28,7 @@ const ThemeSettings = React.memo(() => {
           </button>
         </div>
         <div className="ml-4 flex-col border-t-1 border-color p-4">
-          <p className="text-xl font-semibold ">主题模式</p>
+          <p className="text-xl font-semibold">主题模式</p>
           <div className="mt-4">
             <input
               type="radio"
@@ -65,7 +65,7 @@ const ThemeSettings = React.memo(() => {
           </div>
         </div>
         <div className="ml-4 border-t-1 border-color p-4">
-          <p className="text-xl font-semibold ">主题颜色</p>
+          <p className="text-xl font-semibold">主题颜色</p>
           <div className="flex gap-3">
             {ThemeColors.map((item, index) => (
               <TooltipComponent

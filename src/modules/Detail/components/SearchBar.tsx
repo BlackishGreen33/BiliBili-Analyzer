@@ -10,8 +10,8 @@ import { Input } from '@/common/components/ui/input';
 import { ToastAction } from '@/common/components/ui/toast';
 import { useToast } from '@/common/components/ui/use-toast';
 import useStore from '@/common/hooks/useStore';
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 type SearchBarProps = {};
 
