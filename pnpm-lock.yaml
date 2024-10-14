@@ -27,8 +27,8 @@ importers:
         specifier: ^5.3.1
         version: 5.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@million/lint':
-        specifier: 1.0.9
-        version: 1.0.9
+        specifier: 1.0.10
+        version: 1.0.10
       '@radix-ui/react-icons':
         specifier: ^1.3.0
         version: 1.3.0(react@18.3.1)
@@ -806,12 +806,12 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@million/install@1.0.9':
-    resolution: {integrity: sha512-tJk7azrjsIkHl/xTppFw8K7M/CIrqa1y9J75By+dtW6jZBQi51DQlsp5J1SuAcTR89XwpGEuhN29HOvHosblPw==}
+  '@million/install@1.0.10':
+    resolution: {integrity: sha512-MZL++9DtBCul1oZthuY3v2JLqe2gjHXrH4l5Y8dIK9UB6A50k8d9wa4cT/x160ISNkB4ouZ3dJKJhP56isQAew==}
     hasBin: true
 
-  '@million/lint@1.0.9':
-    resolution: {integrity: sha512-sKqdKUb0zfF2DUXAWuhbxIm+0j7CqG+689azpcSVEdW3zn9ezj3AoL7ne229Q9ElJAmr8Z0zCM73tH5QtyfXzA==}
+  '@million/lint@1.0.10':
+    resolution: {integrity: sha512-lWCU6S+a4bukGQiHCWvdlwvZcCKy3y6unxCzTAHgV1EEBeX7MBD1NdiXV4VdDpB1DozN2HrbyXtbXmU9/6KKcA==}
     hasBin: true
 
   '@napi-rs/nice-android-arm-eabi@1.0.1':
@@ -2237,6 +2237,9 @@ packages:
 
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
+
+  effect@3.9.2:
+    resolution: {integrity: sha512-1sx/v1HTWHTodXfzWxAFg+SCF+ACgpJVruaAMIh/NmDVvrUsf0x9PzpXvkgJUbQ1fMdmKYK//FqxeHSQ+Zxv/Q==}
 
   electron-to-chromium@1.5.28:
     resolution: {integrity: sha512-VufdJl+rzaKZoYVUijN13QcXVF5dWPZANeFTLNy+OSpHdDL5ynXTF35+60RSBbaQYB1ae723lQXHCrf4pyLsMw==}
@@ -5470,7 +5473,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@million/install@1.0.9':
+  '@million/install@1.0.10':
     dependencies:
       '@antfu/ni': 0.21.12
       '@axiomhq/js': 1.0.0-rc.3
@@ -5480,17 +5483,18 @@ snapshots:
       ast-types: 0.14.2
       cli-high: 0.4.2
       diff: 5.2.0
+      effect: 3.9.2
       nanoid: 5.0.7
       recast: 0.23.9
       xycolors: 0.1.2
 
-  '@million/lint@1.0.9':
+  '@million/lint@1.0.10':
     dependencies:
       '@axiomhq/js': 1.0.0-rc.3
       '@babel/core': 7.25.2
       '@babel/types': 7.25.2
       '@hono/node-server': 1.13.1(hono@4.6.3)
-      '@million/install': 1.0.9
+      '@million/install': 1.0.10
       '@rollup/pluginutils': 5.1.2
       '@rrweb/types': 2.0.0-alpha.16
       babel-plugin-syntax-hermes-parser: 0.21.1
@@ -7318,6 +7322,8 @@ snapshots:
       is-obj: 2.0.0
 
   eastasianwidth@0.2.0: {}
+
+  effect@3.9.2: {}
 
   electron-to-chromium@1.5.28: {}
 
