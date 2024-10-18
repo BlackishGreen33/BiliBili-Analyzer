@@ -63,7 +63,7 @@
     "tailwind-merge": "^2.5.4",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7",
-    "zustand": "^4.5.5"
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
     "@capacitor/cli": "^6.1.2",
