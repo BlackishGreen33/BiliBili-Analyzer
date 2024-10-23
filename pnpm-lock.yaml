@@ -75,8 +75,8 @@ importers:
         specifier: ^5.21.5
         version: 5.21.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       antd-style:
-        specifier: ^3.7.0
-        version: 3.7.0(@types/react@18.3.11)(antd@5.21.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^3.7.1
+        version: 3.7.1(@types/react@18.3.11)(antd@5.21.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       axios:
         specifier: ^1.7.7
         version: 1.7.7
@@ -1826,8 +1826,8 @@ packages:
     resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
     engines: {node: '>=12'}
 
-  antd-style@3.7.0:
-    resolution: {integrity: sha512-u0KFUzCLrvzRmcJz7jz23KeM95df6TzJ9q5mqIOrF8e9jWj+um49APLtMQjEA8HmPeGQXeGZCRVS3fTKHaZzEg==}
+  antd-style@3.7.1:
+    resolution: {integrity: sha512-CQOfddVp4aOvBfCepa+Kj2e7ap+2XBINg1Kn2osdE3oQvrD7KJu/K0sfnLcFLkgCJygbxmuazYdWLKb+drPDYA==}
     peerDependencies:
       antd: '>=5.8.1'
       react: '>=18'
@@ -6968,7 +6968,7 @@ snapshots:
 
   ansi-styles@6.2.1: {}
 
-  antd-style@3.7.0(@types/react@18.3.11)(antd@5.21.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  antd-style@3.7.1(@types/react@18.3.11)(antd@5.21.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@ant-design/cssinjs': 1.21.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@babel/runtime': 7.25.6
