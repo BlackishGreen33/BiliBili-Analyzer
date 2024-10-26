@@ -78,7 +78,8 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
         <div className="flex flex-col gap-[2vh] xl:flex-row">
           <Video
             bvid={bvid}
-            // @ts-ignore
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             cid={videoInfo!.cid}
             className="xl:flex-1"
           />

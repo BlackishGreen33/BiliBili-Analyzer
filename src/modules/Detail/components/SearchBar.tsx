@@ -13,9 +13,7 @@ import useStore from '@/common/hooks/useStore';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-type SearchBarProps = {};
-
-const SearchBar: React.FC<SearchBarProps> = React.memo(() => {
+const SearchBar: React.FC = React.memo(() => {
   const router = useRouter();
   const imageRef = useRef(null);
 

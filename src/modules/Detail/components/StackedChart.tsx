@@ -11,6 +11,7 @@ import {
 import { Stacked as StackedChart } from './Stacked';
 
 interface StackedChartProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   videoInfo: any;
 }
 

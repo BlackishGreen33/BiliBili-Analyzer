@@ -149,6 +149,7 @@ const Home: React.FC = React.memo(() => {
     }
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleFilterChange = async (values: any): Promise<void> => {
     setLoading(true);
     const filteredResults = videoData?.video.filter((item) => {
@@ -250,7 +251,6 @@ const Home: React.FC = React.memo(() => {
                   placeholder={'请选择分区'}
                   fieldProps={{
                     options: channelOptions,
-                    // @ts-ignore
                     multiple: true,
                     maxTagCount: 'responsive',
                   }}
