@@ -48,8 +48,8 @@ importers:
         specifier: ^27.1.55
         version: 27.1.55
       '@syncfusion/ej2-react-charts':
-        specifier: ^27.1.55
-        version: 27.1.55
+        specifier: ^27.1.57
+        version: 27.1.57
       '@syncfusion/ej2-react-dropdowns':
         specifier: ^27.1.57
         version: 27.1.57
@@ -1458,9 +1458,6 @@ packages:
   '@syncfusion/ej2-calendars@27.1.57':
     resolution: {integrity: sha512-6Nh3WSBR1biS3oGsv/81Ysi7/qtnwcIzNt2c732Btt4JYEK7nCWuDv9DgmosKElSyEC1wlcCTqbbiP7g/uLrBA==}
 
-  '@syncfusion/ej2-charts@27.1.55':
-    resolution: {integrity: sha512-a4mXb2l3d+7zYHIxHWunOI0qomKoDCGmUfIzObUD5zAnGKbSnHQsB3CR7QaszvzT6s4JTc40TCJCpOTtMxMfdA==}
-
   '@syncfusion/ej2-charts@27.1.57':
     resolution: {integrity: sha512-dKmu8fOS7GA9mxZe9Ba7WZtR+CW1wwDl+WYYvNZIeJgU/9bmv+tKTOSFNNOFTWNW3eIpxNJOQa/2dTGx2LSPPg==}
 
@@ -1584,8 +1581,8 @@ packages:
   '@syncfusion/ej2-react-calendars@27.1.55':
     resolution: {integrity: sha512-U55FuTs/5mkv6xjtsSk76s4Zz3mvR49AgiFOw9nUG1TCka4Mut2ZXzQ6OvkdPJsHlMSCttdPsGsU+KDJtcYR0A==}
 
-  '@syncfusion/ej2-react-charts@27.1.55':
-    resolution: {integrity: sha512-27IQ0HB5iFllZ43Q1b5OAKySTgDfCW1pb8o+KsfT8VXXNWySq1ti+H+70h9x1k3YpE1vlCX/hg4OKHnmmRLf3w==}
+  '@syncfusion/ej2-react-charts@27.1.57':
+    resolution: {integrity: sha512-3QdeoPA4JkIywtDsQRfPFlNY3lExpotizRaL/4IK2TFbYfK49PDSCtTZYISEYz0Uykym1XtU1Jaihhv3v2pnAA==}
 
   '@syncfusion/ej2-react-dropdowns@27.1.57':
     resolution: {integrity: sha512-KmNEGNynewe/6BfnNa3Qze0HLIdepBJJU4Za1RsKRBKrD1Xazx6MjoAIEzmQ0YLkMLlSyWScMN3RZP6JQ3WWSw==}
@@ -1610,9 +1607,6 @@ packages:
 
   '@syncfusion/ej2-ribbon@27.1.50':
     resolution: {integrity: sha512-cj1/FbjPlJO0ITRl228IsE6GzYQz7pB3Z5BbGMn89YtABpxrBMYjn1ZWMBcH2WqBt+boFcv7Tthyu/3Z6RfLGw==}
-
-  '@syncfusion/ej2-richtexteditor@27.1.55':
-    resolution: {integrity: sha512-KDDiVkGULfVQQfwoY95cAUsUqxv5K/CmdFSr95Ew8WTxqiSsNglXNYhEMyE9XKowqrAVGPjByzL1/DCbWcjaUA==}
 
   '@syncfusion/ej2-richtexteditor@27.1.57':
     resolution: {integrity: sha512-hZG0eEkU1B1lIlox66sioxzThb1/nNYO1d6+mjDC82XDAjufqEBbkaCYUeIwe8TxhbiUCtL40KmDkW0fF6OdQw==}
@@ -6212,16 +6206,6 @@ snapshots:
       '@syncfusion/ej2-lists': 27.1.50
       '@syncfusion/ej2-popups': 27.1.57
 
-  '@syncfusion/ej2-charts@27.1.55':
-    dependencies:
-      '@syncfusion/ej2-base': 27.1.55
-      '@syncfusion/ej2-calendars': 27.1.55
-      '@syncfusion/ej2-data': 27.1.52
-      '@syncfusion/ej2-excel-export': 27.1.50
-      '@syncfusion/ej2-navigations': 27.1.56
-      '@syncfusion/ej2-pdf-export': 27.1.51
-      '@syncfusion/ej2-svg-base': 27.1.50
-
   '@syncfusion/ej2-charts@27.1.57':
     dependencies:
       '@syncfusion/ej2-base': 27.1.55
@@ -6281,7 +6265,7 @@ snapshots:
       '@syncfusion/ej2-data': 27.1.52
       '@syncfusion/ej2-inputs': 27.1.55
       '@syncfusion/ej2-lists': 27.1.50
-      '@syncfusion/ej2-navigations': 27.1.56
+      '@syncfusion/ej2-navigations': 27.1.57
       '@syncfusion/ej2-notifications': 27.1.50
       '@syncfusion/ej2-popups': 27.1.56
 
@@ -6570,10 +6554,10 @@ snapshots:
       '@syncfusion/ej2-calendars': 27.1.55
       '@syncfusion/ej2-react-base': 27.1.50
 
-  '@syncfusion/ej2-react-charts@27.1.55':
+  '@syncfusion/ej2-react-charts@27.1.57':
     dependencies:
       '@syncfusion/ej2-base': 27.1.55
-      '@syncfusion/ej2-charts': 27.1.55
+      '@syncfusion/ej2-charts': 27.1.57
       '@syncfusion/ej2-react-base': 27.1.50
 
   '@syncfusion/ej2-react-dropdowns@27.1.57':
@@ -6626,17 +6610,6 @@ snapshots:
       '@syncfusion/ej2-lists': 27.1.50
       '@syncfusion/ej2-navigations': 27.1.57
       '@syncfusion/ej2-popups': 27.1.57
-      '@syncfusion/ej2-splitbuttons': 27.1.56
-
-  '@syncfusion/ej2-richtexteditor@27.1.55':
-    dependencies:
-      '@syncfusion/ej2-base': 27.1.55
-      '@syncfusion/ej2-buttons': 27.1.53
-      '@syncfusion/ej2-dropdowns': 27.1.55
-      '@syncfusion/ej2-filemanager': 27.1.55
-      '@syncfusion/ej2-inputs': 27.1.55
-      '@syncfusion/ej2-navigations': 27.1.56
-      '@syncfusion/ej2-popups': 27.1.56
       '@syncfusion/ej2-splitbuttons': 27.1.56
 
   '@syncfusion/ej2-richtexteditor@27.1.57':
