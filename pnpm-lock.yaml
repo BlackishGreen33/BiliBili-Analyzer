@@ -99,7 +99,7 @@ importers:
         specifier: ^0.4.3
         version: 0.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       puppeteer:
-        specifier: ^23.7.0
+        specifier: ^23.7.1
         version: 23.7.1(typescript@5.6.3)
       react:
         specifier: ^18.3.1
@@ -922,8 +922,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@million/install@1.0.11':
-    resolution: {integrity: sha512-koRlY6tCYa6isBUTheP0pL7PC31pBY1QlL8F/Yaorcx6gIyZSJNVqTGBDqLvDeeV8QcmD/S9mswSazI/FsyGKQ==}
+  '@million/install@1.0.12':
+    resolution: {integrity: sha512-1TeXcdGCjrcCG/VcKayZ6NC646cf/gKTkscn2YbfwYbE4gLJbJHCrXxQ3zsWHznqiw61t1oTjFgIafM1JBcLzA==}
     hasBin: true
 
   '@million/lint@1.0.11':
@@ -5738,7 +5738,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@million/install@1.0.11':
+  '@million/install@1.0.12':
     dependencies:
       '@antfu/ni': 0.21.12
       '@axiomhq/js': 1.0.0-rc.3
@@ -5759,7 +5759,7 @@ snapshots:
       '@babel/core': 7.25.2
       '@babel/types': 7.25.2
       '@hono/node-server': 1.13.1(hono@4.6.3)
-      '@million/install': 1.0.11
+      '@million/install': 1.0.12
       '@rollup/pluginutils': 5.1.2
       '@rrweb/types': 2.0.0-alpha.16
       babel-plugin-syntax-hermes-parser: 0.21.1
