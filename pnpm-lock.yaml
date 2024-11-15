@@ -42,8 +42,8 @@ importers:
         specifier: ^27.1.58
         version: 27.1.58
       '@syncfusion/ej2-base':
-        specifier: ^27.1.55
-        version: 27.1.55
+        specifier: ^27.2.2
+        version: 27.2.2
       '@syncfusion/ej2-react-calendars':
         specifier: ^27.1.57
         version: 27.1.57
@@ -1516,6 +1516,10 @@ packages:
     resolution: {integrity: sha512-ZHtP1SGPfGrMtweYyvJk80piLcoFJCkmEQ/jg82NEldYeVfwYrw9W9OrPphkrzELu1WysrviwccUngWxAhykLA==}
     hasBin: true
 
+  '@syncfusion/ej2-base@27.2.2':
+    resolution: {integrity: sha512-bc/CTAC4BYenD2aw60h2A5wqM5Bzne2QGtAUHR25cSNMtPApAkQ67/unChlE28ZV5eSW3tVfw94bLH2q2tnmRA==}
+    hasBin: true
+
   '@syncfusion/ej2-buttons@27.1.51':
     resolution: {integrity: sha512-0Eg4M2NOpuuWQgOBeNvEMIyjg6fFUJ/0Qk3tAALRCKQDn627qfk32xIs5pKcZ8KVdZ2sjqql3QzQA2Jx9QkydQ==}
 
@@ -1578,6 +1582,9 @@ packages:
 
   '@syncfusion/ej2-icons@27.1.50':
     resolution: {integrity: sha512-LisXluEss0VnFuSh+pNSgHqT/Cg1FKTvkxdKWoSvqAma3dpcuCfrWP4svyMKPAsCi/hxAGdyy3ShKHu0PUP9iA==}
+
+  '@syncfusion/ej2-icons@27.2.2':
+    resolution: {integrity: sha512-Jl4Dvu+rocNDmY2wEwcwyYlGWJ2xRf8izdnARffR5Lu41OjZIh8fgo4fU2lXHdbqNXApm7DeItDY4soBtjgDCQ==}
 
   '@syncfusion/ej2-image-editor@27.1.58':
     resolution: {integrity: sha512-37FK5+iUwbxhb68xPNNh+LR6qXd053a7YgH90oXm2PHGegpOIc1wAhgy5j9xeKzssjIPIS0nxdr3IAJJfL0lyg==}
@@ -6394,6 +6401,10 @@ snapshots:
     dependencies:
       '@syncfusion/ej2-icons': 27.1.50
 
+  '@syncfusion/ej2-base@27.2.2':
+    dependencies:
+      '@syncfusion/ej2-icons': 27.2.2
+
   '@syncfusion/ej2-buttons@27.1.51':
     dependencies:
       '@syncfusion/ej2-base': 27.1.55
@@ -6557,6 +6568,8 @@ snapshots:
       '@syncfusion/ej2-svg-base': 27.1.50
 
   '@syncfusion/ej2-icons@27.1.50': {}
+
+  '@syncfusion/ej2-icons@27.2.2': {}
 
   '@syncfusion/ej2-image-editor@27.1.58':
     dependencies:
