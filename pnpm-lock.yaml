@@ -63,8 +63,8 @@ importers:
         specifier: ^27.1.53
         version: 27.1.53
       '@syncfusion/ej2-react-popups':
-        specifier: ^27.1.58
-        version: 27.1.58
+        specifier: ^27.2.2
+        version: 27.2.2
       '@syncfusion/ej2-react-richtexteditor':
         specifier: ^27.1.58
         version: 27.1.58
@@ -1712,8 +1712,8 @@ packages:
   '@syncfusion/ej2-react-kanban@27.1.53':
     resolution: {integrity: sha512-mmqVZftyMq74udeoD20OHuO1zeIfeHkF+kXBAC9UkrntGclXNuMofJcqLzd+/taEwLGcqGoy/kYEYYEQ84981g==}
 
-  '@syncfusion/ej2-react-popups@27.1.58':
-    resolution: {integrity: sha512-fpzAkv9E0mYM0hXcmZhk2LMFg5u8Hw6XBGPsNIIEr+Ygs9/fm+nNoy5GKFUL4+GGpSxksmwzjM7gZ8QzDwBeDw==}
+  '@syncfusion/ej2-react-popups@27.2.2':
+    resolution: {integrity: sha512-mJzEktf+nly1gVt729xk31F6yJlbbOjqWaLnY9Aej6afinSCZC7HoixT7p2NBCXKGy6X8haDiK4DJZDPysbgAg==}
 
   '@syncfusion/ej2-react-richtexteditor@27.1.58':
     resolution: {integrity: sha512-Zxt3WkkwCgaVhKZD5gAGf294fZt0yovnGqWPhMAXa/Y+2ChkhPkVi7EUnQDaavyLL7HnDoBaOdntciBdp+MqhQ==}
@@ -6916,11 +6916,11 @@ snapshots:
       '@syncfusion/ej2-kanban': 27.1.53
       '@syncfusion/ej2-react-base': 27.1.50
 
-  '@syncfusion/ej2-react-popups@27.1.58':
+  '@syncfusion/ej2-react-popups@27.2.2':
     dependencies:
-      '@syncfusion/ej2-base': 27.1.55
-      '@syncfusion/ej2-popups': 27.1.58
-      '@syncfusion/ej2-react-base': 27.1.50
+      '@syncfusion/ej2-base': 27.2.2
+      '@syncfusion/ej2-popups': 27.2.2
+      '@syncfusion/ej2-react-base': 27.2.2
 
   '@syncfusion/ej2-react-richtexteditor@27.1.58':
     dependencies:
