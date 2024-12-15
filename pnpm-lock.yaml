@@ -69,8 +69,8 @@ importers:
         specifier: ^27.2.5
         version: 27.2.5
       '@syncfusion/ej2-react-schedule':
-        specifier: ^27.2.5
-        version: 27.2.5
+        specifier: ^28.1.33
+        version: 28.1.33
       antd:
         specifier: ^5.22.4
         version: 5.22.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1708,8 +1708,8 @@ packages:
   '@syncfusion/ej2-react-richtexteditor@27.2.5':
     resolution: {integrity: sha512-9uQhhqxwN+vBXw0h9jg8wQuwBo9hMLT1TU2I6F3NBf8wusi15Jj/MgH/8oDPfQLox5kNu0pOy6bSwZoZdZ+56A==}
 
-  '@syncfusion/ej2-react-schedule@27.2.5':
-    resolution: {integrity: sha512-/VQpcXoXGxeZJ25rY0YTaP2JoX7AoeEtpYQFxGslHezo9lQj4t+0F1r9L6POB1QPOf3YywXB9hx8OVSXxZqSfA==}
+  '@syncfusion/ej2-react-schedule@28.1.33':
+    resolution: {integrity: sha512-myuy36lZfbKPMPz1Eg+uorktHBKNr8e7dyRvZcnoO+lxI4JUn8nrkUe0RezmZ84kIZyGGYO19Vm8ozmP2Ognwg==}
 
   '@syncfusion/ej2-ribbon@27.2.2':
     resolution: {integrity: sha512-l9DrfEU9A+rzKzWZ2sv9adeXiVnHzS3+msqGIvY8nrMizEEdQEM3HaAATrqVBdRDlrpnjwMq4+5/TMWQlD6jkQ==}
@@ -1719,6 +1719,9 @@ packages:
 
   '@syncfusion/ej2-schedule@27.2.5':
     resolution: {integrity: sha512-jmWUvMsWl7aQggHOw65Is8/+zWOoIqRNtujNU0BKcXPglQndLRGSTsvc5qzc8RPNuEOrV+5wSYrTOylIU2nHOg==}
+
+  '@syncfusion/ej2-schedule@28.1.33':
+    resolution: {integrity: sha512-pdRWd9oq4xOUoSY10/sHsn7/3PuoxYAOawdrWueRbRyIZcB9a/KMOZFjdQoo8CeRnlaoTTJG6+Bz9/Dty8eDVg==}
 
   '@syncfusion/ej2-splitbuttons@27.2.2':
     resolution: {integrity: sha512-Z/zE59bxz15Vmuh6YtrdISaYkpnqECzvpbvWU6CGHB0DEw2Td11uhjdA+xCdigMTwJuObdUxwZQu1wo7O938oA==}
@@ -6940,11 +6943,11 @@ snapshots:
       '@syncfusion/ej2-react-base': 27.2.2
       '@syncfusion/ej2-richtexteditor': 27.2.5
 
-  '@syncfusion/ej2-react-schedule@27.2.5':
+  '@syncfusion/ej2-react-schedule@28.1.33':
     dependencies:
-      '@syncfusion/ej2-base': 27.2.5
-      '@syncfusion/ej2-react-base': 27.2.2
-      '@syncfusion/ej2-schedule': 27.2.5
+      '@syncfusion/ej2-base': 28.1.33
+      '@syncfusion/ej2-react-base': 28.1.33
+      '@syncfusion/ej2-schedule': 28.1.33
 
   '@syncfusion/ej2-ribbon@27.2.2':
     dependencies:
@@ -6979,6 +6982,19 @@ snapshots:
       '@syncfusion/ej2-lists': 27.2.5
       '@syncfusion/ej2-navigations': 27.2.5
       '@syncfusion/ej2-popups': 27.2.2
+
+  '@syncfusion/ej2-schedule@28.1.33':
+    dependencies:
+      '@syncfusion/ej2-base': 28.1.33
+      '@syncfusion/ej2-buttons': 28.1.33
+      '@syncfusion/ej2-calendars': 28.1.33
+      '@syncfusion/ej2-data': 28.1.33
+      '@syncfusion/ej2-dropdowns': 28.1.33
+      '@syncfusion/ej2-excel-export': 28.1.33
+      '@syncfusion/ej2-inputs': 28.1.33
+      '@syncfusion/ej2-lists': 28.1.33
+      '@syncfusion/ej2-navigations': 28.1.33
+      '@syncfusion/ej2-popups': 28.1.33
 
   '@syncfusion/ej2-splitbuttons@27.2.2':
     dependencies:
