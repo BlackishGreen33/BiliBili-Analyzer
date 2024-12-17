@@ -57,8 +57,8 @@ importers:
         specifier: ^28.1.33
         version: 28.1.33
       '@syncfusion/ej2-react-inputs':
-        specifier: ^27.2.4
-        version: 27.2.4
+        specifier: ^28.1.33
+        version: 28.1.33
       '@syncfusion/ej2-react-kanban':
         specifier: ^27.2.3
         version: 27.2.3
@@ -1696,8 +1696,8 @@ packages:
   '@syncfusion/ej2-react-grids@28.1.33':
     resolution: {integrity: sha512-UZZxwlw1lbKYzDukbBI7oRnBMmtsdWxIhwU+EDc9Er+eRXzlPcwe3JHG1R8oRqY6o75zTh5ZfC/8OBR85m2hMA==}
 
-  '@syncfusion/ej2-react-inputs@27.2.4':
-    resolution: {integrity: sha512-XtxmyUv3dTNO+jxfomzeiGG2Bjeuo5FTLNLUDEFTHM1yhJNw9y0To9s6ZQ9izG5WA57F4Wi6rzkiVq34Mr6CRw==}
+  '@syncfusion/ej2-react-inputs@28.1.33':
+    resolution: {integrity: sha512-XSGTZE3bNvRbp0PDUEKTqaxL2ZFJWf1PlRqlvS3HfvclTxItbeWUslR8HtbbytC9IGiCSbPspwTHy1CcUmvz3Q==}
 
   '@syncfusion/ej2-react-kanban@27.2.3':
     resolution: {integrity: sha512-haUbeg6wQkQOWNR+jZ6/n5F0LfwNP8P/SzGYREVtN4BgkEvYggr9rYMzEwndVxWA8hCPxgLR/oNQLJ700NJTew==}
@@ -6932,11 +6932,11 @@ snapshots:
       '@syncfusion/ej2-grids': 28.1.33
       '@syncfusion/ej2-react-base': 28.1.33
 
-  '@syncfusion/ej2-react-inputs@27.2.4':
+  '@syncfusion/ej2-react-inputs@28.1.33':
     dependencies:
-      '@syncfusion/ej2-base': 27.2.2
-      '@syncfusion/ej2-inputs': 27.2.4
-      '@syncfusion/ej2-react-base': 27.2.2
+      '@syncfusion/ej2-base': 28.1.33
+      '@syncfusion/ej2-inputs': 28.1.33
+      '@syncfusion/ej2-react-base': 28.1.33
 
   '@syncfusion/ej2-react-kanban@27.2.3':
     dependencies:
