@@ -42,8 +42,8 @@ importers:
         specifier: ^27.2.5
         version: 27.2.5
       '@syncfusion/ej2-base':
-        specifier: ^27.2.2
-        version: 27.2.2
+        specifier: ^28.1.33
+        version: 28.1.33
       '@syncfusion/ej2-react-calendars':
         specifier: ^28.1.33
         version: 28.1.33
@@ -1509,10 +1509,6 @@ packages:
 
   '@syncfusion/ej2-barcode-generator@27.2.5':
     resolution: {integrity: sha512-H0ezAuaS5lK4WTbGUESsanppIOOel+ZCUhmP50gpL76tc74Utt7p5FTtkyR63GuUzEW8MHvo7EKCZcqgpUy6BA==}
-
-  '@syncfusion/ej2-base@27.2.2':
-    resolution: {integrity: sha512-bc/CTAC4BYenD2aw60h2A5wqM5Bzne2QGtAUHR25cSNMtPApAkQ67/unChlE28ZV5eSW3tVfw94bLH2q2tnmRA==}
-    hasBin: true
 
   '@syncfusion/ej2-base@27.2.5':
     resolution: {integrity: sha512-b72w1BuVpa/185Pqb1pKvfxppi3uAcXhdE7KCiAzle+dv3eIWFDQFhdeYeqZAaKFND4XkPCUZ029T2Ai2SLbuA==}
@@ -6503,10 +6499,6 @@ snapshots:
       '@syncfusion/ej2-base': 27.2.5
       '@syncfusion/ej2-data': 27.2.2
 
-  '@syncfusion/ej2-base@27.2.2':
-    dependencies:
-      '@syncfusion/ej2-icons': 27.2.2
-
   '@syncfusion/ej2-base@27.2.5':
     dependencies:
       '@syncfusion/ej2-icons': 27.2.2
@@ -7003,7 +6995,7 @@ snapshots:
 
   '@syncfusion/ej2-react-popups@27.2.2':
     dependencies:
-      '@syncfusion/ej2-base': 27.2.2
+      '@syncfusion/ej2-base': 27.2.5
       '@syncfusion/ej2-popups': 27.2.2
       '@syncfusion/ej2-react-base': 27.2.2
 
