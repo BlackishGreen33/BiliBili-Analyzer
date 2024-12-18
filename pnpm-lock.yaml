@@ -48,8 +48,8 @@ importers:
         specifier: ^28.1.33
         version: 28.1.33
       '@syncfusion/ej2-react-charts':
-        specifier: ^28.1.33
-        version: 28.1.33
+        specifier: ^28.1.35
+        version: 28.1.35
       '@syncfusion/ej2-react-dropdowns':
         specifier: ^28.1.33
         version: 28.1.33
@@ -1548,11 +1548,14 @@ packages:
   '@syncfusion/ej2-calendars@28.1.33':
     resolution: {integrity: sha512-SaBbOkIKK/rbh/7XASQi8VK7060wAMTEzHkhYwTzpsxEw7lCaqTMa8bzUNXJXdd31cw5+ymM/ibC0sXcP0RJKw==}
 
+  '@syncfusion/ej2-calendars@28.1.35':
+    resolution: {integrity: sha512-og0hqTfzis4z1wMJmPOgJX/Tky5b6yVA0lMfhLOmD2D9d8owXsOwLsTSMmgO1Gp4548bnRL0qei60cymgIDosg==}
+
   '@syncfusion/ej2-charts@27.2.5':
     resolution: {integrity: sha512-fm6DxHEX1uWCkipm3HcJTWqw6cecdh0XLdwS3xQDXrqfI83KUDtU3cGPhSG1PygnTJz73O/AJgaHPldyQTKjuQ==}
 
-  '@syncfusion/ej2-charts@28.1.33':
-    resolution: {integrity: sha512-C9y6NZT+DEmtxyp5l3y3tgYtHlZ0YpQ9pkNTG7VPT2uE6goU+XTJK1Hhgo5AYeyHSwNgQykAcpK8+61js5K1CQ==}
+  '@syncfusion/ej2-charts@28.1.35':
+    resolution: {integrity: sha512-Dq/l5kwIBUgQbV8Xd8zD4Bc7gk3WDFksWW8w7RqOLmLH4lFkC6KEf19+YoTi7OHXdIK7UGLlbvBGboZ8mS9gEg==}
 
   '@syncfusion/ej2-circulargauge@27.2.2':
     resolution: {integrity: sha512-ECi9tTonm9/3NmKugi3CI7Xg07BsuSvzA2b7UaXYx5UIa12t6DtasG91YqdISI1L2pHmjOotJD55ZqT5an8/cg==}
@@ -1668,6 +1671,9 @@ packages:
   '@syncfusion/ej2-navigations@28.1.33':
     resolution: {integrity: sha512-EV458VN9p4Zk/hw0eNYVyAPVZ8PivexgZL5R7dLFW1VfByyaQoNi9JCiDcOWYHFuSZyjZfD0osSdbEdfMCpV5w==}
 
+  '@syncfusion/ej2-navigations@28.1.35':
+    resolution: {integrity: sha512-VBNtfMqvt8qyO7mQ2Aki8fI3EufoI7EDpD2xSX7RwPgLa676U4L7ZAScSxpmWW5r+2zRfyMB06df7yEW/zqaxQ==}
+
   '@syncfusion/ej2-notifications@27.2.4':
     resolution: {integrity: sha512-O4Q0ST5D6hlax4zVp7BO+QsOs01rXLgE6pLlZTjrh/aadLmqWrFZ80I8RzESQ8CQQzOXPgkl5+AakByxgjVJUg==}
 
@@ -1713,8 +1719,8 @@ packages:
   '@syncfusion/ej2-react-calendars@28.1.33':
     resolution: {integrity: sha512-f58NwI/UxF9fBv/sY+xE1rFDDVj8aw80X1IdlUfJTTG9H2YqcId8IGL/r3FkhmcbYSJAnZGAf+CjGCzHN1xi9Q==}
 
-  '@syncfusion/ej2-react-charts@28.1.33':
-    resolution: {integrity: sha512-t36AWOIYYA26Xhuu1EV6ErHDAL3p9omGP0aQck7nTVxvnlhMDw57qeL1WY43t2m4oOXF4rFPRDQGtxQeNteEPQ==}
+  '@syncfusion/ej2-react-charts@28.1.35':
+    resolution: {integrity: sha512-/H+yObGVShLuOg2vBxKUr/PiSbm3YWL3wywvUiqO5l3kkDWCctafQHLy4ChbLfzRIhDU8yxHIo83jCp4cmOKVQ==}
 
   '@syncfusion/ej2-react-dropdowns@28.1.33':
     resolution: {integrity: sha512-8N3UeMtB0ZXnkuA2ZNggT5Kc9H44B1FgrixqUodZ/9qRyg+7YxMKmRJUm1f6LN2tiCMXuXuSvvFdUC2CkfeCqA==}
@@ -6550,6 +6556,14 @@ snapshots:
       '@syncfusion/ej2-lists': 28.1.33
       '@syncfusion/ej2-popups': 28.1.33
 
+  '@syncfusion/ej2-calendars@28.1.35':
+    dependencies:
+      '@syncfusion/ej2-base': 28.1.33
+      '@syncfusion/ej2-buttons': 28.1.33
+      '@syncfusion/ej2-inputs': 28.1.33
+      '@syncfusion/ej2-lists': 28.1.33
+      '@syncfusion/ej2-popups': 28.1.33
+
   '@syncfusion/ej2-charts@27.2.5':
     dependencies:
       '@syncfusion/ej2-base': 27.2.5
@@ -6560,13 +6574,13 @@ snapshots:
       '@syncfusion/ej2-pdf-export': 27.2.2
       '@syncfusion/ej2-svg-base': 27.2.2
 
-  '@syncfusion/ej2-charts@28.1.33':
+  '@syncfusion/ej2-charts@28.1.35':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
-      '@syncfusion/ej2-calendars': 28.1.33
+      '@syncfusion/ej2-calendars': 28.1.35
       '@syncfusion/ej2-data': 28.1.33
       '@syncfusion/ej2-excel-export': 28.1.33
-      '@syncfusion/ej2-navigations': 28.1.33
+      '@syncfusion/ej2-navigations': 28.1.35
       '@syncfusion/ej2-pdf-export': 28.1.33
       '@syncfusion/ej2-svg-base': 28.1.33
 
@@ -6879,6 +6893,15 @@ snapshots:
       '@syncfusion/ej2-lists': 28.1.33
       '@syncfusion/ej2-popups': 28.1.33
 
+  '@syncfusion/ej2-navigations@28.1.35':
+    dependencies:
+      '@syncfusion/ej2-base': 28.1.33
+      '@syncfusion/ej2-buttons': 28.1.33
+      '@syncfusion/ej2-data': 28.1.33
+      '@syncfusion/ej2-inputs': 28.1.33
+      '@syncfusion/ej2-lists': 28.1.33
+      '@syncfusion/ej2-popups': 28.1.33
+
   '@syncfusion/ej2-notifications@27.2.4':
     dependencies:
       '@syncfusion/ej2-base': 27.2.5
@@ -6982,10 +7005,10 @@ snapshots:
       '@syncfusion/ej2-calendars': 28.1.33
       '@syncfusion/ej2-react-base': 28.1.33
 
-  '@syncfusion/ej2-react-charts@28.1.33':
+  '@syncfusion/ej2-react-charts@28.1.35':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
-      '@syncfusion/ej2-charts': 28.1.33
+      '@syncfusion/ej2-charts': 28.1.35
       '@syncfusion/ej2-react-base': 28.1.33
 
   '@syncfusion/ej2-react-dropdowns@28.1.33':
