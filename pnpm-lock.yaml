@@ -39,8 +39,8 @@ importers:
         specifier: ^1.2.4
         version: 1.2.4(@types/react-dom@18.3.1)(@types/react@18.3.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@syncfusion/ej2':
-        specifier: ^28.1.35
-        version: 28.1.35
+        specifier: ^28.1.36
+        version: 28.1.36
       '@syncfusion/ej2-base':
         specifier: ^28.1.33
         version: 28.1.33
@@ -1670,8 +1670,8 @@ packages:
   '@syncfusion/ej2-treemap@28.1.33':
     resolution: {integrity: sha512-4ixDTA0PaGxayv+Y0HEurclQO0YRBeXnCCrznVsfPvrduHdULa8GAcYP9/D5CdFx0YA7WJAurT0kEZDGST0zsw==}
 
-  '@syncfusion/ej2@28.1.35':
-    resolution: {integrity: sha512-CRerxitymTdwvmYhxTV651ep7S5yRr5zOxhOzsaig7s+j5cViFWG9S7UwW9H9CrEwdNGCAQkh0y7XW6gt40lJA==}
+  '@syncfusion/ej2@28.1.36':
+    resolution: {integrity: sha512-NC8Gd2w3LO5vFg2zYz8x5HJDdYVy6q2lbU+zlQ4YLIJF6OwnSCUAHl//YWbVWxRitdIuoSpnwo7nj6gXd6U5zQ==}
 
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
@@ -6832,7 +6832,7 @@ snapshots:
       '@syncfusion/ej2-pdf-export': 28.1.33
       '@syncfusion/ej2-svg-base': 28.1.33
 
-  '@syncfusion/ej2@28.1.35':
+  '@syncfusion/ej2@28.1.36':
     dependencies:
       '@syncfusion/ej2-barcode-generator': 28.1.35
       '@syncfusion/ej2-base': 28.1.33
