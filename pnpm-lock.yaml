@@ -48,8 +48,8 @@ importers:
         specifier: ^28.1.36
         version: 28.1.36
       '@syncfusion/ej2-react-charts':
-        specifier: ^28.1.35
-        version: 28.1.35
+        specifier: ^28.1.37
+        version: 28.1.37
       '@syncfusion/ej2-react-dropdowns':
         specifier: ^28.1.37
         version: 28.1.37
@@ -1520,8 +1520,14 @@ packages:
   '@syncfusion/ej2-calendars@28.1.36':
     resolution: {integrity: sha512-ouZxMEsPyWbEhLXo2GFLB0g9prPfKHdwjUVbCC5U5gtFpzrjbXAvXDSRo7z4IDDjCrzgKyWwudiokVFZkkta+Q==}
 
+  '@syncfusion/ej2-calendars@28.1.37':
+    resolution: {integrity: sha512-oRs89Dx5BUW8vSRuvXzil7O1Q7ew54teryYWSdxFKCK6HEChScZejWnejfWgtvGyJA7GNBKWIflAhUXgBI6D8g==}
+
   '@syncfusion/ej2-charts@28.1.35':
     resolution: {integrity: sha512-Dq/l5kwIBUgQbV8Xd8zD4Bc7gk3WDFksWW8w7RqOLmLH4lFkC6KEf19+YoTi7OHXdIK7UGLlbvBGboZ8mS9gEg==}
+
+  '@syncfusion/ej2-charts@28.1.37':
+    resolution: {integrity: sha512-0yEVeZWhEP3YZN16PoC4Gn5cH+HyndkcpxwEpFfMhU1SuDVGaVwXxtAUPbGgtq+/U5PBGwy07G4yJBOpiW4XOg==}
 
   '@syncfusion/ej2-circulargauge@28.1.33':
     resolution: {integrity: sha512-XuFvTH2Xn28HAKsm+ET0csFx4H+wxq4iEQ1NvRL2UksSv47yt9/TA6xiwipN3gG68UYeLM0Y3D1kmBAJnLz7Bw==}
@@ -1658,8 +1664,8 @@ packages:
   '@syncfusion/ej2-react-calendars@28.1.36':
     resolution: {integrity: sha512-N39UTapVM2q3l2xJfrhcWNPRB4Adx6VvLLycBI+UmiGpDjLwppbucoxPOidjUcTOi3hgOTqXQp4H6WMce26KWQ==}
 
-  '@syncfusion/ej2-react-charts@28.1.35':
-    resolution: {integrity: sha512-/H+yObGVShLuOg2vBxKUr/PiSbm3YWL3wywvUiqO5l3kkDWCctafQHLy4ChbLfzRIhDU8yxHIo83jCp4cmOKVQ==}
+  '@syncfusion/ej2-react-charts@28.1.37':
+    resolution: {integrity: sha512-R7iQn6B7wwOUFqvc8QyaDiRc2aGk2s+RzrGeos3XzJuzVcHQWMrytnweYmvdMz+7EVMh8vvNiNqcDHWZNQggVw==}
 
   '@syncfusion/ej2-react-dropdowns@28.1.37':
     resolution: {integrity: sha512-tA18lJbVn2av2R2JJ1z07higjXlXudQf8kdf3WfrGWoiVOWPNo6XARTUWeNwthNtMQvE3nIgPfJdrv2J5JAOlg==}
@@ -1708,6 +1714,9 @@ packages:
 
   '@syncfusion/ej2-svg-base@28.1.33':
     resolution: {integrity: sha512-AHRvJp8PWjyd8jXvmd/6h9a+fHNcyBXTtnMZ9zabSU6ugdIxraXQ1WPy0gAaA63OGoJOn4vemi+KxvImYVj6nQ==}
+
+  '@syncfusion/ej2-svg-base@28.1.37':
+    resolution: {integrity: sha512-uO7T1l5nb2u6b/YhW0f8zWa3ID4QcrfascdwzbPbSE0HHCoPYW2e5zljDhhyLbLCIQxwY0HqKxW2tPYcYEqpxw==}
 
   '@syncfusion/ej2-treegrid@28.1.35':
     resolution: {integrity: sha512-aWijRpCORAONtqj3HGM2C1tVAoRs8M+DCrSx8lRNC/nWmnJBL7gnYMmwW75kwiMpC3ZBdHzEOALGjGUojzGYVA==}
@@ -6472,6 +6481,14 @@ snapshots:
       '@syncfusion/ej2-lists': 28.1.33
       '@syncfusion/ej2-popups': 28.1.33
 
+  '@syncfusion/ej2-calendars@28.1.37':
+    dependencies:
+      '@syncfusion/ej2-base': 28.1.33
+      '@syncfusion/ej2-buttons': 28.1.37
+      '@syncfusion/ej2-inputs': 28.1.37
+      '@syncfusion/ej2-lists': 28.1.37
+      '@syncfusion/ej2-popups': 28.1.33
+
   '@syncfusion/ej2-charts@28.1.35':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
@@ -6481,6 +6498,16 @@ snapshots:
       '@syncfusion/ej2-navigations': 28.1.35
       '@syncfusion/ej2-pdf-export': 28.1.33
       '@syncfusion/ej2-svg-base': 28.1.33
+
+  '@syncfusion/ej2-charts@28.1.37':
+    dependencies:
+      '@syncfusion/ej2-base': 28.1.33
+      '@syncfusion/ej2-calendars': 28.1.37
+      '@syncfusion/ej2-data': 28.1.33
+      '@syncfusion/ej2-excel-export': 28.1.33
+      '@syncfusion/ej2-navigations': 28.1.37
+      '@syncfusion/ej2-pdf-export': 28.1.33
+      '@syncfusion/ej2-svg-base': 28.1.37
 
   '@syncfusion/ej2-circulargauge@28.1.33':
     dependencies:
@@ -6873,10 +6900,10 @@ snapshots:
       '@syncfusion/ej2-calendars': 28.1.36
       '@syncfusion/ej2-react-base': 28.1.33
 
-  '@syncfusion/ej2-react-charts@28.1.35':
+  '@syncfusion/ej2-react-charts@28.1.37':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
-      '@syncfusion/ej2-charts': 28.1.35
+      '@syncfusion/ej2-charts': 28.1.37
       '@syncfusion/ej2-react-base': 28.1.33
 
   '@syncfusion/ej2-react-dropdowns@28.1.37':
@@ -6998,6 +7025,10 @@ snapshots:
       '@syncfusion/ej2-navigations': 28.1.35
 
   '@syncfusion/ej2-svg-base@28.1.33':
+    dependencies:
+      '@syncfusion/ej2-base': 28.1.33
+
+  '@syncfusion/ej2-svg-base@28.1.37':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
 
