@@ -63,8 +63,8 @@ importers:
         specifier: ^28.1.37
         version: 28.1.37
       '@syncfusion/ej2-react-popups':
-        specifier: ^28.1.33
-        version: 28.1.33
+        specifier: ^28.1.38
+        version: 28.1.38
       '@syncfusion/ej2-react-richtexteditor':
         specifier: ^28.1.37
         version: 28.1.37
@@ -1628,9 +1628,6 @@ packages:
   '@syncfusion/ej2-navigations@28.1.35':
     resolution: {integrity: sha512-VBNtfMqvt8qyO7mQ2Aki8fI3EufoI7EDpD2xSX7RwPgLa676U4L7ZAScSxpmWW5r+2zRfyMB06df7yEW/zqaxQ==}
 
-  '@syncfusion/ej2-navigations@28.1.36':
-    resolution: {integrity: sha512-qTezUMhSOBWSHYghNB3yN5akl5fAaUTzQOzkUB4dqiW3GPQwW9Ky6EWahm3qVhWOsLLaPTVjNQhhpAFc3XOTiw==}
-
   '@syncfusion/ej2-navigations@28.1.37':
     resolution: {integrity: sha512-QfCE6UCs0wFPZ9UACk7fxkZaOYhuq7R1/1AK3HocMTGn01A3K2NSCb6dee8N43Qqj+Z0d6vLxQwjsSnycmrlzQ==}
 
@@ -1655,6 +1652,9 @@ packages:
   '@syncfusion/ej2-popups@28.1.33':
     resolution: {integrity: sha512-vOpzAfsyS4qEHXL9MgJs/sGbdRTKuXl8d4EPEiyNWxYMjwoM80X5LI9yitC7z1POibB8polH33xJ/SVSSick/w==}
 
+  '@syncfusion/ej2-popups@28.1.38':
+    resolution: {integrity: sha512-BGriVsrYjhpOJmwSE2TPwn5b4Cg1EVS/npP6fvC2+wPzW9PSoHlljweIxE98M8wsttFq0EGi6612y4/NU4gtNw==}
+
   '@syncfusion/ej2-progressbar@28.1.33':
     resolution: {integrity: sha512-LHNMUngyQQ95wUORY/tq6VMyoHCpkrz9FJShhuZIGPNK7rJ/8T9sn5F0O7cqqqqSbH2SIGotgx5CaiRmEFByEA==}
 
@@ -1663,6 +1663,9 @@ packages:
 
   '@syncfusion/ej2-react-base@28.1.33':
     resolution: {integrity: sha512-L7ik2V8UywusX7fFvakggL/xlRt54yDdtQUY2Pz4rTP940wxNR230gB3+t/5XDbkGVLNBNNoscT0ZNWFo7wqyg==}
+
+  '@syncfusion/ej2-react-base@28.1.38':
+    resolution: {integrity: sha512-5o5G/1s/PQFQKGjCeARC79xYqp7419rIEB7H0ZH4z/o2vuT+abqUa0VG0P2VSlzkfNw0CCuFByyuH2zI/DuSfA==}
 
   '@syncfusion/ej2-react-calendars@28.1.36':
     resolution: {integrity: sha512-N39UTapVM2q3l2xJfrhcWNPRB4Adx6VvLLycBI+UmiGpDjLwppbucoxPOidjUcTOi3hgOTqXQp4H6WMce26KWQ==}
@@ -1682,8 +1685,8 @@ packages:
   '@syncfusion/ej2-react-kanban@28.1.37':
     resolution: {integrity: sha512-SKYzfHH5AEM3VpUmviwNcV2A/0twoIwU4xHHC1R4hF8XLL/4XsXc9j72m6C650gPVfMqgpJkg83QK0fMKdCYew==}
 
-  '@syncfusion/ej2-react-popups@28.1.33':
-    resolution: {integrity: sha512-W2wbsPRsfWWNj8S3hMOqumfZpoGERbBIG7ACsOJ6QXyWv4xaoJb/niDPW/rczmHvL25itWEADscoNb4PVG7/2Q==}
+  '@syncfusion/ej2-react-popups@28.1.38':
+    resolution: {integrity: sha512-cXwUoR7iAEnmbrHVb2i1BaYmAtqw/Pg+4fJrhMdNA0LloM4LGTEmS7DF9cpRdk/jyKfQDURti2AKasvHkCuvvw==}
 
   '@syncfusion/ej2-react-richtexteditor@28.1.37':
     resolution: {integrity: sha512-10rq3IwkBBV1W1sezGkPYREr0wG9j7nRI3E+ayTXgLSV21TeazD49sZoPWajr69tseGbScDF4RcVhxTloxsp1w==}
@@ -6819,15 +6822,6 @@ snapshots:
       '@syncfusion/ej2-lists': 28.1.33
       '@syncfusion/ej2-popups': 28.1.33
 
-  '@syncfusion/ej2-navigations@28.1.36':
-    dependencies:
-      '@syncfusion/ej2-base': 28.1.33
-      '@syncfusion/ej2-buttons': 28.1.37
-      '@syncfusion/ej2-data': 28.1.33
-      '@syncfusion/ej2-inputs': 28.1.37
-      '@syncfusion/ej2-lists': 28.1.37
-      '@syncfusion/ej2-popups': 28.1.33
-
   '@syncfusion/ej2-navigations@28.1.37':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
@@ -6896,6 +6890,11 @@ snapshots:
       '@syncfusion/ej2-base': 28.1.33
       '@syncfusion/ej2-buttons': 28.1.33
 
+  '@syncfusion/ej2-popups@28.1.38':
+    dependencies:
+      '@syncfusion/ej2-base': 28.1.33
+      '@syncfusion/ej2-buttons': 28.1.37
+
   '@syncfusion/ej2-progressbar@28.1.33':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
@@ -6912,6 +6911,10 @@ snapshots:
       '@syncfusion/ej2-splitbuttons': 28.1.33
 
   '@syncfusion/ej2-react-base@28.1.33':
+    dependencies:
+      '@syncfusion/ej2-base': 28.1.33
+
+  '@syncfusion/ej2-react-base@28.1.38':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
 
@@ -6951,11 +6954,11 @@ snapshots:
       '@syncfusion/ej2-kanban': 28.1.37
       '@syncfusion/ej2-react-base': 28.1.33
 
-  '@syncfusion/ej2-react-popups@28.1.33':
+  '@syncfusion/ej2-react-popups@28.1.38':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
-      '@syncfusion/ej2-popups': 28.1.33
-      '@syncfusion/ej2-react-base': 28.1.33
+      '@syncfusion/ej2-popups': 28.1.38
+      '@syncfusion/ej2-react-base': 28.1.38
 
   '@syncfusion/ej2-react-richtexteditor@28.1.37':
     dependencies:
