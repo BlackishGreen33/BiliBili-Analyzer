@@ -63,8 +63,8 @@ importers:
         specifier: ^28.1.37
         version: 28.1.37
       '@syncfusion/ej2-react-popups':
-        specifier: ^28.1.38
-        version: 28.1.38
+        specifier: ^28.1.39
+        version: 28.1.39
       '@syncfusion/ej2-react-richtexteditor':
         specifier: ^28.1.38
         version: 28.1.38
@@ -1518,6 +1518,9 @@ packages:
   '@syncfusion/ej2-buttons@28.1.37':
     resolution: {integrity: sha512-eAs+nwvQ95qlAYSV9FzSzkvvIJ3T6qa3czwnuTzD/2vrfj/SNwzGfDVSkr1Ufd+EhLRvT4GO0Eqrvjzj0JnCXg==}
 
+  '@syncfusion/ej2-buttons@28.1.39':
+    resolution: {integrity: sha512-qykrTIsGRqO4tOEAf7QVRBN4CDcnmRBJNsnmiUBB4H5J3MGA0J7Up3Dok1ztlfiiYrcoFUJmrh43d1hfw4KhHw==}
+
   '@syncfusion/ej2-calendars@28.1.37':
     resolution: {integrity: sha512-oRs89Dx5BUW8vSRuvXzil7O1Q7ew54teryYWSdxFKCK6HEChScZejWnejfWgtvGyJA7GNBKWIflAhUXgBI6D8g==}
 
@@ -1626,6 +1629,9 @@ packages:
   '@syncfusion/ej2-popups@28.1.38':
     resolution: {integrity: sha512-BGriVsrYjhpOJmwSE2TPwn5b4Cg1EVS/npP6fvC2+wPzW9PSoHlljweIxE98M8wsttFq0EGi6612y4/NU4gtNw==}
 
+  '@syncfusion/ej2-popups@28.1.39':
+    resolution: {integrity: sha512-uufnfFL5AbkBLmiRvRy8r9dArryTV+d42JCIBgH3SnVJwItkMgNS9U33EPzhqC19WyYKlYofkILU+lvZC5NMCg==}
+
   '@syncfusion/ej2-progressbar@28.1.33':
     resolution: {integrity: sha512-LHNMUngyQQ95wUORY/tq6VMyoHCpkrz9FJShhuZIGPNK7rJ/8T9sn5F0O7cqqqqSbH2SIGotgx5CaiRmEFByEA==}
 
@@ -1656,8 +1662,8 @@ packages:
   '@syncfusion/ej2-react-kanban@28.1.37':
     resolution: {integrity: sha512-SKYzfHH5AEM3VpUmviwNcV2A/0twoIwU4xHHC1R4hF8XLL/4XsXc9j72m6C650gPVfMqgpJkg83QK0fMKdCYew==}
 
-  '@syncfusion/ej2-react-popups@28.1.38':
-    resolution: {integrity: sha512-cXwUoR7iAEnmbrHVb2i1BaYmAtqw/Pg+4fJrhMdNA0LloM4LGTEmS7DF9cpRdk/jyKfQDURti2AKasvHkCuvvw==}
+  '@syncfusion/ej2-react-popups@28.1.39':
+    resolution: {integrity: sha512-0am8TS+BTUrCX7921+IMHhbN+EcH1OR+/Ep6gSiLK38gn6pAS0EUxoBgNLNvZVjjR3m85rHOM0xubi4FYrWhPA==}
 
   '@syncfusion/ej2-react-richtexteditor@28.1.38':
     resolution: {integrity: sha512-ujGLj5HXvkKXPJxFjmuHObW2caIVpXAxWbFVUkhKO0J8H/v+cmnb22wKmtbe1d4V+6SpEdOwWDl1jZB3O+6Pqw==}
@@ -6445,6 +6451,10 @@ snapshots:
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
 
+  '@syncfusion/ej2-buttons@28.1.39':
+    dependencies:
+      '@syncfusion/ej2-base': 28.1.33
+
   '@syncfusion/ej2-calendars@28.1.37':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
@@ -6754,6 +6764,11 @@ snapshots:
       '@syncfusion/ej2-base': 28.1.33
       '@syncfusion/ej2-buttons': 28.1.37
 
+  '@syncfusion/ej2-popups@28.1.39':
+    dependencies:
+      '@syncfusion/ej2-base': 28.1.33
+      '@syncfusion/ej2-buttons': 28.1.39
+
   '@syncfusion/ej2-progressbar@28.1.33':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
@@ -6813,10 +6828,10 @@ snapshots:
       '@syncfusion/ej2-kanban': 28.1.37
       '@syncfusion/ej2-react-base': 28.1.33
 
-  '@syncfusion/ej2-react-popups@28.1.38':
+  '@syncfusion/ej2-react-popups@28.1.39':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
-      '@syncfusion/ej2-popups': 28.1.38
+      '@syncfusion/ej2-popups': 28.1.39
       '@syncfusion/ej2-react-base': 28.1.38
 
   '@syncfusion/ej2-react-richtexteditor@28.1.38':
