@@ -23,7 +23,7 @@
     "crawldata": "node CrawlPopular.cjs"
   },
   "dependencies": {
-    "@ant-design/pro-components": "^2.8.3",
+    "@ant-design/pro-components": "^2.8.4",
     "@capacitor/android": "^6.2.0",
     "@capacitor/core": "^6.2.0",
     "@capacitor/ios": "^6.2.0",
