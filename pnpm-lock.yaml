@@ -57,8 +57,8 @@ importers:
         specifier: ^28.1.38
         version: 28.1.38
       '@syncfusion/ej2-react-inputs':
-        specifier: ^28.1.37
-        version: 28.1.37
+        specifier: ^28.1.41
+        version: 28.1.41
       '@syncfusion/ej2-react-kanban':
         specifier: ^28.1.39
         version: 28.1.39
@@ -1678,8 +1678,8 @@ packages:
   '@syncfusion/ej2-react-grids@28.1.38':
     resolution: {integrity: sha512-UfYSWcyinoMA1Fz91bh1Y9HyYnmxJ46vqbgoywWW+jxOn1qxdlB7in7YA/GDkzjxafvL+Jk3q2twz3R1sZ1USw==}
 
-  '@syncfusion/ej2-react-inputs@28.1.37':
-    resolution: {integrity: sha512-k/Q86hHp2Q5r16vZUxLpdy/TYNKef+V8dJGRoLb3rtwIviOPVUxvNXFSgWa6YEUqhQvbU30TAdy00vkKTYGWFQ==}
+  '@syncfusion/ej2-react-inputs@28.1.41':
+    resolution: {integrity: sha512-ePCTB1d/BbLjK5CaDNfDrDTDPSHAQsZ/RiFxu2kxceIvf73QEqBHf1Mbo9jkYa6I5Ju6YXPkjtoLIhznSV1ogQ==}
 
   '@syncfusion/ej2-react-kanban@28.1.39':
     resolution: {integrity: sha512-oEZ8K14RRusO4PFEwdxoBr3x832IYCCOnlYfYbxq8nRG4RjnVx0Eyo3qAxEPReOo17tD475i/DzbzzXPlc5CZw==}
@@ -6629,7 +6629,7 @@ snapshots:
       '@syncfusion/ej2-lists': 28.1.37
       '@syncfusion/ej2-navigations': 28.1.41
       '@syncfusion/ej2-popups': 28.1.39
-      '@syncfusion/ej2-splitbuttons': 28.1.37
+      '@syncfusion/ej2-splitbuttons': 28.1.41
 
   '@syncfusion/ej2-filemanager@28.1.39':
     dependencies:
@@ -6919,11 +6919,11 @@ snapshots:
       '@syncfusion/ej2-grids': 28.1.38
       '@syncfusion/ej2-react-base': 28.1.38
 
-  '@syncfusion/ej2-react-inputs@28.1.37':
+  '@syncfusion/ej2-react-inputs@28.1.41':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
-      '@syncfusion/ej2-inputs': 28.1.37
-      '@syncfusion/ej2-react-base': 28.1.33
+      '@syncfusion/ej2-inputs': 28.1.41
+      '@syncfusion/ej2-react-base': 28.1.38
 
   '@syncfusion/ej2-react-kanban@28.1.39':
     dependencies:
@@ -6965,7 +6965,7 @@ snapshots:
       '@syncfusion/ej2-buttons': 28.1.37
       '@syncfusion/ej2-dropdowns': 28.1.41
       '@syncfusion/ej2-filemanager': 28.1.36
-      '@syncfusion/ej2-inputs': 28.1.37
+      '@syncfusion/ej2-inputs': 28.1.41
       '@syncfusion/ej2-navigations': 28.1.37
       '@syncfusion/ej2-popups': 28.1.38
       '@syncfusion/ej2-splitbuttons': 28.1.37
