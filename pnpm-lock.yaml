@@ -45,8 +45,8 @@ importers:
         specifier: ^28.1.33
         version: 28.1.33
       '@syncfusion/ej2-react-calendars':
-        specifier: ^28.1.39
-        version: 28.1.39
+        specifier: ^28.1.41
+        version: 28.1.41
       '@syncfusion/ej2-react-charts':
         specifier: ^28.1.41
         version: 28.1.41
@@ -1660,14 +1660,11 @@ packages:
   '@syncfusion/ej2-querybuilder@28.1.35':
     resolution: {integrity: sha512-ZTF2tl0s7p6dT26Tuty5oTCwAVuK4+rwyBA2mOR74Qwptlv1Y+hBvRBi1p3hrCb14w89RmrOb2uk/sbLCIpOjg==}
 
-  '@syncfusion/ej2-react-base@28.1.33':
-    resolution: {integrity: sha512-L7ik2V8UywusX7fFvakggL/xlRt54yDdtQUY2Pz4rTP940wxNR230gB3+t/5XDbkGVLNBNNoscT0ZNWFo7wqyg==}
-
   '@syncfusion/ej2-react-base@28.1.38':
     resolution: {integrity: sha512-5o5G/1s/PQFQKGjCeARC79xYqp7419rIEB7H0ZH4z/o2vuT+abqUa0VG0P2VSlzkfNw0CCuFByyuH2zI/DuSfA==}
 
-  '@syncfusion/ej2-react-calendars@28.1.39':
-    resolution: {integrity: sha512-ufeTQmpgjcPleqDScffYHb6yIBUVBh1jNb8+SmoL0CDcWac6WPPUMQZhUd96zb9olF1HRDZDlACaeIpnoglgTQ==}
+  '@syncfusion/ej2-react-calendars@28.1.41':
+    resolution: {integrity: sha512-CIhh8BEATEgEbFla/pQghgwK6hmBhWHbIJqd0My4BwtGGdy9XC97/bldMgVfeyn3PUgHLwpAE8o//BPjbp7xFw==}
 
   '@syncfusion/ej2-react-charts@28.1.41':
     resolution: {integrity: sha512-qmSfI6QT5lFNVdUuSSITBET+57JLKoZrPkEt8+oJQ+pNjgkdVqaMhhqMntzdkdpBEdMR3lngJ0xi6IMqFuQ/uA==}
@@ -6877,18 +6874,14 @@ snapshots:
       '@syncfusion/ej2-inputs': 28.1.37
       '@syncfusion/ej2-splitbuttons': 28.1.37
 
-  '@syncfusion/ej2-react-base@28.1.33':
-    dependencies:
-      '@syncfusion/ej2-base': 28.1.33
-
   '@syncfusion/ej2-react-base@28.1.38':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
 
-  '@syncfusion/ej2-react-calendars@28.1.39':
+  '@syncfusion/ej2-react-calendars@28.1.41':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
-      '@syncfusion/ej2-calendars': 28.1.39
+      '@syncfusion/ej2-calendars': 28.1.41
       '@syncfusion/ej2-react-base': 28.1.38
 
   '@syncfusion/ej2-react-charts@28.1.41':
