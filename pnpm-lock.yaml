@@ -54,8 +54,8 @@ importers:
         specifier: ^28.1.41
         version: 28.1.41
       '@syncfusion/ej2-react-grids':
-        specifier: ^28.1.38
-        version: 28.1.38
+        specifier: ^28.1.41
+        version: 28.1.41
       '@syncfusion/ej2-react-inputs':
         specifier: ^28.1.41
         version: 28.1.41
@@ -1582,6 +1582,9 @@ packages:
   '@syncfusion/ej2-grids@28.1.38':
     resolution: {integrity: sha512-98Er5bw6nwaKfEsWbps+ScSr88cQajOhbANB5CVHzP6ApVmrDi7COimzFUJETxtgmIrvcLeemjG86EuiUMbjkg==}
 
+  '@syncfusion/ej2-grids@28.1.41':
+    resolution: {integrity: sha512-7rFEbL+TO7bOgTeFLpqUW3GRIA5cC+u9NCF3Y+uLll+ly/+QVm8FAqHsdLk7QXXVefk3eo5vc3xswUOHKBKJOQ==}
+
   '@syncfusion/ej2-heatmap@28.1.33':
     resolution: {integrity: sha512-lTNGpR8gKMJCTFkzuyvHWDePE9exYoAchgpUsB3ofte9AVmGeiVCmXPSe+1HbH9ezl5wJ/kZUcIPNOGUZ/j3vw==}
 
@@ -1660,9 +1663,6 @@ packages:
   '@syncfusion/ej2-querybuilder@28.1.35':
     resolution: {integrity: sha512-ZTF2tl0s7p6dT26Tuty5oTCwAVuK4+rwyBA2mOR74Qwptlv1Y+hBvRBi1p3hrCb14w89RmrOb2uk/sbLCIpOjg==}
 
-  '@syncfusion/ej2-react-base@28.1.33':
-    resolution: {integrity: sha512-L7ik2V8UywusX7fFvakggL/xlRt54yDdtQUY2Pz4rTP940wxNR230gB3+t/5XDbkGVLNBNNoscT0ZNWFo7wqyg==}
-
   '@syncfusion/ej2-react-base@28.1.38':
     resolution: {integrity: sha512-5o5G/1s/PQFQKGjCeARC79xYqp7419rIEB7H0ZH4z/o2vuT+abqUa0VG0P2VSlzkfNw0CCuFByyuH2zI/DuSfA==}
 
@@ -1675,8 +1675,8 @@ packages:
   '@syncfusion/ej2-react-dropdowns@28.1.41':
     resolution: {integrity: sha512-CZnWk3RZ+BH7KlFUmWZVZo0Eq97UNWFJkt3L5zERAcykxT5gN/dFLu2d5DoUTvi2VdGMBjC4PMqnHsWueK/nEA==}
 
-  '@syncfusion/ej2-react-grids@28.1.38':
-    resolution: {integrity: sha512-UfYSWcyinoMA1Fz91bh1Y9HyYnmxJ46vqbgoywWW+jxOn1qxdlB7in7YA/GDkzjxafvL+Jk3q2twz3R1sZ1USw==}
+  '@syncfusion/ej2-react-grids@28.1.41':
+    resolution: {integrity: sha512-q8LMeTnhSaoKtn+AnKuISbHLbBL7bieuBouzv2zHKFj5YC7e+29sq0UNF8ObP2l9O+LwifDTHCiQVJLPAxx2XA==}
 
   '@syncfusion/ej2-react-inputs@28.1.41':
     resolution: {integrity: sha512-ePCTB1d/BbLjK5CaDNfDrDTDPSHAQsZ/RiFxu2kxceIvf73QEqBHf1Mbo9jkYa6I5Ju6YXPkjtoLIhznSV1ogQ==}
@@ -6613,7 +6613,7 @@ snapshots:
       '@syncfusion/ej2-base': 28.1.33
       '@syncfusion/ej2-buttons': 28.1.39
       '@syncfusion/ej2-data': 28.1.33
-      '@syncfusion/ej2-grids': 28.1.38
+      '@syncfusion/ej2-grids': 28.1.41
       '@syncfusion/ej2-inputs': 28.1.41
       '@syncfusion/ej2-layouts': 28.1.33
       '@syncfusion/ej2-lists': 28.1.37
@@ -6669,6 +6669,24 @@ snapshots:
       '@syncfusion/ej2-pdf-export': 28.1.38
       '@syncfusion/ej2-popups': 28.1.39
       '@syncfusion/ej2-splitbuttons': 28.1.37
+
+  '@syncfusion/ej2-grids@28.1.41':
+    dependencies:
+      '@syncfusion/ej2-base': 28.1.33
+      '@syncfusion/ej2-buttons': 28.1.39
+      '@syncfusion/ej2-calendars': 28.1.41
+      '@syncfusion/ej2-compression': 28.1.33
+      '@syncfusion/ej2-data': 28.1.33
+      '@syncfusion/ej2-dropdowns': 28.1.41
+      '@syncfusion/ej2-excel-export': 28.1.33
+      '@syncfusion/ej2-file-utils': 28.1.33
+      '@syncfusion/ej2-inputs': 28.1.41
+      '@syncfusion/ej2-lists': 28.1.37
+      '@syncfusion/ej2-navigations': 28.1.41
+      '@syncfusion/ej2-notifications': 28.1.33
+      '@syncfusion/ej2-pdf-export': 28.1.38
+      '@syncfusion/ej2-popups': 28.1.39
+      '@syncfusion/ej2-splitbuttons': 28.1.41
 
   '@syncfusion/ej2-heatmap@28.1.33':
     dependencies:
@@ -6877,10 +6895,6 @@ snapshots:
       '@syncfusion/ej2-inputs': 28.1.37
       '@syncfusion/ej2-splitbuttons': 28.1.37
 
-  '@syncfusion/ej2-react-base@28.1.33':
-    dependencies:
-      '@syncfusion/ej2-base': 28.1.33
-
   '@syncfusion/ej2-react-base@28.1.38':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
@@ -6903,10 +6917,10 @@ snapshots:
       '@syncfusion/ej2-dropdowns': 28.1.41
       '@syncfusion/ej2-react-base': 28.1.38
 
-  '@syncfusion/ej2-react-grids@28.1.38':
+  '@syncfusion/ej2-react-grids@28.1.41':
     dependencies:
       '@syncfusion/ej2-base': 28.1.33
-      '@syncfusion/ej2-grids': 28.1.38
+      '@syncfusion/ej2-grids': 28.1.41
       '@syncfusion/ej2-react-base': 28.1.38
 
   '@syncfusion/ej2-react-inputs@28.1.41':
