@@ -45,8 +45,8 @@ importers:
         specifier: ^28.1.33
         version: 28.1.33
       '@syncfusion/ej2-react-calendars':
-        specifier: ^28.1.39
-        version: 28.1.39
+        specifier: ^28.2.3
+        version: 28.2.3
       '@syncfusion/ej2-react-charts':
         specifier: ^28.1.41
         version: 28.1.41
@@ -1714,8 +1714,8 @@ packages:
   '@syncfusion/ej2-react-base@28.2.3':
     resolution: {integrity: sha512-mrKI8OiSujBxOVpuWUGTiaCzS+cC8yGpujr4uG79ce/Rle4knE9BZEbEDQamZkAxT/u8kG4yetox6vs7kLI9EA==}
 
-  '@syncfusion/ej2-react-calendars@28.1.39':
-    resolution: {integrity: sha512-ufeTQmpgjcPleqDScffYHb6yIBUVBh1jNb8+SmoL0CDcWac6WPPUMQZhUd96zb9olF1HRDZDlACaeIpnoglgTQ==}
+  '@syncfusion/ej2-react-calendars@28.2.3':
+    resolution: {integrity: sha512-xoqQg31DUz7wOERx0Rw+K3od/609nItkCQvsSBYnxlx47mnx/EhifzC5z1obVtBrri5iK09rYGUuOp8vgnA2cg==}
 
   '@syncfusion/ej2-react-charts@28.1.41':
     resolution: {integrity: sha512-qmSfI6QT5lFNVdUuSSITBET+57JLKoZrPkEt8+oJQ+pNjgkdVqaMhhqMntzdkdpBEdMR3lngJ0xi6IMqFuQ/uA==}
@@ -6924,11 +6924,11 @@ snapshots:
     dependencies:
       '@syncfusion/ej2-base': 28.2.3
 
-  '@syncfusion/ej2-react-calendars@28.1.39':
+  '@syncfusion/ej2-react-calendars@28.2.3':
     dependencies:
-      '@syncfusion/ej2-base': 28.1.33
-      '@syncfusion/ej2-calendars': 28.1.39
-      '@syncfusion/ej2-react-base': 28.1.38
+      '@syncfusion/ej2-base': 28.2.3
+      '@syncfusion/ej2-calendars': 28.2.3
+      '@syncfusion/ej2-react-base': 28.2.3
 
   '@syncfusion/ej2-react-charts@28.1.41':
     dependencies:
