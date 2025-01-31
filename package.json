@@ -24,9 +24,9 @@
   },
   "dependencies": {
     "@ant-design/pro-components": "^2.8.4",
-    "@capacitor/android": "^6.2.0",
-    "@capacitor/core": "^6.2.0",
-    "@capacitor/ios": "^6.2.0",
+    "@capacitor/android": "^7.0.1",
+    "@capacitor/core": "^7.0.1",
+    "@capacitor/ios": "^7.0.1",
     "@emotion/styled": "^11.14.0",
     "@iframe-resizer/react": "^5.3.2",
     "@million/lint": "1.0.14",
