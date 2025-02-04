@@ -124,10 +124,10 @@ importers:
         version: 3.0.1
       tailwind-scrollbar-hide:
         specifier: ^2.0.0
-        version: 2.0.0(tailwindcss@4.0.2)
+        version: 2.0.0(tailwindcss@4.0.3)
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@4.0.2)
+        version: 1.0.7(tailwindcss@4.0.3)
       zustand:
         specifier: ^5.0.3
         version: 5.0.3(@types/react@18.3.13)(react@18.3.1)(use-sync-external-store@1.4.0(react@18.3.1))
@@ -181,8 +181,8 @@ importers:
         specifier: ^0.6.11
         version: 0.6.11(prettier-plugin-organize-imports@4.1.0(prettier@3.4.2)(typescript@5.7.3))(prettier@3.4.2)
       tailwindcss:
-        specifier: ^4.0.2
-        version: 4.0.2
+        specifier: ^4.0.3
+        version: 4.0.3
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
@@ -4532,8 +4532,8 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
 
-  tailwindcss@4.0.2:
-    resolution: {integrity: sha512-cjWQjZEbzQNqH4IiSjRcYg96zjlu+rjzTFkqTc/fN3FNnIU4CoNlQvwCsIomwG/2EPWYT9ysFL1QF6Av3fZeNg==}
+  tailwindcss@4.0.3:
+    resolution: {integrity: sha512-ImmZF0Lon5RrQpsEAKGxRvHwCvMgSC4XVlFRqmbzTEDb/3wvin9zfEZrMwgsa3yqBbPqahYcVI6lulM2S7IZAA==}
 
   tapable@2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
@@ -10302,15 +10302,15 @@ snapshots:
 
   tailwind-merge@3.0.1: {}
 
-  tailwind-scrollbar-hide@2.0.0(tailwindcss@4.0.2):
+  tailwind-scrollbar-hide@2.0.0(tailwindcss@4.0.3):
     dependencies:
-      tailwindcss: 4.0.2
+      tailwindcss: 4.0.3
 
-  tailwindcss-animate@1.0.7(tailwindcss@4.0.2):
+  tailwindcss-animate@1.0.7(tailwindcss@4.0.3):
     dependencies:
-      tailwindcss: 4.0.2
+      tailwindcss: 4.0.3
 
-  tailwindcss@4.0.2: {}
+  tailwindcss@4.0.3: {}
 
   tapable@2.2.1: {}
 
