@@ -6,7 +6,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: var(--jakartaSans-font);
+  --font-sans:
+    var(--font-noto-sans-sc), var(--font-inter), 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
   --font-sora: var(--soraSans-font);
   --font-code: var(--firaCode-font);
   --font-open: var(--openSans-font);
