@@ -1,6 +1,12 @@
+'use client';
+
+import dynamic from 'next/dynamic';
 import React from 'react';
 
-import Search from '@/modules/Search';
+const Search = dynamic(() => import('@/modules/Search'), {
+  ssr: false,
+  loading: () => null,
+});
 
 const Home: React.FC = React.memo(() => <Search />);
 
