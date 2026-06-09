@@ -21,7 +21,7 @@ const Navbar: React.FC = React.memo(() => {
     isClicked,
     setScreenSize,
     screenSize,
-    handleClick,
+    toggleNotification,
   } = useStore();
 
   const handleResize = useCallback(() => {
@@ -60,7 +60,7 @@ const Navbar: React.FC = React.memo(() => {
         <NavButton
           title="下载应用"
           dotColor="rgb(254, 201, 15)"
-          customFunc={() => handleClick('notification')}
+          customFunc={toggleNotification}
           color={currentColor}
           icon={<FaDownload />}
         />

@@ -16,7 +16,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "static": "next build && next export",
     "prettier": "prettier --write .",
     "prepare": "husky",

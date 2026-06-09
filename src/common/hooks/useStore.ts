@@ -11,29 +11,16 @@ interface State {
   setScreenSize: (size: undefined | number) => void;
   setCurrentColor: (color: string) => void;
   setActiveMenu: (active: boolean) => void;
-  setIsClicked: (clicked: {
-    chat: boolean;
-    cart: boolean;
-    userProfile: boolean;
-    notification: boolean;
-  }) => void;
   setThemeSettings: (settings: boolean) => void;
-  handleClick: (clicked: keyof State['isClicked']) => void;
+  toggleNotification: () => void;
 }
-
-export const initialState = {
-  chat: false,
-  cart: false,
-  userProfile: false,
-  notification: false,
-};
 
 const useStore = create<State>((set) => ({
   screenSize: undefined,
   currentColor: '#03C9D7',
   themeSettings: false,
   activeMenu: true,
-  isClicked: initialState,
+  isClicked: { notification: false },
 
   setScreenSize: (size) => set({ screenSize: size }),
   setCurrentColor: (color) => {
@@ -41,18 +28,13 @@ const useStore = create<State>((set) => ({
     localStorage.setItem('colorMode', color);
   },
   setActiveMenu: (active) => set({ activeMenu: active }),
-  setIsClicked: (clicked) => {
-    set({ isClicked: clicked });
-  },
   setThemeSettings: (settings) => set({ themeSettings: settings }),
-  handleClick: (clicked) => {
+  toggleNotification: () =>
     set((state) => ({
       isClicked: {
-        ...state.isClicked,
-        [clicked]: !state.isClicked[clicked],
+        notification: !state.isClicked.notification,
       },
-    }));
-  },
+    })),
 }));
 
 export default useStore;

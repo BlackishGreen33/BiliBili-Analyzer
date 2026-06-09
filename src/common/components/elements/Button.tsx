@@ -1,6 +1,5 @@
 'use client';
 
-import useStore, { initialState } from '@/common/hooks/useStore';
 import React from 'react';
 
 interface ButtonProps {
@@ -16,14 +15,11 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = React.memo(
   ({ icon, bgColor, color, bgHoverColor, size, text, borderRadius, width }) => {
-    const { setIsClicked } = useStore();
-
     return (
       <button
         type="button"
-        onClick={() => setIsClicked(initialState)}
         style={{ backgroundColor: bgColor, color, borderRadius }}
-        className={` text-${size} p-3 w-${width} hover:drop-shadow-xl hover:bg-${bgHoverColor}`}
+        className={`text-${size} w-${width} p-3 hover:bg-${bgHoverColor} hover:drop-shadow-xl`}
       >
         {icon} {text}
       </button>

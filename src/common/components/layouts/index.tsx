@@ -10,6 +10,9 @@ import Navbar from '../navbar/Navbar';
 import Sidebar from '../sidebar/Sidebar';
 import { Toaster } from '../ui/toaster';
 
+const CHATBASE_ID = 'WWELx6VqHYeHPfUGO8a2J';
+const CHATBASE_DOMAIN = 'www.chatbase.co';
+
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -17,21 +20,6 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = React.memo(({ children }) => {
   const { setCurrentColor, activeMenu, themeSettings } = useStore();
   const { setTheme, theme } = useTheme();
-
-  const chatbotScript = `
-  <script>
-window.embeddedChatbotConfig = {
-chatbotId: "WWELx6VqHYeHPfUGO8a2J",
-domain: "www.chatbase.co"
-}
-</script>
-<script
-src="https://www.chatbase.co/embed.min.js"
-chatbotId="WWELx6VqHYeHPfUGO8a2J"
-domain="www.chatbase.co"
-defer>
-</script>
-`;
 
   useEffect(() => {
     const currentThemeColor = localStorage.getItem('colorMode');
@@ -42,6 +30,27 @@ defer>
       setTheme(currentThemeMode);
     }
   }, [setCurrentColor, setTheme]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    if (document.getElementById('chatbase-script')) {
+      return;
+    }
+    (window as unknown as { embeddedChatbotConfig: unknown }).embeddedChatbotConfig =
+      {
+        chatbotId: CHATBASE_ID,
+        domain: CHATBASE_DOMAIN,
+      };
+    const script = document.createElement('script');
+    script.id = 'chatbase-script';
+    script.src = 'https://www.chatbase.co/embed.min.js';
+    script.setAttribute('chatbotId', CHATBASE_ID);
+    script.setAttribute('domain', CHATBASE_DOMAIN);
+    script.defer = true;
+    document.body.appendChild(script);
+  }, []);
 
   return (
     <>
@@ -66,7 +75,6 @@ defer>
               {themeSettings && <ThemeSettings />}
               {children}
             </div>
-            <div dangerouslySetInnerHTML={{ __html: chatbotScript }} />
             <Footer />
             <Toaster />
           </div>
