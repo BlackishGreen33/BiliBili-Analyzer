@@ -1,27 +1,18 @@
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 
-const githubResultBranch =
-  'https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result';
-
-type VideoData = {
-  url: string;
-  cover: string;
-  title: string;
-  UP: string;
-  views: string;
-  tags: { firstChannel: string; secondChannel: string; ordinaryTags: string[] };
-};
+import { RESULT_BASE_URL } from '@/common/constants/result';
+import type { CrawlResult } from '@/common/types/video';
 
 export async function GET(req: Request) {
   try {
-    const listRes = await axios.get(githubResultBranch + '/list.json');
+    const listRes = await axios.get(`${RESULT_BASE_URL}/list.json`);
     const filename = listRes.data[0];
     if (!filename) {
       throw new Error('Filename not found');
     }
-    const dataRes = await axios.get(`${githubResultBranch}/${filename}.json`);
-    const allData = dataRes.data;
+    const dataRes = await axios.get(`${RESULT_BASE_URL}/${filename}.json`);
+    const allData = dataRes.data as CrawlResult;
 
     const randomIndex = Math.floor(Math.random() * allData.video.length);
     const video = allData.video[randomIndex];

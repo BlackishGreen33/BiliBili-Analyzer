@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 
 import Providers from '@/common/providers/Providers';
 
-import '@/common/styles/globals.scss';
+import '@/common/styles/globals.css';
 
 // import ProgressBar from '@/common/components/elements/ProgressBar';
 // import { ModalProvider } from '@/common/components/providers/modal-provider';
