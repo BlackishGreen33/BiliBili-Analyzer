@@ -1,17 +1,10 @@
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 
+import type { CrawlResult } from '@/common/types/video';
+
 const githubResultBranch =
   'https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result';
-
-type VideoData = {
-  url: string;
-  cover: string;
-  title: string;
-  UP: string;
-  views: string;
-  tags: { firstChannel: string; secondChannel: string; ordinaryTags: string[] };
-};
 
 export async function GET(req: Request) {
   try {
@@ -21,7 +14,7 @@ export async function GET(req: Request) {
       throw new Error('Filename not found');
     }
     const dataRes = await axios.get(`${githubResultBranch}/${filename}.json`);
-    const allData = dataRes.data;
+    const allData = dataRes.data as CrawlResult;
 
     const randomIndex = Math.floor(Math.random() * allData.video.length);
     const video = allData.video[randomIndex];

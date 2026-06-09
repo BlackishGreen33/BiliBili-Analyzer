@@ -24,29 +24,16 @@ import React, { useEffect, useState } from 'react';
 import { ToastAction } from '@/common/components/ui/toast';
 import { toast } from '@/common/components/ui/use-toast';
 import useStore from '@/common/hooks/useStore';
+import type { CrawlResult, VideoData } from '@/common/types/video';
 
 const { Text, Title, Paragraph } = Typography;
-
-type VideoData = {
-  url: string;
-  cover: string;
-  title: string;
-  UP: string;
-  views: string;
-  tags: { firstChannel: string; secondChannel: string; ordinaryTags: string[] };
-};
-
-type Data = {
-  time: number;
-  video: VideoData[];
-};
 
 const Home: React.FC = React.memo(() => {
   const [dataList, setDataList] = useState<{ value: string; label: string }[]>(
     []
   );
   const [selectedTime, setSelectedTime] = useState('');
-  const [videoData, setVideoData] = useState<Data>();
+  const [videoData, setVideoData] = useState<CrawlResult>();
   const [filteredData, setFilteredData] = useState<VideoData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
