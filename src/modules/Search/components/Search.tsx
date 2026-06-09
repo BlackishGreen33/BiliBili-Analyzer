@@ -1,24 +1,21 @@
 'use client';
 
 import {
-  ProForm,
-  ProFormCascader,
-  ProFormText,
-} from '@ant-design/pro-components';
-import {
+  Button,
   Card,
+  Cascader,
   ConfigProvider,
+  Input,
   List,
   Select,
   Space,
   Tag,
   Typography,
 } from 'antd';
-import { ThemeProvider } from 'antd-style';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { ToastAction } from '@/common/components/ui/toast';
 import { toast } from '@/common/components/ui/use-toast';
@@ -31,6 +28,12 @@ import type { CrawlResult, VideoData } from '@/common/types/video';
 
 const { Text, Title, Paragraph } = Typography;
 
+type ChannelOption = {
+  value: string;
+  label: string;
+  children?: ChannelOption[];
+};
+
 const Home: React.FC = React.memo(() => {
   const [dataList, setDataList] = useState<{ value: string; label: string }[]>(
     []
@@ -39,35 +42,31 @@ const Home: React.FC = React.memo(() => {
   const [videoData, setVideoData] = useState<CrawlResult>();
   const [filteredData, setFilteredData] = useState<VideoData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-
-  const [form] = ProForm.useForm();
+  const [searchValue, setSearchValue] = useState('');
+  const [selectedChannels, setSelectedChannels] = useState<string[][]>([]);
 
   const { currentColor, screenSize } = useStore();
   const { theme } = useTheme();
   const router = useRouter();
 
-  const loadFilename = useCallback(
-    async (filename: string) => {
-      setLoading(true);
-      try {
-        const data = await fetchResultByName(filename);
-        setVideoData(data);
-        setFilteredData(data.video);
-        setSelectedTime(filename);
-        form.resetFields();
-      } catch (error) {
-        toast({
-          variant: 'destructive',
-          title: '无法获取到数据。',
-          description: '发生了一些意料之外的错误。',
-          action: <ToastAction altText="Try again">再试一次</ToastAction>,
-        });
-      } finally {
-        setLoading(false);
-      }
-    },
-    [form, toast]
-  );
+  const loadFilename = useCallback(async (filename: string) => {
+    setLoading(true);
+    try {
+      const data = await fetchResultByName(filename);
+      setVideoData(data);
+      setFilteredData(data.video);
+      setSelectedTime(filename);
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: '无法获取到数据。',
+        description: '发生了一些意料之外的错误。',
+        action: <ToastAction altText="Try again">再试一次</ToastAction>,
+      });
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -99,6 +98,8 @@ const Home: React.FC = React.memo(() => {
   }, [loadFilename, toast]);
 
   const changeTime = (filename: string) => {
+    setSearchValue('');
+    setSelectedChannels([]);
     void loadFilename(filename);
   };
 
@@ -108,62 +109,71 @@ const Home: React.FC = React.memo(() => {
     children?: Option[];
   };
 
-  const channelOptions: Option[] = [];
-  videoData?.video.forEach((v) => {
-    if (v.tags.firstChannel && v.tags.secondChannel) {
-      const existingChannel = channelOptions.find(
-        (entry) => entry.label === v.tags.firstChannel
-      );
-
-      if (existingChannel) {
-        existingChannel.children = existingChannel.children || [];
-        const existingSecondChannel = existingChannel.children.find(
-          (child) => child.label === v.tags.secondChannel
+  const channelOptions: Option[] = useMemo(() => {
+    const options: Option[] = [];
+    videoData?.video.forEach((v) => {
+      if (v.tags.firstChannel && v.tags.secondChannel) {
+        const existingChannel = options.find(
+          (entry) => entry.label === v.tags.firstChannel
         );
 
-        if (!existingSecondChannel) {
-          existingChannel.children.push({
-            label: v.tags.secondChannel,
-            value: v.tags.secondChannel,
-          });
-        }
-      } else {
-        channelOptions.push({
-          label: v.tags.firstChannel,
-          value: v.tags.firstChannel,
-          children: [
-            {
+        if (existingChannel) {
+          existingChannel.children = existingChannel.children || [];
+          const existingSecondChannel = existingChannel.children.find(
+            (child) => child.label === v.tags.secondChannel
+          );
+
+          if (!existingSecondChannel) {
+            existingChannel.children.push({
               label: v.tags.secondChannel,
               value: v.tags.secondChannel,
-            },
-          ],
-        });
+            });
+          }
+        } else {
+          options.push({
+            label: v.tags.firstChannel,
+            value: v.tags.firstChannel,
+            children: [
+              {
+                label: v.tags.secondChannel,
+                value: v.tags.secondChannel,
+              },
+            ],
+          });
+        }
       }
-    }
-  });
+    });
+    return options;
+  }, [videoData]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleFilterChange = async (values: any): Promise<void> => {
-    setLoading(true);
-    const filteredResults = videoData?.video.filter((item) => {
+  const applyFilters = useCallback(() => {
+    const keyword = searchValue.trim().toLowerCase();
+    const filteredResults = (videoData?.video || []).filter((item) => {
       const matchesChannel =
-        !values.channel ||
-        values.channel.some(
-          (selectedChannel: string[]) =>
+        selectedChannels.length === 0 ||
+        selectedChannels.some(
+          (selectedChannel) =>
             selectedChannel[0] === item.tags.firstChannel ||
             selectedChannel[1] === item.tags.secondChannel
-        ) ||
-        values.channel.length === 0;
+        );
 
       const matchesSearch =
-        !values.search ||
-        item.title.toLowerCase().includes(values.search.toLowerCase());
+        !keyword || item.title.toLowerCase().includes(keyword);
 
       return matchesChannel && matchesSearch;
     });
+    setFilteredData(filteredResults);
+  }, [searchValue, selectedChannels, videoData]);
 
-    setFilteredData(filteredResults || []);
-    setLoading(false);
+  const handleFilter = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    applyFilters();
+  };
+
+  const handleReset = () => {
+    setSearchValue('');
+    setSelectedChannels([]);
+    setFilteredData(videoData?.video || []);
   };
 
   const handleClicked = async (url: string) => {
@@ -184,24 +194,19 @@ const Home: React.FC = React.memo(() => {
 
   return (
     <div className="m-2 mt-24 p-2 md:m-10 md:p-10">
-      <ThemeProvider
-        themeMode={theme === 'light' ? 'light' : 'dark'}
+      <ConfigProvider
         theme={{
           token: {
             colorPrimary: currentColor,
           },
+          components: {
+            Cascader: {
+              controlItemWidth: 200,
+              dropdownHeight: 500,
+            },
+          },
         }}
       >
-        <ConfigProvider
-          theme={{
-            components: {
-              Cascader: {
-                controlItemWidth: 200,
-                dropdownHeight: 500,
-              },
-            },
-          }}
-        >
           <div className="mx-auto mb-[50px] mt-0 w-[70vw]">
             <Title level={3} className="m-auto">
               哔哩哔哩热门视频分类检索系统
@@ -226,29 +231,42 @@ const Home: React.FC = React.memo(() => {
                   }}
                 />
               </Space>
-              <ProForm
-                form={form}
-                onReset={handleFilterChange}
-                onFinish={handleFilterChange}
-                submitter={{ onSubmit: handleFilterChange }}
-              >
-                <ProFormText
-                  name="search"
-                  label="搜索"
-                  placeholder={'请输入视频标题、UP主名称或视频标签'}
-                  fieldProps={{ size: 'large' }}
-                ></ProFormText>
-                <ProFormCascader
-                  name="channel"
-                  label="分区"
-                  placeholder={'请选择分区'}
-                  fieldProps={{
-                    options: channelOptions,
-                    multiple: true,
-                    maxTagCount: 'responsive',
-                  }}
-                />
-              </ProForm>
+              <form onSubmit={handleFilter} className="mt-4 flex flex-col gap-3">
+                <label className="flex flex-col gap-1">
+                  <span className="text-sm text-gray-500">搜索</span>
+                  <Input
+                    size="large"
+                    placeholder="请输入视频标题、UP主名称或视频标签"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                    allowClear
+                  />
+                </label>
+                <label className="flex flex-col gap-1">
+                  <span className="text-sm text-gray-500">分区</span>
+                  <Cascader
+                    size="large"
+                    options={channelOptions}
+                    value={selectedChannels}
+                    onChange={(value) =>
+                      setSelectedChannels(value as string[][])
+                    }
+                    placeholder="请选择分区"
+                    multiple
+                    maxTagCount="responsive"
+                  />
+                </label>
+                <Space>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    style={{ backgroundColor: currentColor }}
+                  >
+                    筛选
+                  </Button>
+                  <Button onClick={handleReset}>重置</Button>
+                </Space>
+              </form>
             </Card>
           </div>
           <div className="mx-auto mb-[50px] mt-0 w-[70vw]">
@@ -328,8 +346,7 @@ const Home: React.FC = React.memo(() => {
               )}
             />
           </div>
-        </ConfigProvider>
-      </ThemeProvider>
+      </ConfigProvider>
     </div>
   );
 });
