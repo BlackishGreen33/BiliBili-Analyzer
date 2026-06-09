@@ -23,6 +23,7 @@ import React, { useEffect, useState } from 'react';
 
 import { ToastAction } from '@/common/components/ui/toast';
 import { toast } from '@/common/components/ui/use-toast';
+import { RESULT_BASE_URL } from '@/common/constants/result';
 import useStore from '@/common/hooks/useStore';
 import type { CrawlResult, VideoData } from '@/common/types/video';
 
@@ -46,9 +47,7 @@ const Home: React.FC = React.memo(() => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(
-        'https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result/list.json'
-      )
+      .get(`${RESULT_BASE_URL}/list.json`)
       .then((response) => {
         const lists = response.data.map((fileName: string) => ({
           value: fileName,
@@ -59,9 +58,7 @@ const Home: React.FC = React.memo(() => {
       })
       .then((filename) => {
         axios
-          .get(
-            `https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result/${filename}.json`
-          )
+          .get(`${RESULT_BASE_URL}/${filename}.json`)
           .then((dataResponse) => {
             setVideoData(dataResponse.data);
             setFilteredData(dataResponse.data.video);
@@ -84,9 +81,7 @@ const Home: React.FC = React.memo(() => {
   const changeTime = (filename: string) => {
     setLoading(true);
     axios
-      .get(
-        `https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result/${filename}.json`
-      )
+      .get(`${RESULT_BASE_URL}/${filename}.json`)
       .then((dataResponse) => {
         setVideoData(dataResponse.data);
         setFilteredData(dataResponse.data.video);
