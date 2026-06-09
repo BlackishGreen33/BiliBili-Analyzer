@@ -1,18 +1,15 @@
-import axios from 'axios';
 import { NextResponse } from 'next/server';
 
-import { RESULT_BASE_URL } from '@/common/constants/result';
-import type { CrawlResult } from '@/common/types/video';
+import { fetchResultByName, fetchResultList } from '@/common/libs/result-data';
 
 export async function GET(req: Request) {
   try {
-    const listRes = await axios.get(`${RESULT_BASE_URL}/list.json`);
-    const filename = listRes.data[0];
+    const list = await fetchResultList();
+    const filename = list[0];
     if (!filename) {
       throw new Error('Filename not found');
     }
-    const dataRes = await axios.get(`${RESULT_BASE_URL}/${filename}.json`);
-    const allData = dataRes.data as CrawlResult;
+    const allData = await fetchResultByName(filename);
 
     const randomIndex = Math.floor(Math.random() * allData.video.length);
     const video = allData.video[randomIndex];

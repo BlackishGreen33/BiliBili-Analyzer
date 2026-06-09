@@ -15,16 +15,18 @@ import {
   Typography,
 } from 'antd';
 import { ThemeProvider } from 'antd-style';
-import axios from 'axios';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { ToastAction } from '@/common/components/ui/toast';
 import { toast } from '@/common/components/ui/use-toast';
-import { RESULT_BASE_URL } from '@/common/constants/result';
 import useStore from '@/common/hooks/useStore';
+import {
+  fetchResultByName,
+  fetchResultList,
+} from '@/common/libs/result-data';
 import type { CrawlResult, VideoData } from '@/common/types/video';
 
 const { Text, Title, Paragraph } = Typography;
@@ -44,51 +46,60 @@ const Home: React.FC = React.memo(() => {
   const { theme } = useTheme();
   const router = useRouter();
 
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get(`${RESULT_BASE_URL}/list.json`)
-      .then((response) => {
-        const lists = response.data.map((fileName: string) => ({
-          value: fileName,
-          label: fileName,
-        }));
-        setDataList(lists);
-        return response.data[0];
-      })
-      .then((filename) => {
-        axios
-          .get(`${RESULT_BASE_URL}/${filename}.json`)
-          .then((dataResponse) => {
-            setVideoData(dataResponse.data);
-            setFilteredData(dataResponse.data.video);
-            setLoading(false);
-            setSelectedTime(filename);
-            form.resetFields();
-          })
-          .catch((error) => {
-            toast({
-              variant: 'destructive',
-              title: '无法获取到数据。',
-              description: '发生了一些意料之外的错误。',
-              action: <ToastAction altText="Try again">再试一次</ToastAction>,
-            });
-            setLoading(false);
-          });
-      });
-  }, []);
-
-  const changeTime = (filename: string) => {
-    setLoading(true);
-    axios
-      .get(`${RESULT_BASE_URL}/${filename}.json`)
-      .then((dataResponse) => {
-        setVideoData(dataResponse.data);
-        setFilteredData(dataResponse.data.video);
-        setLoading(false);
+  const loadFilename = useCallback(
+    async (filename: string) => {
+      setLoading(true);
+      try {
+        const data = await fetchResultByName(filename);
+        setVideoData(data);
+        setFilteredData(data.video);
         setSelectedTime(filename);
         form.resetFields();
-      });
+      } catch (error) {
+        toast({
+          variant: 'destructive',
+          title: '无法获取到数据。',
+          description: '发生了一些意料之外的错误。',
+          action: <ToastAction altText="Try again">再试一次</ToastAction>,
+        });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [form, toast]
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const list = await fetchResultList();
+        if (cancelled) {
+          return;
+        }
+        setDataList(list.map((fileName) => ({ value: fileName, label: fileName })));
+        const latest = list[0];
+        if (latest) {
+          await loadFilename(latest);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          toast({
+            variant: 'destructive',
+            title: '无法获取到数据。',
+            description: '发生了一些意料之外的错误。',
+            action: <ToastAction altText="Try again">再试一次</ToastAction>,
+          });
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [loadFilename, toast]);
+
+  const changeTime = (filename: string) => {
+    void loadFilename(filename);
   };
 
   type Option = {
