@@ -7,7 +7,6 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  swcMinify: true,
   // output: "export",
   images: {
     unoptimized: true,
