@@ -52,25 +52,36 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
     return result;
   };
 
-  const fetchVideoInfo = async () => {
-    const res = await axios.post('/api/videoInfo', { bvid: bvid });
-    setVideoInfo(res.data.data);
-  };
-
-  const getVideoTags = async () => {
-    const res = await axios.post('/api/videoTags', { bvid: bvid });
-    setGetTags(res.data);
-  };
-
   useEffect(() => {
-    if (bvid) {
-      fetchVideoInfo();
-      getVideoTags();
-      if (getTags) {
-        setTagProps(createTagsArray(getTags));
-      }
+    if (!bvid) {
+      return;
     }
-  }, [bvid, getTags]);
+    let cancelled = false;
+
+    const fetchVideoInfo = async () => {
+      const res = await axios.post('/api/videoInfo', { bvid });
+      if (!cancelled) {
+        setVideoInfo(res.data.data);
+      }
+    };
+
+    const getVideoTags = async () => {
+      const res = await axios.post('/api/videoTags', { bvid });
+      if (cancelled) {
+        return;
+      }
+      const tags = res.data;
+      setGetTags(tags);
+      setTagProps(createTagsArray(tags));
+    };
+
+    fetchVideoInfo();
+    getVideoTags();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [bvid]);
 
   return (
     videoInfo && (
