@@ -1,22 +1,28 @@
-const puppeteer = require('puppeteer');
 const axios = require('axios');
-const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
 
-const url = 'https://www.bilibili.com/v/popular/all/';
-const selector =
-  '#app > div.popular-container > div.popular-video-container.popular-list > div.flow-loader > ul.card-list > div.video-card';
+const POPULAR_API = 'https://api.bilibili.com/x/web-interface/popular';
+const TAGS_API = (bvid) =>
+  `https://api.bilibili.com/x/tag/archive/tags?bvid=${bvid}`;
 
-const resultArray = [];
-const maxRetries = 3;
+const PER_PAGE = 20;
+const MAX_PAGES = 50;
+const MAX_RETRIES = 3;
+const TAG_CONCURRENCY = 10;
 
-const fetchData = async (videoLink) => {
+const headers = {
+  'User-Agent':
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  Referer: 'https://www.bilibili.com/',
+};
+
+const fetchWithRetry = async (url) => {
   let retries = 0;
-  while (retries < maxRetries) {
+  while (retries < MAX_RETRIES) {
     try {
-      const response = await axios.get(videoLink);
-      return response.data;
+      const { data } = await axios.get(url, { headers });
+      return data;
     } catch (error) {
       console.error('获取数据时出错：', error.message, '即将重试');
       retries++;
@@ -25,90 +31,90 @@ const fetchData = async (videoLink) => {
   throw new Error('达到最大重试次数。无法获取数据。');
 };
 
-const processVideoPage = (videoPageHTML) => {
-  const $ = cheerio.load(videoPageHTML);
+const formatViews = (view) => {
+  if (typeof view !== 'number' || !Number.isFinite(view)) return '';
+  if (view >= 100000000) {
+    const v = (view / 100000000).toFixed(1);
+    return (v.endsWith('.0') ? v.slice(0, -2) : v) + '亿';
+  }
+  if (view >= 10000) {
+    const v = (view / 10000).toFixed(1);
+    return (v.endsWith('.0') ? v.slice(0, -2) : v) + '万';
+  }
+  return String(view);
+};
+
+const fetchPopularPage = async (pn) => {
+  const data = await fetchWithRetry(
+    `${POPULAR_API}?ps=${PER_PAGE}&pn=${pn}`
+  );
+  if (data.code !== 0) {
+    throw new Error(`Popular API error: ${data.message}`);
+  }
+  return data.data?.list || [];
+};
+
+const fetchOrdinaryTags = async (bvid) => {
+  try {
+    const data = await fetchWithRetry(TAGS_API(bvid));
+    if (data.code !== 0) return [];
+    return (data.data || []).map((t) => t.tag_name);
+  } catch (error) {
+    console.error(`获取标签失败 ${bvid}:`, error.message);
+    return [];
+  }
+};
+
+const mapWithConcurrency = async (items, limit, fn) => {
+  const results = new Array(items.length);
+  let next = 0;
+  const workers = Array.from({ length: limit }, async () => {
+    while (true) {
+      const i = next++;
+      if (i >= items.length) return;
+      results[i] = await fn(items[i], i);
+    }
+  });
+  await Promise.all(workers);
+  return results;
+};
+
+const processVideo = async (video) => {
+  const bvid = video.bvid;
+  const ordinaryTags = await fetchOrdinaryTags(bvid);
 
   return {
-    firstChannel: $('#v_tag .tag-panel .firstchannel-tag').text().trim(),
-    secondChannel: $('#v_tag .tag-panel .secondchannel-tag').text().trim(),
-    ordinaryTags: $('#v_tag .tag-panel .ordinary-tag')
-      .map((_, el) => $(el).text().trim())
-      .get(),
+    url: `https://www.bilibili.com/video/${bvid}`,
+    cover: video.pic.replace(/^http:/, 'https:') + '@412w_232h_1c_!web-popular.avif',
+    title: video.title,
+    UP: video.owner?.name || '',
+    views: formatViews(video.stat?.view),
+    tags: {
+      firstChannel: video.tname || '',
+      secondChannel: video.tnamev2 || '',
+      ordinaryTags,
+    },
   };
 };
 
-const processData = async (targetElement) => {
-  const videoLink =
-    'https:' +
-    (await targetElement.$eval('.video-card__content a', (link) =>
-      link.getAttribute('href')
-    ));
-  const imageUrl =
-    'https:' +
-    (await targetElement.$eval('.cover-picture__image', (image) =>
-      image.getAttribute('data-src')
-    ));
-  const title = await targetElement.$eval('.video-name', (titleElement) =>
-    titleElement.getAttribute('title')
-  );
-  const upName = await targetElement.$eval('.up-name__text', (upElement) =>
-    upElement.getAttribute('title')
-  );
-  const videoViews = (
-    await targetElement.$eval(
-      '.play-text',
-      (viewsElement) => viewsElement.textContent
-    )
-  ).trim();
-
-  const videoPageHTML = await fetchData(videoLink);
-
-  const videoTags = processVideoPage(videoPageHTML);
-
-  console.log('视频链接:', videoLink);
-  console.log('视频封面:', imageUrl);
-  console.log('标题:', title);
-  console.log('UP主:', upName);
-  console.log('播放量:', videoViews);
-  console.log('一级分区:', videoTags.firstChannel);
-  console.log('二级分区:', videoTags.secondChannel);
-  console.log('普通标签:', videoTags.ordinaryTags);
-
-  resultArray.push({
-    url: videoLink,
-    cover: imageUrl,
-    title: title,
-    UP: upName,
-    views: videoViews,
-    tags: videoTags,
-  });
-};
-
 const crawlData = async () => {
-  const browser = await puppeteer.launch({ headless: 'new' });
-  console.log('打开热门页面');
-  const page = await browser.newPage();
-  console.log('页面加载中');
-  await page.goto(url, { waitUntil: 'networkidle2' });
+  console.log('开始获取热门视频');
 
-  let previousHeight;
-  while (true) {
-    const currentHeight = await page.evaluate('document.body.scrollHeight');
-    if (previousHeight && currentHeight === previousHeight) {
-      break;
-    }
-    await page.evaluate('window.scrollTo(0, document.body.scrollHeight)');
-    await new Promise((r) => setTimeout(r, 1000));
-    previousHeight = currentHeight;
+  const allVideos = [];
+  for (let pn = 1; pn <= MAX_PAGES; pn++) {
+    console.log(`正在获取第 ${pn} 页`);
+    const videos = await fetchPopularPage(pn);
+    if (videos.length === 0) break;
+    allVideos.push(...videos);
+    if (videos.length < PER_PAGE) break;
   }
 
-  await page.waitForSelector(selector);
-  console.log('正在获取数据');
+  console.log(`共获取 ${allVideos.length} 个视频，正在获取标签`);
 
-  const targetElements = await page.$$(selector);
-
-  await Promise.all(
-    targetElements.map((targetElement) => processData(targetElement))
+  const resultArray = await mapWithConcurrency(
+    allVideos,
+    TAG_CONCURRENCY,
+    processVideo
   );
 
   const currentTime = Date.now();
@@ -135,10 +141,10 @@ const crawlData = async () => {
   list.unshift(fileName.replace('.json', ''));
   fs.writeFileSync(listFilePath, JSON.stringify(list, null, 2));
 
-  await browser.close();
+  console.log(`完成，已保存 ${resultArray.length} 个视频到 ${filePath}`);
 };
 
-crawlData().then(() => {
-  // 每小时执行一次
-  // setInterval(crawlData, 3600000);
+crawlData().catch((err) => {
+  console.error('爬虫出错：', err);
+  process.exit(1);
 });

@@ -39,3 +39,12 @@ syncfusion-license.txt
 
 # Million Lint
 .million
+
+# AI agent skills (impeccable, taste-skill) — installed for the AI
+# coding agent to consume, not part of the project.
+.agents/
+.github/skills/
+skills-lock.json
+
+# Crawler output (only lives on the `result` branch)
+/result

@@ -12,7 +12,6 @@ import {
   Tag,
   Typography,
 } from 'antd';
-import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
@@ -46,7 +45,6 @@ const Home: React.FC = React.memo(() => {
   const [selectedChannels, setSelectedChannels] = useState<string[][]>([]);
 
   const { currentColor, screenSize } = useStore();
-  const { theme } = useTheme();
   const router = useRouter();
 
   const loadFilename = useCallback(async (filename: string) => {
@@ -56,7 +54,7 @@ const Home: React.FC = React.memo(() => {
       setVideoData(data);
       setFilteredData(data.video);
       setSelectedTime(filename);
-    } catch (error) {
+    } catch {
       toast({
         variant: 'destructive',
         title: '无法获取到数据。',
@@ -81,7 +79,7 @@ const Home: React.FC = React.memo(() => {
         if (latest) {
           await loadFilename(latest);
         }
-      } catch (error) {
+      } catch {
         if (!cancelled) {
           toast({
             variant: 'destructive',
@@ -95,7 +93,7 @@ const Home: React.FC = React.memo(() => {
     return () => {
       cancelled = true;
     };
-  }, [loadFilename, toast]);
+  }, [loadFilename]);
 
   const changeTime = (filename: string) => {
     setSearchValue('');
@@ -103,14 +101,8 @@ const Home: React.FC = React.memo(() => {
     void loadFilename(filename);
   };
 
-  type Option = {
-    value: string;
-    label: string;
-    children?: Option[];
-  };
-
-  const channelOptions: Option[] = useMemo(() => {
-    const options: Option[] = [];
+  const channelOptions = useMemo<ChannelOption[]>(() => {
+    const options: ChannelOption[] = [];
     videoData?.video.forEach((v) => {
       if (v.tags.firstChannel && v.tags.secondChannel) {
         const existingChannel = options.find(
@@ -303,7 +295,7 @@ const Home: React.FC = React.memo(() => {
                   >
                     <Card.Meta
                       title={
-                        <a href={item.url} target={'_blank'}>
+                        <a href={item.url} target="_blank">
                           {item.title}
                         </a>
                       }
