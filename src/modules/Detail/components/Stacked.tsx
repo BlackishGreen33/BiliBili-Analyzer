@@ -32,10 +32,8 @@ export const Stacked: React.FC<StackedProps> = React.memo(
     return (
       <ChartComponent
         id="charts"
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        primaryXAxis={stackedPrimaryXAxis}
-        primaryYAxis={stackedPrimaryYAxis}
+        primaryXAxis={stackedPrimaryXAxis as object}
+        primaryYAxis={stackedPrimaryYAxis as object}
         width={width}
         height={height}
         chartArea={{ border: { width: 0 } }}

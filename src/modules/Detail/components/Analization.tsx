@@ -11,10 +11,10 @@ import {
 import { FaCommentDots } from 'react-icons/fa6';
 
 import { Card } from '@/common/components/ui/card';
+import type { BilibiliVideoInfo } from '@/common/types/bilibili';
 
 interface AnalizationProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  videoInfo: any;
+  videoInfo: BilibiliVideoInfo;
 }
 
 const Analization: React.FC<AnalizationProps> = React.memo(({ videoInfo }) => {

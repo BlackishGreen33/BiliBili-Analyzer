@@ -7,12 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/common/components/ui/card';
+import type { BilibiliVideoInfo } from '@/common/types/bilibili';
 
 import { Stacked as StackedChart } from './Stacked';
 
 interface StackedChartProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  videoInfo: any;
+  videoInfo: BilibiliVideoInfo;
 }
 
 const Stacked: React.FC<StackedChartProps> = React.memo(({ videoInfo }) => {

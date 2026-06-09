@@ -1,11 +1,11 @@
 import { Card } from '@/common/components/ui/card';
+import type { BilibiliVideoInfo } from '@/common/types/bilibili';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { MdDateRange, MdOutlineAccessTime, MdSubtitles } from 'react-icons/md';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type BaseProps = { videoInfo: any };
+type BaseProps = { videoInfo: BilibiliVideoInfo };
 
 const Base: React.FC<BaseProps> = React.memo(({ videoInfo }) => {
   return (
