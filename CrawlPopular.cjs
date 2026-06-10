@@ -9,6 +9,7 @@ const TAGS_API = (bvid) =>
 const PER_PAGE = 20;
 const MAX_PAGES = 50;
 const MAX_RETRIES = 3;
+const TAG_CONCURRENCY = 10;
 
 const headers = {
   'User-Agent':
@@ -64,6 +65,20 @@ const fetchOrdinaryTags = async (bvid) => {
   }
 };
 
+const mapWithConcurrency = async (items, limit, fn) => {
+  const results = new Array(items.length);
+  let next = 0;
+  const workers = Array.from({ length: limit }, async () => {
+    while (true) {
+      const i = next++;
+      if (i >= items.length) return;
+      results[i] = await fn(items[i], i);
+    }
+  });
+  await Promise.all(workers);
+  return results;
+};
+
 const processVideo = async (video) => {
   const bvid = video.bvid;
   const ordinaryTags = await fetchOrdinaryTags(bvid);
@@ -96,7 +111,11 @@ const crawlData = async () => {
 
   console.log(`共获取 ${allVideos.length} 个视频，正在获取标签`);
 
-  const resultArray = await Promise.all(allVideos.map(processVideo));
+  const resultArray = await mapWithConcurrency(
+    allVideos,
+    TAG_CONCURRENCY,
+    processVideo
+  );
 
   const currentTime = Date.now();
   const currentDate = new Date(currentTime + 8 * 60 * 60 * 1000);
