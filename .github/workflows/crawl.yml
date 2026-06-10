@@ -31,16 +31,28 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-      - name: Checkout to result branch
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git fetch origin result
-          git checkout -B result origin/result
       - name: Install node modules
         run: pnpm install
       - name: Crawl data
         run: pnpm run crawldata
+      - name: Save crawl output
+        run: |
+          mkdir -p /tmp/crawl-output
+          cp -r result/. /tmp/crawl-output/
+      - name: Switch to result branch
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git fetch origin result
+          if git show-ref --verify --quiet refs/remotes/origin/result; then
+            git checkout -B result origin/result
+          else
+            git checkout --orphan result
+          fi
+      - name: Apply crawl output
+        run: |
+          mkdir -p result
+          cp -r /tmp/crawl-output/. result/
       - name: Push to result branch
         run: |
           git add result/* -f
