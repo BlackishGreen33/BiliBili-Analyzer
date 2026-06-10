@@ -39,3 +39,6 @@ syncfusion-license.txt
 
 # Million Lint
 .million
+
+# Crawler output (only lives on the `result` branch)
+/result

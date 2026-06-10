@@ -22,7 +22,7 @@
 
 BiliBili-Analyzer 是一个基于 [Bilibili](https://www.bilibili.com) 热门视频榜单的检索与可视化分析系统。
 
-- 🛰️ **数据采集**：使用 Puppeteer + Axios + Cheerio 抓取每日热门视频并附带 UP 主、分区、标签等元信息
+- 🛰️ **数据采集**：通过 B 站官方热门 API（`/x/web-interface/popular` + `/x/tag/archive/tags`）抓取每日热门视频并附带 UP 主、分区、标签等元信息
 - 🔍 **多维检索**：支持按标题关键字、一级/二级分区组合过滤
 - 📊 **可视化分析**：详情页提供视频统计图表、标签云、作者卡片等分析视图
 - 📱 **跨端**：基于 Next.js App Router 构建 Web 端，并通过 Capacitor 打包为 Android/iOS 应用
@@ -33,7 +33,7 @@ BiliBili-Analyzer 是一个基于 [Bilibili](https://www.bilibili.com) 热门视
 - **UI**：Tailwind CSS v4、antd、Radix UI、Syncfusion EJ2 Charts、react-d3-cloud
 - **状态**：Zustand
 - **数据源**：`github:result` 分支上的 `list.json` + 按日期命名的 JSON 抓取结果
-- **数据采集**：Puppeteer + Axios + Cheerio（Node 脚本）
+- **数据采集**：Axios（Node 脚本，调用 B 站官方 API）
 - **移动端**：Capacitor
 - **代码规范**：ESLint 9 (flat config) + Prettier + Husky + lint-staged
 
@@ -105,7 +105,7 @@ $ pnpm run dev
 
 ## 🛰️ 数据采集
 
-`CrawlPopular.cjs` 会拉取 [B 站热门页](https://www.bilibili.com/v/popular/all/)，对每张视频卡片访问详情页，提取一级/二级分区和普通标签，最终生成 `result/<时间戳>.json`，并把文件名维护到 `result/list.json`。CI 中通过 `crawl.yml` 每天 12:00（UTC+8）自动执行。
+`CrawlPopular.cjs` 调用 [B 站热门 API](https://socialsisteryi.github.io/bilibili-API-collect/docs/video_ranking/popular.html) 取得每日热门视频列表（含 `tid`/`tname`/`tnamev2` 等分区与 UP 主元信息），并对每支视频调用标签 API 补齐普通标签，最终生成 `result/<时间戳>.json`，并把文件名维护到 `result/list.json`。CI 中通过 `crawl.yml` 每天 12:00（UTC+8）自动执行。
 
 ## 📝 授权
 
