@@ -1,57 +1,53 @@
 'use client';
 
-import React from 'react';
-import { MdOutlineCancel } from 'react-icons/md';
-
-import useStore from '@/common/hooks/useStore';
-import { useRouter } from 'next/navigation';
-
 import Image from 'next/image';
-import { Button } from '.';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import { FaXmark } from 'react-icons/fa6';
+
+import { Button } from '@/common/components/ui/button';
+import { useThemeStore } from '@/common/hooks/useThemeStore';
+import { useUiStore } from '@/common/hooks/useUiStore';
 
 const Download: React.FC = React.memo(() => {
   const router = useRouter();
-  const { currentColor } = useStore();
+  const { currentColor } = useThemeStore();
+  const { setDownloadOpen } = useUiStore();
 
   return (
-    <div className="nav-item absolute right-5 top-16 w-96 rounded-lg bg-white p-8 dark:bg-[#42464D] md:right-40">
+    <div className="bg-popover absolute top-16 right-5 w-80 rounded-xl border p-5 shadow-xl md:right-40 dark:bg-[#42464D]">
       <div className="flex items-center justify-between">
-        <div className="flex gap-3">
-          <p className="text-lg font-semibold dark:text-gray-200">下载应用</p>
-        </div>
+        <p className="text-base font-semibold">下载应用</p>
         <Button
-          icon={<MdOutlineCancel />}
-          color="rgb(153, 171, 180)"
-          bgHoverColor="light-gray"
-          size="2xl"
-          borderRadius="50%"
-        />
+          variant="ghost"
+          size="icon"
+          aria-label="关闭"
+          onClick={() => setDownloadOpen(false)}
+          className="h-8 w-8"
+        >
+          <FaXmark />
+        </Button>
       </div>
-      <div className="mt-5">
+      <div className="mt-4 flex flex-col items-center gap-4">
         <Image
           src="/qrcode.png"
           alt="qrcode"
-          width={200}
-          height={200}
+          width={180}
+          height={180}
           loading="lazy"
-          className="h-full w-full"
+          className="h-44 w-44"
         />
-        <div
-          className="mt-5"
+        <Button
+          className="w-full"
+          style={{ backgroundColor: currentColor, color: 'white' }}
           onClick={() =>
             router.push(
               'https://github.com/BlackishGreen33/BiliBili-Analyzer/releases'
             )
           }
         >
-          <Button
-            color="white"
-            bgColor={currentColor}
-            text="前往下载"
-            borderRadius="10px"
-            width="full"
-          />
-        </div>
+          前往下载
+        </Button>
       </div>
     </div>
   );

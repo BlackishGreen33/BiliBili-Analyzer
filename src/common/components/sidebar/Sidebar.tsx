@@ -2,23 +2,21 @@
 
 import React from 'react';
 
-import useStore from '@/common/hooks/useStore';
+import { useLayoutStore } from '@/common/hooks/useLayoutStore';
 
+import Logo from './Logo';
 import Navigation from './Navigation';
-import TopArea from './TopArea';
 
 const Sidebar: React.FC = React.memo(() => {
-  const { activeMenu } = useStore();
+  const { activeMenu } = useLayoutStore();
+
+  if (!activeMenu) return null;
 
   return (
-    <div className="ml-3 h-screen overflow-auto pb-10 md:overflow-hidden md:hover:overflow-auto">
-      {activeMenu && (
-        <>
-          <TopArea />
-          <Navigation />
-        </>
-      )}
-    </div>
+    <aside className="ml-3 flex h-screen flex-col overflow-y-auto pb-10 md:overflow-hidden md:hover:overflow-auto">
+      <Logo />
+      <Navigation />
+    </aside>
   );
 });
 

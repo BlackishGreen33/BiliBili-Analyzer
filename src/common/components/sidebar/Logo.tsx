@@ -4,13 +4,15 @@ import Link from 'next/link';
 import React from 'react';
 import { FaBilibili } from 'react-icons/fa6';
 
-import useStore from '@/common/hooks/useStore';
+import { useLayoutStore } from '@/common/hooks/useLayoutStore';
+import { useThemeStore } from '@/common/hooks/useThemeStore';
 
 const Logo: React.FC = React.memo(() => {
-  const { activeMenu, setActiveMenu, screenSize, currentColor } = useStore();
+  const { setActiveMenu, screenSize } = useLayoutStore();
+  const { currentColor } = useThemeStore();
 
   const handleCloseSideBar = () => {
-    if (activeMenu !== undefined && screenSize! <= 900) {
+    if (screenSize !== undefined && screenSize <= 900) {
       setActiveMenu(false);
     }
   };
@@ -19,10 +21,11 @@ const Logo: React.FC = React.memo(() => {
     <Link
       href="/"
       onClick={handleCloseSideBar}
-      className="ml-3 mt-6 flex items-center gap-3 text-xl font-extrabold tracking-tight"
+      className="mt-6 ml-3 flex items-center gap-2.5 text-base font-bold tracking-tight"
       style={{ color: currentColor }}
     >
-      <FaBilibili /> <span>分类检索系统</span>
+      <FaBilibili className="h-5 w-5" />
+      <span>分类检索系统</span>
     </Link>
   );
 });
