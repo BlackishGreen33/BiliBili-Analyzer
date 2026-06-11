@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import React, { type ReactNode } from 'react';
 import { BsCurrencyDollar, BsFillCollectionPlayFill } from 'react-icons/bs';
 import {
@@ -11,6 +12,11 @@ import {
 } from 'react-icons/fa6';
 
 import { Card } from '@/common/components/ui/card';
+import {
+  containerStagger,
+  EASE_OUT_EXPO,
+  fadeUp,
+} from '@/common/styles/motion';
 import type { BilibiliVideoStat } from '@/common/types/bilibili';
 import { formatCompact } from '@/common/utils/format';
 
@@ -86,24 +92,38 @@ const Analization: React.FC<AnalizationProps> = React.memo(({ stat }) => {
   }));
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+    <motion.div
+      className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7"
+      variants={containerStagger(0.05, 0.04)}
+      initial="hidden"
+      animate="show"
+    >
       {metrics.map((item) => (
-        <Card key={item.key} className="flex flex-col items-start gap-3 p-5">
-          <div
-            className="rounded-full p-3 text-2xl"
-            style={{ color: item.iconColor, backgroundColor: item.iconBg }}
-          >
-            {item.icon}
-          </div>
-          <div>
-            <p className="text-xl font-semibold tabular-nums">
-              {formatCompact(item.value)}
-            </p>
-            <p className="text-muted-foreground text-xs">{item.label}</p>
-          </div>
-        </Card>
+        <motion.div
+          key={item.key}
+          variants={fadeUp}
+          whileHover={{ y: -2 }}
+          transition={{ duration: 0.2, ease: EASE_OUT_EXPO }}
+        >
+          <Card className="hover:border-primary/50 transition-base flex cursor-default flex-col items-start gap-3 p-5 hover:shadow-md">
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: -6 }}
+              transition={{ duration: 0.2, ease: EASE_OUT_EXPO }}
+              className="rounded-full p-3 text-2xl"
+              style={{ color: item.iconColor, backgroundColor: item.iconBg }}
+            >
+              {item.icon}
+            </motion.div>
+            <div>
+              <p className="text-xl font-semibold tabular-nums">
+                {formatCompact(item.value)}
+              </p>
+              <p className="text-muted-foreground text-xs">{item.label}</p>
+            </div>
+          </Card>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 });
 

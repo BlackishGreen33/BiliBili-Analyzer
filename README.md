@@ -78,7 +78,7 @@ graph LR
 | 詞雲 Word cloud        | react-d3-cloud                                          |
 | 數據抓取 Data fetching | SWR 2 + Zod 3 schema validation                         |
 | 狀態 State             | Zustand 5 (split into 3 stores)                         |
-| 字體 Fonts             | Space Grotesk + Noto Sans SC + JetBrains Mono           |
+| 字體 Fonts             | Geist Sans + Geist Mono + Noto Sans SC                  |
 | 數據採集 Crawler       | Node.js + axios, exponential backoff                    |
 | 部署 Deployment        | Vercel + GitHub Actions (daily cron)                    |
 | 移動端 Mobile          | Capacitor 8 (via `pnpm build:mobile`)                   |
@@ -196,11 +196,12 @@ BiliBili-Analyzer/
 - [x] Zod schema 驗證資料
 - [x] Error boundary + loading skeleton
 - [x] `pnpm build:mobile` Capacitor 打包
+- [x] 服務端篩選支援（深連結分享）— `/` 篩選條件同步至 URL `?q=&c=&tag=&date=`
+- [x] 體驗升級：Geist 字體 / framer-motion 動畫 / 自訂 Select / 自適應無限滾動
 - [ ] i18n（繁中 + 簡中 + 英文）
 - [ ] 跨日趨勢比較（選擇兩個日期做對比）
 - [ ] 互動率即時排行
 - [ ] 視頻長度預測（基於歷史數據）
-- [ ] 服務端篩選支援（深連結分享）
 
 ## 🧪 相容環境 / Browser support
 

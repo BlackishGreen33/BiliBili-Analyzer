@@ -40,17 +40,17 @@ and the user's choice is a single accent, not a global theme.
 
 ## Typography
 
-| Slot               | Family                                               | Notes                                                           |
-| ------------------ | ---------------------------------------------------- | --------------------------------------------------------------- |
-| Display (h1–h3)    | **Space Grotesk** (geometric sans, 400/500/600/700)  | tighter letterspacing `-0.01em`, capped at `clamp()` max 4rem   |
-| Body               | **Noto Sans SC** (400/500/700)                       | line length ≤ 75ch, body 14–15px                                |
-| Numeric / tabular  | **JetBrains Mono**                                   | all stat numbers (`1,234,567` not `1234567`) use `tabular-nums` |
-| Monospace fallback | ui-monospace                                         |                                                                 |
-| Emoji              | Apple Color Emoji / Segoe UI Emoji / Segoe UI Symbol |                                                                 |
+| Slot               | Family                                                   | Notes                                                           |
+| ------------------ | -------------------------------------------------------- | --------------------------------------------------------------- |
+| Display (h1–h3)    | **Geist Sans** (geometric sans, 100–900 weight variable) | tighter letterspacing `-0.02em`, capped at `clamp()` max 4rem   |
+| Body               | **Noto Sans SC** (400/500/700) with Geist Sans for Latin | line length ≤ 75ch, body 14–15px                                |
+| Numeric / tabular  | **Geist Mono** (variable)                                | all stat numbers (`1,234,567` not `1234561`) use `tabular-nums` |
+| Monospace fallback | ui-monospace, SFMono-Regular                             |                                                                 |
+| Emoji              | Apple Color Emoji / Segoe UI Emoji / Segoe UI Symbol     |                                                                 |
+| CJK fallback       | PingFang SC / Hiragino Sans GB / Microsoft YaHei         | kicks in for Chinese characters on all platforms                |
 
-Avoid: Inter (saturated AI tell), PingFang as the only CN fallback (kicks
-out on non-Apple), "Inter for everything" pattern, gray text on colored
-backgrounds (impeccable absolute ban).
+Avoid: Inter (saturated AI tell), "Inter for everything" pattern,
+gray text on colored backgrounds (impeccable absolute ban).
 
 `h1` line-height `1.2`, `h2` `1.3`, `h3` `1.4`. All headings get
 `text-wrap: balance`.
@@ -91,9 +91,23 @@ No `rounded-3xl` blob shapes, no `rounded-sm` (too sharp, looks like 2014).
 - Default transition: `cubic-bezier(0.16, 1, 0.3, 1)` (ease-out-expo). No
   bounce, no elastic — these read as dated.
 - Duration: 150 ms for hover, 250 ms for layout, 400 ms for entrance.
-- `prefers-reduced-motion: reduce` short-circuits to 0 ms (handled by
-  Tailwind `motion-safe:` / `motion-reduce:` variants in future iterations).
-- Reveal animation: not used at all in v2 — the data is the reveal.
+- `prefers-reduced-motion: reduce` short-circuits to 0 ms (handled by the
+  global CSS rule in `globals.css`).
+- All entrance / layout / exit transitions live in `src/common/styles/motion.ts`
+  (`fadeUp`, `scaleIn`, `slideInRight`, `containerStagger`).
+- `framer-motion` is the standard library. Use it for:
+  - Stagger lists (cards, summary, table rows) — `containerStagger(0.04)`.
+  - Page sections / hero — `initial="hidden" animate="show"` with
+    `fadeUp` and a small `delay` (0.06–0.24s).
+  - Drawer / popover enter-exit — `AnimatePresence` + `slideInRight` /
+    `backdropFade`.
+  - Hover / tap micro-interactions — `whileHover` + `whileTap`. Keep
+    ranges small (scale 1.02–1.08, rotate ±10°) and never block the
+    click.
+- Tailwind `transition-base` utility (200 ms ease-out-expo) handles
+  color / shadow / transform on cards and chips.
+- Reveal animation is intentional: the data is the reveal — motion should
+  never delay content readability by more than ~300 ms.
 
 ## Components
 
@@ -103,6 +117,8 @@ No `rounded-3xl` blob shapes, no `rounded-sm` (too sharp, looks like 2014).
 - `Card`, `CardHeader`, `CardContent`, `CardDescription`, `CardTitle`
 - `Input` (text only, no fancy variants)
 - `Badge` (outline + secondary)
+- `Select` (Radix UI Select + cva-styled trigger) — date pickers in
+  `/` and `/dashboard` no longer use the browser's native `<select>`
 - `Toast` (Radix) — only for error feedback; success feedback uses inline
   text; we don't toast "data loaded" because that's noise
 - `Spinner` (ImSpinner8 with `animate-spin`)
