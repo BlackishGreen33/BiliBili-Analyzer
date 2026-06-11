@@ -8,7 +8,7 @@ const Footer: React.FC = React.memo(() => (
         href="https://www.bilibili.com"
         target="_blank"
         rel="noreferrer"
-        className="hover:text-foreground ml-1"
+        className="hover:text-foreground ml-1 cursor-pointer transition-colors duration-200 hover:underline"
       >
         bilibili.com
       </a>
