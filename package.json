@@ -1,8 +1,8 @@
 {
   "name": "bilibili-analyzer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "哔哩哔哩近期热门视频分类检索分析系统 - 数据库大作业",
+  "description": "B 站近期热门视频分类检索分析系统",
   "author": "BlackishGreen33 <s5460703@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -10,7 +10,7 @@
     "url": "git+https://github.com/BlackishGreen33/BiliBili-Analyzer.git"
   },
   "bugs": {
-    "url": "git+https://github.com/BlackishGreen33/BiliBili-Analyzer/issues"
+    "url": "https://github.com/BlackishGreen33/BiliBili-Analyzer/issues"
   },
   "scripts": {
     "dev": "next dev",
@@ -19,45 +19,33 @@
     "lint": "eslint .",
     "prettier": "prettier --write .",
     "prepare": "husky",
-    "crawldata": "node CrawlPopular.cjs"
+    "crawldata": "node CrawlPopular.cjs",
+    "build:mobile": "node scripts/build-mobile.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.4.0",
     "@capacitor/core": "^8.4.0",
     "@capacitor/ios": "^8.4.0",
-    "@emotion/styled": "^11.14.1",
-    "@iframe-resizer/react": "^5.5.9",
-    "@million/lint": "1.0.14",
     "@radix-ui/react-icons": "^1.3.2",
+    "@radix-ui/react-popover": "^1.1.10",
     "@radix-ui/react-slot": "^1.2.5",
     "@radix-ui/react-toast": "^1.2.16",
-    "@syncfusion/ej2": "^33.2.12",
-    "@syncfusion/ej2-base": "^33.2.3",
-    "@syncfusion/ej2-react-calendars": "^33.2.12",
-    "@syncfusion/ej2-react-charts": "^33.2.12",
-    "@syncfusion/ej2-react-dropdowns": "^33.2.12",
-    "@syncfusion/ej2-react-grids": "^33.2.12",
-    "@syncfusion/ej2-react-inputs": "^33.2.12",
-    "@syncfusion/ej2-react-kanban": "^33.2.3",
-    "@syncfusion/ej2-react-popups": "^33.2.7",
-    "@syncfusion/ej2-react-richtexteditor": "^33.2.12",
-    "@syncfusion/ej2-react-schedule": "^33.2.4",
-    "antd": "^6.4.3",
+    "@tanstack/react-virtual": "^3.13.0",
     "axios": "^1.17.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "million": "^3.1.11",
     "next": "^16.2.9",
     "next-themes": "^0.4.6",
     "react": "^19.2.7",
     "react-d3-cloud": "^1.0.6",
     "react-dom": "^19.2.7",
     "react-icons": "^5.6.0",
-    "sass": "^1.100.0",
-    "styled-components": "^6.1.15",
+    "recharts": "^2.15.4",
+    "swr": "^2.3.0",
     "tailwind-merge": "^3.6.0",
     "tailwind-scrollbar-hide": "^4.0.0",
     "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.25.76",
     "zustand": "^5.0.14"
   },
   "devDependencies": {
