@@ -50,6 +50,17 @@ pnpm dev
 - 常數：`UPPER_SNAKE_CASE`（僅頂層）
 - 布林：`is*`、`has*`、`can*` 開頭
 
+## 動畫 / Motion
+
+- 共用 framer-motion variants 放在 `src/common/styles/motion.ts`
+  （`fadeUp`、`scaleIn`、`slideInRight`、`containerStagger`）
+- 所有進場/離場優先用 `AnimatePresence` + variants，避免
+  條件渲染直接消失/出現
+- 微互動（hover、tap）用 `whileHover` / `whileTap`，
+  幅度控制在 `scale ≤ 1.08` / `rotate ≤ ±12°`
+- 全域 `prefers-reduced-motion` 規則已寫在 `globals.css`，
+  自動把 `*` 的 animation/transition 縮短到 0.01ms
+
 ## 目錄
 
 | 路徑                                                      | 用途              | 規則                       |

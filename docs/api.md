@@ -103,6 +103,28 @@ BV1wEEg62EDP
 $ curl 'https://bilibili-analyzer.vercel.app/api/video?mode=channel&value=动画'
 ```
 
+## 分享篩選（深連結）
+
+`/` 檢索頁的篩選條件會同步到 URL 的 query string，任何時候按下篩選卡
+header 的「分享篩選」按鈕即可複製當前 URL；他人打開後還原完全相同的
+狀態。
+
+| Param  | 型別   | 範例                             | 說明                               |
+| ------ | ------ | -------------------------------- | ---------------------------------- |
+| `q`    | string | `?q=赛博`                        | 搜索關鍵字                         |
+| `c`    | string | `?c=动画-动画综合,游戏-单机游戏` | 1+ 個分區；`,` 分隔，`-` 接一/二級 |
+| `tag`  | string | `?tag=原神`                      | 當前高亮標籤                       |
+| `date` | string | `?date=2026-06-11`               | 選中的爬取日期檔名                 |
+
+完整範例：
+
+```
+https://bilibili-analyzer.vercel.app/?q=原神&c=游戏-单机游戏&tag=原神&date=2026-06-11
+```
+
+`router.replace` 不會污染歷史紀錄；reload 後 state 從 `useSearchParams()`
+重新讀取，與初始訪問體驗一致。
+
 ## 版本控制
 
 API 路徑沒有 `/v1/`，因為目前還在 0.x 階段。當第一個 1.0 釋出時，所有
