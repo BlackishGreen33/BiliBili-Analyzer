@@ -1,27 +1,16 @@
+import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
-import { JetBrains_Mono, Noto_Sans_SC, Space_Grotesk } from 'next/font/google';
+import { Noto_Sans_SC } from 'next/font/google';
 
 import '@/common/styles/globals.css';
 
 import Providers from '@/common/providers/Providers';
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-space-grotesk',
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-});
-
-const notoSansSC = Noto_Sans_SC({
+const notoSC = Noto_Sans_SC({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
-  variable: '--font-noto-sans-sc',
-  display: 'swap',
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
+  variable: '--font-noto-sc',
   display: 'swap',
 });
 
@@ -47,10 +36,10 @@ export default function RootLayout({
   return (
     <html
       lang="zh-CN"
-      className={`${spaceGrotesk.variable} ${notoSansSC.variable} ${jetbrainsMono.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${notoSC.variable}`}
       suppressHydrationWarning
     >
-      <body className={notoSansSC.className}>
+      <body className={`${GeistSans.className} ${notoSC.className}`}>
         <Providers>{children}</Providers>
       </body>
     </html>
