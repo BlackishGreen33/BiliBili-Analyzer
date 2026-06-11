@@ -14,7 +14,10 @@ const config = [
       'node_modules/**',
       'out/**',
       'public/**',
-      '.million/**',
+      'scripts/**',
+      'CrawlPopular.cjs',
+      '.github/skills/**',
+      '.agents/skills/**',
     ],
   },
   {
@@ -27,7 +30,6 @@ const config = [
   },
   {
     rules: {
-      'no-unused-vars': 'off',
       'no-console': 'warn',
       'react/no-unescaped-entities': 'off',
       'react/display-name': 'off',
@@ -35,12 +37,10 @@ const config = [
         'warn',
         { props: 'never', children: 'never' },
       ],
-      '@typescript-eslint/no-unused-vars': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-empty-object-type': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off',
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/ban-ts-comment': 'warn',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      'unused-imports/no-unused-imports': 'warn',
+      'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'warn',
         {
