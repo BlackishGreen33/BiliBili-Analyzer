@@ -1,51 +1,79 @@
-import axios from 'axios';
+'use client';
 
-import { RESULT_BASE_URL } from '@/common/constants/result';
+import useSWR from 'swr';
+
+import { CrawlResultSchema } from '@/common/types/schema';
 import type { CrawlResult } from '@/common/types/video';
 
-type CachedList = {
-  filenames: string[];
-  fetchedAt: number;
+const RESULT_BASE_URL =
+  'https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result';
+
+const listFetcher = async (): Promise<string[]> => {
+  const res = await fetch(`${RESULT_BASE_URL}/list.json`, {
+    cache: 'no-store',
+  });
+  if (!res.ok) {
+    throw new Error('Failed to load list.json');
+  }
+  return (await res.json()) as string[];
 };
 
-const LIST_TTL_MS = 60 * 1000;
-
-let cachedList: CachedList | null = null;
-let inFlightList: Promise<string[]> | null = null;
-
-const inFlightResults = new Map<string, Promise<CrawlResult>>();
-
-export async function fetchResultList(): Promise<string[]> {
-  const now = Date.now();
-  if (cachedList && now - cachedList.fetchedAt < LIST_TTL_MS) {
-    return cachedList.filenames;
+const crawlFetcher = async (url: string): Promise<CrawlResult> => {
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) {
+    throw new Error(`Request failed (${res.status})`);
   }
-  if (inFlightList) {
-    return inFlightList;
+  const raw = await res.json();
+  const parsed = CrawlResultSchema.safeParse(raw);
+  if (!parsed.success) {
+    console.error('CrawlResult validation failed', parsed.error.format());
+    // Fallback: still return raw data so the UI doesn't completely break,
+    // but log so we can fix schema drift upstream.
+    return raw as CrawlResult;
   }
-  inFlightList = axios
-    .get<string[]>(`${RESULT_BASE_URL}/list.json`)
-    .then((res) => {
-      cachedList = { filenames: res.data, fetchedAt: Date.now() };
-      return res.data;
-    })
-    .finally(() => {
-      inFlightList = null;
-    });
-  return inFlightList;
+  return parsed.data as CrawlResult;
+};
+
+/**
+ * SWR-based list of all crawl filenames, sorted newest first.
+ */
+export function useResultList() {
+  return useSWR<string[]>('result-list', listFetcher, {
+    revalidateOnFocus: false,
+    dedupingInterval: 60_000,
+  });
 }
 
-export async function fetchResultByName(filename: string): Promise<CrawlResult> {
-  const cached = inFlightResults.get(filename);
-  if (cached) {
-    return cached;
+/**
+ * SWR-based loader for a specific crawl file. Pass `null` to disable.
+ */
+export function useResultByName(filename: string | null) {
+  return useSWR<CrawlResult>(
+    filename ? `${RESULT_BASE_URL}/${filename}.json` : null,
+    crawlFetcher,
+    { revalidateOnFocus: false }
+  );
+}
+
+/**
+ * Convenience hook that auto-selects the latest crawl file.
+ */
+export function useLatestCrawl(filename: string | null) {
+  return useResultByName(filename);
+}
+
+export async function fetchRandomBvid(): Promise<string> {
+  const res = await fetch('/api/randomBvid');
+  if (!res.ok) {
+    throw new Error('Failed to fetch random bvid');
   }
-  const promise = axios
-    .get<CrawlResult>(`${RESULT_BASE_URL}/${filename}.json`)
-    .then((res) => res.data)
-    .finally(() => {
-      inFlightResults.delete(filename);
-    });
-  inFlightResults.set(filename, promise);
-  return promise;
+  return res.text();
+}
+
+export function useRandomBvid() {
+  return useSWR<string>('random-bvid', fetchRandomBvid, {
+    revalidateOnFocus: false,
+    revalidateIfStale: false,
+    revalidateOnReconnect: false,
+  });
 }

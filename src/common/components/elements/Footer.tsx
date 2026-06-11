@@ -1,11 +1,20 @@
 import React from 'react';
 
 const Footer: React.FC = React.memo(() => (
-  <div className="mt-24">
-    <p className="m-20 text-center text-gray-700 dark:text-gray-200">
-      哔哩哔哩热门视频分类检索系统 © 2024
+  <footer className="text-muted-foreground mt-20 border-t py-6 text-center text-xs">
+    <p>
+      BiliBili Analyzer © 2026 · 数据来源：
+      <a
+        href="https://www.bilibili.com"
+        target="_blank"
+        rel="noreferrer"
+        className="hover:text-foreground ml-1"
+      >
+        bilibili.com
+      </a>
     </p>
-  </div>
+    <p className="mt-1">仅做热门榜单公开数据检索分析 · 不存储任何用户隐私</p>
+  </footer>
 ));
 
 export default Footer;

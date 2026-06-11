@@ -1,95 +1,90 @@
 'use client';
 
-import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { useTheme } from 'next-themes';
 import React from 'react';
 import { BsCheck } from 'react-icons/bs';
-import { MdOutlineCancel } from 'react-icons/md';
+import { FaXmark } from 'react-icons/fa6';
 
-import useStore from '@/common/hooks/useStore';
-import { ThemeColors } from '../../dummy/ThemeColors';
+import { Button } from '@/common/components/ui/button';
+import { useThemeStore } from '@/common/hooks/useThemeStore';
 
-const ThemeSettings = React.memo(() => {
-  const { setCurrentColor, currentColor, setThemeSettings } = useStore();
+const ACCENT_COLORS = [
+  { name: '粉色 (B 站)', color: '#FB7299' },
+  { name: '青色', color: '#03C9D7' },
+  { name: '蓝紫', color: '#7352FF' },
+  { name: '橙红', color: '#FF5C8E' },
+  { name: '深蓝', color: '#1E4DB7' },
+  { name: '橘黄', color: '#FB9678' },
+];
+
+const ThemeSettings: React.FC = React.memo(() => {
+  const { setCurrentColor, currentColor, setThemeSettings } = useThemeStore();
   const { setTheme, theme } = useTheme();
 
   return (
-    <div className="nav-item fixed right-0 top-0 w-screen bg-half-transparent">
-      <div className="float-right h-screen w-400 bg-white dark:bg-[#484B52] dark:text-gray-200">
-        <div className="ml-4 flex items-center justify-between p-4">
+    <div
+      role="dialog"
+      aria-label="主题设置"
+      className="fixed inset-0 z-50 flex justify-end bg-black/40"
+    >
+      <div className="bg-popover text-popover-foreground h-full w-96 max-w-full overflow-y-auto p-6 shadow-2xl">
+        <div className="flex items-center justify-between">
           <p className="text-lg font-semibold">设定</p>
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="关闭"
             onClick={() => setThemeSettings(false)}
-            style={{ color: 'rgb(153, 171, 180)', borderRadius: '50%' }}
-            className="p-3 text-2xl hover:bg-light-gray hover:drop-shadow-xl"
           >
-            <MdOutlineCancel />
-          </button>
+            <FaXmark />
+          </Button>
         </div>
-        <div className="ml-4 flex-col border-t-1 border-color p-4">
-          <p className="text-xl font-semibold">主题模式</p>
-          <div className="mt-4">
-            <input
-              type="radio"
-              id="light"
-              name="theme"
-              value="light"
-              className="cursor-pointer"
-              onChange={(e) =>
-                setTheme(e.target.value === 'light' ? 'light' : 'dark')
-              }
-              checked={theme === 'light'}
-            />
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label htmlFor="light" className="text-md ml-2 cursor-pointer">
-              浅色模式
-            </label>
-          </div>
-          <div className="mt-2">
-            <input
-              type="radio"
-              id="dark"
-              name="theme"
-              value="dark"
-              onChange={(e) =>
-                setTheme(e.target.value === 'light' ? 'light' : 'dark')
-              }
-              className="cursor-pointer"
-              checked={theme === 'dark'}
-            />
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label htmlFor="dark" className="text-md ml-2 cursor-pointer">
-              深色模式
-            </label>
-          </div>
-        </div>
-        <div className="ml-4 border-t-1 border-color p-4">
-          <p className="text-xl font-semibold">主题颜色</p>
-          <div className="flex gap-3">
-            {ThemeColors.map((item, index) => (
-              <TooltipComponent
-                key={index}
-                content={item.name}
-                position="TopCenter"
+
+        <div className="mt-6 border-t pt-6">
+          <p className="text-base font-semibold">主题模式</p>
+          <div className="mt-4 space-y-2">
+            {(['light', 'dark'] as const).map((mode) => (
+              <label
+                key={mode}
+                className="flex cursor-pointer items-center gap-2 text-sm"
               >
-                <div
-                  className="relative mt-2 flex cursor-pointer items-center gap-5"
-                  key={item.name}
-                >
-                  <button
-                    type="button"
-                    className="h-10 w-10 cursor-pointer rounded-full"
-                    style={{ backgroundColor: item.color }}
-                    onClick={() => setCurrentColor(item.color)}
-                  >
-                    <BsCheck
-                      className={`ml-2 text-2xl text-white ${item.color === currentColor ? 'block' : 'hidden'}`}
-                    />
-                  </button>
-                </div>
-              </TooltipComponent>
+                <input
+                  type="radio"
+                  name="theme"
+                  value={mode}
+                  checked={theme === mode}
+                  onChange={() => setTheme(mode)}
+                  className="h-4 w-4 cursor-pointer"
+                />
+                {mode === 'light' ? '浅色模式' : '深色模式'}
+              </label>
             ))}
+          </div>
+        </div>
+
+        <div className="mt-6 border-t pt-6">
+          <p className="text-base font-semibold">主题颜色</p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            {ACCENT_COLORS.map((item) => {
+              const isActive =
+                item.color.toLowerCase() === currentColor.toLowerCase();
+              return (
+                <button
+                  key={item.color}
+                  type="button"
+                  title={item.name}
+                  aria-label={item.name}
+                  aria-pressed={isActive}
+                  onClick={() => setCurrentColor(item.color)}
+                  style={{ backgroundColor: item.color }}
+                  className="ring-offset-popover focus:ring-ring relative h-10 w-10 rounded-full ring-offset-2 transition hover:scale-110 focus:ring-2 focus:outline-none"
+                >
+                  {isActive && (
+                    <BsCheck className="absolute top-1/2 left-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 text-white" />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
