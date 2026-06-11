@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import useSWR from 'swr';
@@ -13,6 +14,11 @@ import {
 } from '@/common/components/ui/card';
 import { Spinner } from '@/common/components/ui/spinner';
 import { useRelatedVideos } from '@/common/libs/video-data';
+import {
+  containerStagger,
+  EASE_OUT_EXPO,
+  fadeUp,
+} from '@/common/styles/motion';
 import type { BilibiliVideoInfo } from '@/common/types/bilibili';
 import type { VideoTags } from '@/common/types/video';
 import { extractBvid, formatViews } from '@/common/utils/format';
@@ -52,62 +58,81 @@ interface VideoInfoProps {
   bvid: string;
 }
 
+type RelatedVideo = {
+  bvid: string;
+  url: string;
+  cover: string;
+  title: string;
+  UP: string;
+  views: number;
+};
+
 const RelatedVideoList: React.FC<{
   title: string;
   description: string;
-  videos: Array<{
-    bvid: string;
-    url: string;
-    cover: string;
-    title: string;
-    UP: string;
-    views: number;
-  }>;
-}> = ({ title, description, videos }) => {
+  videos: RelatedVideo[];
+  index: number;
+}> = React.memo(({ title, description, videos, index }) => {
   const router = useRouter();
   if (videos.length === 0) return null;
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {videos.slice(0, 8).map((v) => (
-            <button
-              key={v.url}
-              type="button"
-              onClick={() => {
-                const bvid = v.bvid || extractBvid(v.url);
-                if (bvid) router.push('/details?bvid=' + bvid);
-              }}
-              className="group bg-card hover:border-primary/50 flex flex-col gap-2 rounded-lg border p-2 text-left transition hover:shadow-md"
-            >
-              <div className="bg-muted relative aspect-video w-full overflow-hidden rounded-md">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={v.cover}
-                  alt={v.title}
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                  className="h-full w-full object-cover transition group-hover:scale-105"
-                />
-              </div>
-              <p className="line-clamp-2 text-sm leading-tight font-medium">
-                {v.title}
-              </p>
-              <div className="text-muted-foreground flex items-center justify-between text-xs">
-                <span className="truncate">{v.UP}</span>
-                <span className="tabular-nums">{formatViews(v.views)}</span>
-              </div>
-            </button>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: 0.06 * index, ease: EASE_OUT_EXPO }}
+    >
+      <Card>
+        <CardHeader>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <motion.div
+            variants={containerStagger(0.04, 0.02)}
+            initial="hidden"
+            animate="show"
+            className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          >
+            {videos.slice(0, 8).map((v) => (
+              <motion.button
+                key={v.url}
+                type="button"
+                variants={fadeUp}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2, ease: EASE_OUT_EXPO }}
+                onClick={() => {
+                  const bvid = v.bvid || extractBvid(v.url);
+                  if (bvid) router.push('/details?bvid=' + bvid);
+                }}
+                className="group bg-card hover:border-primary/50 transition-base flex cursor-pointer flex-col gap-2 rounded-lg border p-2 text-left hover:shadow-md"
+              >
+                <div className="bg-muted relative aspect-video w-full overflow-hidden rounded-md">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={v.cover}
+                    alt={v.title}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <p className="line-clamp-2 text-sm leading-tight font-medium">
+                  {v.title}
+                </p>
+                <div className="text-muted-foreground flex items-center justify-between text-xs">
+                  <span className="truncate">{v.UP}</span>
+                  <span className="tabular-nums">{formatViews(v.views)}</span>
+                </div>
+              </motion.button>
+            ))}
+          </motion.div>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
-};
+});
+RelatedVideoList.displayName = 'RelatedVideoList';
 
 const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
   const { data: videoInfo, isLoading: infoLoading } = useSWR<BilibiliVideoInfo>(
@@ -149,10 +174,15 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
 
   if (!videoInfo) {
     return (
-      <div className="text-muted-foreground flex h-96 flex-col items-center justify-center gap-2">
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="text-muted-foreground flex h-96 flex-col items-center justify-center gap-2"
+      >
         <p>无法加载视频信息</p>
         <p className="text-sm">请检查网络连接或稍后重试</p>
-      </div>
+      </motion.div>
     );
   }
 
@@ -164,24 +194,59 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-6 xl:flex-row">
-        <Video
-          bvid={bvid}
-          aid={videoInfo.aid}
-          cid={videoInfo.cid}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
           className="xl:flex-1"
-        />
-        <Base videoInfo={videoInfo} />
+        >
+          <Video
+            bvid={bvid}
+            aid={videoInfo.aid}
+            cid={videoInfo.cid}
+            className="xl:flex-1"
+          />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 8 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4, delay: 0.06, ease: EASE_OUT_EXPO }}
+          className="xl:flex-1"
+        >
+          <Base videoInfo={videoInfo} />
+        </motion.div>
       </div>
       <div className="flex flex-col gap-6 xl:flex-row">
-        <WordCloud formattedTopics={tagProps} />
-        <StackedChart stat={videoInfo.stat} />
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.12, ease: EASE_OUT_EXPO }}
+          className="xl:flex-1"
+        >
+          <WordCloud formattedTopics={tagProps} />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.18, ease: EASE_OUT_EXPO }}
+          className="xl:flex-1"
+        >
+          <StackedChart stat={videoInfo.stat} />
+        </motion.div>
       </div>
-      <Analization stat={videoInfo.stat} />
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.24, ease: EASE_OUT_EXPO }}
+      >
+        <Analization stat={videoInfo.stat} />
+      </motion.div>
       {upVideos.length > 0 && (
         <RelatedVideoList
           title={`${videoInfo.owner.name} 的其他热门视频`}
           description="同一 UP 主当日上榜的其他热门"
           videos={upVideos}
+          index={0}
         />
       )}
       {channelVideos.length > 0 && (
@@ -189,6 +254,7 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
           title={`${tags?.firstChannel ?? '同分区'}的其他热门视频`}
           description="同一一级分区当日上榜的其他热门"
           videos={channelVideos}
+          index={1}
         />
       )}
     </div>

@@ -11,10 +11,10 @@ type BaseProps = { videoInfo: BilibiliVideoInfo };
 
 const Base: React.FC<BaseProps> = React.memo(({ videoInfo }) => {
   return (
-    <Card className="flex flex-1 flex-col gap-5 p-6">
+    <Card className="hover:border-primary/50 transition-base flex flex-1 flex-col gap-5 p-6 hover:shadow-md">
       <div className="flex items-center gap-4">
         <Image
-          className="h-16 w-16 rounded-full"
+          className="h-16 w-16 rounded-full border-2"
           src={videoInfo.owner.face}
           alt={videoInfo.owner.name}
           width={64}
@@ -36,7 +36,7 @@ const Base: React.FC<BaseProps> = React.memo(({ videoInfo }) => {
           <Link
             href={`https://www.bilibili.com/video/${videoInfo.bvid}`}
             target="_blank"
-            className="min-w-0 truncate font-semibold text-blue-800 hover:underline dark:text-blue-300"
+            className="min-w-0 truncate font-semibold text-blue-800 transition-colors hover:underline dark:text-blue-300"
           >
             {videoInfo.title}
           </Link>
