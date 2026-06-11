@@ -1,95 +1,108 @@
 'use client';
 
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { BsCurrencyDollar, BsFillCollectionPlayFill } from 'react-icons/bs';
 import {
+  FaCommentDots,
   FaComments,
   FaEye,
   FaRegThumbsUp,
-  FaShareSquare,
-} from 'react-icons/fa';
-import { FaCommentDots } from 'react-icons/fa6';
+  FaShareFromSquare,
+} from 'react-icons/fa6';
 
 import { Card } from '@/common/components/ui/card';
-import type { BilibiliVideoInfo } from '@/common/types/bilibili';
+import type { BilibiliVideoStat } from '@/common/types/bilibili';
+import { formatCompact } from '@/common/utils/format';
 
 interface AnalizationProps {
-  videoInfo: BilibiliVideoInfo;
+  stat: BilibiliVideoStat;
 }
 
-const Analization: React.FC<AnalizationProps> = React.memo(({ videoInfo }) => {
-  const AnalizationData = [
-    {
-      icon: <FaEye />,
-      amount: videoInfo.stat.view,
-      title: '观看次数',
-      iconColor: '#03C9D7',
-      iconBg: '#E5FAFB',
-    },
-    {
-      icon: <FaComments />,
-      amount: videoInfo.stat.danmaku,
-      title: '弹幕数量',
-      iconColor: 'rgb(228, 106, 118)',
-      iconBg: 'rgb(255, 244, 229)',
-    },
-    {
-      icon: <FaCommentDots />,
-      amount: videoInfo.stat.reply,
-      title: '评论数',
-      iconColor: 'rgb(228, 106, 118)',
-      iconBg: 'rgb(255, 244, 229)',
-    },
-    {
-      icon: <BsFillCollectionPlayFill />,
-      amount: videoInfo.stat.favorite,
-      title: '收藏数',
-      iconColor: 'rgb(0, 194, 146)',
-      iconBg: 'rgb(235, 250, 242)',
-    },
-    {
-      icon: <BsCurrencyDollar />,
-      amount: videoInfo.stat.coin,
-      title: '投币数',
-      iconColor: 'rgb(254, 201, 15)',
-      iconBg: 'rgb(255, 244, 229)',
-    },
-    {
-      icon: <FaShareSquare />,
-      amount: videoInfo.stat.share,
-      title: '分享数',
-      iconColor: 'rgb(15, 201, 65)',
-      iconBg: 'rgb(215, 232, 218)',
-    },
-    {
-      icon: <FaRegThumbsUp />,
-      amount: videoInfo.stat.like,
-      title: '点赞数',
-      iconColor: 'rgb(95, 91, 215)',
-      iconBg: 'rgb(246, 246, 246)',
-    },
-  ];
+type Metric = {
+  key: keyof BilibiliVideoStat;
+  label: string;
+  value: number;
+  icon: ReactNode;
+  iconColor: string;
+  iconBg: string;
+};
+
+const STAT_METRICS: ReadonlyArray<Omit<Metric, 'value'>> = [
+  {
+    key: 'view',
+    label: '观看次数',
+    icon: <FaEye />,
+    iconColor: '#03C9D7',
+    iconBg: '#E5FAFB',
+  },
+  {
+    key: 'danmaku',
+    label: '弹幕数量',
+    icon: <FaComments />,
+    iconColor: 'rgb(228, 106, 118)',
+    iconBg: 'rgb(255, 244, 229)',
+  },
+  {
+    key: 'reply',
+    label: '评论数',
+    icon: <FaCommentDots />,
+    iconColor: 'rgb(228, 106, 118)',
+    iconBg: 'rgb(255, 244, 229)',
+  },
+  {
+    key: 'favorite',
+    label: '收藏数',
+    icon: <BsFillCollectionPlayFill />,
+    iconColor: 'rgb(0, 194, 146)',
+    iconBg: 'rgb(235, 250, 242)',
+  },
+  {
+    key: 'coin',
+    label: '投币数',
+    icon: <BsCurrencyDollar />,
+    iconColor: 'rgb(254, 201, 15)',
+    iconBg: 'rgb(255, 244, 229)',
+  },
+  {
+    key: 'share',
+    label: '分享数',
+    icon: <FaShareFromSquare />,
+    iconColor: 'rgb(15, 201, 65)',
+    iconBg: 'rgb(215, 232, 218)',
+  },
+  {
+    key: 'like',
+    label: '点赞数',
+    icon: <FaRegThumbsUp />,
+    iconColor: 'rgb(95, 91, 215)',
+    iconBg: 'rgb(246, 246, 246)',
+  },
+];
+
+const Analization: React.FC<AnalizationProps> = React.memo(({ stat }) => {
+  const metrics: Metric[] = STAT_METRICS.map((m) => ({
+    ...m,
+    value: stat[m.key],
+  }));
 
   return (
-    <div className="flex flex-wrap justify-center lg:flex-nowrap">
-      <div className="m-3 flex flex-wrap items-center justify-center gap-1">
-        {AnalizationData.map((item) => (
-          <Card
-            key={item.title}
-            className="h-44 rounded-2xl bg-white p-4 pt-9 dark:bg-secondary-dark-bg dark:text-gray-200 md:w-56"
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+      {metrics.map((item) => (
+        <Card key={item.key} className="flex flex-col items-start gap-3 p-5">
+          <div
+            className="rounded-full p-3 text-2xl"
+            style={{ color: item.iconColor, backgroundColor: item.iconBg }}
           >
-            <button
-              type="button"
-              style={{ color: item.iconColor, backgroundColor: item.iconBg }}
-              className="rounded-full p-4 text-2xl opacity-90 hover:drop-shadow-xl"
-            >
-              {item.icon}
-            </button>
-            <p className="mt-3 text-lg font-semibold">{item.amount}</p>
-            <p className="mt-1 text-sm text-gray-400">{item.title}</p>
-          </Card>
-        ))}
-      </div>
+            {item.icon}
+          </div>
+          <div>
+            <p className="text-xl font-semibold tabular-nums">
+              {formatCompact(item.value)}
+            </p>
+            <p className="text-muted-foreground text-xs">{item.label}</p>
+          </div>
+        </Card>
+      ))}
     </div>
   );
 });
