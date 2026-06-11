@@ -1,22 +1,9 @@
-import MillionLint from '@million/lint';
-import million from 'million/compiler';
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
   reactStrictMode: true,
-  compiler: {
-    styledComponents: true,
-  },
-  // output: "export",
+  // output: "export",  // 仅在 `pnpm build:mobile` 时由 scripts/build-mobile.mjs 临时启用
   images: {
-    unoptimized: true,
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'www.github.com',
-        port: '',
-        pathname: '/**',
-      },
       {
         protocol: 'https',
         hostname: 'i0.hdslb.com',
@@ -35,15 +22,14 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'i1.hdslb.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };
 
-export default million.next(
-  MillionLint.next({
-    rsc: true,
-  })(nextConfig),
-  {
-    auto: true,
-  }
-);
+export default nextConfig;
