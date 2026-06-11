@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useEffect } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
@@ -55,17 +56,20 @@ const Navbar: React.FC = React.memo(() => {
           color={currentColor}
           icon={<FaDownload />}
         />
-        <button
+        <motion.button
           type="button"
           onClick={() =>
             router.push('https://github.com/BlackishGreen33/BiliBili-Analyzer')
           }
-          className="text-muted-foreground hover:bg-muted hover:text-foreground flex items-center gap-2 rounded-lg p-1 px-2 text-sm"
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+          transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+          className="text-muted-foreground hover:bg-muted hover:text-foreground group flex cursor-pointer items-center gap-2 rounded-lg p-1 px-2 text-sm transition-colors"
         >
-          <FaGithub className="h-7 w-7" />
+          <FaGithub className="h-7 w-7 transition-transform duration-200 group-hover:rotate-12" />
           <span className="font-bold">GitHub</span>
-        </button>
-        {downloadOpen && <Download />}
+        </motion.button>
+        <AnimatePresence>{downloadOpen && <Download />}</AnimatePresence>
       </div>
     </div>
   );
