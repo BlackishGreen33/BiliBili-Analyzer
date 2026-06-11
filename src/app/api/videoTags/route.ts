@@ -1,25 +1,29 @@
 import { NextResponse } from 'next/server';
 
-import { fetchResultByName, fetchResultList } from '@/common/libs/result-data';
-
-const preUrl = 'https://www.bilibili.com/video/';
+import {
+  fetchResultByName,
+  fetchResultList,
+} from '@/common/libs/result-data.server';
 
 export async function POST(req: Request) {
   try {
-    const { bvid } = await req.json();
-    const url = preUrl + bvid;
+    const { bvid } = (await req.json()) as { bvid?: string };
+    if (!bvid) {
+      return new NextResponse('Missing bvid', { status: 400 });
+    }
 
     const list = await fetchResultList();
     const filename = list[0];
     if (!filename) {
-      throw new Error('Filename not found');
+      return new NextResponse('No crawl data available', { status: 404 });
     }
     const allData = await fetchResultByName(filename);
 
-    const video = allData.video.find((obj) => obj.url === url);
-
+    const video = allData.video.find(
+      (v) => v.bvid === bvid || v.url.endsWith('/' + bvid)
+    );
     if (!video) {
-      throw new Error('Video data not found');
+      return new NextResponse('Video not found', { status: 404 });
     }
 
     return NextResponse.json(video.tags);

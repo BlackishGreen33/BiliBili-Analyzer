@@ -1,7 +1,7 @@
 'use client';
 
-import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
+import { useTheme } from 'next-themes';
 import React from 'react';
 import D3WordCloud from 'react-d3-cloud';
 
@@ -40,8 +40,8 @@ const WordCloud: React.FC<WordCloudProps> = React.memo(
             rotate={0}
             padding={10}
             fill={theme.theme === 'dark' ? 'white' : 'black'}
-            onWordClick={(e, d) => {
-              router.push('/quiz?topic=' + d.text);
+            onWordClick={(_e, d) => {
+              router.push('/?tag=' + encodeURIComponent(d.text));
             }}
           />
         </CardContent>

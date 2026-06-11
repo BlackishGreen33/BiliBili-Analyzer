@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
 
-import { fetchResultByName, fetchResultList } from '@/common/libs/result-data';
+import {
+  fetchResultByName,
+  fetchResultList,
+} from '@/common/libs/result-data.server';
+import { extractBvid } from '@/common/utils/format';
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
     const list = await fetchResultList();
     const filename = list[0];
@@ -11,23 +15,26 @@ export async function GET(req: Request) {
     }
     const allData = await fetchResultByName(filename);
 
+    if (allData.video.length === 0) {
+      throw new Error('No videos in latest crawl');
+    }
+
     const randomIndex = Math.floor(Math.random() * allData.video.length);
     const video = allData.video[randomIndex];
-
     if (!video) {
       throw new Error('Video data not found');
     }
 
-    const pattern = /video\/([a-zA-Z0-9]+)/;
-    const matchResult = video.url.match(pattern);
-    if (matchResult && matchResult[1]) {
-      const bvid = matchResult[1];
-      return NextResponse.json(bvid);
-    } else {
-      console.error('无法从 URL 中获取 BV 号');
+    const bvid = video.bvid || extractBvid(video.url);
+    if (!bvid) {
+      throw new Error('Cannot extract bvid from video url');
     }
+    return new NextResponse(bvid, {
+      status: 200,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    });
   } catch (error) {
-    console.error('RANDOM_BVID_POST', error);
+    console.error('RANDOM_BVID_GET', error);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
