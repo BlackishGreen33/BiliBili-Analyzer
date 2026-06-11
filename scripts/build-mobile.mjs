@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { readFile, writeFile, copyFile, mkdir, rm } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
 import { execSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import { copyFile, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const root = process.cwd();
@@ -19,10 +19,7 @@ async function main() {
   await writeFile(backupPath, original, 'utf-8');
 
   // Patch config to enable static export
-  const patched = original.replace(
-    /\/\/ output: "export"/,
-    'output: "export"'
-  );
+  const patched = original.replace(/\/\/ output: "export"/, 'output: "export"');
   await writeFile(configPath, patched, 'utf-8');
 
   try {
@@ -36,7 +33,9 @@ async function main() {
     console.log('▸ capacitor sync');
     execSync('npx cap sync android ios', { stdio: 'inherit' });
 
-    console.log('▸ 移动端构建完成。运行 `npx cap open android` 或 `npx cap open ios` 继续。');
+    console.log(
+      '▸ 移动端构建完成。运行 `npx cap open android` 或 `npx cap open ios` 继续。'
+    );
   } finally {
     console.log('▸ 还原 next.config.mjs');
     await copyFile(backupPath, configPath, 'utf-8');

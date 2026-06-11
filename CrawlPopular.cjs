@@ -49,9 +49,7 @@ const fetchWithRetry = async (url) => {
 };
 
 const fetchPopularPage = async (pn) => {
-  const data = await fetchWithRetry(
-    `${POPULAR_API}?ps=${PER_PAGE}&pn=${pn}`
-  );
+  const data = await fetchWithRetry(`${POPULAR_API}?ps=${PER_PAGE}&pn=${pn}`);
   if (data.code !== 0) {
     throw new Error(`Popular API error: ${data.message}`);
   }
@@ -282,7 +280,10 @@ const buildAggregations = (videos) => {
   }
 
   // Publish hour distribution
-  const hourHist = Array.from({ length: 24 }, (_, h) => ({ hour: h, count: 0 }));
+  const hourHist = Array.from({ length: 24 }, (_, h) => ({
+    hour: h,
+    count: 0,
+  }));
   for (const v of videos) {
     if (!v.pubdate) continue;
     const d = new Date(v.pubdate * 1000 + 8 * 60 * 60 * 1000); // UTC+8
