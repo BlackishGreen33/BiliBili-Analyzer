@@ -28,6 +28,18 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'i2.hdslb.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i3.hdslb.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

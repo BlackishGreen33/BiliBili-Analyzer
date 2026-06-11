@@ -18,6 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/common/components/ui/card';
+import { useThemeStore } from '@/common/hooks/useThemeStore';
 import type { BilibiliVideoStat } from '@/common/types/bilibili';
 import { formatCompact } from '@/common/utils/format';
 
@@ -36,6 +37,7 @@ interface StackedChartProps {
 }
 
 const StackedChart: React.FC<StackedChartProps> = React.memo(({ stat }) => {
+  const { currentColor } = useThemeStore();
   const data = useMemo(
     () =>
       METRIC_LABELS.map(({ key, label }) => ({
@@ -94,11 +96,7 @@ const StackedChart: React.FC<StackedChartProps> = React.memo(({ stat }) => {
                 }}
                 formatter={(v: number) => formatCompact(v)}
               />
-              <Bar
-                dataKey="value"
-                fill="hsl(var(--primary))"
-                radius={[6, 6, 0, 0]}
-              />
+              <Bar dataKey="value" fill={currentColor} radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
