@@ -12,10 +12,7 @@
 
 ### Environment variables
 
-None. All APIs are public.
-
-> The old version required `SYNCFUSION_LICENSE`, which has been
-> removed.
+**None needed.** All APIs are public.
 
 ### Build
 
@@ -102,10 +99,7 @@ npx cap open ios         # archive in Xcode
 
 ## Environment variables
 
-| Name                 | Purpose   | Required |
-| -------------------- | --------- | -------- |
-| `SYNCFUSION_LICENSE` | (removed) | ❌       |
-| `NEXT_PUBLIC_*`      | (none)    | ❌       |
+None needed.
 
 ## Monitoring
 
