@@ -49,6 +49,13 @@ export const VideoDataSchema = z
         official: z.number().optional(),
       })
       .optional(),
+    /** 影片互動指標（從 /x/web-interface/popular 的 stat 區塊注入） */
+    statLike: z.number().nonnegative().optional(),
+    statCoin: z.number().nonnegative().optional(),
+    statFavorite: z.number().nonnegative().optional(),
+    statShare: z.number().nonnegative().optional(),
+    statReply: z.number().nonnegative().optional(),
+    statDanmaku: z.number().nonnegative().optional(),
   })
   .passthrough();
 

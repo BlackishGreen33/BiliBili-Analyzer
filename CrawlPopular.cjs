@@ -311,6 +311,37 @@ const buildAggregations = (videos) => {
     .sort((a, b) => b.count - a.count)
     .slice(0, 100);
 
+  // Per-video engagement ranking
+  // engagement = (like + 2·coin + 2·favorite + share) / view
+  // 收藏與投幣加權 ×2（顯式 intent，權重應高於被動的 like）
+  const topEngagement = videos
+    .map((v) => {
+      const views = safe(v.views);
+      const eng =
+        views > 0
+          ? (safe(v.statLike) +
+              safe(v.statCoin) * 2 +
+              safe(v.statFavorite) * 2 +
+              safe(v.statShare)) /
+            views
+          : 0;
+      return {
+        bvid: v.bvid,
+        title: v.title,
+        UP: v.UP,
+        mid: v.mid,
+        views,
+        like: safe(v.statLike),
+        coin: safe(v.statCoin),
+        favorite: safe(v.statFavorite),
+        share: safe(v.statShare),
+        engagement: eng,
+      };
+    })
+    .filter((v) => v.views > 0)
+    .sort((a, b) => b.engagement - a.engagement || b.views - a.views)
+    .slice(0, 10);
+
   return {
     summary: {
       totalVideos: videos.length,
@@ -333,6 +364,7 @@ const buildAggregations = (videos) => {
     duration: durationBuckets,
     hourHeatmap: hourHist,
     topTags,
+    topEngagement,
   };
 };
 

@@ -152,6 +152,20 @@ type DashboardAgg = {
     tag: string;
     count: number;
   }>;
+  /** 互動率 TOP 10（v0.2 新增） */
+  topEngagement: Array<{
+    bvid: string;
+    title: string;
+    UP: string;
+    mid?: number;
+    views: number;
+    like: number;
+    coin: number;
+    favorite: number;
+    share: number;
+    /** engagement = (like + 2·coin + 2·favorite + share) / view */
+    engagement: number;
+  }>;
 };
 ```
 
@@ -163,10 +177,14 @@ type DashboardAgg = {
 
 ## 變更歷史
 
+- **v0.3**（2026-06-12）:
+  - `summary.avgEngagement` — 加權平均互動率
+  - `topEngagement[10]` — 影片級互動率排行
 - **v0.2**（2026-06-11）:
   - `views` 從 `string` 改為 `number`
   - 新增 `bvid`、`mid`、`duration`、`pubdate`、`dimension`、`pages`、
     `desc`、`tid`、`tid_v2`、`tnamev2`、`shortLink`、`honors`、
-    `rights`、`pubLocation`、`upMeta`
+    `rights`、`pubLocation`、`upMeta`、`statLike`/`statCoin`/
+    `statFavorite`/`statShare`/`statReply`/`statDanmaku`
   - 新增 `agg-latest.json` 預聚合檔
 - **v0.1**（2024）: 初始版本，僅有 `url/cover/title/UP/views/tags`

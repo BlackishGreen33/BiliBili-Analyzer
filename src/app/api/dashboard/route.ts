@@ -135,26 +135,63 @@ function buildAggregations(videos: CrawlVideo[]) {
     }
   }
 
+  const totalViewsAll = videos.reduce(
+    (a: number, v: CrawlVideo) => a + safe(v.views),
+    0
+  );
+  const totalLikeAll = videos.reduce(
+    (a: number, v: CrawlVideo) => a + safe(v.statLike),
+    0
+  );
+  const totalCoinAll = videos.reduce(
+    (a: number, v: CrawlVideo) => a + safe(v.statCoin),
+    0
+  );
+  const totalFavoriteAll = videos.reduce(
+    (a: number, v: CrawlVideo) => a + safe(v.statFavorite),
+    0
+  );
+  const totalShareAll = videos.reduce(
+    (a: number, v: CrawlVideo) => a + safe(v.statShare),
+    0
+  );
+
+  const topEngagement = videos
+    .map((v) => {
+      const views = safe(v.views);
+      const eng =
+        views > 0
+          ? (safe(v.statLike) +
+              safe(v.statCoin) * 2 +
+              safe(v.statFavorite) * 2 +
+              safe(v.statShare)) /
+            views
+          : 0;
+      return {
+        bvid: v.bvid,
+        title: v.title,
+        UP: v.UP,
+        mid: v.mid,
+        views,
+        like: safe(v.statLike),
+        coin: safe(v.statCoin),
+        favorite: safe(v.statFavorite),
+        share: safe(v.statShare),
+        engagement: eng,
+      };
+    })
+    .filter((v) => v.views > 0)
+    .sort((a, b) => b.engagement - a.engagement || b.views - a.views)
+    .slice(0, 10);
+
   return {
     summary: {
       totalVideos: videos.length,
       totalUp: upMap.size,
-      totalViews: videos.reduce(
-        (a: number, v: CrawlVideo) => a + safe(v.views),
-        0
-      ),
-      totalLike: videos.reduce(
-        (a: number, v: CrawlVideo) => a + safe(v.statLike),
-        0
-      ),
-      totalCoin: videos.reduce(
-        (a: number, v: CrawlVideo) => a + safe(v.statCoin),
-        0
-      ),
-      totalFavorite: videos.reduce(
-        (a: number, v: CrawlVideo) => a + safe(v.statFavorite),
-        0
-      ),
+      totalViews: totalViewsAll,
+      totalLike: totalLikeAll,
+      totalCoin: totalCoinAll,
+      totalFavorite: totalFavoriteAll,
       totalReply: videos.reduce(
         (a: number, v: CrawlVideo) => a + safe(v.statReply),
         0
@@ -163,6 +200,14 @@ function buildAggregations(videos: CrawlVideo[]) {
         (a: number, v: CrawlVideo) => a + safe(v.statDanmaku),
         0
       ),
+      avgEngagement:
+        totalViewsAll > 0
+          ? (totalLikeAll +
+              totalCoinAll * 2 +
+              totalFavoriteAll * 2 +
+              totalShareAll) /
+            totalViewsAll
+          : 0,
     },
     channels: Array.from(channelMap.values())
       .map((c) => ({
@@ -192,6 +237,7 @@ function buildAggregations(videos: CrawlVideo[]) {
       .map(([tag, count]) => ({ tag, count }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 60),
+    topEngagement,
   };
 }
 
