@@ -7,24 +7,26 @@ location** of every metric on `/dashboard` and the detail page.
 
 ## Metrics overview
 
-| View               | Location              | Source                                               | Formula                             |
-| ------------------ | --------------------- | ---------------------------------------------------- | ----------------------------------- |
-| Total videos       | `/dashboard` summary  | `agg-latest.json::summary.totalVideos`               | `video.length`                      |
-| Total UP 主        | `/dashboard` summary  | `summary.totalUp`                                    | `unique(UP).length`                 |
-| Total views        | `/dashboard` summary  | `summary.totalViews`                                 | `Σ views`                           |
-| Engagement         | `/dashboard` summary  | `summary.totalLike + 2·totalCoin + 2·totalFavorite`  | weighted sum                        |
-| Channel share      | `/dashboard` pie      | `channels[].count`                                   | primary channel video count         |
-| UP leaderboard     | `/dashboard` bar      | `topUps[0..9]`                                       | descending by `count`               |
-| Duration histogram | `/dashboard` bar      | `duration`                                           | 7-bucket histogram                  |
-| Publish hour       | `/dashboard` bar      | `hourHeatmap`                                        | 24-hour publish count (UTC+8)       |
-| Top tags           | `/dashboard` badges   | `topTags[0..19]`                                     | tag occurrence count                |
-| UP table           | `/dashboard` table    | `topUps`                                             | count + views + followers           |
-| View count         | detail                | `BilibiliVideoInfo.stat.view`                        | live Bilibili API                   |
-| 7-metric grid      | detail `Analization`  | `stat.{view,danmaku,reply,favorite,coin,share,like}` | live Bilibili API                   |
-| Bar chart          | detail `StackedChart` | same as above                                        | 7 bars, adaptive y                  |
-| Word cloud         | detail `WordCloud`    | `/api/videoTags`                                     | first=300, second=200, ordinary=100 |
+| View               | Location              | Source                                               | Formula                                         |
+| ------------------ | --------------------- | ---------------------------------------------------- | ----------------------------------------------- |
+| Total videos       | `/dashboard` summary  | `agg-latest.json::summary.totalVideos`               | `video.length`                                  |
+| Total UP 主        | `/dashboard` summary  | `summary.totalUp`                                    | `unique(UP).length`                             |
+| Total views        | `/dashboard` summary  | `summary.totalViews`                                 | `Σ views`                                       |
+| Engagement         | `/dashboard` summary  | `summary.totalLike + 2·totalCoin + 2·totalFavorite`  | weighted sum                                    |
+| Avg. engagement    | `/dashboard` summary  | `summary.avgEngagement`                              | `Σ(like + 2·coin + 2·favorite + share) / Σview` |
+| Top 10 engagement  | `/dashboard` section  | `topEngagement[0..9]`                                | per-video engagement desc                       |
+| Channel share      | `/dashboard` pie      | `channels[].count`                                   | primary channel video count                     |
+| UP leaderboard     | `/dashboard` bar      | `topUps[0..9]`                                       | descending by `count`                           |
+| Duration histogram | `/dashboard` bar      | `duration`                                           | 7-bucket histogram                              |
+| Publish hour       | `/dashboard` bar      | `hourHeatmap`                                        | 24-hour publish count (UTC+8)                   |
+| Top tags           | `/dashboard` badges   | `topTags[0..19]`                                     | tag occurrence count                            |
+| UP table           | `/dashboard` table    | `topUps`                                             | count + views + followers                       |
+| View count         | detail                | `BilibiliVideoInfo.stat.view`                        | live Bilibili API                               |
+| 7-metric grid      | detail `Analization`  | `stat.{view,danmaku,reply,favorite,coin,share,like}` | live Bilibili API                               |
+| Bar chart          | detail `StackedChart` | same as above                                        | 7 bars, adaptive y                              |
+| Word cloud         | detail `WordCloud`    | `/api/videoTags`                                     | first=300, second=200, ordinary=100             |
 
-## Engagement rate (designed but not yet shipped)
+## Engagement rate (shipped in v0.3)
 
 ```
 engagement = (like + 2·coin + 2·favorite + share) / view
@@ -34,8 +36,23 @@ Both favorite and coin are weighted ×2 because they are **explicit
 intent** ("save for later" / "I endorse this") and deserve a stronger
 weight than a passive like.
 
-> **Future**: add `engagement` to `agg-latest.json::summary.avgEngagement`,
-> and add a Top-10 engagement leaderboard to `/dashboard`.
+Two surfaces are derived from this formula:
+
+### Aggregate (summary card)
+
+```
+avgEngagement = Σ(like + 2·coin + 2·favorite + share) / Σview
+```
+
+Written into `agg-latest.json::summary.avgEngagement` and surfaced as
+the 5th summary card on `/dashboard`.
+
+### Per-video Top 10
+
+Every video gets a `engagement` ratio; the dashboard sorts by it
+descending (views as tiebreak) and renders the top 10 in a
+horizontal bar chart + a clickable table that jumps to
+`/details?bvid=...`.
 
 ## Formulas
 
@@ -91,11 +108,13 @@ for (const v of videos) {
 
 ## Known gaps
 
-- ❌ Cross-day trend (needs ≥ 30 days to draw a time series)
-- ❌ Live engagement leaderboard (client-side reduce of 1000 videos)
+- ❌ Cross-day trend (needs ≥ 30 days to draw a time series) — covered
+  by `/dashboard/trend` (v0.5) which falls back to the `mock-n-days`
+  fixture when fewer than 30 days of real data are available.
 - ❌ Chinese word segmentation for title word cloud (needs `nodejieba`)
-- ❌ Cross-channel UP overlap
-- ❌ Publish-to-popular latency analysis
-
-> The first three are on the Roadmap and will be implemented in
-> future iterations.
+  — covered by `src/common/utils/cjk-segmenter.ts` using the built-in
+  `Intl.Segmenter('zh', { granularity: 'word' })` (v0.5). No native
+  dependency required.
+- ❌ Cross-channel UP overlap — covered by `/dashboard/ups` (v0.5).
+- ❌ Publish-to-popular latency analysis — covered by the latency
+  section on `/dashboard` (v0.5).

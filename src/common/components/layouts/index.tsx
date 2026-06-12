@@ -2,7 +2,11 @@
 
 import React, { useEffect } from 'react';
 
-import { Footer, ThemeSettings } from '@/common/components/elements';
+import {
+  Footer,
+  SkipToContent,
+  ThemeSettings,
+} from '@/common/components/elements';
 import Navbar from '@/common/components/navbar/Navbar';
 import Sidebar from '@/common/components/sidebar/Sidebar';
 import { Toaster } from '@/common/components/ui/toaster';
@@ -35,6 +39,7 @@ const Layout: React.FC<LayoutProps> = React.memo(({ children }) => {
 
   return (
     <div className="bg-main-bg dark:bg-main-dark-bg relative flex min-h-screen">
+      <SkipToContent />
       <div
         className={`dark:bg-secondary-dark-bg ${activeMenu ? 'sidebar fixed z-40 w-72 bg-white' : 'w-0'}`}
       >
@@ -50,7 +55,7 @@ const Layout: React.FC<LayoutProps> = React.memo(({ children }) => {
         <div className="navbar bg-main-bg dark:bg-main-dark-bg sticky top-0 z-30 w-full">
           <Navbar />
         </div>
-        <div>
+        <div id="main" tabIndex={-1}>
           {themeSettings && <ThemeSettings />}
           {children}
         </div>

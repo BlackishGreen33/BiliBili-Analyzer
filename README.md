@@ -200,7 +200,7 @@ BiliBili-Analyzer/
 - [x] 體驗升級：Geist 字體 / framer-motion 動畫 / 自訂 Select / 自適應無限滾動
 - [x] i18n（简体中文 / 繁體中文 / English，react-i18next，cookie 持久化 + SSR `<html lang>`）
 - [x] 跨日趨勢比較（新頁 `/dashboard/compare?a=&b=` + `/api/dashboard/compare`）
-- [ ] 互動率即時排行
+- [x] 互動率即時排行（`/dashboard` 「互動率 TOP 10」bar + table；`summary.avgEngagement` 與 `topEngagement[10]`）
 - [ ] 視頻長度預測（基於歷史數據）
 
 ## 🧪 相容環境 / Browser support

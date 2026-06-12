@@ -190,4 +190,7 @@ export default {
     copiedFail: 'Copy failed',
     copiedFailHint: 'Copy the URL from the address bar manually.',
   },
+  a11y: {
+    skipToContent: 'Skip to main content',
+  },
 } as const;

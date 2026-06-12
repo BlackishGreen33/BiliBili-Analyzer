@@ -190,4 +190,7 @@ export default {
     copiedFail: '複製失敗',
     copiedFailHint: '請手動複製網址列連結。',
   },
+  a11y: {
+    skipToContent: '跳到主要內容',
+  },
 } as const;

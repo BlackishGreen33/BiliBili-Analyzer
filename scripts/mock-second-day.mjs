@@ -83,22 +83,23 @@ const dropRatio = 0.1;
 const statJitterRatio = 0.3;
 const channelShiftRatio = 0.05;
 
-const yesterdayVideos = latestData.video
-  .map((v) => {
-    const v2 = { ...v };
-    v2.views = Math.max(1, Math.floor(v.views * viewsScale));
-    if (Math.random() < statJitterRatio) {
-      const j = 0.8 + Math.random() * 0.4;
-      if (typeof v2.statLike === 'number') v2.statLike = Math.floor(v2.statLike * j);
-      if (typeof v2.statCoin === 'number') v2.statCoin = Math.floor(v2.statCoin * j);
-      if (typeof v2.statFavorite === 'number')
-        v2.statFavorite = Math.floor(v2.statFavorite * j);
-    }
-    if (Math.random() < channelShiftRatio) {
-      v2.tags = { ...v2.tags, firstChannel: '未知' };
-    }
-    return v2;
-  });
+const yesterdayVideos = latestData.video.map((v) => {
+  const v2 = { ...v };
+  v2.views = Math.max(1, Math.floor(v.views * viewsScale));
+  if (Math.random() < statJitterRatio) {
+    const j = 0.8 + Math.random() * 0.4;
+    if (typeof v2.statLike === 'number')
+      v2.statLike = Math.floor(v2.statLike * j);
+    if (typeof v2.statCoin === 'number')
+      v2.statCoin = Math.floor(v2.statCoin * j);
+    if (typeof v2.statFavorite === 'number')
+      v2.statFavorite = Math.floor(v2.statFavorite * j);
+  }
+  if (Math.random() < channelShiftRatio) {
+    v2.tags = { ...v2.tags, firstChannel: '未知' };
+  }
+  return v2;
+});
 
 // 模擬「昨日少 10% 影片」
 const dropCount = Math.floor(yesterdayVideos.length * dropRatio);
@@ -124,4 +125,6 @@ console.log(``);
 console.log(`→ 打開 /dashboard/compare 即可看到 2 天 diff`);
 console.log(`→ 預設 URL: /dashboard/compare?a=${yesterdayFile}&b=${latest}`);
 console.log(``);
-console.log(`重置：rm result/${yesterdayFile}.json && git checkout result/list.json`);
+console.log(
+  `重置：rm result/${yesterdayFile}.json && git checkout result/list.json`
+);

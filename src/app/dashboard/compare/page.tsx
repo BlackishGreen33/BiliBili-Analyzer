@@ -14,7 +14,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import useSWR from 'swr';
 
 import { Badge } from '@/common/components/ui/badge';
 import { Button } from '@/common/components/ui/button';
@@ -46,22 +45,6 @@ import {
   formatDateTime,
   formatPercent,
 } from '@/common/utils/format';
-
-const devListFetcher = async (url: string): Promise<string[]> => {
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) return [];
-  const j = (await res.json()) as { list: string[] };
-  return j.list;
-};
-
-/** Dev-only: 從 `/api/dev/result-list` 拿本機 mock 檔名清單 */
-function useDevResultList() {
-  return useSWR<string[]>(
-    process.env.NODE_ENV === 'production' ? null : '/api/dev/result-list',
-    devListFetcher,
-    { revalidateOnFocus: false, dedupingInterval: 10_000 }
-  );
-}
 
 const DeltaChip: React.FC<{ delta: number; formatter: (n: number) => string }> =
   React.memo(({ delta, formatter }) => {
@@ -134,20 +117,7 @@ const ComparePage: React.FC = React.memo(() => {
   const { currentColor } = useThemeStore();
   const { toast } = useToast();
   const { t } = useTranslation();
-  const { data: remoteList = [] } = useResultList();
-  const { data: devList = [] } = useDevResultList();
-  // 合併：本機 mock 優先（最新在 [0]），遠端補後
-  const list = useMemo(() => {
-    const seen = new Set<string>();
-    const merged: string[] = [];
-    for (const f of [...devList, ...remoteList]) {
-      if (!seen.has(f)) {
-        seen.add(f);
-        merged.push(f);
-      }
-    }
-    return merged;
-  }, [devList, remoteList]);
+  const { data: list = [] } = useResultList();
 
   // 預設 a = 較舊的日期（昨日），b = 最新（今日）
   // list[0] 是最新；list[1] 是昨日

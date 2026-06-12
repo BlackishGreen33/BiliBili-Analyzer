@@ -190,4 +190,7 @@ export default {
     copiedFail: '复制失败',
     copiedFailHint: '请手动复制地址栏链接。',
   },
+  a11y: {
+    skipToContent: '跳到主要内容',
+  },
 } as const;

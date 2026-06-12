@@ -210,7 +210,14 @@ static，但代價是初次 paint 的 lang 屬性會錯 ~50ms。
 ## Out of scope (deliberate)
 
 - Dark/light auto-switching beyond `prefers-color-scheme` — no
-  user-pinned override has been requested yet.
-- i18n / multi-locale — single zh-CN locale for now, copy uses 1 locale.
-- Motion variants — no entrance animation in v2.
-- Custom font for hero — Space Grotesk at default 600 weight is enough.
+  user-pinned override has been requested yet. The theme picker
+  inside the settings drawer (`浅色 / 深色` radio) provides manual
+  control on top of OS-level detection.
+- Custom font for hero — Geist Sans at default 600 weight is enough.
+- Mutation testing (Stryker) — too slow for a small Vercel-hosted
+  project; the unit + RTL smoke suite already pins every
+  `buildAggregations` branch.
+- Server-side data persistence — the data layer is intentionally
+  read-only, sourced from the `result` orphan branch. IndexedDB /
+  localStorage caching has been considered and rejected (see
+  `docs/architecture.md` § Rendering strategy).
