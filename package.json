@@ -20,7 +20,8 @@
     "prettier": "prettier --write .",
     "prepare": "husky",
     "crawldata": "node CrawlPopular.cjs",
-    "build:mobile": "node scripts/build-mobile.mjs"
+    "build:mobile": "node scripts/build-mobile.mjs",
+    "mock-second-day": "node scripts/mock-second-day.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.4.0",
