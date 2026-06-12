@@ -62,7 +62,7 @@ BV1wEEg62EDP
 
 - `file` (optional) — 指定爬取檔名（不含 `.json`）；省略時取最新
 
-**Response** (`200` `application/json`): 見 [data-schema.md](./data-schema.md#預聚合檔agglatestjson) 的 `DashboardAgg` 結構
+**Response** (`200` `application/json`): 見 [data-schema.md](./data-schema.md#預聚合檔agglatestjson) 的 `DashboardAgg` 結構。`summary.avgEngagement` 與 `topEngagement[10]` 為 v0.2 之後新增的互動率欄位。
 
 ## `GET /api/video?mode=&value=&file=`
 

@@ -24,6 +24,15 @@ export function formatCompact(n: number): string {
 }
 
 /**
+ * 百分比格式（保留 2 位小數）。
+ * 0.1234 → "12.34%"；1 → "100.00%"
+ */
+export function formatPercent(n: number, fractionDigits = 2): string {
+  if (!Number.isFinite(n)) return '0%';
+  return `${(n * 100).toFixed(fractionDigits)}%`;
+}
+
+/**
  * 中文万 / 亿 格式（保留與舊版 `CrawlPopular.cjs` 的視覺一致性）。
  * 100,000,000 → "1亿"；12,345 → "1.2万"；999 → "999"
  */

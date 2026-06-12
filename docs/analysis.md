@@ -6,24 +6,26 @@
 
 ## 指標總覽
 
-| 視圖        | 位置                  | 資料源                                                                       | 計算                                                     |
-| ----------- | --------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------- |
-| 總視頻數    | `/dashboard` summary  | `result/agg-latest.json::summary.totalVideos`                                | `video.length`                                           |
-| 上榜 UP 數  | `/dashboard` summary  | `summary.totalUp`                                                            | `unique(UP).length`                                      |
-| 總播放量    | `/dashboard` summary  | `summary.totalViews`                                                         | `Σ views`                                                |
-| 互動量      | `/dashboard` summary  | `summary.totalLike + 2·totalCoin + 2·totalFavorite`                          | 加權後總和                                               |
-| 分區占比    | `/dashboard` pie      | `channels[].count`                                                           | 一級分區熱門視頻數比例                                   |
-| UP 主上榜榜 | `/dashboard` bar      | `topUps[0..9]`                                                               | 上榜次數降冪                                             |
-| 時長分佈    | `/dashboard` bar      | `duration`                                                                   | 7 桶直方圖（<1, 1-3, 3-5, 5-10, 10-20, 20-30, >30 分鐘） |
-| 發布時段    | `/dashboard` bar      | `hourHeatmap`                                                                | 24 小時發布數（UTC+8）                                   |
-| 熱門標籤    | `/dashboard` badges   | `topTags[0..19]`                                                             | 標籤出現次數                                             |
-| UP 主排行榜 | `/dashboard` table    | `topUps`                                                                     | 上榜數 + 總播放 + 粉絲                                   |
-| 觀看次數    | 詳情頁                | `BilibiliVideoInfo.stat.view`                                                | 即時 B 站 API                                            |
-| 互動 7 指標 | 詳情頁 `Analization`  | `BilibiliVideoInfo.stat.{view, danmaku, reply, favorite, coin, share, like}` | 即時 B 站 API                                            |
-| 條形圖      | 詳情頁 `StackedChart` | 同上                                                                         | 7 項 bar，y 軸自適應                                     |
-| 標籤雲      | 詳情頁 `WordCloud`    | 從 `/api/videoTags` 取得                                                     | 一級 300、二級 200、用戶 100 加權                        |
+| 視圖          | 位置                  | 資料源                                                                       | 計算                                                     |
+| ------------- | --------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------- |
+| 總視頻數      | `/dashboard` summary  | `result/agg-latest.json::summary.totalVideos`                                | `video.length`                                           |
+| 上榜 UP 數    | `/dashboard` summary  | `summary.totalUp`                                                            | `unique(UP).length`                                      |
+| 總播放量      | `/dashboard` summary  | `summary.totalViews`                                                         | `Σ views`                                                |
+| 互動量        | `/dashboard` summary  | `summary.totalLike + 2·totalCoin + 2·totalFavorite`                          | 加權後總和                                               |
+| 平均互動率    | `/dashboard` summary  | `summary.avgEngagement`                                                      | `Σ(like + 2·coin + 2·favorite + share) / Σview`          |
+| 分區占比      | `/dashboard` pie      | `channels[].count`                                                           | 一級分區熱門視頻數比例                                   |
+| UP 主上榜榜   | `/dashboard` bar      | `topUps[0..9]`                                                               | 上榜次數降冪                                             |
+| 時長分佈      | `/dashboard` bar      | `duration`                                                                   | 7 桶直方圖（<1, 1-3, 3-5, 5-10, 10-20, 20-30, >30 分鐘） |
+| 發布時段      | `/dashboard` bar      | `hourHeatmap`                                                                | 24 小時發布數（UTC+8）                                   |
+| 熱門標籤      | `/dashboard` badges   | `topTags[0..19]`                                                             | 標籤出現次數                                             |
+| UP 主排行榜   | `/dashboard` table    | `topUps`                                                                     | 上榜數 + 總播放 + 粉絲                                   |
+| 互動率 TOP 10 | `/dashboard` section  | `topEngagement[0..9]`                                                        | 互動率降冪 + 播放做 tie-break                            |
+| 觀看次數      | 詳情頁                | `BilibiliVideoInfo.stat.view`                                                | 即時 B 站 API                                            |
+| 互動 7 指標   | 詳情頁 `Analization`  | `BilibiliVideoInfo.stat.{view, danmaku, reply, favorite, coin, share, like}` | 即時 B 站 API                                            |
+| 條形圖        | 詳情頁 `StackedChart` | 同上                                                                         | 7 項 bar，y 軸自適應                                     |
+| 標籤雲        | 詳情頁 `WordCloud`    | 從 `/api/videoTags` 取得                                                     | 一級 300、二級 200、用戶 100 加權                        |
 
-## 互動率（保留但未上線）
+## 互動率
 
 互動率公式：
 
@@ -34,8 +36,37 @@ engagement = (like + 2·coin + 2·favorite + share) / view
 收藏與投幣加權 ×2，因為這兩個行為是**顯式 intent**（"我想回來看" 與
 "我認可這作品"），權重應高於被動的 like。
 
-> **未來**：把 `engagement` 加到 `result/agg-latest.json::summary.avgEngagement`，
-> 並在 `/dashboard` 加 Top 10 互動率榜。
+### 加權平均（summary 級）
+
+```
+avgEngagement = Σ(like + 2·coin + 2·favorite + share) / Σview
+```
+
+寫入 `result/agg-latest.json::summary.avgEngagement`，由
+`/api/dashboard` 暴露為第 5 張 summary 卡。
+
+### 影片級排行（Top 10）
+
+每支影片單獨算 `engagement` 後降冪（播放量做 tie-break），取前 10
+寫入 `topEngagement[10]`：
+
+```ts
+type EngagementItem = {
+  bvid: string;
+  title: string;
+  UP: string;
+  mid?: number;
+  views: number;
+  like: number;
+  coin: number;
+  favorite: number;
+  share: number;
+  engagement: number; // 0–N（多數 0.01–0.30）
+};
+```
+
+`/dashboard` 對應 section 用水平 bar chart + table 並列；點 row 跳
+`/details?bvid=...`。
 
 ## 公式
 
