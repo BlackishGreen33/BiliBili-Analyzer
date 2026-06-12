@@ -46,3 +46,13 @@ skills-lock.json
 
 # Crawler output (only lives on the `result` branch)
 /result
+
+# IDE / editor
+/.idea/
+**/.idea/
+
+# Unused marketing assets from the original Syncfusion template
+public/assets/avatar*
+public/assets/product*
+public/next.svg
+public/vercel.svg
