@@ -2,6 +2,7 @@
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import React from 'react';
+import '@/common/i18n';
 
 import Layout from '@/common/components/layouts';
 

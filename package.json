@@ -50,7 +50,10 @@
     "tailwind-scrollbar-hide": "^4.0.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.25.76",
-    "zustand": "^5.0.14"
+    "zustand": "^5.0.14",
+    "i18next": "^24.2.3",
+    "i18next-browser-languagedetector": "^8.2.1",
+    "react-i18next": "^15.7.4"
   },
   "devDependencies": {
     "@capacitor/cli": "^8.4.0",

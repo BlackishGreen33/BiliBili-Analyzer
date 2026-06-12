@@ -9,6 +9,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaFilter, FaSearch, FaTimes, FaUserAlt } from 'react-icons/fa';
 import { LuShare2 } from 'react-icons/lu';
 
@@ -181,6 +182,7 @@ const Search: React.FC = React.memo(() => {
   const { currentColor } = useThemeStore();
   const { screenSize } = useLayoutStore();
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const { data: list = [] } = useResultList();
   const [selectedTime, setSelectedTime] = useState<string | null>(
@@ -262,8 +264,8 @@ const Search: React.FC = React.memo(() => {
     if (!bvid) {
       toast({
         variant: 'destructive',
-        title: '无法从 URL 中获取 BV 号',
-        description: '请确认输入的链接是否正确。',
+        title: t('detail.bvidMissing.title'),
+        description: t('detail.bvidMissing.desc'),
       });
       return;
     }
@@ -314,17 +316,17 @@ const Search: React.FC = React.memo(() => {
     try {
       await navigator.clipboard.writeText(url);
       toast({
-        title: '已复制分享链接',
-        description: '他人打开链接即可还原当前筛选。',
+        title: t('share.copied'),
+        description: t('share.copiedHint'),
       });
     } catch {
       toast({
         variant: 'destructive',
-        title: '复制失败',
-        description: '请手动复制地址栏链接。',
+        title: t('share.copiedFail'),
+        description: t('share.copiedFailHint'),
       });
     }
-  }, [toast]);
+  }, [toast, t]);
 
   return (
     <div className="m-2 mt-24 p-2 md:m-10 md:p-10">
@@ -335,11 +337,13 @@ const Search: React.FC = React.memo(() => {
         transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
       >
         <h1 className="text-3xl font-extrabold tracking-tight">
-          哔哩哔哩近期热门视频
+          {t('search.hero.title')}
         </h1>
         <p className="text-muted-foreground mt-2 text-sm">
-          数据更新于 {result ? formatDateTime(result.time) : '加载中…'} · 共{' '}
-          {result?.video.length ?? 0} 支视频
+          {t('search.hero.hint', {
+            time: result ? formatDateTime(result.time) : t('common.loading'),
+            count: result?.video.length ?? 0,
+          })}
         </p>
       </motion.div>
 
@@ -352,33 +356,33 @@ const Search: React.FC = React.memo(() => {
           <CardHeader>
             <div className="flex flex-wrap items-start justify-between gap-2">
               <div>
-                <CardTitle>筛选条件</CardTitle>
-                <CardDescription>
-                  按日期、分区、关键字或标签过滤热门视频
-                </CardDescription>
+                <CardTitle>{t('search.filter.title')}</CardTitle>
+                <CardDescription>{t('search.filter.desc')}</CardDescription>
               </div>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleShare}
                 className="cursor-pointer active:scale-95"
-                title="复制当前筛选的分享链接"
+                title={t('search.filter.share')}
               >
                 <LuShare2 className="mr-1.5 h-3.5 w-3.5" />
-                分享筛选
+                {t('search.filter.share')}
               </Button>
             </div>
           </CardHeader>
           <CardContent className="space-y-5">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <div className="space-y-1.5">
-                <label className="text-sm font-medium">日期</label>
+                <label className="text-sm font-medium">
+                  {t('search.filter.date')}
+                </label>
                 <Select
                   value={effectiveTime ?? ''}
                   onValueChange={handleChangeDate}
                 >
                   <SelectTrigger className="cursor-pointer">
-                    <SelectValue placeholder="选择日期" />
+                    <SelectValue placeholder={t('search.filter.date')} />
                   </SelectTrigger>
                   <SelectContent>
                     {list.map((f) => (
@@ -390,11 +394,13 @@ const Search: React.FC = React.memo(() => {
                 </Select>
               </div>
               <div className="space-y-1.5 md:col-span-2">
-                <label className="text-sm font-medium">搜索</label>
+                <label className="text-sm font-medium">
+                  {t('search.filter.keyword')}
+                </label>
                 <div className="relative">
                   <FaSearch className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
                   <Input
-                    placeholder="视频标题、UP 主名称、标签"
+                    placeholder={t('search.filter.keywordPlaceholder')}
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                     className="pl-9"
@@ -404,7 +410,9 @@ const Search: React.FC = React.memo(() => {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">一级分区</label>
+              <label className="text-sm font-medium">
+                {t('search.filter.firstChannel')}
+              </label>
               <div className="flex flex-wrap gap-2">
                 <motion.button
                   type="button"
@@ -421,7 +429,7 @@ const Search: React.FC = React.memo(() => {
                       selectedChannels.length === 0 ? currentColor : undefined,
                   }}
                 >
-                  全部
+                  {t('search.filter.all')}
                 </motion.button>
                 {channelOptions.map((opt) => {
                   const active = selectedChannels.some(
@@ -471,7 +479,9 @@ const Search: React.FC = React.memo(() => {
                   transition={{ duration: 0.24, ease: EASE_OUT_EXPO }}
                   className="space-y-2 overflow-hidden"
                 >
-                  <label className="text-sm font-medium">二级分区</label>
+                  <label className="text-sm font-medium">
+                    {t('search.filter.secondChannel')}
+                  </label>
                   <div className="flex flex-wrap gap-2">
                     {channelOptions
                       .filter((opt) =>
@@ -531,11 +541,10 @@ const Search: React.FC = React.memo(() => {
 
             <div className="flex items-center justify-between border-t pt-3">
               <p className="text-muted-foreground text-sm">
-                命中{' '}
-                <span className="text-foreground font-semibold tabular-nums">
-                  {filtered.length}
-                </span>{' '}
-                / {result?.video.length ?? 0} 支
+                {t('search.filter.match', {
+                  matched: filtered.length,
+                  total: result?.video.length ?? 0,
+                })}
               </p>
               <div className="flex gap-2">
                 <Button
@@ -548,7 +557,7 @@ const Search: React.FC = React.memo(() => {
                   className="cursor-pointer active:scale-95"
                 >
                   <FaTimes className="mr-1 h-3 w-3" />
-                  重置
+                  {t('common.reset')}
                 </Button>
               </div>
             </div>
@@ -568,14 +577,16 @@ const Search: React.FC = React.memo(() => {
               className="mb-4 flex items-center gap-2 text-sm"
             >
               <FaFilter className="text-muted-foreground h-3 w-3" />
-              <span className="text-muted-foreground">当前标签：</span>
+              <span className="text-muted-foreground">
+                {t('search.filter.currentTag')}
+              </span>
               <Badge variant="secondary">{activeTag}</Badge>
               <button
                 type="button"
                 onClick={() => setActiveTag(null)}
                 className="text-muted-foreground hover:text-foreground cursor-pointer text-xs transition-colors"
               >
-                清除
+                {t('common.clear')}
               </button>
             </motion.div>
           )}
@@ -602,13 +613,13 @@ const Search: React.FC = React.memo(() => {
             transition={{ duration: 0.3 }}
             className="text-muted-foreground flex h-64 flex-col items-center justify-center"
           >
-            <p>没有匹配的视频</p>
+            <p>{t('search.empty.title')}</p>
             <Button
               variant="link"
               onClick={handleReset}
               className="mt-2 cursor-pointer"
             >
-              清除筛选
+              {t('search.empty.action')}
             </Button>
           </motion.div>
         ) : (
@@ -640,7 +651,10 @@ const Search: React.FC = React.memo(() => {
                   aria-label="加载中"
                 />
                 <span className="text-muted-foreground ml-2 text-xs">
-                  正在加载更多（{visible.length} / {filtered.length}）…
+                  {t('search.loadingMore', {
+                    visible: visible.length,
+                    total: filtered.length,
+                  })}
                 </span>
               </div>
             )}

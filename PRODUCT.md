@@ -122,12 +122,15 @@ Explicitly **not**:
 - Hit targets: ≥ 36 px.
 - Motion: `prefers-reduced-motion` short-circuits animations to
   instantaneous.
-- Single locale: zh-CN for v2. The UI is in Simplified Chinese with
-  CJK-friendly fonts (Noto Sans SC as primary, PingFang SC as
-  macOS fallback, Microsoft YaHei as Windows fallback).
+- **Locales (v0.3+)**: 简体中文 (zh-CN, default) / 繁體中文 (zh-TW) / English。
+  切換器在「設置中心」drawer；持久化 cookie + localStorage。
+  CJK-friendly fonts: Noto Sans SC as primary, PingFang SC as macOS fallback,
+  Microsoft YaHei as Windows fallback。
 - No audio plays automatically. Video embeds require user click to
   start (`autoplay=false` on the B 站 iframe).
 - All interactive controls have visible labels (text + icon, or
   `aria-label` for icon-only).
 - Color is never the only signal: error states use both red _and_ an
   icon; "selected filter" uses both pill-color _and_ weight.
+- `<html lang>` server 端跟 cookie 同步：切換語言後 reload 也不閃。
+  副作用：所有頁面從 static 變 dynamic（見 `docs/architecture.md` 已知限制）。

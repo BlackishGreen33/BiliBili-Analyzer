@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import useSWR from 'swr';
 
 import {
@@ -135,6 +136,7 @@ const RelatedVideoList: React.FC<{
 RelatedVideoList.displayName = 'RelatedVideoList';
 
 const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
+  const { t } = useTranslation();
   const { data: videoInfo, isLoading: infoLoading } = useSWR<BilibiliVideoInfo>(
     bvid ? ['/api/videoInfo', bvid] : null,
     ([url, id]) =>
@@ -180,8 +182,8 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
         transition={{ duration: 0.3 }}
         className="text-muted-foreground flex h-96 flex-col items-center justify-center gap-2"
       >
-        <p>无法加载视频信息</p>
-        <p className="text-sm">请检查网络连接或稍后重试</p>
+        <p>{t('detail.error.title')}</p>
+        <p className="text-sm">{t('detail.error.hint')}</p>
       </motion.div>
     );
   }
@@ -243,16 +245,18 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
       </motion.div>
       {upVideos.length > 0 && (
         <RelatedVideoList
-          title={`${videoInfo.owner.name} 的其他热门视频`}
-          description="同一 UP 主当日上榜的其他热门"
+          title={t('detail.relatedUpTitle', { name: videoInfo.owner.name })}
+          description={t('detail.relatedUpDesc')}
           videos={upVideos}
           index={0}
         />
       )}
       {channelVideos.length > 0 && (
         <RelatedVideoList
-          title={`${tags?.firstChannel ?? '同分区'}的其他热门视频`}
-          description="同一一级分区当日上榜的其他热门"
+          title={t('detail.relatedChannelTitle', {
+            channel: tags?.firstChannel ?? '',
+          })}
+          description={t('detail.relatedChannelDesc')}
           videos={channelVideos}
           index={1}
         />

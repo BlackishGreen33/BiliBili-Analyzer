@@ -2,8 +2,10 @@
 
 import { NextPage } from 'next';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 const NotFound: NextPage = () => {
+  const { t } = useTranslation();
   return (
     <div className="flex min-h-[80vh] flex-col items-center justify-center gap-4 py-20 text-center">
       <h1
@@ -12,14 +14,12 @@ const NotFound: NextPage = () => {
       >
         404
       </h1>
-      <p className="text-muted-foreground text-lg">
-        哎呀，这里好像什么都没有啊！
-      </p>
+      <p className="text-muted-foreground text-lg">{t('errors.notFound')}</p>
       <Link
         href="/"
         className="text-primary mt-2 text-sm underline-offset-4 hover:underline"
       >
-        回到首页
+        {t('errors.notFoundHint')}
       </Link>
     </div>
   );

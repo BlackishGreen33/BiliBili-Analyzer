@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { BiBarChartAlt2, BiCommentDetail } from 'react-icons/bi';
 import { FiSettings } from 'react-icons/fi';
 import { LuGitCompareArrows, LuSearch } from 'react-icons/lu';
@@ -17,9 +18,14 @@ import {
 } from '@/common/styles/motion';
 
 type NavItem = {
-  title: string;
+  titleKey: 'nav.groupSearch' | 'nav.groupPersonal';
   links: Array<{
-    name: string;
+    nameKey:
+      | 'nav.home'
+      | 'nav.detail'
+      | 'nav.dashboard'
+      | 'nav.compare'
+      | 'nav.settings';
     nav: string;
     icon: React.ReactNode;
   }>;
@@ -27,21 +33,21 @@ type NavItem = {
 
 const NAV_GROUPS: NavItem[] = [
   {
-    title: '检索系统',
+    titleKey: 'nav.groupSearch',
     links: [
-      { name: '热门视频分类检索', nav: '', icon: <LuSearch /> },
-      { name: '视频详细信息', nav: 'details', icon: <BiCommentDetail /> },
-      { name: '聚合分析', nav: 'dashboard', icon: <BiBarChartAlt2 /> },
+      { nameKey: 'nav.home', nav: '', icon: <LuSearch /> },
+      { nameKey: 'nav.detail', nav: 'details', icon: <BiCommentDetail /> },
+      { nameKey: 'nav.dashboard', nav: 'dashboard', icon: <BiBarChartAlt2 /> },
       {
-        name: '跨日趋势比较',
+        nameKey: 'nav.compare',
         nav: 'dashboard/compare',
         icon: <LuGitCompareArrows />,
       },
     ],
   },
   {
-    title: '个性化',
-    links: [{ name: '设置中心', nav: 'settings', icon: <FiSettings /> }],
+    titleKey: 'nav.groupPersonal',
+    links: [{ nameKey: 'nav.settings', nav: 'settings', icon: <FiSettings /> }],
   },
 ];
 
@@ -119,6 +125,7 @@ const Navigation: React.FC = React.memo(() => {
   const { currentColor, themeSettings, setThemeSettings } = useThemeStore();
   const { setActiveMenu, screenSize } = useLayoutStore();
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   const handleCloseSideBar = () => {
     if (screenSize !== undefined && screenSize <= 900) {
@@ -134,12 +141,12 @@ const Navigation: React.FC = React.memo(() => {
       animate="show"
     >
       {NAV_GROUPS.map((item) => (
-        <div key={item.title}>
+        <div key={item.titleKey}>
           <motion.p
             variants={fadeUp}
             className="m-3 mt-4 text-xs font-medium tracking-wider text-gray-400 uppercase dark:text-gray-400"
           >
-            {item.title}
+            {t(item.titleKey)}
           </motion.p>
           {item.links.map((link) => {
             if (link.nav === 'settings') {
@@ -152,7 +159,7 @@ const Navigation: React.FC = React.memo(() => {
                     setThemeSettings(true);
                     handleCloseSideBar();
                   }}
-                  label={link.name}
+                  label={t(link.nameKey)}
                 >
                   {link.icon}
                 </SettingsLink>
@@ -168,7 +175,7 @@ const Navigation: React.FC = React.memo(() => {
                 isActive={isActive}
                 currentColor={currentColor}
                 onClick={handleCloseSideBar}
-                label={link.name}
+                label={t(link.nameKey)}
               >
                 {link.icon}
               </NavLinkRow>

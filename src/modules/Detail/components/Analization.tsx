@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import React, { type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BsCurrencyDollar, BsFillCollectionPlayFill } from 'react-icons/bs';
 import {
   FaCommentDots,
@@ -25,7 +26,7 @@ interface AnalizationProps {
 }
 
 type Metric = {
-  key: keyof BilibiliVideoStat;
+  key: Exclude<keyof BilibiliVideoStat, 'aid'>;
   label: string;
   value: number;
   icon: ReactNode;
@@ -33,52 +34,45 @@ type Metric = {
   iconBg: string;
 };
 
-const STAT_METRICS: ReadonlyArray<Omit<Metric, 'value'>> = [
+const STAT_METRICS: ReadonlyArray<Omit<Metric, 'value' | 'label'>> = [
   {
     key: 'view',
-    label: '观看次数',
     icon: <FaEye />,
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
   },
   {
     key: 'danmaku',
-    label: '弹幕数量',
     icon: <FaComments />,
     iconColor: 'rgb(228, 106, 118)',
     iconBg: 'rgb(255, 244, 229)',
   },
   {
     key: 'reply',
-    label: '评论数',
     icon: <FaCommentDots />,
     iconColor: 'rgb(228, 106, 118)',
     iconBg: 'rgb(255, 244, 229)',
   },
   {
     key: 'favorite',
-    label: '收藏数',
     icon: <BsFillCollectionPlayFill />,
     iconColor: 'rgb(0, 194, 146)',
     iconBg: 'rgb(235, 250, 242)',
   },
   {
     key: 'coin',
-    label: '投币数',
     icon: <BsCurrencyDollar />,
     iconColor: 'rgb(254, 201, 15)',
     iconBg: 'rgb(255, 244, 229)',
   },
   {
     key: 'share',
-    label: '分享数',
     icon: <FaShareFromSquare />,
     iconColor: 'rgb(15, 201, 65)',
     iconBg: 'rgb(215, 232, 218)',
   },
   {
     key: 'like',
-    label: '点赞数',
     icon: <FaRegThumbsUp />,
     iconColor: 'rgb(95, 91, 215)',
     iconBg: 'rgb(246, 246, 246)',
@@ -86,8 +80,10 @@ const STAT_METRICS: ReadonlyArray<Omit<Metric, 'value'>> = [
 ];
 
 const Analization: React.FC<AnalizationProps> = React.memo(({ stat }) => {
+  const { t } = useTranslation();
   const metrics: Metric[] = STAT_METRICS.map((m) => ({
     ...m,
+    label: t(`detail.metrics.${m.key}`),
     value: stat[m.key],
   }));
 
