@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Bar,
   BarChart,
@@ -22,14 +23,14 @@ import { useThemeStore } from '@/common/hooks/useThemeStore';
 import type { BilibiliVideoStat } from '@/common/types/bilibili';
 import { formatCompact } from '@/common/utils/format';
 
-const METRIC_LABELS: Array<{ key: keyof BilibiliVideoStat; label: string }> = [
-  { key: 'view', label: '观看' },
-  { key: 'danmaku', label: '弹幕' },
-  { key: 'reply', label: '评论' },
-  { key: 'favorite', label: '收藏' },
-  { key: 'coin', label: '投币' },
-  { key: 'share', label: '分享' },
-  { key: 'like', label: '点赞' },
+const METRIC_KEYS: Array<Exclude<keyof BilibiliVideoStat, 'aid'>> = [
+  'view',
+  'danmaku',
+  'reply',
+  'favorite',
+  'coin',
+  'share',
+  'like',
 ];
 
 interface StackedChartProps {
@@ -38,26 +39,27 @@ interface StackedChartProps {
 
 const StackedChart: React.FC<StackedChartProps> = React.memo(({ stat }) => {
   const { currentColor } = useThemeStore();
+  const { t } = useTranslation();
   const data = useMemo(
     () =>
-      METRIC_LABELS.map(({ key, label }) => ({
-        name: label,
+      METRIC_KEYS.map((key) => ({
+        name: t(`detail.metrics.${key}`),
         value: stat[key],
       })),
-    [stat]
+    [stat, t]
   );
 
   const max = useMemo(
-    () => Math.max(...METRIC_LABELS.map(({ key }) => stat[key])),
+    () => Math.max(...METRIC_KEYS.map((key) => stat[key])),
     [stat]
   );
 
   return (
     <Card className="flex-1">
       <CardHeader>
-        <CardTitle>互动指标</CardTitle>
+        <CardTitle>{t('detail.stackedTitle')}</CardTitle>
         <CardDescription>
-          视频核心数据一览（峰值 {formatCompact(max)}）
+          {t('detail.stackedDesc', { max: formatCompact(max) })}
         </CardDescription>
       </CardHeader>
       <CardContent>

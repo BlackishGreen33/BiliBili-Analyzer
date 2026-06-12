@@ -166,6 +166,23 @@ What this UI explicitly is NOT:
 - Not Material 3. We're not in Google's design system lane.
 - No glassmorphism, no gradient text, no side-stripe borders.
 
+## i18n
+
+3 個 locales：简体中文 (zh-CN, default) / 繁體中文 (zh-TW) / English (en)。
+翻譯字典在 `src/common/i18n/dictionaries/{locale}.ts` 內聯（~80 keys），
+source of truth 為 `zh-CN.ts`；`types.ts` 用 `typeof zhCN` 推導
+`CustomTypeOptions.resources` → 編譯期保證 `t('key')` 一定存在。
+
+切換器在 `ThemeSettings` drawer；持久化用 cookie + localStorage 雙寫
+（`i18next-browser-languagedetector` 的 `lookupCookie` /
+`lookupLocalStorage` 設為 `bili-analyzer-locale`）。
+
+`<html lang>` 在 `app/layout.tsx` server 端用 `cookies()` 讀，
+切換語言後 reload 也不閃。**代價：所有頁面從 `○` 變 `ƒ`（dynamic
+rendered）** — 因為 `cookies()` 強制 dynamic 渲染。Production
+v0.4 可改用 client `useEffect` 設 `document.documentElement.lang` 換回
+static，但代價是初次 paint 的 lang 屬性會錯 ~50ms。
+
 ## Layout patterns
 
 - Dashboard: 12-col grid via `grid-cols-1 lg:grid-cols-2 xl:grid-cols-4` on

@@ -3,10 +3,18 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { BsCheck } from 'react-icons/bs';
 import { FaXmark } from 'react-icons/fa6';
 
 import { Button } from '@/common/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/common/components/ui/select';
 import { useThemeStore } from '@/common/hooks/useThemeStore';
 import { EASE_OUT_EXPO, fadeUp } from '@/common/styles/motion';
 
@@ -19,10 +27,15 @@ const ACCENT_COLORS = [
   { name: '橘黄', color: '#FB9678' },
 ];
 
+const LOCALES = ['zh-CN', 'zh-TW', 'en'] as const;
+type Locale = (typeof LOCALES)[number];
+
 const ThemeSettings: React.FC = React.memo(() => {
   const { setCurrentColor, currentColor, themeSettings, setThemeSettings } =
     useThemeStore();
   const { setTheme, theme } = useTheme();
+  const { t, i18n } = useTranslation();
+  const currentLocale: Locale = (i18n.language as Locale) ?? 'zh-CN';
 
   return (
     <AnimatePresence>
@@ -30,7 +43,7 @@ const ThemeSettings: React.FC = React.memo(() => {
         <motion.div
           key="theme-settings-backdrop"
           role="dialog"
-          aria-label="主题设置"
+          aria-label={t('theme.title')}
           aria-modal="true"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -49,11 +62,11 @@ const ThemeSettings: React.FC = React.memo(() => {
             className="bg-popover text-popover-foreground h-full w-96 max-w-full overflow-y-auto p-6 shadow-2xl"
           >
             <div className="flex items-center justify-between">
-              <p className="text-lg font-semibold">设定</p>
+              <p className="text-lg font-semibold">{t('theme.title')}</p>
               <Button
                 variant="ghost"
                 size="icon"
-                aria-label="关闭"
+                aria-label={t('common.close')}
                 onClick={() => setThemeSettings(false)}
                 className="cursor-pointer"
               >
@@ -98,7 +111,7 @@ const ThemeSettings: React.FC = React.memo(() => {
               transition={{ delay: 0.06 }}
               className="mt-6 border-t pt-6"
             >
-              <p className="text-base font-semibold">主题颜色</p>
+              <p className="text-base font-semibold">{t('theme.color')}</p>
               <div className="mt-4 flex flex-wrap gap-3">
                 {ACCENT_COLORS.map((item) => {
                   const isActive =
@@ -123,6 +136,33 @@ const ThemeSettings: React.FC = React.memo(() => {
                     </motion.button>
                   );
                 })}
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              transition={{ delay: 0.12 }}
+              className="mt-6 border-t pt-6"
+            >
+              <p className="text-base font-semibold">{t('theme.language')}</p>
+              <div className="mt-4">
+                <Select
+                  value={currentLocale}
+                  onValueChange={(v) => i18n.changeLanguage(v as Locale)}
+                >
+                  <SelectTrigger className="w-full cursor-pointer">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {LOCALES.map((l) => (
+                      <SelectItem key={l} value={l} className="cursor-pointer">
+                        {t(`theme.languageOptions.${l}`)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </motion.div>
           </motion.aside>

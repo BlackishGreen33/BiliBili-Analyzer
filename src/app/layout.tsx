@@ -2,6 +2,7 @@ import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
 import { Noto_Sans_SC } from 'next/font/google';
+import { cookies } from 'next/headers';
 
 import '@/common/styles/globals.css';
 
@@ -28,14 +29,24 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
+const SUPPORTED_LOCALES = ['zh-CN', 'zh-TW', 'en'] as const;
+type Locale = (typeof SUPPORTED_LOCALES)[number];
+
+function isSupportedLocale(value: string | undefined): value is Locale {
+  return !!value && (SUPPORTED_LOCALES as readonly string[]).includes(value);
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const raw = cookieStore.get('bili-analyzer-locale')?.value;
+  const locale: Locale = isSupportedLocale(raw) ? raw : 'zh-CN';
   return (
     <html
-      lang="zh-CN"
+      lang={locale}
       className={`${GeistSans.variable} ${GeistMono.variable} ${notoSC.variable}`}
       suppressHydrationWarning
     >

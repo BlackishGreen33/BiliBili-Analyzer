@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Bar,
   BarChart,
@@ -84,6 +85,7 @@ const DashboardPage: React.FC = React.memo(() => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { currentColor } = useThemeStore();
+  const { t } = useTranslation();
   const { data: list = [] } = useResultList();
   const initialFile = searchParams.get('file') || list[0] || null;
   const [file, setFile] = useState<string | null>(initialFile);
@@ -122,6 +124,7 @@ const DashboardPage: React.FC = React.memo(() => {
     () =>
       (data?.topEngagement ?? []).map((v) => ({
         ...v,
+        // 截斷標題避免 label 太長
         shortTitle: v.title.length > 14 ? `${v.title.slice(0, 14)}…` : v.title,
       })),
     [data?.topEngagement]
@@ -150,16 +153,18 @@ const DashboardPage: React.FC = React.memo(() => {
       >
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-extrabold tracking-tight">聚合分析</h1>
+            <h1 className="text-3xl font-extrabold tracking-tight">
+              {t('dashboard.title')}
+            </h1>
             <p className="text-muted-foreground mt-2 text-sm">
-              {data ? `数据更新于 ${formatDateTime(data.time)}` : '加载中…'}
+              {data ? `${formatDateTime(data.time)}` : t('common.loading')}
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <label className="text-sm">日期</label>
+            <label className="text-sm">{t('search.filter.date')}</label>
             <Select value={file ?? ''} onValueChange={handleFileChange}>
               <SelectTrigger className="w-44 cursor-pointer">
-                <SelectValue placeholder="选择日期" />
+                <SelectValue placeholder={t('search.filter.date')} />
               </SelectTrigger>
               <SelectContent>
                 {list.map((f) => (
@@ -186,50 +191,54 @@ const DashboardPage: React.FC = React.memo(() => {
         >
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
             <SummaryCard
-              label="总视频数"
+              label={t('dashboard.summary.videos')}
               value={formatCompact(data.summary.totalVideos)}
             />
             <SummaryCard
-              label="上榜 UP 数"
+              label={t('dashboard.summary.ups')}
               value={formatCompact(data.summary.totalUp)}
             />
             <SummaryCard
-              label="总播放量"
+              label={t('dashboard.summary.views')}
               value={formatCompact(data.summary.totalViews)}
-              sub="所有视频累计播放"
+              sub={t('dashboard.summary.viewsSub')}
             />
             <SummaryCard
-              label="互动量"
+              label={t('dashboard.summary.engagement')}
               value={formatCompact(
                 data.summary.totalLike +
                   data.summary.totalCoin * 2 +
                   data.summary.totalFavorite * 2
               )}
-              sub={`点赞 ${formatCompact(data.summary.totalLike)} · 投币 ${formatCompact(data.summary.totalCoin)} · 收藏 ${formatCompact(data.summary.totalFavorite)}`}
+              sub={t('dashboard.summary.engagementSub', {
+                like: formatCompact(data.summary.totalLike),
+                coin: formatCompact(data.summary.totalCoin),
+                favorite: formatCompact(data.summary.totalFavorite),
+              })}
             />
             <SummaryCard
-              label="平均互动率"
+              label={t('dashboard.summary.avgEngagement')}
               value={
                 data.summary.avgEngagement > 0
                   ? formatPercent(data.summary.avgEngagement, 2)
                   : '—'
               }
-              sub="按 互动率公式 加权"
+              sub={t('dashboard.summary.avgEngagementSub')}
             />
           </div>
 
           <motion.div variants={fadeUp}>
             <Card>
               <CardHeader>
-                <CardTitle>互动率 TOP 10</CardTitle>
+                <CardTitle>{t('dashboard.chart.engagementTop')}</CardTitle>
                 <CardDescription>
-                  当日 互动率 最高的视频
+                  {t('dashboard.chart.engagementTopDesc')}
                   {engagementData.length > 0 && (
                     <>
-                      {' · 峰值 '}
-                      <span className="text-foreground tabular-nums">
-                        {formatPercent(maxEngagement, 2)}
-                      </span>
+                      {' · '}
+                      {t('dashboard.chart.engagementTopPeak', {
+                        value: formatPercent(maxEngagement, 2),
+                      })}
                     </>
                   )}
                 </CardDescription>
@@ -237,7 +246,7 @@ const DashboardPage: React.FC = React.memo(() => {
               <CardContent>
                 {engagementData.length === 0 ? (
                   <p className="text-muted-foreground py-12 text-center text-sm">
-                    暂无互动率数据
+                    {t('dashboard.chart.engagementTopEmpty')}
                   </p>
                 ) : (
                   <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
@@ -295,10 +304,18 @@ const DashboardPage: React.FC = React.memo(() => {
                       <table className="w-full text-sm">
                         <thead className="text-muted-foreground border-b text-left text-xs uppercase">
                           <tr>
-                            <th className="py-3 pr-4">#</th>
-                            <th className="py-3 pr-4">视频</th>
-                            <th className="py-3 pr-4 text-right">互动率</th>
-                            <th className="py-3 pr-4 text-right">播放</th>
+                            <th className="py-3 pr-4">
+                              {t('dashboard.table.rank')}
+                            </th>
+                            <th className="py-3 pr-4">
+                              {t('dashboard.table.video')}
+                            </th>
+                            <th className="py-3 pr-4 text-right">
+                              {t('dashboard.table.engagement')}
+                            </th>
+                            <th className="py-3 pr-4 text-right">
+                              {t('dashboard.table.play')}
+                            </th>
                           </tr>
                         </thead>
                         <tbody>
@@ -349,8 +366,10 @@ const DashboardPage: React.FC = React.memo(() => {
             <motion.div variants={fadeUp}>
               <Card>
                 <CardHeader>
-                  <CardTitle>分区占比</CardTitle>
-                  <CardDescription>当日热门视频的分区分布</CardDescription>
+                  <CardTitle>{t('dashboard.chart.channels')}</CardTitle>
+                  <CardDescription>
+                    {t('dashboard.chart.channelsDesc')}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="h-72">
@@ -402,8 +421,10 @@ const DashboardPage: React.FC = React.memo(() => {
             <motion.div variants={fadeUp}>
               <Card>
                 <CardHeader>
-                  <CardTitle>UP 主上榜 TOP 10</CardTitle>
-                  <CardDescription>当日上榜次数最多的 UP 主</CardDescription>
+                  <CardTitle>{t('dashboard.chart.upBar')}</CardTitle>
+                  <CardDescription>
+                    {t('dashboard.chart.upBarDesc')}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="h-72">
@@ -454,8 +475,10 @@ const DashboardPage: React.FC = React.memo(() => {
             <motion.div variants={fadeUp}>
               <Card>
                 <CardHeader>
-                  <CardTitle>时长分布</CardTitle>
-                  <CardDescription>热门视频的时长直方图</CardDescription>
+                  <CardTitle>{t('dashboard.chart.duration')}</CardTitle>
+                  <CardDescription>
+                    {t('dashboard.chart.durationDesc')}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="h-64">
@@ -504,9 +527,9 @@ const DashboardPage: React.FC = React.memo(() => {
             <motion.div variants={fadeUp}>
               <Card>
                 <CardHeader>
-                  <CardTitle>发布时段分布</CardTitle>
+                  <CardTitle>{t('dashboard.chart.hour')}</CardTitle>
                   <CardDescription>
-                    热门视频发布的小时段（UTC+8）
+                    {t('dashboard.chart.hourDesc')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -559,8 +582,10 @@ const DashboardPage: React.FC = React.memo(() => {
           <motion.div variants={fadeUp}>
             <Card>
               <CardHeader>
-                <CardTitle>热门标签 TOP 20</CardTitle>
-                <CardDescription>当日出现次数最多的用户标签</CardDescription>
+                <CardTitle>{t('dashboard.chart.tags')}</CardTitle>
+                <CardDescription>
+                  {t('dashboard.chart.tagsDesc')}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
@@ -595,19 +620,29 @@ const DashboardPage: React.FC = React.memo(() => {
           <motion.div variants={fadeUp}>
             <Card>
               <CardHeader>
-                <CardTitle>UP 主排行榜</CardTitle>
-                <CardDescription>当日上榜 UP 主综合数据</CardDescription>
+                <CardTitle>{t('dashboard.chart.upTable')}</CardTitle>
+                <CardDescription>
+                  {t('dashboard.chart.upTableDesc')}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead className="text-muted-foreground border-b text-left text-xs uppercase">
                       <tr>
-                        <th className="py-3 pr-4">#</th>
-                        <th className="py-3 pr-4">UP 主</th>
-                        <th className="py-3 pr-4 text-right">上榜次数</th>
-                        <th className="py-3 pr-4 text-right">总播放</th>
-                        <th className="py-3 pr-4 text-right">粉丝</th>
+                        <th className="py-3 pr-4">
+                          {t('dashboard.table.rank')}
+                        </th>
+                        <th className="py-3 pr-4">{t('dashboard.table.up')}</th>
+                        <th className="py-3 pr-4 text-right">
+                          {t('dashboard.table.count')}
+                        </th>
+                        <th className="py-3 pr-4 text-right">
+                          {t('dashboard.table.views')}
+                        </th>
+                        <th className="py-3 pr-4 text-right">
+                          {t('dashboard.table.followers')}
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
