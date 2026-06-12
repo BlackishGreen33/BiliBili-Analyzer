@@ -199,7 +199,7 @@ BiliBili-Analyzer/
 - [x] 服務端篩選支援（深連結分享）— `/` 篩選條件同步至 URL `?q=&c=&tag=&date=`
 - [x] 體驗升級：Geist 字體 / framer-motion 動畫 / 自訂 Select / 自適應無限滾動
 - [ ] i18n（繁中 + 簡中 + 英文）
-- [ ] 跨日趨勢比較（選擇兩個日期做對比）
+- [x] 跨日趨勢比較（新頁 `/dashboard/compare?a=&b=` + `/api/dashboard/compare`）
 - [ ] 互動率即時排行
 - [ ] 視頻長度預測（基於歷史數據）
 

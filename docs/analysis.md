@@ -107,6 +107,21 @@ for (const v of videos) {
 
 `avgViews = Σ views / count`。
 
+## 跨日趨勢（`/dashboard/compare`）
+
+選擇兩個日期的爬取結果做對比，server 端計算 diff：
+
+| 區塊         | 內容                                                            |
+| ------------ | --------------------------------------------------------------- |
+| 總量對比     | 5 個 metric（總視頻/UP/播放/互動量/平均互動率） × 2 天 + Δ chip |
+| 分區占比差異 | 一級分區 countA → countB + Δ，按 \|Δ\| 排序                     |
+| UP 主榜變化  | 新增 N · 落榜 N · 持續上榜 N（按 Δ 排序）                       |
+| 時長分佈     | A、B 兩個 BarChart 並排                                         |
+| 發布時段     | A、B 兩個 BarChart 並排                                         |
+| 標籤變化     | 新增 N · 消失 N · 共 N 持續（badge 帶計數）                     |
+
+需要至少 2 天資料；第一天上線時僅有 1 天，需等隔日 cron 觸發後才能用。QA 可用 `pnpm mock-second-day` 生成假昨日資料 + `MOCK_LOCAL_FILES=1 pnpm dev` 走本機路徑。
+
 ## 設計原則
 
 1. **單一資料源**：所有指標都從 `agg-latest.json`（server 端預聚合）
@@ -117,10 +132,9 @@ for (const v of videos) {
 
 ## 已知缺口
 
-- ❌ 跨日趨勢（要 30 天資料才能畫時間序列）
-- ❌ 互動率即時排行（要做 Top 10 排行需要 client 端 reduce 1000 支視頻）
+- ❌ 跨日趨勢時間序列（要 30 天資料才能畫時序圖，現行為 2 天 diff）
 - ❌ 視頻標題中文分詞詞雲（需要 `nodejieba` 之類）
 - ❌ 跨分區 UP 主重疊分析
 - ❌ 發布日 vs 上熱門日的延遲分析（"發布後 X 天上熱門"）
 
-> 前 3 項已在 Roadmap，未來再實作。
+> 第 1 項已由 `/dashboard/compare` 覆蓋（2 天 diff 版本），時間序列為下輪 roadmap。

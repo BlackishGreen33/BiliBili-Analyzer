@@ -64,6 +64,42 @@ BV1wEEg62EDP
 
 **Response** (`200` `application/json`): 見 [data-schema.md](./data-schema.md#預聚合檔agglatestjson) 的 `DashboardAgg` 結構。`summary.avgEngagement` 與 `topEngagement[10]` 為 v0.2 之後新增的互動率欄位。
 
+## `GET /api/dashboard/compare?a=&b=`
+
+回傳**兩天**聚合資料的對比結果（5 分鐘 server-side 快取，key
+`compare:{a}:{b}`）。
+
+**Query**:
+
+- `a` (required) — 日期 A 檔名（不含 `.json`）
+- `b` (required) — 日期 B 檔名（不含 `.json`）
+
+**Response** (`200` `application/json`):
+
+```ts
+{
+  a: { file: string; time: number; data: DashboardAgg };
+  b: { file: string; time: number; data: DashboardAgg };
+  diff: {
+    newBvids: string[];            // B 有 A 沒有的 BV
+    droppedBvids: string[];         // A 有 B 沒有的 BV
+    persistentBvids: string[];      // 兩天都上榜
+    persistentCount: number;
+    totals: { totalVideos, totalUp, totalViews, totalEngagement, avgEngagement };
+    totalsDelta: { totalVideos, totalUp, totalViews, totalEngagement, avgEngagement };
+    channelShift: Array<{ firstChannel, countA, countB, delta }>;
+    upShift:      Array<{ name, mid?, countA, countB, delta }>;
+    tagShift:     { newTags, droppedTags, commonTags };
+  };
+}
+```
+
+**Errors**:
+
+- `400` — 缺 `a` 或 `b`，或兩者相同
+- `404` — 任一天無對應檔案
+- `500` `Internal Error`
+
 ## `GET /api/video?mode=&value=&file=`
 
 回傳相關視頻（用於詳情頁「同 UP 主」「同分區」section）。
@@ -96,6 +132,17 @@ BV1wEEg62EDP
 - 沒有 auth（資料完全公開）
 - 沒有 CORS 設定（只服務自家前端）
 - Response 全部 JSON 格式除了 `/api/randomBvid` 是純文字
+
+## `GET /api/dev/result-list`
+
+**Dev-only**：回傳本機 `result/list.json` 內容。Production 永遠回
+`{ "list": [] }`。給 `MOCK_LOCAL_FILES=1` + `pnpm mock-second-day`
+QA 流用，`/dashboard/compare` 會用它把 mock 檔名 prepend 到 list 前面。
+
+```bash
+$ curl http://localhost:3000/api/dev/result-list
+{"list":["2026-06-11T02-25-39+0800","2026-06-12T02-25-39+0800"]}
+```
 
 ## 範例：取得某支視頻的所有同分區視頻
 

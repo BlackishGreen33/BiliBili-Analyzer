@@ -114,6 +114,53 @@ pnpm dev
 >
 > 兩個 PR 同時合併；先合併 schema 會導致 client 拒絕新資料。
 
+## 怎麼跑跨日比對的 QA
+
+`/dashboard/compare` 需要至少 2 天資料才能用；正式環境第一次上線時只有
+1 天，要等隔日 12:00 UTC+8 cron 跑完才會有第二份。
+
+QA 流程（不污染 production）：
+
+```bash
+# 1. 下載當日 prod 資料
+mkdir -p result
+curl -sL "https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result/list.json" -o result/list.json
+LATEST=$(node -e "console.log(require('./result/list.json')[0])")
+curl -sL "https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result/${LATEST}.json" -o "result/${LATEST}.json"
+
+# 2. 生成「昨日」假資料（拷今日 + 10% 下線 + stat 微抖動）
+pnpm mock-second-day
+
+# 3. dev server 走本機路徑
+MOCK_LOCAL_FILES=1 pnpm dev
+
+# 4. 開 http://localhost:3000/dashboard/compare 看 diff
+```
+
+重置：
+
+```bash
+rm result/2026-06-11*.json  # 昨日 mock
+# list.json 還原
+git checkout result/list.json
+```
+
+## 怎麼加新 i18n key
+
+字典 source of truth 是 `src/common/i18n/dictionaries/zh-CN.ts`（其他 locale
+會 fallback 到它）。流程：
+
+1. 在 `zh-CN.ts` 加新 key，例如 `dashboard.chart.foo: '新图表'`
+2. 在 `zh-TW.ts` 與 `en.ts` 加同名 key（如果留空、會自動 fallback 到 zh-CN）
+3. 在 UI 元件裡 `const { t } = useTranslation()` 後用 `t('dashboard.chart.foo')`
+4. TypeScript 編譯會自動檢查 key 是否存在於 `zh-CN`（透過
+   `src/common/i18n/types.ts` 的 `CustomTypeOptions.resources`）
+
+切換器在 `src/common/components/elements/ThemeSettings.tsx` 的
+「語言」Select。持久化用 cookie + localStorage（key =
+`bili-analyzer-locale`），透過 `i18next-browser-languagedetector`
+的 `lookupCookie` / `lookupLocalStorage` 設定。
+
 ## 設計系統
 
 參考 [DESIGN.md](../DESIGN.md) — 所有視覺決策的單一來源。

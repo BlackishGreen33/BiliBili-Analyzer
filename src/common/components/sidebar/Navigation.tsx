@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import { BiBarChartAlt2, BiCommentDetail } from 'react-icons/bi';
 import { FiSettings } from 'react-icons/fi';
-import { LuSearch } from 'react-icons/lu';
+import { LuGitCompareArrows, LuSearch } from 'react-icons/lu';
 
 import { useLayoutStore } from '@/common/hooks/useLayoutStore';
 import { useThemeStore } from '@/common/hooks/useThemeStore';
@@ -32,6 +32,11 @@ const NAV_GROUPS: NavItem[] = [
       { name: '热门视频分类检索', nav: '', icon: <LuSearch /> },
       { name: '视频详细信息', nav: 'details', icon: <BiCommentDetail /> },
       { name: '聚合分析', nav: 'dashboard', icon: <BiBarChartAlt2 /> },
+      {
+        name: '跨日趋势比较',
+        nav: 'dashboard/compare',
+        icon: <LuGitCompareArrows />,
+      },
     ],
   },
   {
@@ -155,9 +160,7 @@ const Navigation: React.FC = React.memo(() => {
             }
             const isHome = link.nav === '';
             const href = link.nav ? `/${link.nav}` : '/';
-            const isActive = isHome
-              ? pathname === '/'
-              : pathname.startsWith(href);
+            const isActive = isHome ? pathname === '/' : pathname === href;
             return (
               <NavLinkRow
                 key={link.nav}
