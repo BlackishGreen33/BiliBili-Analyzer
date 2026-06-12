@@ -135,3 +135,139 @@ export function useDashboardCompare(a: string | null, b: string | null) {
     { revalidateOnFocus: false, dedupingInterval: 30_000 }
   );
 }
+
+export type TrendPoint = {
+  file: string;
+  date: string;
+  totalVideos: number;
+  totalUp: number;
+  totalViews: number;
+  totalEngagement: number;
+  avgEngagement: number;
+  avgViews: number;
+  duration: Array<{ label: string; count: number }>;
+};
+
+export type TrendData = {
+  window: number;
+  isMock: boolean;
+  realCount: number;
+  points: TrendPoint[];
+};
+
+const trendFetcher = async (url: string): Promise<TrendData> => {
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || 'Failed to load trend data');
+  }
+  return (await res.json()) as TrendData;
+};
+
+export function useDashboardTrend(window: number) {
+  return useSWR<TrendData>(
+    `/api/dashboard/trend?window=${window}`,
+    trendFetcher,
+    { revalidateOnFocus: false, dedupingInterval: 30_000 }
+  );
+}
+
+export type WordCloudToken = { word: string; count: number };
+
+export type WordCloudData = {
+  file: string;
+  tokens: WordCloudToken[];
+};
+
+const wordcloudFetcher = async (url: string): Promise<WordCloudData> => {
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || 'Failed to load wordcloud');
+  }
+  return (await res.json()) as WordCloudData;
+};
+
+export function useWordCloud() {
+  return useSWR<WordCloudData>('/api/wordcloud', wordcloudFetcher, {
+    revalidateOnFocus: false,
+    dedupingInterval: 60_000,
+  });
+}
+
+export type UpOverlapItem = {
+  name: string;
+  mid?: number;
+  channelCount: number;
+  totalCount: number;
+  views: number;
+  channels: Array<{ firstChannel: string; count: number }>;
+};
+
+export type UpOverlapData = {
+  window: number;
+  minChannels: number;
+  minCount: number;
+  totalUps: number;
+  items: UpOverlapItem[];
+};
+
+const upOverlapFetcher = async (url: string): Promise<UpOverlapData> => {
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || 'Failed to load up overlap');
+  }
+  return (await res.json()) as UpOverlapData;
+};
+
+export function useUpOverlap(window: number, minChannels = 2, minCount = 2) {
+  const params = new URLSearchParams({
+    window: String(window),
+    minChannels: String(minChannels),
+    minCount: String(minCount),
+  });
+  return useSWR<UpOverlapData>(
+    `/api/up/overlap?${params.toString()}`,
+    upOverlapFetcher,
+    { revalidateOnFocus: false, dedupingInterval: 30_000 }
+  );
+}
+
+export type LatencyBucketKey =
+  | 'd0'
+  | 'd1'
+  | 'd2'
+  | 'd3'
+  | 'd4'
+  | 'd5'
+  | 'd6to7'
+  | 'd8to14'
+  | 'd15to30'
+  | 'd30plus';
+
+export type LatencyPoint = { key: LatencyBucketKey; count: number };
+
+export type LatencyData = {
+  window: number;
+  total: number;
+  buckets: LatencyPoint[];
+  avgDays: number;
+  medianDays: number;
+};
+
+const latencyFetcher = async (url: string): Promise<LatencyData> => {
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || 'Failed to load latency');
+  }
+  return (await res.json()) as LatencyData;
+};
+
+export function useLatency(window: number) {
+  return useSWR<LatencyData>(`/api/latency?window=${window}`, latencyFetcher, {
+    revalidateOnFocus: false,
+    dedupingInterval: 30_000,
+  });
+}

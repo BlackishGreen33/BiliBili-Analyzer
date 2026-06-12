@@ -17,6 +17,7 @@ import {
   YAxis,
 } from 'recharts';
 
+import { LatencySection, TitleWordCloud } from '@/common/components/elements';
 import { Badge } from '@/common/components/ui/badge';
 import {
   Card,
@@ -34,7 +35,7 @@ import {
 } from '@/common/components/ui/select';
 import { Spinner } from '@/common/components/ui/spinner';
 import { useThemeStore } from '@/common/hooks/useThemeStore';
-import { useDashboard } from '@/common/libs/dashboard-data';
+import { useDashboard, useWordCloud } from '@/common/libs/dashboard-data';
 import { useResultList } from '@/common/libs/result-data';
 import {
   containerStagger,
@@ -617,6 +618,11 @@ const DashboardPage: React.FC = React.memo(() => {
             </Card>
           </motion.div>
 
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <WordCloudSection file={data.file} />
+            <LatencySection file={data.file} />
+          </div>
+
           <motion.div variants={fadeUp}>
             <Card>
               <CardHeader>
@@ -684,3 +690,25 @@ const DashboardPage: React.FC = React.memo(() => {
 });
 
 export default DashboardPage;
+
+const WordCloudSection: React.FC<{ file: string }> = React.memo(({ file }) => {
+  const { t } = useTranslation();
+  const { data, isLoading } = useWordCloud();
+  // 只在選中最新檔時顯示（簡化：永遠用最新檔的 wordcloud）
+  void file;
+  if (isLoading || !data || data.tokens.length === 0) return null;
+  return (
+    <motion.div variants={fadeUp}>
+      <Card>
+        <CardHeader>
+          <CardTitle>{t('wordcloud.globalSection')}</CardTitle>
+          <CardDescription>{t('wordcloud.desc')}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <TitleWordCloud tokens={data.tokens} height={300} maxWords={60} />
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+});
+WordCloudSection.displayName = 'WordCloudSection';

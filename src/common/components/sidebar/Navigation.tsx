@@ -6,8 +6,9 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { BiBarChartAlt2, BiCommentDetail } from 'react-icons/bi';
+import { FaUserShield } from 'react-icons/fa';
 import { FiSettings } from 'react-icons/fi';
-import { LuGitCompareArrows, LuSearch } from 'react-icons/lu';
+import { LuGitCompareArrows, LuSearch, LuTrendingUp } from 'react-icons/lu';
 
 import { useLayoutStore } from '@/common/hooks/useLayoutStore';
 import { useThemeStore } from '@/common/hooks/useThemeStore';
@@ -24,6 +25,8 @@ type NavItem = {
       | 'nav.home'
       | 'nav.detail'
       | 'nav.dashboard'
+      | 'nav.trend'
+      | 'nav.ups'
       | 'nav.compare'
       | 'nav.settings';
     nav: string;
@@ -38,6 +41,16 @@ const NAV_GROUPS: NavItem[] = [
       { nameKey: 'nav.home', nav: '', icon: <LuSearch /> },
       { nameKey: 'nav.detail', nav: 'details', icon: <BiCommentDetail /> },
       { nameKey: 'nav.dashboard', nav: 'dashboard', icon: <BiBarChartAlt2 /> },
+      {
+        nameKey: 'nav.trend',
+        nav: 'dashboard/trend',
+        icon: <LuTrendingUp />,
+      },
+      {
+        nameKey: 'nav.ups',
+        nav: 'dashboard/ups',
+        icon: <FaUserShield />,
+      },
       {
         nameKey: 'nav.compare',
         nav: 'dashboard/compare',

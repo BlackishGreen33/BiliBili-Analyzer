@@ -145,6 +145,60 @@ rm result/2026-06-11*.json  # 昨日 mock
 git checkout result/list.json
 ```
 
+## 怎麼跑時序圖 / UP 跨分區的 QA
+
+`/dashboard/trend`、`/dashboard/ups` 需要 N 天歷史（推薦 30 天）。正式
+環境第一次上線時只有 1 天資料，UI 會顯示「模擬資料」badge 並降階到實際天數。
+
+QA 流程（與 `mock-second-day` 類似但生成多天）：
+
+```bash
+# 1. 同上：下載當日 prod 資料
+mkdir -p result
+curl -sL "https://raw.githubusercontent.com/.../result/list.json" -o result/list.json
+LATEST=$(node -e "console.log(require('./result/list.json')[0])")
+curl -sL "https://.../${LATEST}.json" -o "result/${LATEST}.json"
+
+# 2. 生成 30 天假資料（idempotent：已存在的不會重複生成）
+pnpm mock-n-days --days=30
+
+# 3. dev server 走本機路徑
+MOCK_LOCAL_FILES=1 pnpm dev
+
+# 4. 開 http://localhost:3000/dashboard/trend 看時序圖
+#    開 http://localhost:3000/dashboard/ups 看 UP 主跨分區
+```
+
+重置：
+
+```bash
+rm result/2026-*.json  # 砍掉所有非最新檔
+git checkout result/list.json
+```
+
+> `mock-n-days` 與 `mock-second-day` 共存，後者是前者的特例（`days=1`）。
+> 但 `mock-second-day` 對 jitter 的參數不同（dropRatio 10% vs 5%），
+> QA 可依需求選擇。
+
+## 怎麼跑測試
+
+```bash
+pnpm test               # 跑一次
+pnpm test:watch         # watch 模式
+pnpm test:coverage      # 跑一次 + 輸出 coverage
+```
+
+測試覆蓋：
+
+- `src/common/utils/format.test.ts` — `formatXxx` / `extractBvid` 邊界值
+- `src/common/utils/cjk-segmenter.test.ts` — `Intl.Segmenter` + n-gram 詞頻
+- `src/common/types/schema.test.ts` — Zod schema accept/reject
+- `src/common/libs/result-data.server.test.ts` — `buildAggregations` 7 個 metric
+- `src/app/api/api-routes.test.ts` — 5 個 server route（vi.mock `result-data.server`）
+
+覆蓋率門檻寫在 `vitest.config.ts`，目前 70% lines / 70% branches / 80% functions。
+CI 會在 `pnpm lint` 之後跑 `pnpm test --coverage`，未達門檻會 fail。
+
 ## 怎麼加新 i18n key
 
 字典 source of truth 是 `src/common/i18n/dictionaries/zh-CN.ts`（其他 locale
