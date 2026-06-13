@@ -817,8 +817,9 @@ const ComparePage: React.FC = React.memo(() => {
                         {t('compare.tagsNew')}
                       </Badge>
                       <span className="text-muted-foreground text-xs">
-                        {data.diff.tagShift.newTags.length}{' '}
-                        {t('compare.countUnit')}
+                        {t('compare.countUnit', {
+                          count: data.diff.tagShift.newTags.length,
+                        })}
                       </span>
                     </h4>
                     <div className="flex flex-wrap gap-1.5">
@@ -853,8 +854,9 @@ const ComparePage: React.FC = React.memo(() => {
                         {t('compare.tagsDropped')}
                       </Badge>
                       <span className="text-muted-foreground text-xs">
-                        {data.diff.tagShift.droppedTags.length}{' '}
-                        {t('compare.countUnit')}
+                        {t('compare.countUnit', {
+                          count: data.diff.tagShift.droppedTags.length,
+                        })}
                       </span>
                     </h4>
                     <div className="flex flex-wrap gap-1.5">

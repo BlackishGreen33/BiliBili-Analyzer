@@ -224,7 +224,7 @@ export default {
     tagsCommon: '共 {count} 个标签持续上榜',
     tagsNew: '新增',
     tagsDropped: '消失',
-    countUnit: '个',
+    countUnit: '{count} 个',
   },
   theme: {
     title: '设置中心',

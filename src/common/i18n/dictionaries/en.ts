@@ -8,9 +8,9 @@ export default {
     clear: 'Clear',
     close: 'Close',
     swap: 'Swap',
-    year: '',
-    month: '',
-    day: '',
+    year: 'Year',
+    month: 'Month',
+    day: 'Day',
   },
   nav: {
     groupSearch: 'Search',
@@ -224,7 +224,7 @@ export default {
     tagsCommon: '{count} tags persistent',
     tagsNew: 'New',
     tagsDropped: 'Dropped',
-    countUnit: '',
+    countUnit: '{count} tags',
   },
   theme: {
     title: 'Settings',
