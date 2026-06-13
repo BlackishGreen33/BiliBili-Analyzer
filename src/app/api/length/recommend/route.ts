@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 
+import { predictLength } from '@/common/libs/length-predictor';
 import {
   fetchResultByName,
   fetchResultList,
@@ -10,16 +11,6 @@ const cache = new Map<string, { data: unknown; at: number }>();
 
 const MAX_WINDOW = 90;
 const DEFAULT_WINDOW = 30;
-
-const DURATION_BUCKETS = [
-  { label: '<1 分钟', min: 0, max: 60 },
-  { label: '1-3 分钟', min: 60, max: 180 },
-  { label: '3-5 分钟', min: 180, max: 300 },
-  { label: '5-10 分钟', min: 300, max: 600 },
-  { label: '10-20 分钟', min: 600, max: 1200 },
-  { label: '20-30 分钟', min: 1200, max: 1800 },
-  { label: '>30 分钟', min: 1800, max: Infinity },
-];
 
 export type LengthDistribution = {
   label: string;
@@ -36,13 +27,16 @@ export type LengthRecommendPayload = {
   distribution: LengthDistribution[];
   sampleSize: number;
   confidence: 'low' | 'mid' | 'high';
+  /** v2: 中位數 + IQR 信賴區間 */
+  medianSeconds: number;
+  p25: number;
+  p75: number;
+  /** 給 UI 顯示的解釋（i18n key） */
+  rationaleKey:
+    | 'length.rationale.notEnough'
+    | 'length.rationale.globalFallback'
+    | 'length.rationale.scope';
 };
-
-function confidenceFor(sampleSize: number): 'low' | 'mid' | 'high' {
-  if (sampleSize < 30) return 'low';
-  if (sampleSize < 100) return 'mid';
-  return 'high';
-}
 
 function matchVideo(
   type: string,
@@ -96,7 +90,8 @@ export async function GET(req: Request) {
   try {
     const list = await fetchResultList();
     const target = list.slice(0, window);
-    const matched: number[] = [];
+    const scopeSamples: number[] = [];
+    const globalSamples: number[] = [];
 
     const results = await Promise.all(
       target.map((f) =>
@@ -110,41 +105,32 @@ export async function GET(req: Request) {
     for (const r of results) {
       if (!r) continue;
       for (const v of r.video) {
+        const dur = typeof v.duration === 'number' ? v.duration : 0;
+        globalSamples.push(dur);
         if (matchVideo(type, value, v)) {
-          matched.push(typeof v.duration === 'number' ? v.duration : 0);
+          scopeSamples.push(dur);
         }
       }
     }
 
-    const counts = DURATION_BUCKETS.map((b) => ({ ...b, count: 0 }));
-    for (const d of matched) {
-      const bucket = counts.find((b) => d >= b.min && d < b.max);
-      if (bucket) bucket.count++;
-    }
-    const total = matched.length;
-    const distribution: LengthDistribution[] = counts.map((b) => ({
-      label: b.label,
-      min: b.min,
-      max: b.max,
-      count: b.count,
-      share: total > 0 ? b.count / total : 0,
-    }));
-
-    const nonEmpty = distribution.filter((d) => d.count > 0);
-    const primary =
-      nonEmpty.length > 0
-        ? nonEmpty.reduce((a, b) => (b.share > a.share ? b : a))
-        : null;
+    const prediction = predictLength({
+      type: type as 'up' | 'channel' | 'tag',
+      value,
+      scopeSamples,
+      globalSamples,
+    });
 
     const payload: LengthRecommendPayload = {
       scope: { type: type as 'up' | 'channel' | 'tag', value },
       window,
-      primary: primary
-        ? { label: primary.label, share: primary.share, count: primary.count }
-        : null,
-      distribution,
-      sampleSize: total,
-      confidence: confidenceFor(total),
+      primary: prediction.primary,
+      distribution: prediction.distribution,
+      sampleSize: prediction.sampleSize,
+      confidence: prediction.confidence,
+      medianSeconds: prediction.medianSeconds,
+      p25: prediction.p25,
+      p75: prediction.p75,
+      rationaleKey: prediction.rationaleKey,
     };
     cache.set(cacheKey, { data: payload, at: now });
     return NextResponse.json(payload);

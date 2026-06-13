@@ -164,6 +164,11 @@ export default {
     bucketShare: '{count} videos · {share}',
     globalTitle: 'Global length preference',
     globalDesc: 'Duration distribution of all listed videos',
+    rationale: {
+      notEnough: 'Not enough history; using global baseline',
+      globalFallback: 'Limited scope data; using global baseline',
+      scope: 'Computed from this UP/channel/tag only',
+    },
   },
   latency: {
     title: 'Publish-to-popular latency',

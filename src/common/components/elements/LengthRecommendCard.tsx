@@ -15,7 +15,7 @@ import {
 import { useThemeStore } from '@/common/hooks/useThemeStore';
 import { useLengthRecommend } from '@/common/libs/dashboard-data';
 import { EASE_OUT_EXPO, fadeUp } from '@/common/styles/motion';
-import { formatPercent } from '@/common/utils/format';
+import { formatDuration, formatPercent } from '@/common/utils/format';
 
 export type LengthRecommendScope = {
   type: 'up' | 'channel' | 'tag';
@@ -39,7 +39,16 @@ const LengthRecommendCard: React.FC<{ scope: LengthRecommendScope }> =
       return null;
     }
 
-    const { primary, distribution, sampleSize, confidence } = data;
+    const {
+      primary,
+      distribution,
+      sampleSize,
+      confidence,
+      medianSeconds,
+      p25,
+      p75,
+      rationaleKey,
+    } = data;
     const label = scope.label ?? scope.value;
     const isLowConfidence = confidence === 'low';
 
@@ -85,6 +94,15 @@ const LengthRecommendCard: React.FC<{ scope: LengthRecommendScope }> =
                     share: formatPercent(primary.share, 0),
                   })}
                 </p>
+                {medianSeconds > 0 && (
+                  <p
+                    className="text-muted-foreground mt-1 text-[11px] tabular-nums"
+                    title={t(rationaleKey)}
+                  >
+                    median {formatDuration(medianSeconds)} · IQR{' '}
+                    {formatDuration(p25)}–{formatDuration(p75)}
+                  </p>
+                )}
                 <div className="mt-4 space-y-1.5">
                   {distribution.map((b, i) => (
                     <motion.div

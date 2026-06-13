@@ -164,6 +164,11 @@ export default {
     bucketShare: '{count} 支 / 占比 {share}',
     globalTitle: '全局时长偏好',
     globalDesc: '所有上榜视频的时长分布',
+    rationale: {
+      notEnough: '历史不足，採用全站基準',
+      globalFallback: '同範圍資料偏少，採用全站基準',
+      scope: '僅根據此 UP / 分區 / 標籤的歷史計算',
+    },
   },
   latency: {
     title: '发布到上榜延迟',

@@ -287,6 +287,14 @@ export type LengthRecommendData = {
   distribution: LengthDistribution[];
   sampleSize: number;
   confidence: 'low' | 'mid' | 'high';
+  /** v2: 中位數 + IQR */
+  medianSeconds: number;
+  p25: number;
+  p75: number;
+  rationaleKey:
+    | 'length.rationale.notEnough'
+    | 'length.rationale.globalFallback'
+    | 'length.rationale.scope';
 };
 
 const lengthFetcher = async (url: string): Promise<LengthRecommendData> => {
