@@ -347,3 +347,85 @@ describe('GET /api/dashboard/trend — cache hit', () => {
     expect(d1.points.length).toBe(d2.points.length);
   });
 });
+
+describe('GET /api/latency?stream=1 (NDJSON streaming)', () => {
+  it('returns NDJSON with meta + 10 bucket chunks + done', async () => {
+    const res = await callRoute(
+      latencyGET,
+      'http://localhost/api/latency?window=30&stream=1'
+    );
+    expect(res.headers.get('Content-Type')).toBe(
+      'application/x-ndjson; charset=utf-8'
+    );
+    const text = await res.text();
+    const lines = text.split('\n').filter(Boolean);
+    expect(lines.length).toBe(12); // meta + 10 buckets + done
+    const events = lines.map((l) => JSON.parse(l));
+    expect(events[0].type).toBe('meta');
+    expect(events[0].window).toBe(30);
+    for (let i = 1; i <= 10; i++) {
+      expect(events[i].type).toBe('chunk');
+      expect(events[i].data.key).toBeDefined();
+      expect(typeof events[i].data.count).toBe('number');
+    }
+    expect(events[11].type).toBe('done');
+    expect(typeof events[11].avgDays).toBe('number');
+    expect(typeof events[11].medianDays).toBe('number');
+  });
+
+  it('stream payload, when accumulated, matches the JSON payload', async () => {
+    // 先拿 JSON 對照組
+    const jsonRes = await callRoute(
+      latencyGET,
+      'http://localhost/api/latency?window=30'
+    );
+    const json = await jsonRes.json();
+
+    // 再拿 stream 版本（不同 cache key 不會 hit，強制重算）
+    const streamRes = await callRoute(
+      latencyGET,
+      'http://localhost/api/latency?window=90&stream=1'
+    );
+    const text = await streamRes.text();
+    const events = text
+      .split('\n')
+      .filter(Boolean)
+      .map((l) => JSON.parse(l));
+    const meta = events[0];
+    const buckets = events.slice(1, 11).map((e) => e.data);
+    const done = events[11];
+    expect(meta.window).toBe(90);
+    expect(buckets).toEqual(json.buckets);
+    expect(done.avgDays).toBeCloseTo(json.avgDays, 5);
+    expect(done.medianDays).toBeCloseTo(json.medianDays, 5);
+  });
+});
+
+describe('GET /api/dashboard/trend?stream=1 (NDJSON streaming)', () => {
+  it('returns NDJSON with meta + per-point chunks + done', async () => {
+    // 用 window=45 避免與其他 test 的 cache key 衝突
+    const res = await callRoute(
+      trendGET,
+      'http://localhost/api/dashboard/trend?window=45&stream=1'
+    );
+    expect(res.headers.get('Content-Type')).toBe(
+      'application/x-ndjson; charset=utf-8'
+    );
+    const text = await res.text();
+    const lines = text.split('\n').filter(Boolean);
+    // mock 有 3 天 → meta + 3 points + done = 5 lines
+    expect(lines.length).toBe(5);
+    const events = lines.map((l) => JSON.parse(l));
+    expect(events[0].type).toBe('meta');
+    expect(events[0].window).toBe(45);
+    expect(events[0].isMock).toBe(true);
+    expect(events[0].realCount).toBe(3);
+    for (let i = 1; i <= 3; i++) {
+      expect(events[i].type).toBe('chunk');
+      expect(typeof events[i].data.file).toBe('string');
+      expect(typeof events[i].data.totalVideos).toBe('number');
+    }
+    expect(events[4].type).toBe('done');
+    expect(events[4].pointCount).toBe(3);
+  });
+});
