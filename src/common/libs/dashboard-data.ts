@@ -271,3 +271,42 @@ export function useLatency(window: number) {
     dedupingInterval: 30_000,
   });
 }
+
+export type LengthDistribution = {
+  label: string;
+  min: number;
+  max: number;
+  share: number;
+  count: number;
+};
+
+export type LengthRecommendData = {
+  scope: { type: 'up' | 'channel' | 'tag'; value: string };
+  window: number;
+  primary: { label: string; share: number; count: number } | null;
+  distribution: LengthDistribution[];
+  sampleSize: number;
+  confidence: 'low' | 'mid' | 'high';
+};
+
+const lengthFetcher = async (url: string): Promise<LengthRecommendData> => {
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || 'Failed to load length recommend');
+  }
+  return (await res.json()) as LengthRecommendData;
+};
+
+export function useLengthRecommend(
+  type: 'up' | 'channel' | 'tag',
+  value: string,
+  window: number
+) {
+  const params = new URLSearchParams({ type, value, window: String(window) });
+  return useSWR<LengthRecommendData>(
+    type && value ? `/api/length/recommend?${params.toString()}` : null,
+    lengthFetcher,
+    { revalidateOnFocus: false, dedupingInterval: 30_000 }
+  );
+}

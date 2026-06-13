@@ -1,6 +1,9 @@
 export { default as Download } from './Download';
 export { default as Footer } from './Footer';
+export { default as GlobalLengthPreference } from './GlobalLengthPreference';
 export { default as LatencySection } from './LatencySection';
+export { default as LengthRecommendCard } from './LengthRecommendCard';
 export { default as SkipToContent } from './SkipToContent';
+export { default as SummaryCard } from './SummaryCard';
 export { default as ThemeSettings } from './ThemeSettings';
 export { default as TitleWordCloud } from './TitleWordCloud';

@@ -6,6 +6,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import useSWR from 'swr';
 
+import { LengthRecommendCard } from '@/common/components/elements';
 import {
   Card,
   CardContent,
@@ -249,6 +250,16 @@ const VideoInfo: React.FC<VideoInfoProps> = React.memo(({ bvid }) => {
           description={t('detail.relatedUpDesc')}
           videos={upVideos}
           index={0}
+        />
+      )}
+      {videoInfo.owner.name && (
+        <LengthRecommendCard
+          scope={{
+            type: 'up',
+            value: String(videoInfo.owner.mid ?? videoInfo.owner.name),
+            label: videoInfo.owner.name,
+            window: 30,
+          }}
         />
       )}
       {channelVideos.length > 0 && (

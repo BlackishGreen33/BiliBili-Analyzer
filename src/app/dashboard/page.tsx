@@ -17,7 +17,12 @@ import {
   YAxis,
 } from 'recharts';
 
-import { LatencySection, TitleWordCloud } from '@/common/components/elements';
+import {
+  GlobalLengthPreference,
+  LatencySection,
+  SummaryCard,
+  TitleWordCloud,
+} from '@/common/components/elements';
 import { Badge } from '@/common/components/ui/badge';
 import {
   Card,
@@ -61,26 +66,6 @@ const CHART_PALETTE = [
   '#FEC90F',
   '#0FC941',
 ];
-
-const SummaryCard: React.FC<{ label: string; value: string; sub?: string }> = ({
-  label,
-  value,
-  sub,
-}) => (
-  <motion.div
-    variants={fadeUp}
-    whileHover={{ y: -2 }}
-    transition={{ duration: 0.2, ease: EASE_OUT_EXPO }}
-  >
-    <Card className="hover:border-primary/50 transition-base cursor-default p-5 hover:shadow-md">
-      <p className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
-        {label}
-      </p>
-      <p className="mt-2 text-3xl font-bold tabular-nums">{value}</p>
-      {sub && <p className="text-muted-foreground mt-1 text-xs">{sub}</p>}
-    </Card>
-  </motion.div>
-);
 
 const DashboardPage: React.FC = React.memo(() => {
   const searchParams = useSearchParams();
@@ -622,6 +607,11 @@ const DashboardPage: React.FC = React.memo(() => {
             <WordCloudSection file={data.file} />
             <LatencySection file={data.file} />
           </div>
+
+          <GlobalLengthPreference
+            buckets={data.duration}
+            totalVideos={data.summary.totalVideos}
+          />
 
           <motion.div variants={fadeUp}>
             <Card>
