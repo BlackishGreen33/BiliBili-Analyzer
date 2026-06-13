@@ -300,3 +300,50 @@ describe('buildAggregations integration with API responses', () => {
     expect(agg.summary.totalUp).toBe(3);
   });
 });
+
+describe('GET /api/wordcloud cache hit', () => {
+  it('returns the same payload on subsequent calls (cache hit)', async () => {
+    const r1 = await callRoute(wordcloudGET, 'http://localhost/api/wordcloud');
+    const d1 = await r1.json();
+    const r2 = await callRoute(wordcloudGET, 'http://localhost/api/wordcloud');
+    const d2 = await r2.json();
+    expect(d1.file).toBe(d2.file);
+    expect(d1.tokens.length).toBe(d2.tokens.length);
+  });
+});
+
+describe('GET /api/length/recommend additional branches', () => {
+  it('rejects missing type', async () => {
+    const res = await callRoute(
+      lengthGET,
+      'http://localhost/api/length/recommend?value=foo'
+    );
+    expect(res.status).toBe(400);
+  });
+
+  it('handles tag scope', async () => {
+    const res = await callRoute(
+      lengthGET,
+      'http://localhost/api/length/recommend?type=tag&value=原神&window=30'
+    );
+    const data = await res.json();
+    expect(data.scope.type).toBe('tag');
+  });
+});
+
+describe('GET /api/dashboard/trend — cache hit', () => {
+  it('returns identical payload on second call', async () => {
+    const r1 = await callRoute(
+      trendGET,
+      'http://localhost/api/dashboard/trend?window=7'
+    );
+    const d1 = await r1.json();
+    const r2 = await callRoute(
+      trendGET,
+      'http://localhost/api/dashboard/trend?window=7'
+    );
+    const d2 = await r2.json();
+    expect(d1.realCount).toBe(d2.realCount);
+    expect(d1.points.length).toBe(d2.points.length);
+  });
+});

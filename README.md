@@ -125,15 +125,43 @@ BiliBili-Analyzer/
 
 ## 🛠️ 可用脚本 / Available scripts
 
-| 命令                | 說明                                                        |
-| ------------------- | ----------------------------------------------------------- |
-| `pnpm dev`          | 启动开发服务器 (Turbopack)                                  |
-| `pnpm build`        | 生产构建                                                    |
-| `pnpm start`        | 启动生产服务                                                |
-| `pnpm lint`         | ESLint (flat config)                                        |
-| `pnpm prettier`     | Prettier 格式化                                             |
-| `pnpm crawldata`    | 抓取当日热门 + UP 主 + 预聚合 (写入 `result/`)              |
-| `pnpm build:mobile` | 临时 patch `next.config.mjs` → 静态导出 → `cap sync` → 还原 |
+| 命令                   | 說明                                                        |
+| ---------------------- | ----------------------------------------------------------- |
+| `pnpm dev`             | 启动开发服务器 (Turbopack)                                  |
+| `pnpm build`           | 生产构建                                                    |
+| `pnpm start`           | 启动生产服务                                                |
+| `pnpm lint`            | ESLint (flat config)                                        |
+| `pnpm prettier`        | Prettier 格式化                                             |
+| `pnpm test`            | Vitest 跑一次所有 unit + RTL + API 測試                     |
+| `pnpm test:watch`      | Vitest watch 模式                                           |
+| `pnpm test:coverage`   | Vitest + v8 coverage report                                 |
+| `pnpm crawldata`       | 抓取当日热门 + UP 主 + 预聚合 (写入 `result/`)              |
+| `pnpm mock-second-day` | 拷昨日假資料（QA 跨日比對用）                               |
+| `pnpm mock-n-days`     | 拷 N 天假資料（QA 時序圖 / 跨分區用，預設 30）              |
+| `pnpm build:mobile`    | 临时 patch `next.config.mjs` → 静态导出 → `cap sync` → 还原 |
+
+## 🧪 測試 / Tests
+
+Vitest 2.x + happy-dom + @testing-library/react。122 個測試覆蓋：
+
+- `src/common/utils/format.test.ts` — `formatXxx` / `extractBvid` 邊界值（33）
+- `src/common/utils/cjk-segmenter.test.ts` — `Intl.Segmenter` + n-gram 詞頻（23）
+- `src/common/types/schema.test.ts` — Zod schema accept/reject（10）
+- `src/common/libs/result-data.server.test.ts` — `buildAggregations` 7 個 metric（16）
+- `src/app/api/api-routes.test.ts` — 5 個 server route（trend/length/wordcloud/latency/up-overlap）（20）
+- `src/common/components/elements/SkipToContent.test.tsx` — RTL smoke（4）
+- `src/common/components/elements/ThemeSettings.test.tsx` — RTL smoke（6）
+- `src/common/components/elements/SummaryCard.test.tsx` — RTL smoke（5）
+- `src/common/components/elements/LengthRecommendCard.test.tsx` — RTL smoke（5）
+
+Coverage 門檻見 `vitest.config.ts`（目前 **85% lines / 78% branches / 88% functions / 85% statements**，
+含排除清單）。CI 會在 `pnpm lint` 後跑 `pnpm test:coverage`，未達門檻 fail。
+
+> 排除清單精準只保留「本輪新增或重構的程式碼」。舊 API（`/api/dashboard`、
+> `/api/dashboard/compare`、`/api/randomBvid`、`/api/video*`）與舊 client hooks
+> （`useDashboard`、`useResultList` 等）與 legacy 頁面（`modules/Search/Search.tsx`、
+> `modules/Detail/components/*`）本輪未觸碰，不算入覆蓋率。下一輪若要推高
+> 覆蓋率，把它們加回 `include` 即可（相應要補測試）。
 
 ## 🛰️ 数据采集 / Data crawler
 
@@ -201,7 +229,7 @@ BiliBili-Analyzer/
 - [x] i18n（简体中文 / 繁體中文 / English，react-i18next，cookie 持久化 + SSR `<html lang>`）
 - [x] 跨日趨勢比較（新頁 `/dashboard/compare?a=&b=` + `/api/dashboard/compare`）
 - [x] 互動率即時排行（`/dashboard` 「互動率 TOP 10」bar + table；`summary.avgEngagement` 與 `topEngagement[10]`）
-- [ ] 視頻長度預測（基於歷史數據）
+- [x] 視頻長度預測（`/api/length/recommend?type=up|channel|tag`；詳情頁「同 UP 主」下方 + `/dashboard` 全局視角；`/dashboard/ups` 跨分區排行；`/dashboard/trend` 跨日時序；發布到上榜延遲；CJK 標題分詞詞雲）
 
 ## 🧪 相容環境 / Browser support
 

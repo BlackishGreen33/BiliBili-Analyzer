@@ -122,6 +122,61 @@ for (const v of videos) {
 
 需要至少 2 天資料；第一天上線時僅有 1 天，需等隔日 cron 觸發後才能用。QA 可用 `pnpm mock-second-day` 生成假昨日資料 + `MOCK_LOCAL_FILES=1 pnpm dev` 走本機路徑。
 
+## 跨日時序（`/dashboard/trend`）
+
+把每日 summary（總視頻/UP/播放/互動量/平均互動率/平均單支播放）按時間排序
+畫 6 條 Recharts `LineChart`，加 1 條 7 桶時長分布堆疊 `AreaChart`。
+
+API：`GET /api/dashboard/trend?window=N`（預設 30，可選 7/14/30/60/90，
+超過 90 一律 cap 在 90）。不足 N 天時回 `isMock: true` 並標記 `realCount`，
+UI 顯示「模擬資料」badge。
+
+QA：`pnpm mock-n-days --days=30` 一次產 30 天假資料（idempotent）。
+
+## UP 主跨分區（`/dashboard/ups`）
+
+跨 N 天（預設 30）統計出現在 2+ 一級分區的 UP 主排行。視覺化採表格 +
+heatmap badge（每個分區上榜次數用邊框顏色標出）。
+
+API：`GET /api/up/overlap?window=30&minChannels=2&minCount=2&limit=50`。
+
+## 發布到上榜延遲（`/dashboard` section）
+
+從歷史 N 天的影片，計算 `delay = floor((crawlTime - pubdate) / 86400)`，
+分 10 桶（0/1/2/3/4/5/6-7/8-14/15-30/30+ 天）。內嵌於 `/dashboard` 為
+水平 bar chart，描述列顯示平均與中位數天數。
+
+API：`GET /api/latency?window=30`。
+
+## 全站標題分詞詞雲（`/dashboard` section）
+
+對最新一天 1000 支影片的標題用 `Intl.Segmenter('zh', { granularity: 'word' })`
+切詞，n-gram 2-3，過濾單字與 stopword，計算 top 200 詞頻。`react-d3-cloud`
+渲染。
+
+API：`GET /api/wordcloud`。
+
+> **不引入 jieba / nodejieba**：`Intl.Segmenter` 是 Node 18+ / 瀏覽器內建，
+> Vercel runtime 也支援。中文分詞品質足夠「高頻詞觀察」場景。
+
+## 視頻長度預測（`/api/length/recommend`）
+
+給定 `type=up|channel|tag` + `value`，從歷史 N 天（預設 30）所有
+result 檔案中抓符合條件的影片，計算 7 桶時長分布，回傳：
+
+- `primary` — 機率最高桶
+- `distribution` — 7 桶 share + count
+- `sampleSize` — 樣本數
+- `confidence` — `low` (<30) / `mid` (30-100) / `high` (>100)
+
+UI 兩處使用：
+
+- **詳情頁**「同 UP 主」section 旁 — `LengthRecommendCard`（帶 confidence badge）
+- **`/dashboard`** 全局視角 — `GlobalLengthPreference`（直接用 `data.duration`，
+  不發 API）
+
+QA：`pnpm mock-n-days --days=30` 後才有 30 天歷史。
+
 ## 設計原則
 
 1. **單一資料源**：所有指標都從 `agg-latest.json`（server 端預聚合）

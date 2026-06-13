@@ -150,6 +150,123 @@ $ curl http://localhost:3000/api/dev/result-list
 $ curl 'https://bilibili-analyzer.vercel.app/api/video?mode=channel&value=动画'
 ```
 
+## `GET /api/dashboard/trend?window=30`
+
+回傳 N 天每日 summary 的時序資料（最多 90 天）。
+
+**Response** (`200` `application/json`):
+
+```ts
+{
+  window: number; // 實際 window（已 cap 90）
+  isMock: boolean; // 真實天數 < window 時為 true
+  realCount: number; // 真實天數
+  points: Array<{
+    file: string;
+    date: string; // YYYY-MM-DD (UTC+8)
+    totalVideos: number;
+    totalUp: number;
+    totalViews: number;
+    totalEngagement: number;
+    avgEngagement: number;
+    avgViews: number;
+    duration: Array<{ label: string; count: number }>;
+  }>;
+}
+```
+
+## `GET /api/up/overlap?window=30&minChannels=2&minCount=2&limit=50`
+
+回傳 N 天內出現在多個一級分區的 UP 主排行。
+
+**Response** (`200` `application/json`):
+
+```ts
+{
+  window: number;
+  minChannels: number;
+  minCount: number;
+  totalUps: number; // 全部 UP 數
+  items: Array<{
+    name: string;
+    mid?: number;
+    channelCount: number;
+    totalCount: number;
+    views: number;
+    channels: Array<{ firstChannel: string; count: number }>;
+  }>;
+}
+```
+
+## `GET /api/latency?window=30`
+
+回傳 N 天影片「發布 → 進入熱門榜」的延遲直方圖。
+
+**Response** (`200` `application/json`):
+
+```ts
+{
+  window: number;
+  total: number; // 有 pubdate 的影片數
+  avgDays: number; // 平均延遲天數
+  medianDays: number; // 中位數
+  buckets: Array<{
+    key:
+      | 'd0'
+      | 'd1'
+      | 'd2'
+      | 'd3'
+      | 'd4'
+      | 'd5'
+      | 'd6to7'
+      | 'd8to14'
+      | 'd15to30'
+      | 'd30plus';
+    count: number;
+  }>;
+}
+```
+
+## `GET /api/wordcloud`
+
+回傳最新一天 1000 支影片標題的 CJK 分詞詞頻（top 200）。
+
+**Response** (`200` `application/json`):
+
+```ts
+{
+  file: string;
+  tokens: Array<{ word: string; count: number }>;
+}
+```
+
+## `GET /api/length/recommend?type=&value=&window=30`
+
+視頻長度預測（最佳發布時長建議）。
+
+**Query**:
+
+- `type` (required) — `up` / `channel` / `tag`
+- `value` (required) — UP 名或 mid / 分區名 / 標籤
+- `window` (optional, 預設 30，最大 90)
+
+**Response** (`200` `application/json`):
+
+```ts
+{
+  scope: { type: 'up' | 'channel' | 'tag'; value: string };
+  window: number;
+  primary: { label: string; share: number; count: number } | null;
+  distribution: Array<{ label: string; share: number; count: number }>;
+  sampleSize: number;
+  confidence: 'low' | 'mid' | 'high';  // <30 / 30-100 / >100
+}
+```
+
+**Errors**:
+
+- `400` — 缺 `type` / `value`，或 `type` 非法
+
 ## 分享篩選（深連結）
 
 `/` 檢索頁的篩選條件會同步到 URL 的 query string，任何時候按下篩選卡
