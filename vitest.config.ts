@@ -80,15 +80,14 @@ export default defineConfig({
         'src/common/components/elements/TitleWordCloud.tsx',
       ],
       thresholds: {
-        // v0.8 拆出 6 個 hook 檔 + 各補 RTL 測試, 全部進覆蓋網
-        // 移除 6 個 use-* 排除項
-        // branches 86 → 87 (hooks 大量 SWR cache key 分支被覆蓋, 但 routes
-        //   內 catch + parseInt ?? 衍生分支仍低, 下一輪拆純函數可解)
-        // 下一輪若要再推：拆出 routes 內 computeXxx 純函數 helpers
-        lines: 93,
-        branches: 87,
-        functions: 94,
-        statements: 93,
+        // v0.9 抽 6 個 route 的純函數到 src/common/libs/routes/ + 7 個 helper 測試檔
+        // branches 87 → 90 (route 內 parseInt ?? DEFAULT 衍生分支
+        //   + computeDiff 拆分後的小 helper 分支被全覆蓋)
+        // 下一輪若要再推：LengthRecommendCard sub-component 拆解
+        lines: 94,
+        branches: 90,
+        functions: 95,
+        statements: 94,
       },
     },
   },
