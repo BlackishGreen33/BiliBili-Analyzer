@@ -55,7 +55,8 @@ const Base: React.FC<BaseProps> = React.memo(({ videoInfo }) => {
           <span className="text-sm">{t('detail.publishDate')}</span>
           <span className="font-semibold">
             {new Date(videoInfo.pubdate * 1000).toLocaleString(
-              i18n.language === 'en' ? 'en-US' : 'zh-CN'
+              i18n.language === 'en' ? 'en-US' : 'zh-CN',
+              { timeZone: 'Asia/Shanghai' }
             )}
           </span>
         </div>

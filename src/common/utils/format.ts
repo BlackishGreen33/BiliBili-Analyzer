@@ -68,10 +68,16 @@ export function formatDuration(totalSeconds: number): string {
 
 /**
  * Unix 毫秒轉本地化的日期時間字串。
+ *
+ * 顯式帶 `timeZone: 'Asia/Shanghai'`：所有 `result/*.json` 的 `time` 欄位
+ * 都以 UTC+8 為慣例（見 docs/data-schema.md），若依賴 process timezone，
+ * UTC 環境（CI、容器）會輸出偏移後的時間。
  */
 export function formatDateTime(timestamp: number): string {
   if (!Number.isFinite(timestamp) || timestamp <= 0) return '—';
-  return new Date(timestamp).toLocaleString('zh-CN');
+  return new Date(timestamp).toLocaleString('zh-CN', {
+    timeZone: 'Asia/Shanghai',
+  });
 }
 
 /**
@@ -79,7 +85,9 @@ export function formatDateTime(timestamp: number): string {
  */
 export function formatDate(timestamp: number): string {
   if (!Number.isFinite(timestamp) || timestamp <= 0) return '—';
-  return new Date(timestamp).toLocaleDateString('zh-CN');
+  return new Date(timestamp).toLocaleDateString('zh-CN', {
+    timeZone: 'Asia/Shanghai',
+  });
 }
 
 /**
