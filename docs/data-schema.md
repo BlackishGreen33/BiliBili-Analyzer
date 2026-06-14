@@ -177,6 +177,15 @@ type DashboardAgg = {
 
 ## 变更历史
 
+- **v0.9**（2026-06-14）:
+  - `formatDateTime` / `formatDate` 显式带 `timeZone: 'Asia/Shanghai'`,
+    修 CI (ubuntu-latest UTC) 失败
+  - 拆 6 个 route 内的纯函数到 `src/common/libs/routes/`,
+    7 个 helper 各补 RTL 测试 (`bucketFor` 10 桶边界、
+    `computeLatencyStats` 奇偶中位数、`buildTrendPoint` totalEngagement
+    计算、`parseOverlapParams` 4 链 fallback、`matchVideo` 3 type、
+    `computeDiff` 4 helper 拆解)
+  - branches 覆盖率 87 → 90
 - **v0.3**（2026-06-12）:
   - `summary.avgEngagement` — 加权平均互动率
   - `topEngagement[10]` — 视频级互动率排行

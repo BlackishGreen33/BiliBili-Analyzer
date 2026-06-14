@@ -38,6 +38,30 @@ export type ParseLengthResult =
   | { ok: true; type: LengthType; value: string; window: number }
   | { ok: false; status: 400; message: string };
 
+export type LengthDistribution = {
+  label: string;
+  min: number;
+  max: number;
+  share: number;
+  count: number;
+};
+
+export type LengthRecommendPayload = {
+  scope: { type: LengthType; value: string };
+  window: number;
+  primary: { label: string; share: number; count: number } | null;
+  distribution: LengthDistribution[];
+  sampleSize: number;
+  confidence: 'low' | 'mid' | 'high';
+  medianSeconds: number;
+  p25: number;
+  p75: number;
+  rationaleKey:
+    | 'length.rationale.notEnough'
+    | 'length.rationale.globalFallback'
+    | 'length.rationale.scope';
+};
+
 export function parseLengthParams(url: URL): ParseLengthResult {
   const type = url.searchParams.get('type') ?? '';
   const value = url.searchParams.get('value') ?? '';
