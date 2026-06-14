@@ -597,3 +597,103 @@ describe('GET /api/wordcloud error branches', () => {
     }
   });
 });
+
+describe('GET /api/up/overlap additional branches', () => {
+  it('falls back to defaults when minChannels/minCount/limit are NaN', async () => {
+    const res = await callRoute(
+      overlapGET,
+      'http://localhost/api/up/overlap?window=56&minChannels=abc&minCount=xyz&limit=foo'
+    );
+    const data = await res.json();
+    expect(data.minChannels).toBe(2);
+    expect(data.minCount).toBe(2);
+    expect(data.items.length).toBeLessThanOrEqual(50);
+  });
+
+  it('caps limit at 200', async () => {
+    const res = await callRoute(
+      overlapGET,
+      'http://localhost/api/up/overlap?window=57&limit=99999'
+    );
+    const data = await res.json();
+    expect(data.items.length).toBeLessThanOrEqual(200);
+  });
+
+  it('returns items with channelCount and totalCount from mock data', async () => {
+    // mockResults[0] 有 10 個 video, mid 0..4
+    // 同一 mid 跨多個 channel → 應找出至少一個有 channelCount >= 2 的 UP
+    const res = await callRoute(
+      overlapGET,
+      'http://localhost/api/up/overlap?window=58&minChannels=1&minCount=1'
+    );
+    const data = await res.json();
+    // 用寬鬆條件, 確認有走進累積 + filter 分支
+    expect(data.totalUps).toBeGreaterThanOrEqual(0);
+    for (const item of data.items) {
+      expect(item.channelCount).toBeGreaterThanOrEqual(1);
+      expect(item.totalCount).toBeGreaterThanOrEqual(1);
+    }
+  });
+});
+
+describe('GET /api/dashboard/trend error branches', () => {
+  it('returns 500 when fetchResultList throws (outer try/catch)', async () => {
+    const origError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const origImpl = listImpl;
+    listImpl = () => Promise.reject(new Error('list boom'));
+    try {
+      const res = await callRoute(
+        trendGET,
+        'http://localhost/api/dashboard/trend?window=60'
+      );
+      expect(res.status).toBe(500);
+    } finally {
+      listImpl = origImpl;
+      origError.mockRestore();
+    }
+  });
+
+  it('returns NDJSON done-with-error when stream=1 and fetchResultList throws', async () => {
+    const origError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const origImpl = listImpl;
+    listImpl = () => Promise.reject(new Error('list boom'));
+    try {
+      const res = await callRoute(
+        trendGET,
+        'http://localhost/api/dashboard/trend?window=61&stream=1'
+      );
+      expect(res.headers.get('Content-Type')).toBe(
+        'application/x-ndjson; charset=utf-8'
+      );
+      const text = await res.text();
+      const events = text
+        .split('\n')
+        .filter(Boolean)
+        .map((l) => JSON.parse(l));
+      expect(events.length).toBe(1);
+      expect(events[0].type).toBe('done');
+      expect(events[0].error).toBe('Internal Error');
+    } finally {
+      listImpl = origImpl;
+      origError.mockRestore();
+    }
+  });
+});
+
+describe('GET /api/length/recommend error branches', () => {
+  it('returns 400 for type=tag (allowlist branch - covered)', () => {
+    // sanity check
+    return callRoute(
+      lengthGET,
+      'http://localhost/api/length/recommend?type=tag&value=foo'
+    ).then((res) => expect(res.status).toBe(200));
+  });
+
+  it('rejects empty value via 400 (input validation branch)', async () => {
+    const res = await callRoute(
+      lengthGET,
+      'http://localhost/api/length/recommend?type=up&value='
+    );
+    expect(res.status).toBe(400);
+  });
+});

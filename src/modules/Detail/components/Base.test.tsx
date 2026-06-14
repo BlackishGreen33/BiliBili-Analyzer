@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import i18next from 'i18next';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import Base from '@/modules/Detail/components/Base';
 import { renderWithProviders } from '@/test/test-utils';
@@ -30,6 +31,10 @@ const videoInfo = {
 };
 
 describe('Base', () => {
+  afterEach(async () => {
+    await i18next.changeLanguage('zh-CN');
+  });
+
   it('renders the UP master name', () => {
     renderWithProviders(<Base videoInfo={videoInfo} />);
     expect(screen.getByText('某UP主')).toBeInTheDocument();
@@ -52,9 +57,16 @@ describe('Base', () => {
     expect(screen.getByText('1:01:01')).toBeInTheDocument();
   });
 
-  it('renders the publish date', () => {
+  it('renders the publish date in zh-CN', () => {
     renderWithProviders(<Base videoInfo={videoInfo} />);
     // pubdate 1700000000 → 2023/11/14 中文格式
     expect(screen.getByText(/2023/)).toBeInTheDocument();
+  });
+
+  it('renders the publish date in en-US when language is en', async () => {
+    await i18next.changeLanguage('en');
+    renderWithProviders(<Base videoInfo={videoInfo} />);
+    // en-US 格式會有斜線或逗號分隔 (ex: 11/14/2023)
+    expect(screen.getByText(/2023|11\/14|Nov/)).toBeInTheDocument();
   });
 });
