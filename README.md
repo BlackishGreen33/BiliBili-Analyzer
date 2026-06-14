@@ -142,11 +142,12 @@ BiliBili-Analyzer/
 
 ## 🧪 測試 / Tests
 
-Vitest 2.x + happy-dom + @testing-library/react。**277 個測試**覆蓋：
+Vitest 2.x + happy-dom + @testing-library/react。**304 個測試**覆蓋：
 
 - `src/common/utils/{format,cjk-segmenter,search-filters}.test.ts` — 純函數（70）
 - `src/common/types/schema.test.ts` — Zod schema accept/reject（10）
 - `src/common/libs/{result-data.server,length-predictor,streaming,dashboard-stream}.test.ts` — 純函數 + hook（15 + 6 + 18 + 9）
+- `src/common/libs/{use-dashboard,use-dashboard-trend,use-wordcloud,use-up-overlap,use-latency,use-length-recommend}.test.ts` — SWR hook 個別測試（24）
 - `src/common/hooks/{useLayoutStore,useThemeStore,useUiStore}.test.ts` — zustand store（8）
 - `src/common/i18n/i18n-shape.test.ts` — 三語字典 leaf key 一致性（8）
 - `src/common/utils/search-filters.test.ts` — 過濾/編碼/解碼（19）
@@ -157,7 +158,7 @@ Vitest 2.x + happy-dom + @testing-library/react。**277 個測試**覆蓋：
 - `src/common/components/elements/{SkipToContent,ThemeSettings,SummaryCard,LengthRecommendCard}.test.tsx` — 元素 RTL（20）
 - `src/app/api/api-routes.test.ts` — 5 個 server route 包含 catch path（38）
 
-Coverage 門檻見 `vitest.config.ts`（目前 **92% lines / 86% branches / 93% functions / 92% statements**，
+Coverage 門檻見 `vitest.config.ts`（目前 **93% lines / 87% branches / 94% functions / 93% statements**，
 含排除清單）。CI 會在 `pnpm lint` 後跑 `pnpm test:coverage`，未達門檻 fail。
 
 > 排除清單保留「非本輪觸碰的舊 API / 純 layout chrome / 高度 mock 化使函式覆蓋率失真的容器組件」。
@@ -231,6 +232,7 @@ Coverage 門檻見 `vitest.config.ts`（目前 **92% lines / 86% branches / 93% 
 - [x] 互動率即時排行（`/dashboard` 「互動率 TOP 10」bar + table；`summary.avgEngagement` 與 `topEngagement[10]`）
 - [x] 視頻長度預測（`/api/length/recommend?type=up|channel|tag`；詳情頁「同 UP 主」下方 + `/dashboard` 全局視角；`/dashboard/ups` 跨分區排行；`/dashboard/trend` 跨日時序；發布到上榜延遲；CJK 標題分詞詞雲）
 - [x] v0.7 收尾：補完 5 個 RTL 組件 + 3 個 API catch path + NDJSON 客戶端漸進渲染（`useLatencyStream` / `useDashboardTrendStream`）+ i18n 硬碼中文清零 + 門檻推 92/86/93/92
+- [x] v0.8 重構 + 測試：拆 `dashboard-data.ts` 為 6 個單檔 hook（`use-dashboard` / `use-dashboard-trend` / `use-wordcloud` / `use-up-overlap` / `use-latency` / `use-length-recommend`）+ 各補 RTL 測試 + package.json 對齊 0.8.0 + 門檻推 93/87/94/93
 
 ## 🧪 相容環境 / Browser support
 

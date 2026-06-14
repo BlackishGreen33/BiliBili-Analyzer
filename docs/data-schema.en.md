@@ -160,6 +160,10 @@ raw JSON as fallback) so the UI never goes 100% dark.
 
 ## Changelog
 
+- **v0.8** (2026-06-14):
+  - Schema unchanged. Codebase: `dashboard-data.ts` split into 6
+    single-responsibility hook files. Each hook now has its own
+    RTL test. 304 tests, coverage 93/87/94/93.
 - **v0.7** (2026-06-14):
   - Schema unchanged. Codebase: NDJSON streaming (`?stream=1`) added to
     `/api/latency` and `/api/dashboard/trend`; client hooks
