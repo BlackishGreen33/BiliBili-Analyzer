@@ -1,18 +1,18 @@
 # 部署 / Deployment
 
-> 雙語：[繁體中文](./deployment.md) · [English](./deployment.en.md)
+> 双语：[简体中文](./deployment.md) · [English](./deployment.en.md)
 
 ## Web 部署 (Vercel)
 
-### 觸發
+### 触发
 
 - `main` 分支 push
-- `.github/workflows/build.yml` 跑 `pnpm build` 驗證
-- 通過後 Vercel 自動部署 preview → production
+- `.github/workflows/build.yml` 跑 `pnpm build` 验证
+- 通过后 Vercel 自动部署 preview → production
 
-### 環境變數
+### 环境变量
 
-**不需要設定任何環境變數**。全部 API 都是公開的。
+**不需要设置任何环境变量**。全部 API 都是公开的。
 
 ### Build command
 
@@ -20,19 +20,19 @@
 pnpm build
 ```
 
-### Vercel 設定
+### Vercel 设置
 
 - **Framework**: Next.js
 - **Build command**: `pnpm build`
 - **Output directory**: `.next`
 - **Node.js version**: 20
 
-> **不要**啟用 `output: "export"`！會讓 API routes 失效，導致 dashboard
-> 與詳情頁全部壞掉。
+> **不要**启用 `output: "export"`！会让 API routes 失效，导致 dashboard
+> 与详情页全部坏掉。
 
-## 數據爬取 (GitHub Actions)
+## 数据爬取 (GitHub Actions)
 
-### 觸發
+### 触发
 
 `.github/workflows/crawl.yml`：
 
@@ -49,40 +49,40 @@ on:
 
 1. checkout `main`
 2. `pnpm install`
-3. `pnpm run crawldata`（執行 `CrawlPopular.cjs`）
-4. 把 `result/` 拷貝到 `/tmp`
+3. `pnpm run crawldata`（执行 `CrawlPopular.cjs`）
+4. 把 `result/` 拷贝到 `/tmp`
 5. 切到 `result` orphan 分支
-6. 從 `/tmp` 套用 `result/`
+6. 从 `/tmp` 套用 `result/`
 7. `git add result/* -f && git commit && git push origin result`
 
-### 失敗處理
+### 失败处理
 
-- 如果 cron 失敗，當天沒有資料；前端的 SWR 會 fallback 到昨天
-- `result` 分支的歷史無限期保留
-- 監控：可在 repo 開 Issues 自動警報
+- 如果 cron 失败，当天没有数据；前端的 SWR 会 fallback 到昨天
+- `result` 分支的历史无限期保留
+- 监控：可在 repo 开 Issues 自动警报
 
-## 移動端 (Capacitor)
+## 移动端 (Capacitor)
 
-### 為什麼不常駐啟用？
+### 为什么不常驻启用？
 
-`next.config.mjs` 註解著 `// output: "export"`，因為 Vercel 部署時啟用會
-導致 build 報錯（API routes 與 middleware 都不能 export）。
+`next.config.mjs` 注释着 `// output: "export"`，因为 Vercel 部署时启用会
+导致 build 报错（API routes 与 middleware 都不能 export）。
 
-### 構建流程
+### 构建流程
 
 ```bash
 pnpm build:mobile
 ```
 
-此命令會：
+此命令会：
 
-1. 備份 `next.config.mjs` 到 `next.config.mjs.bak`
-2. 把 `// output: "export"` 解開為 `output: "export"`
-3. 跑 `npx next build`（靜態匯出到 `out/`）
-4. `npx cap sync android ios`（把 `out/` 拷貝到原生殼）
-5. **還原** `next.config.mjs`，刪除 `.bak`
+1. 备份 `next.config.mjs` 到 `next.config.mjs.bak`
+2. 把 `// output: "export"` 解开为 `output: "export"`
+3. 跑 `npx next build`（静态汇出到 `out/`）
+4. `npx cap sync android ios`（把 `out/` 拷贝到原生壳）
+5. **还原** `next.config.mjs`，删除 `.bak`
 
-### 構建原生 app
+### 构建原生 app
 
 ```bash
 # Android
@@ -94,41 +94,41 @@ npx cap open ios
 # 在 Xcode 中 archive
 ```
 
-### 環境要求
+### 环境要求
 
 - Android: Android Studio + JDK 17 + Android SDK
 - iOS: macOS + Xcode 15+ + CocoaPods
 - Capacitor 8
 
-## 環境變數一覽
+## 环境变量一览
 
-不需要任何環境變數。
+不需要任何环境变量。
 
-## 監控
+## 监控
 
-目前**沒有**整合 Sentry / LogRocket。如果需要：
+目前**没有**整合 Sentry / LogRocket。如果需要：
 
 ```bash
 pnpm add @sentry/nextjs
 ```
 
-然後在 `next.config.mjs` 啟用。在 `src/app/error.tsx` 與每個 API
-route 的 `console.error` 處接入 Sentry capture。
+然后在 `next.config.mjs` 启用。在 `src/app/error.tsx` 与每个 API
+route 的 `console.error` 处接入 Sentry capture。
 
-## 還原 / Rollback
+## 还原 / Rollback
 
-- Vercel 後台 → Deployments → 找到上一個 production deployment →
+- Vercel 后台 → Deployments → 找到上一个 production deployment →
   Promote to Production
-- `result` 分支的歷史：用 `git revert` 或 reset
+- `result` 分支的历史：用 `git revert` 或 reset
 
-## CDN / 快取
+## CDN / 缓存
 
-Vercel 自動提供：
+Vercel 自动提供：
 
-- 靜態資產 → 永久快取
-- 頁面 → SWR 機制
-- API routes → 無快取（已自帶 in-memory cache）
+- 静态资产 → 永久缓存
+- 页面 → SWR 机制
+- API routes → 无缓存（已自带 in-memory cache）
 
-## 監控
+## 监控
 
-> 尚未整合。未來加入 Sentry / Plausible Analytics。
+> 尚未整合。未来加入 Sentry / Plausible Analytics。

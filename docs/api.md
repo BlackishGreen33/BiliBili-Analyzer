@@ -1,16 +1,16 @@
-# API 合約 / API
+# API 合约 / API
 
-> 雙語：[繁體中文](./api.md) · [English](./api.en.md)
+> 双语：[简体中文](./api.md) · [English](./api.en.md)
 
-所有路由位於 `src/app/api/*`，執行於 Node.js Runtime（不是 Edge）。
+所有路由位于 `src/app/api/*`，执行于 Node.js Runtime（不是 Edge）。
 
 ## `GET /api/randomBvid`
 
-從最新一天的爬取中隨機取一支視頻，回傳 BV 號。
+从最新一天的爬取中随机取一支视频，回传 BV 号。
 
 **Response**:
 
-- `200` `text/plain` — BV 號字串，例如 `BV1wEEg62EDP`
+- `200` `text/plain` — BV 号字符串，例如 `BV1wEEg62EDP`
 - `500` `Internal Error`
 
 ```bash
@@ -20,7 +20,7 @@ BV1wEEg62EDP
 
 ## `POST /api/videoInfo`
 
-即時查詢 B 站視頻元資料（繞過快取，呼叫 B 站 `/x/web-interface/view`）。
+实时查询 B 站视频元数据（绕过缓存，调用 B 站 `/x/web-interface/view`）。
 
 **Body**:
 
@@ -30,13 +30,13 @@ BV1wEEg62EDP
 
 **Response**:
 
-- `200` `application/json` — 完整 B 站回應
+- `200` `application/json` — 完整 B 站响应
 - `400` `Missing bvid`
 - `500` `Internal Error`
 
 ## `POST /api/videoTags`
 
-從最新一天的爬取中查詢某支視頻的標籤。
+从最新一天的爬取中查询某支视频的标签。
 
 **Body**:
 
@@ -56,23 +56,23 @@ BV1wEEg62EDP
 
 ## `GET /api/dashboard?file=...`
 
-回傳**預聚合**分析資料（5 分鐘 server-side 快取）。
+回传**预聚合**分析数据（5 分钟 server-side 缓存）。
 
 **Query**:
 
-- `file` (optional) — 指定爬取檔名（不含 `.json`）；省略時取最新
+- `file` (optional) — 指定爬取文件名（不含 `.json`）；省略时取最新
 
-**Response** (`200` `application/json`): 見 [data-schema.md](./data-schema.md#預聚合檔agglatestjson) 的 `DashboardAgg` 結構。`summary.avgEngagement` 與 `topEngagement[10]` 為 v0.2 之後新增的互動率欄位。
+**Response** (`200` `application/json`): 见 [data-schema.md](./data-schema.md#预聚合文件agglatestjson) 的 `DashboardAgg` 结构。`summary.avgEngagement` 与 `topEngagement[10]` 为 v0.2 之后新增的互动率字段。
 
 ## `GET /api/dashboard/compare?a=&b=`
 
-回傳**兩天**聚合資料的對比結果（5 分鐘 server-side 快取，key
+回传**两天**聚合数据的对比结果（5 分钟 server-side 缓存，key
 `compare:{a}:{b}`）。
 
 **Query**:
 
-- `a` (required) — 日期 A 檔名（不含 `.json`）
-- `b` (required) — 日期 B 檔名（不含 `.json`）
+- `a` (required) — 日期 A 文件名（不含 `.json`）
+- `b` (required) — 日期 B 文件名（不含 `.json`）
 
 **Response** (`200` `application/json`):
 
@@ -81,9 +81,9 @@ BV1wEEg62EDP
   a: { file: string; time: number; data: DashboardAgg };
   b: { file: string; time: number; data: DashboardAgg };
   diff: {
-    newBvids: string[];            // B 有 A 沒有的 BV
-    droppedBvids: string[];         // A 有 B 沒有的 BV
-    persistentBvids: string[];      // 兩天都上榜
+    newBvids: string[];            // B 有 A 没有的 BV
+    droppedBvids: string[];         // A 有 B 没有的 BV
+    persistentBvids: string[];      // 两天都上榜
     persistentCount: number;
     totals: { totalVideos, totalUp, totalViews, totalEngagement, avgEngagement };
     totalsDelta: { totalVideos, totalUp, totalViews, totalEngagement, avgEngagement };
@@ -96,19 +96,19 @@ BV1wEEg62EDP
 
 **Errors**:
 
-- `400` — 缺 `a` 或 `b`，或兩者相同
-- `404` — 任一天無對應檔案
+- `400` — 缺 `a` 或 `b`，或两者相同
+- `404` — 任一天无对应文件
 - `500` `Internal Error`
 
 ## `GET /api/video?mode=&value=&file=`
 
-回傳相關視頻（用於詳情頁「同 UP 主」「同分區」section）。
+回传相关视频（用于详情页「同 UP 主」「同分区」section）。
 
 **Query**:
 
 - `mode` (required) — `up` / `channel` / `tag`
-- `value` (required) — UP 名或 mid、分區名、標籤
-- `file` (optional) — 預設最新
+- `value` (required) — UP 名或 mid、分区名、标签
+- `file` (optional) — 默认最新
 
 **Response** (`200` `application/json`):
 
@@ -128,23 +128,23 @@ BV1wEEg62EDP
 
 ## 共用
 
-- 沒有 rate limit（Vercel 免費層自然限制）
-- 沒有 auth（資料完全公開）
-- 沒有 CORS 設定（只服務自家前端）
-- Response 全部 JSON 格式除了 `/api/randomBvid` 是純文字
+- 没有 rate limit（Vercel 免费层自然限制）
+- 没有 auth（数据完全公开）
+- 没有 CORS 设置（只服务自家前端）
+- Response 全部 JSON 格式除了 `/api/randomBvid` 是纯文本
 
 ## `GET /api/dev/result-list`
 
-**Dev-only**：回傳本機 `result/list.json` 內容。Production 永遠回
-`{ "list": [] }`。給 `MOCK_LOCAL_FILES=1` + `pnpm mock-second-day`
-QA 流用，`/dashboard/compare` 會用它把 mock 檔名 prepend 到 list 前面。
+**Dev-only**：回传本机 `result/list.json` 内容。Production 永远回
+`{ "list": [] }`。给 `MOCK_LOCAL_FILES=1` + `pnpm mock-second-day`
+QA 流用，`/dashboard/compare` 会用它把 mock 文件名 prepend 到 list 前面。
 
 ```bash
 $ curl http://localhost:3000/api/dev/result-list
 {"list":["2026-06-11T02-25-39+0800","2026-06-12T02-25-39+0800"]}
 ```
 
-## 範例：取得某支視頻的所有同分區視頻
+## 示例：取得某支视频的所有同分区视频
 
 ```bash
 $ curl 'https://bilibili-analyzer.vercel.app/api/video?mode=channel&value=动画'
@@ -152,15 +152,15 @@ $ curl 'https://bilibili-analyzer.vercel.app/api/video?mode=channel&value=动画
 
 ## `GET /api/dashboard/trend?window=30`
 
-回傳 N 天每日 summary 的時序資料（最多 90 天）。
+回传 N 天每日 summary 的时序数据（最多 90 天）。
 
 **Response** (`200` `application/json`):
 
 ```ts
 {
-  window: number; // 實際 window（已 cap 90）
-  isMock: boolean; // 真實天數 < window 時為 true
-  realCount: number; // 真實天數
+  window: number; // 实际 window（已 cap 90）
+  isMock: boolean; // 真实天数 < window 时为 true
+  realCount: number; // 真实天数
   points: Array<{
     file: string;
     date: string; // YYYY-MM-DD (UTC+8)
@@ -177,7 +177,7 @@ $ curl 'https://bilibili-analyzer.vercel.app/api/video?mode=channel&value=动画
 
 ## `GET /api/up/overlap?window=30&minChannels=2&minCount=2&limit=50`
 
-回傳 N 天內出現在多個一級分區的 UP 主排行。
+回传 N 天内出现在多个一级分区的 UP 主排行。
 
 **Response** (`200` `application/json`):
 
@@ -186,7 +186,7 @@ $ curl 'https://bilibili-analyzer.vercel.app/api/video?mode=channel&value=动画
   window: number;
   minChannels: number;
   minCount: number;
-  totalUps: number; // 全部 UP 數
+  totalUps: number; // 全部 UP 数
   items: Array<{
     name: string;
     mid?: number;
@@ -200,16 +200,16 @@ $ curl 'https://bilibili-analyzer.vercel.app/api/video?mode=channel&value=动画
 
 ## `GET /api/latency?window=30`
 
-回傳 N 天影片「發布 → 進入熱門榜」的延遲直方圖。
+回传 N 天视频「发布 → 进入热门榜」的延迟直方图。
 
 **Response** (`200` `application/json`):
 
 ```ts
 {
   window: number;
-  total: number; // 有 pubdate 的影片數
-  avgDays: number; // 平均延遲天數
-  medianDays: number; // 中位數
+  total: number; // 有 pubdate 的视频数
+  avgDays: number; // 平均延迟天数
+  medianDays: number; // 中位数
   buckets: Array<{
     key:
       | 'd0'
@@ -229,7 +229,7 @@ $ curl 'https://bilibili-analyzer.vercel.app/api/video?mode=channel&value=动画
 
 ## `GET /api/wordcloud`
 
-回傳最新一天 1000 支影片標題的 CJK 分詞詞頻（top 200）。
+回传最新一天 1000 支视频标题的 CJK 分词词频（top 200）。
 
 **Response** (`200` `application/json`):
 
@@ -242,13 +242,13 @@ $ curl 'https://bilibili-analyzer.vercel.app/api/video?mode=channel&value=动画
 
 ## `GET /api/length/recommend?type=&value=&window=30`
 
-視頻長度預測（最佳發布時長建議）。
+视频长度预测（最佳发布时长建议）。
 
 **Query**:
 
 - `type` (required) — `up` / `channel` / `tag`
-- `value` (required) — UP 名或 mid / 分區名 / 標籤
-- `window` (optional, 預設 30，最大 90)
+- `value` (required) — UP 名或 mid / 分区名 / 标签
+- `window` (optional, 默认 30，最大 90)
 
 **Response** (`200` `application/json`):
 
@@ -267,29 +267,29 @@ $ curl 'https://bilibili-analyzer.vercel.app/api/video?mode=channel&value=动画
 
 - `400` — 缺 `type` / `value`，或 `type` 非法
 
-## 分享篩選（深連結）
+## 分享筛选（深链接）
 
-`/` 檢索頁的篩選條件會同步到 URL 的 query string，任何時候按下篩選卡
-header 的「分享篩選」按鈕即可複製當前 URL；他人打開後還原完全相同的
-狀態。
+`/` 检索页的筛选条件会同步到 URL 的 query string，任何时候按下筛选卡
+header 的「分享筛选」按钮即可复制当前 URL；他人打开后还原完全相同的
+状态。
 
-| Param  | 型別   | 範例                             | 說明                               |
+| Param  | 类型   | 示例                             | 说明                               |
 | ------ | ------ | -------------------------------- | ---------------------------------- |
-| `q`    | string | `?q=赛博`                        | 搜索關鍵字                         |
-| `c`    | string | `?c=动画-动画综合,游戏-单机游戏` | 1+ 個分區；`,` 分隔，`-` 接一/二級 |
-| `tag`  | string | `?tag=原神`                      | 當前高亮標籤                       |
-| `date` | string | `?date=2026-06-11`               | 選中的爬取日期檔名                 |
+| `q`    | string | `?q=赛博`                        | 搜索关键字                         |
+| `c`    | string | `?c=动画-动画综合,游戏-单机游戏` | 1+ 个分区；`,` 分隔，`-` 接一/二级 |
+| `tag`  | string | `?tag=原神`                      | 当前高亮标签                       |
+| `date` | string | `?date=2026-06-11`               | 选中的爬取日期文件名               |
 
-完整範例：
+完整示例：
 
 ```
 https://bilibili-analyzer.vercel.app/?q=原神&c=游戏-单机游戏&tag=原神&date=2026-06-11
 ```
 
-`router.replace` 不會污染歷史紀錄；reload 後 state 從 `useSearchParams()`
-重新讀取，與初始訪問體驗一致。
+`router.replace` 不会污染历史记录；reload 后 state 从 `useSearchParams()`
+重新读取，与初始访问体验一致。
 
 ## 版本控制
 
-API 路徑沒有 `/v1/`，因為目前還在 0.x 階段。當第一個 1.0 釋出時，所有
-breaking change 會發布到 `/api/v2/...`，舊的至少保留 6 個月。
+API 路径没有 `/v1/`，因为目前还在 0.x 阶段。当第一个 1.0 释出时，所有
+breaking change 会发布到 `/api/v2/...`，旧的至少保留 6 个月。
