@@ -33,7 +33,10 @@ import {
 } from '@/common/components/ui/select';
 import { Spinner } from '@/common/components/ui/spinner';
 import { useThemeStore } from '@/common/hooks/useThemeStore';
-import { useDashboardTrend } from '@/common/libs/dashboard-data';
+import {
+  trendStreamToData,
+  useDashboardTrendStream,
+} from '@/common/libs/dashboard-stream';
 import {
   containerStagger,
   EASE_OUT_EXPO,
@@ -57,7 +60,9 @@ const TrendPage: React.FC = React.memo(() => {
   const { t } = useTranslation();
   const { currentColor } = useThemeStore();
   const [window, setWindow] = useState<number>(30);
-  const { data, isLoading } = useDashboardTrend(window);
+  const stream = useDashboardTrendStream(window);
+  const data = trendStreamToData(stream);
+  const isLoading = !stream.meta;
 
   const durationStackData = useMemo(() => {
     if (!data) return [];
@@ -78,7 +83,6 @@ const TrendPage: React.FC = React.memo(() => {
   return (
     <div className="m-2 mt-24 p-2 md:m-10 md:p-10">
       <motion.div
-        className="mx-auto mb-8 max-w-7xl"
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}

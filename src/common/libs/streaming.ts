@@ -82,33 +82,9 @@ export async function consumeNdjson<T extends Record<string, unknown>>(
   if (!res.body) {
     throw new Error('Response has no body');
   }
-  const reader = res.body.getReader();
-  const decoder = new TextDecoder();
   const result: Record<string, unknown> = {};
   const dataArr: unknown[] = [];
-  let buffer = '';
-
-  // 對齊 Server-Sent Events 的換行處理：每行一個 JSON
-  for (;;) {
-    const { value, done } = await reader.read();
-    if (done) break;
-    buffer += decoder.decode(value, { stream: true });
-    const lines = buffer.split('\n');
-    buffer = lines.pop() ?? '';
-    for (const line of lines) {
-      if (!line.trim()) continue;
-      const event = JSON.parse(line) as StreamEvent;
-      if (event.type === 'chunk' && 'data' in event) {
-        dataArr.push((event as unknown as { data: unknown }).data);
-      } else {
-        const { type: _type, ...rest } = event;
-        void _type;
-        Object.assign(result, rest);
-      }
-    }
-  }
-  if (buffer.trim()) {
-    const event = JSON.parse(buffer) as StreamEvent;
+  for await (const event of parseNdjsonEvents(res.body)) {
     if (event.type === 'chunk' && 'data' in event) {
       dataArr.push((event as unknown as { data: unknown }).data);
     } else {
@@ -121,4 +97,46 @@ export async function consumeNdjson<T extends Record<string, unknown>>(
     result.data = dataArr;
   }
   return result as T;
+}
+
+/**
+ * 給 client 端：把 NDJSON stream 解析成 AsyncIterable<StreamEvent>
+ *
+ * 設計重點：
+ *   - 純函數 + AsyncGenerator，無外部副作用，易測試
+ *   - 處理跨 chunk 的 partial line（buffer 機制）
+ *   - 容忍無尾端換行的最後一行
+ *   - 空行 / 純空白行自動跳過
+ *
+ * 給 useLatencyStream() / useDashboardTrendStream() 這類
+ * 「要逐 chunk 推進 UI state」的情境用
+ */
+export async function* parseNdjsonEvents(
+  body: ReadableStream<Uint8Array> | null
+): AsyncGenerator<StreamEvent> {
+  if (!body) {
+    throw new Error('Stream has no body');
+  }
+  const reader = body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  try {
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() ?? '';
+      for (const line of lines) {
+        if (!line.trim()) continue;
+        yield JSON.parse(line) as StreamEvent;
+      }
+    }
+    if (buffer.trim()) {
+      yield JSON.parse(buffer) as StreamEvent;
+    }
+  } finally {
+    reader.releaseLock();
+  }
 }

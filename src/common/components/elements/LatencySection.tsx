@@ -23,17 +23,41 @@ import {
 } from '@/common/components/ui/card';
 import { Spinner } from '@/common/components/ui/spinner';
 import { useThemeStore } from '@/common/hooks/useThemeStore';
-import { useLatency } from '@/common/libs/dashboard-data';
-import { EASE_OUT_EXPO, fadeUp } from '@/common/styles/motion';
+import {
+  latencyStreamToData,
+  useLatencyStream,
+} from '@/common/libs/dashboard-stream';
+import { fadeUp } from '@/common/styles/motion';
 
 const LatencySection: React.FC<{ file: string }> = React.memo(({ file }) => {
   const { t } = useTranslation();
   const { currentColor } = useThemeStore();
-  const { data, isLoading } = useLatency(30);
+  const stream = useLatencyStream(30);
   // 預設 30 天窗口
   void file;
 
-  if (isLoading || !data) {
+  if (stream.error) {
+    return (
+      <Card>
+        <CardContent className="text-muted-foreground flex h-40 items-center justify-center text-sm">
+          {t('latency.empty')}
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (!stream.meta) {
+    return (
+      <Card>
+        <CardContent className="flex h-40 items-center justify-center">
+          <Spinner />
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const data = latencyStreamToData(stream);
+  if (!data) {
     return (
       <Card>
         <CardContent className="flex h-40 items-center justify-center">
@@ -64,7 +88,7 @@ const LatencySection: React.FC<{ file: string }> = React.memo(({ file }) => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {data.total === 0 ? (
+          {data.total === 0 && stream.isComplete ? (
             <p className="text-muted-foreground py-8 text-center text-sm">
               {t('latency.empty')}
             </p>
@@ -121,8 +145,5 @@ const LatencySection: React.FC<{ file: string }> = React.memo(({ file }) => {
   );
 });
 LatencySection.displayName = 'LatencySection';
-
-// suppress unused import warning
-void EASE_OUT_EXPO;
 
 export default LatencySection;

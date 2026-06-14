@@ -5,6 +5,7 @@ import {
   encodeNdjsonLine,
   ndjsonStream,
   ndjsonStreamFromEvents,
+  parseNdjsonEvents,
 } from '@/common/libs/streaming';
 
 describe('encodeNdjsonLine', () => {
@@ -168,5 +169,90 @@ describe('ndjsonStream', () => {
       })()
     );
     await expect(res.text()).rejects.toThrow('boom');
+  });
+});
+
+describe('parseNdjsonEvents', () => {
+  function streamFromChunks(chunks: string[]): ReadableStream<Uint8Array> {
+    const encoder = new TextEncoder();
+    return new ReadableStream<Uint8Array>({
+      start(controller) {
+        for (const c of chunks) {
+          controller.enqueue(encoder.encode(c));
+        }
+        controller.close();
+      },
+    });
+  }
+
+  async function collect<T>(gen: AsyncGenerator<T>): Promise<T[]> {
+    const out: T[] = [];
+    for await (const v of gen) out.push(v);
+    return out;
+  }
+
+  it('yields events as they arrive from a multi-chunk stream', async () => {
+    const stream = streamFromChunks([
+      '{"type":"meta","window":30}\n{"type":"chunk","data":{"a":',
+      '1}}\n{"type":"done","ok":true}\n',
+    ]);
+    const events = await collect(parseNdjsonEvents(stream));
+    expect(events).toEqual([
+      { type: 'meta', window: 30 },
+      { type: 'chunk', data: { a: 1 } },
+      { type: 'done', ok: true },
+    ]);
+  });
+
+  it('handles a single chunk with multiple events', async () => {
+    const stream = streamFromChunks([
+      '{"type":"meta","x":1}\n{"type":"chunk","data":{"y":2}}\n',
+    ]);
+    const events = await collect(parseNdjsonEvents(stream));
+    expect(events).toEqual([
+      { type: 'meta', x: 1 },
+      { type: 'chunk', data: { y: 2 } },
+    ]);
+  });
+
+  it('handles a final event with no trailing newline', async () => {
+    const stream = streamFromChunks([
+      '{"type":"meta","a":1}\n{"type":"done","b":2}',
+    ]);
+    const events = await collect(parseNdjsonEvents(stream));
+    expect(events).toEqual([
+      { type: 'meta', a: 1 },
+      { type: 'done', b: 2 },
+    ]);
+  });
+
+  it('skips empty and whitespace-only lines', async () => {
+    const stream = streamFromChunks([
+      '\n{"type":"meta","x":1}\n\n  \n{"type":"done","y":2}\n',
+    ]);
+    const events = await collect(parseNdjsonEvents(stream));
+    expect(events).toEqual([
+      { type: 'meta', x: 1 },
+      { type: 'done', y: 2 },
+    ]);
+  });
+
+  it('throws when body is null', async () => {
+    await expect(async () => {
+      for await (const _ of parseNdjsonEvents(null)) {
+        // no-op
+      }
+    }).rejects.toThrow('Stream has no body');
+  });
+
+  it('releases the reader lock when iteration finishes', async () => {
+    const stream = streamFromChunks(['{"type":"meta","x":1}\n']);
+    const gen = parseNdjsonEvents(stream);
+    await gen.next();
+    await gen.return(undefined);
+    // 第二個 reader 應可取得 lock（不會 throw "stream already locked"）
+    const reader2 = stream.getReader();
+    expect(reader2).toBeDefined();
+    reader2.releaseLock();
   });
 });
