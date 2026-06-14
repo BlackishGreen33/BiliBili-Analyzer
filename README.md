@@ -142,26 +142,26 @@ BiliBili-Analyzer/
 
 ## 🧪 測試 / Tests
 
-Vitest 2.x + happy-dom + @testing-library/react。122 個測試覆蓋：
+Vitest 2.x + happy-dom + @testing-library/react。**277 個測試**覆蓋：
 
-- `src/common/utils/format.test.ts` — `formatXxx` / `extractBvid` 邊界值（33）
-- `src/common/utils/cjk-segmenter.test.ts` — `Intl.Segmenter` + n-gram 詞頻（23）
+- `src/common/utils/{format,cjk-segmenter,search-filters}.test.ts` — 純函數（70）
 - `src/common/types/schema.test.ts` — Zod schema accept/reject（10）
-- `src/common/libs/result-data.server.test.ts` — `buildAggregations` 7 個 metric（16）
-- `src/app/api/api-routes.test.ts` — 5 個 server route（trend/length/wordcloud/latency/up-overlap）（20）
-- `src/common/components/elements/SkipToContent.test.tsx` — RTL smoke（4）
-- `src/common/components/elements/ThemeSettings.test.tsx` — RTL smoke（6）
-- `src/common/components/elements/SummaryCard.test.tsx` — RTL smoke（5）
-- `src/common/components/elements/LengthRecommendCard.test.tsx` — RTL smoke（5）
+- `src/common/libs/{result-data.server,length-predictor,streaming,dashboard-stream}.test.ts` — 純函數 + hook（15 + 6 + 18 + 9）
+- `src/common/hooks/{useLayoutStore,useThemeStore,useUiStore}.test.ts` — zustand store（8）
+- `src/common/i18n/i18n-shape.test.ts` — 三語字典 leaf key 一致性（8）
+- `src/common/utils/search-filters.test.ts` — 過濾/編碼/解碼（19）
+- `src/modules/Search/hooks/{useSearchFilters,useInfiniteScroll}.test.ts` — hook（22）
+- `src/modules/Detail/components/{Analization,Base,Video,SearchBar,Detail,StackedChart,WordCloud,VideoInfo}.test.tsx` — Detail RTL（22）
+- `src/modules/Search/components/Search.test.tsx` — Search RTL（9）
+- `src/modules/Home/components/Home.test.tsx` — Home RTL（1）
+- `src/common/components/elements/{SkipToContent,ThemeSettings,SummaryCard,LengthRecommendCard}.test.tsx` — 元素 RTL（20）
+- `src/app/api/api-routes.test.ts` — 5 個 server route 包含 catch path（38）
 
-Coverage 門檻見 `vitest.config.ts`（目前 **85% lines / 78% branches / 88% functions / 85% statements**，
+Coverage 門檻見 `vitest.config.ts`（目前 **92% lines / 86% branches / 93% functions / 92% statements**，
 含排除清單）。CI 會在 `pnpm lint` 後跑 `pnpm test:coverage`，未達門檻 fail。
 
-> 排除清單精準只保留「本輪新增或重構的程式碼」。舊 API（`/api/dashboard`、
-> `/api/dashboard/compare`、`/api/randomBvid`、`/api/video*`）與舊 client hooks
-> （`useDashboard`、`useResultList` 等）與 legacy 頁面（`modules/Search/Search.tsx`、
-> `modules/Detail/components/*`）本輪未觸碰，不算入覆蓋率。下一輪若要推高
-> 覆蓋率，把它們加回 `include` 即可（相應要補測試）。
+> 排除清單保留「非本輪觸碰的舊 API / 純 layout chrome / 高度 mock 化使函式覆蓋率失真的容器組件」。
+> 詳見 `vitest.config.ts` 註解。下一輪若要推高覆蓋率，把對應檔加回 `include` 並補測試即可。
 
 ## 🛰️ 数据采集 / Data crawler
 
@@ -230,6 +230,7 @@ Coverage 門檻見 `vitest.config.ts`（目前 **85% lines / 78% branches / 88% 
 - [x] 跨日趨勢比較（新頁 `/dashboard/compare?a=&b=` + `/api/dashboard/compare`）
 - [x] 互動率即時排行（`/dashboard` 「互動率 TOP 10」bar + table；`summary.avgEngagement` 與 `topEngagement[10]`）
 - [x] 視頻長度預測（`/api/length/recommend?type=up|channel|tag`；詳情頁「同 UP 主」下方 + `/dashboard` 全局視角；`/dashboard/ups` 跨分區排行；`/dashboard/trend` 跨日時序；發布到上榜延遲；CJK 標題分詞詞雲）
+- [x] v0.7 收尾：補完 5 個 RTL 組件 + 3 個 API catch path + NDJSON 客戶端漸進渲染（`useLatencyStream` / `useDashboardTrendStream`）+ i18n 硬碼中文清零 + 門檻推 92/86/93/92
 
 ## 🧪 相容環境 / Browser support
 

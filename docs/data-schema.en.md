@@ -160,6 +160,15 @@ raw JSON as fallback) so the UI never goes 100% dark.
 
 ## Changelog
 
+- **v0.7** (2026-06-14):
+  - Schema unchanged. Codebase: NDJSON streaming (`?stream=1`) added to
+    `/api/latency` and `/api/dashboard/trend`; client hooks
+    `useLatencyStream` / `useDashboardTrendStream` for progressive
+    rendering. 277 tests, coverage 92/86/93/92.
+- **v0.6** (2026-06-13):
+  - Schema unchanged. Codebase: 5 commits, 224 tests. NDJSON streaming
+    server-side, length prediction v2 (median + IQR), 5 missing en
+    i18n keys added.
 - **v0.2** (2026-06-11):
   - `views` is now `number` (was `string`)
   - Added `bvid`, `mid`, `duration`, `pubdate`, `dimension`, `pages`,
