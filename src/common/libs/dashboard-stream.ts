@@ -15,13 +15,12 @@
 
 import { useEffect, useState } from 'react';
 
+import { parseNdjsonEvents, type StreamEvent } from '@/common/libs/streaming';
 import {
-  type LatencyData,
-  type LatencyPoint,
   type TrendData,
   type TrendPoint,
-} from '@/common/libs/dashboard-data';
-import { parseNdjsonEvents, type StreamEvent } from '@/common/libs/streaming';
+} from '@/common/libs/use-dashboard-trend';
+import { type LatencyData, type LatencyPoint } from '@/common/libs/use-latency';
 
 export type LatencyStreamState = {
   meta: { window: number; total: number } | null;

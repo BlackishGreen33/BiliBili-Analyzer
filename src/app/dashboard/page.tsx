@@ -40,8 +40,9 @@ import {
 } from '@/common/components/ui/select';
 import { Spinner } from '@/common/components/ui/spinner';
 import { useThemeStore } from '@/common/hooks/useThemeStore';
-import { useDashboard, useWordCloud } from '@/common/libs/dashboard-data';
 import { useResultList } from '@/common/libs/result-data';
+import { useDashboard } from '@/common/libs/use-dashboard';
+import { useWordCloud } from '@/common/libs/use-wordcloud';
 import {
   containerStagger,
   EASE_OUT_EXPO,

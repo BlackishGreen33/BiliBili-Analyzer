@@ -6,10 +6,10 @@ import { renderWithProviders } from '@/test/test-utils';
 
 // Mock SWR fetcher responses
 const mockUseLengthRecommend = vi.fn();
-vi.mock('@/common/libs/dashboard-data', async () => {
+vi.mock('@/common/libs/use-length-recommend', async () => {
   const actual = await vi.importActual<
-    typeof import('@/common/libs/dashboard-data')
-  >('@/common/libs/dashboard-data');
+    typeof import('@/common/libs/use-length-recommend')
+  >('@/common/libs/use-length-recommend');
   return {
     ...actual,
     useLengthRecommend: (...args: unknown[]) => mockUseLengthRecommend(...args),

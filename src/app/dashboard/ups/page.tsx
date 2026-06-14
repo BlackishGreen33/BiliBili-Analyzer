@@ -21,7 +21,7 @@ import {
   SelectValue,
 } from '@/common/components/ui/select';
 import { Spinner } from '@/common/components/ui/spinner';
-import { useUpOverlap } from '@/common/libs/dashboard-data';
+import { useUpOverlap } from '@/common/libs/use-up-overlap';
 import {
   containerStagger,
   EASE_OUT_EXPO,

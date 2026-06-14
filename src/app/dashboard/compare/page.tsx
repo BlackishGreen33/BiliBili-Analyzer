@@ -33,8 +33,8 @@ import {
 } from '@/common/components/ui/select';
 import { useToast } from '@/common/components/ui/use-toast';
 import { useThemeStore } from '@/common/hooks/useThemeStore';
-import { useDashboardCompare } from '@/common/libs/dashboard-data';
 import { useResultList } from '@/common/libs/result-data';
+import { useDashboardCompare } from '@/common/libs/use-dashboard';
 import {
   containerStagger,
   EASE_OUT_EXPO,

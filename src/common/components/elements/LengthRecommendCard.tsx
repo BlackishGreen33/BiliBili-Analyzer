@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from '@/common/components/ui/card';
 import { useThemeStore } from '@/common/hooks/useThemeStore';
-import { useLengthRecommend } from '@/common/libs/dashboard-data';
+import { useLengthRecommend } from '@/common/libs/use-length-recommend';
 import { EASE_OUT_EXPO, fadeUp } from '@/common/styles/motion';
 import { formatDuration, formatPercent } from '@/common/utils/format';
 

@@ -72,8 +72,13 @@ export default defineConfig({
         // 12. 結果 loader 的 client SWR 鉤子（v0.1 老邏輯，與 server fetcher 行為等價）
         'src/common/libs/result-data.ts',
         'src/common/libs/video-data.ts',
-        // 13. SWR hook 集合（除 streaming 變體外，v0.1 既有未測；下輪可拆檔後補）
-        'src/common/libs/dashboard-data.ts',
+        // 13. v0.8 拆出的 SWR hook 集合（每個檔案一個 hook, 還未補測試, 下一步 commit 補）
+        'src/common/libs/use-dashboard.ts',
+        'src/common/libs/use-dashboard-trend.ts',
+        'src/common/libs/use-wordcloud.ts',
+        'src/common/libs/use-up-overlap.ts',
+        'src/common/libs/use-latency.ts',
+        'src/common/libs/use-length-recommend.ts',
         // 14. 其餘未在本輪觸碰的 presentational 組件
         'src/common/components/elements/Download.tsx',
         'src/common/components/elements/Footer.tsx',
@@ -82,15 +87,10 @@ export default defineConfig({
         'src/common/components/elements/TitleWordCloud.tsx',
       ],
       thresholds: {
-        // v0.7 推高至 92/86/93/92
-        // 移除 4 個 presentational 排除項（這輪 streaming client 接入）
-        // 5 個 Detail + Search + Home 排除項加回（mock 化使函式覆蓋率失真）
-        // branches 86% 因為:
-        //   - routes (latency 78 / trend 86 / up-overlap 65 / length 81) 多重 catch + parseInt ?? 衍生
-        //   - result-data.server (87) mock fetch + JSON.parse 分支
-        //   - cjk-segmenter (80) 多 regex 條件分支
-        //   - length-predictor (88) 邊界 percentile 內插
-        // 下一輪若要再推：拆出純函數 helpers 單獨測
+        // v0.8 拆檔後暫時降門檻, 待下一步 commit 補完 hook 測試後再推
+        // 移除 dashboard-data.ts 排除項 (已拆), 加入 6 個新檔案暫時排除
+        // branches 86% → 86% (hooks 未測, 無變化)
+        // 下一輪若要再推：補 hook RTL 測試後移除排除項, 推至 95/90/95/95
         lines: 92,
         branches: 86,
         functions: 93,
