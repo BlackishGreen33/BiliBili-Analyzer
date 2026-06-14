@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaDice } from 'react-icons/fa';
 import { IoSearchSharp } from 'react-icons/io5';
 
@@ -17,6 +18,7 @@ const SearchBar: React.FC = React.memo(() => {
   const router = useRouter();
   const { currentColor } = useThemeStore();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [value, setValue] = useState('');
   const [isInputFocused, setIsInputFocused] = useState(false);
   const {
@@ -29,8 +31,8 @@ const SearchBar: React.FC = React.memo(() => {
     if (!bvid) {
       toast({
         variant: 'destructive',
-        title: '暂无可用视频',
-        description: '请稍后再试。',
+        title: t('detail.search.emptyVideo.title'),
+        description: t('detail.search.emptyVideo.desc'),
       });
       return;
     }
@@ -42,8 +44,8 @@ const SearchBar: React.FC = React.memo(() => {
     if (!bvid) {
       toast({
         variant: 'destructive',
-        title: '无法从 URL 中获取 BV 号',
-        description: '请确认输入的链接是否正确。',
+        title: t('detail.search.invalidBvid.title'),
+        description: t('detail.search.invalidBvid.desc'),
       });
       return;
     }
@@ -79,7 +81,7 @@ const SearchBar: React.FC = React.memo(() => {
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 p-6">
         <Input
           className="h-12 w-1/2 max-w-xl rounded-full bg-gray-100/80 px-6 text-base backdrop-blur dark:bg-gray-900/80"
-          placeholder="在此处输入视频链接"
+          placeholder={t('detail.search.placeholder')}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onFocus={() => setIsInputFocused(true)}
@@ -95,7 +97,7 @@ const SearchBar: React.FC = React.memo(() => {
             onClick={handleSearch}
           >
             <IoSearchSharp />
-            搜索视频
+            {t('detail.search.button')}
           </Button>
           <Button
             className="h-11 gap-2 px-5"
@@ -104,7 +106,7 @@ const SearchBar: React.FC = React.memo(() => {
             disabled={isLoading}
           >
             <FaDice />
-            {isLoading ? '加载中…' : '随机'}
+            {isLoading ? t('detail.search.loading') : t('detail.search.random')}
           </Button>
         </div>
       </div>

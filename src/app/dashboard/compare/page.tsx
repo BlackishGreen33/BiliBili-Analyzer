@@ -500,7 +500,9 @@ const ComparePage: React.FC = React.memo(() => {
                               <FaUserAlt className="text-muted-foreground h-2.5 w-2.5" />
                               {u.name}
                             </span>
-                            <span className="tabular-nums">{u.count} 次</span>
+                            <span className="tabular-nums">
+                              {t('compare.countLabel', { count: u.count })}
+                            </span>
                           </div>
                         ))}
                         {upBuckets.newUps.length === 0 && (
@@ -533,7 +535,7 @@ const ComparePage: React.FC = React.memo(() => {
                               {u.name}
                             </span>
                             <span className="text-muted-foreground tabular-nums">
-                              {u.count} 次
+                              {t('compare.countLabel', { count: u.count })}
                             </span>
                           </div>
                         ))}
@@ -728,7 +730,9 @@ const ComparePage: React.FC = React.memo(() => {
                             borderRadius: '8px',
                             fontSize: '12px',
                           }}
-                          labelFormatter={(h: number) => `${h} 时`}
+                          labelFormatter={(h: number) =>
+                            t('dashboard.chart.hourSuffix', { h })
+                          }
                         />
                         <Bar
                           dataKey="count"
@@ -780,7 +784,9 @@ const ComparePage: React.FC = React.memo(() => {
                             borderRadius: '8px',
                             fontSize: '12px',
                           }}
-                          labelFormatter={(h: number) => `${h} 时`}
+                          labelFormatter={(h: number) =>
+                            t('dashboard.chart.hourSuffix', { h })
+                          }
                         />
                         <Bar
                           dataKey="count"

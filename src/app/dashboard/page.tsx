@@ -88,15 +88,15 @@ const DashboardPage: React.FC = React.memo(() => {
     [data?.channels]
   );
 
-  const upBarData = useMemo(
-    () =>
-      (data?.topUps ?? []).slice(0, 10).map((u) => ({
-        name: u.name,
-        上榜: u.count,
-        粉丝: u.followers ?? 0,
-      })),
-    [data?.topUps]
-  );
+  const upBarData = useMemo(() => {
+    const countKey = t('dashboard.chart.upBarCount');
+    const followersKey = t('dashboard.chart.followers');
+    return (data?.topUps ?? []).slice(0, 10).map((u) => ({
+      name: u.name,
+      [countKey]: u.count,
+      [followersKey]: u.followers ?? 0,
+    }));
+  }, [data?.topUps, t]);
 
   const tagBarData = useMemo(
     () =>
@@ -445,7 +445,7 @@ const DashboardPage: React.FC = React.memo(() => {
                           }}
                         />
                         <Bar
-                          dataKey="上榜"
+                          dataKey={t('dashboard.chart.upBarCount')}
                           fill={currentColor}
                           radius={[0, 6, 6, 0]}
                         />
@@ -550,7 +550,9 @@ const DashboardPage: React.FC = React.memo(() => {
                             borderRadius: '8px',
                             fontSize: '12px',
                           }}
-                          labelFormatter={(h: number) => `${h} 时`}
+                          labelFormatter={(h: number) =>
+                            t('dashboard.chart.hourSuffix', { h })
+                          }
                         />
                         <Bar
                           dataKey="count"

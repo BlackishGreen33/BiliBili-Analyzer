@@ -102,4 +102,16 @@ describe('i18n dictionary shape', () => {
     expect(getNested(zhCN, 'compare.countUnit')).toBe('{count} 个');
     expect(getNested(zhTW, 'compare.countUnit')).toBe('{count} 個');
   });
+
+  it('compare.countLabel is a parameterized template in all three languages', () => {
+    expect(getNested(en, 'compare.countLabel')).toBe('{count} listings');
+    expect(getNested(zhCN, 'compare.countLabel')).toBe('{count} 次');
+    expect(getNested(zhTW, 'compare.countLabel')).toBe('{count} 次');
+  });
+
+  it('dashboard.chart.hourSuffix is a parameterized template in all three languages', () => {
+    expect(getNested(en, 'dashboard.chart.hourSuffix')).toBe('{h}h');
+    expect(getNested(zhCN, 'dashboard.chart.hourSuffix')).toBe('{h} 时');
+    expect(getNested(zhTW, 'dashboard.chart.hourSuffix')).toBe('{h} 時');
+  });
 });

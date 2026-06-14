@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import React from 'react';
 import D3WordCloud from 'react-d3-cloud';
+import { useTranslation } from 'react-i18next';
 
 import {
   Card,
@@ -24,12 +25,13 @@ const WordCloud: React.FC<WordCloudProps> = React.memo(
   ({ formattedTopics }) => {
     const theme = useTheme();
     const router = useRouter();
+    const { t } = useTranslation();
 
     return (
       <Card className="flex-1">
         <CardHeader>
-          <CardTitle>标签云</CardTitle>
-          <CardDescription>视频相关的搜索词</CardDescription>
+          <CardTitle>{t('detail.tags.title')}</CardTitle>
+          <CardDescription>{t('detail.tags.desc')}</CardDescription>
         </CardHeader>
         <CardContent>
           <D3WordCloud
