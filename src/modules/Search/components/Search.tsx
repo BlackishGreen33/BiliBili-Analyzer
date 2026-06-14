@@ -1,14 +1,8 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useRouter, useSearchParams } from 'next/navigation';
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFilter, FaSearch, FaTimes, FaUserAlt } from 'react-icons/fa';
 import { LuShare2 } from 'react-icons/lu';
@@ -45,12 +39,9 @@ import {
   formatDateTime,
   formatViews,
 } from '@/common/utils/format';
+import { buildChannelOptions } from '@/common/utils/search-filters';
 
-type ChannelOption = {
-  value: string;
-  label: string;
-  children?: ChannelOption[];
-};
+import { useInfiniteScroll, useSearchFilters } from '../hooks';
 
 type VideoItem = {
   bvid: string;
@@ -64,46 +55,6 @@ type VideoItem = {
     secondChannel: string;
     ordinaryTags: string[];
   };
-};
-
-function buildChannelOptions(
-  videos: Array<{ tags: { firstChannel: string; secondChannel: string } }>
-): ChannelOption[] {
-  const map = new Map<string, ChannelOption>();
-  for (const v of videos) {
-    const first = v.tags.firstChannel;
-    const second = v.tags.secondChannel;
-    if (!first || !second) continue;
-    let entry = map.get(first);
-    if (!entry) {
-      entry = { value: first, label: first, children: [] };
-      map.set(first, entry);
-    }
-    if (!entry.children!.some((c) => c.value === second)) {
-      entry.children!.push({ value: second, label: second });
-    }
-  }
-  return Array.from(map.values());
-}
-
-const PAGE_SIZE = 24;
-
-const encodeChannels = (cs: string[][]): string =>
-  cs
-    .map(([f, s]) => (s ? `${f}-${s}` : f))
-    .filter((s) => s.length > 0)
-    .join(',');
-
-const decodeChannels = (raw: string | null | undefined): string[][] => {
-  if (!raw) return [];
-  return raw
-    .split(',')
-    .map((seg) => seg.trim())
-    .filter(Boolean)
-    .map((seg) => {
-      const i = seg.indexOf('-');
-      return i < 0 ? [seg, ''] : [seg.slice(0, i), seg.slice(i + 1)];
-    });
 };
 
 const VideoCard: React.FC<{
@@ -173,134 +124,59 @@ VideoCard.displayName = 'VideoCard';
 
 const Search: React.FC = React.memo(() => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const initialQ = searchParams.get('q') ?? '';
-  const initialTag = searchParams.get('tag') ?? '';
-  const initialDate = searchParams.get('date') ?? '';
-  const initialChannels = decodeChannels(searchParams.get('c'));
-
   const { currentColor } = useThemeStore();
   const { screenSize } = useLayoutStore();
   const { toast } = useToast();
   const { t } = useTranslation();
 
   const { data: list = [] } = useResultList();
-  const [selectedTime, setSelectedTime] = useState<string | null>(
-    initialDate || null
-  );
-  const effectiveTime = selectedTime ?? list[0] ?? null;
-  const { data: result, isLoading } = useLatestCrawl(effectiveTime);
+  // 第一階段：先確定 effectiveTime（不需要 result）
+  const fallbackFile = list[0] ?? null;
+  const { data: result, isLoading } = useLatestCrawl(fallbackFile);
 
-  const [searchValue, setSearchValue] = useState(initialQ);
-  const [selectedChannels, setSelectedChannels] =
-    useState<string[][]>(initialChannels);
-  const [activeTag, setActiveTag] = useState<string | null>(initialTag || null);
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const filters = useSearchFilters({ result: result ?? null, list }, router);
+  const {
+    searchValue,
+    selectedChannels,
+    activeTag,
+    visible,
+    filtered,
+    effectiveTime,
+    setSearchValue,
+    setSelectedChannels,
+    setActiveTag,
+    handleReset,
+    handleChangeDate,
+    loadMore,
+  } = filters;
 
   const channelOptions = useMemo(
     () => (result ? buildChannelOptions(result.video) : []),
     [result]
   );
 
-  const filtered = useMemo(() => {
-    if (!result) return [];
-    const kw = searchValue.trim().toLowerCase();
-    return result.video.filter((v) => {
-      const matchKw =
-        !kw ||
-        v.title.toLowerCase().includes(kw) ||
-        v.UP.toLowerCase().includes(kw) ||
-        v.tags.ordinaryTags.some((t) => t.toLowerCase().includes(kw));
-      const matchChannel =
-        selectedChannels.length === 0 ||
-        selectedChannels.some(
-          ([first, second]) =>
-            v.tags.firstChannel === first &&
-            (v.tags.secondChannel === second || !second)
-        );
-      const matchTag = !activeTag || v.tags.ordinaryTags.includes(activeTag);
-      return matchKw && matchChannel && matchTag;
-    });
-  }, [result, searchValue, selectedChannels, activeTag]);
-
-  useEffect(() => {
-    if (result && visibleCount > filtered.length && filtered.length > 0) {
-      setVisibleCount(Math.min(PAGE_SIZE, filtered.length));
-    }
-  }, [result, filtered.length, visibleCount]);
-
-  const visible = useMemo(
-    () => filtered.slice(0, visibleCount),
-    [filtered, visibleCount]
-  );
-
-  useEffect(() => {
-    if (!effectiveTime) return;
-    const params = new URLSearchParams();
-    if (searchValue.trim()) params.set('q', searchValue.trim());
-    if (selectedChannels.length > 0)
-      params.set('c', encodeChannels(selectedChannels));
-    if (activeTag) params.set('tag', activeTag);
-    if (selectedTime) params.set('date', selectedTime);
-    const qs = params.toString();
-    const target = qs ? `/?${qs}` : '/';
-    if (
-      typeof window !== 'undefined' &&
-      window.location.pathname + window.location.search !== target
-    ) {
-      router.replace(target, { scroll: false });
-    }
-  }, [
-    router,
-    searchValue,
-    selectedChannels,
-    activeTag,
-    selectedTime,
-    effectiveTime,
-  ]);
-
-  const handleRowClick = (url: string) => {
-    const bvid = extractBvid(url);
-    if (!bvid) {
-      toast({
-        variant: 'destructive',
-        title: t('detail.bvidMissing.title'),
-        description: t('detail.bvidMissing.desc'),
-      });
-      return;
-    }
-    router.push('/details?bvid=' + bvid);
-  };
-
-  const handleReset = () => {
-    setSearchValue('');
-    setSelectedChannels([]);
-    setActiveTag(null);
-  };
-
-  const handleChangeDate = (filename: string) => {
-    setSelectedTime(filename);
-    handleReset();
-  };
-
-  const stateRef = useRef({ visible: 0, filtered: 0 });
-  useEffect(() => {
-    stateRef.current = { visible: visible.length, filtered: filtered.length };
+  useInfiniteScroll({
+    hasMore: visible.length < filtered.length,
+    visible: visible.length,
+    total: filtered.length,
+    onLoadMore: loadMore,
   });
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const onScroll = () => {
-      const { visible: v, filtered: f } = stateRef.current;
-      if (v >= f) return;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      if (max <= 0) return;
-      if (window.scrollY > max - 600) {
-        setVisibleCount((c) => Math.min(c + PAGE_SIZE, f));
+
+  const handleRowClick = useCallback(
+    (url: string) => {
+      const bvid = extractBvid(url);
+      if (!bvid) {
+        toast({
+          variant: 'destructive',
+          title: t('detail.bvidMissing.title'),
+          description: t('detail.bvidMissing.desc'),
+        });
+        return;
       }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+      router.push('/details?bvid=' + bvid);
+    },
+    [router, toast, t]
+  );
 
   const gridCols = useMemo(() => {
     const w = screenSize ?? 1280;
@@ -510,8 +386,8 @@ const Search: React.FC = React.memo(() => {
                                 );
                                 if (idx < 0) return prev;
                                 const copy = [...prev];
-                                if (copy[idx][1] === sub.value) {
-                                  copy[idx] = [copy[idx][0], ''];
+                                if (copy[idx]![1] === sub.value) {
+                                  copy[idx] = [copy[idx]![0]!, ''];
                                 } else {
                                   copy[idx] = [parent.value, sub.value];
                                 }
@@ -635,10 +511,10 @@ const Search: React.FC = React.memo(() => {
             >
               {visible.map((item) => (
                 <VideoCard
-                  key={item.url}
-                  item={item}
+                  key={(item as VideoItem).url}
+                  item={item as VideoItem}
                   currentColor={currentColor}
-                  onClick={() => handleRowClick(item.url)}
+                  onClick={() => handleRowClick((item as VideoItem).url)}
                   onTagClick={(tag) => setActiveTag(tag)}
                 />
               ))}
@@ -664,7 +540,6 @@ const Search: React.FC = React.memo(() => {
     </div>
   );
 });
-
 Search.displayName = 'Search';
 
 export default Search;

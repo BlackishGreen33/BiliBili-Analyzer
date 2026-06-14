@@ -47,9 +47,13 @@ export default defineConfig({
         'src/common/components/layouts/**',
         'src/common/components/navbar/**',
         'src/common/components/sidebar/**',
-        // 8. 詳細頁 Detail 模組（v0.2 已上線、未在本輪重構；plan 為下一輪再補）
-        'src/modules/Detail/components/**',
-        // 9. 搜尋頁 Search 主組件（670 行，純 presentational；plan 為下一輪拆 hook 後再測）
+        // 8. 詳情頁未測組件（v0.2 結構複雜，partial 覆蓋；待下輪 RTL 補齊）
+        'src/modules/Detail/components/Detail.tsx',
+        'src/modules/Detail/components/SearchBar.tsx',
+        'src/modules/Detail/components/StackedChart.tsx',
+        'src/modules/Detail/components/VideoInfo.tsx',
+        'src/modules/Detail/components/WordCloud.tsx',
+        // 9. 搜尋頁主組件（已抽 hooks，純組件；本輪未加 RTL，列下一輪）
         'src/modules/Search/components/Search.tsx',
         'src/modules/Home/components/Home.tsx',
         // 10. 所有 page.tsx（容器層；目前用 e2e 手動 QA 覆蓋）
@@ -68,9 +72,7 @@ export default defineConfig({
         'src/common/libs/dashboard-data.ts',
         'src/common/libs/result-data.ts',
         'src/common/libs/video-data.ts',
-        // 14. Zustand stores（本輪無重構；測試相對低價值）
-        'src/common/hooks/**',
-        // 15. 其餘未在本輪觸碰的 presentational 組件
+        // 14. 其餘未在本輪觸碰的 presentational 組件
         'src/common/components/elements/Download.tsx',
         'src/common/components/elements/Footer.tsx',
         'src/common/components/elements/LatencySection.tsx',
@@ -78,16 +80,15 @@ export default defineConfig({
         'src/common/components/elements/TitleWordCloud.tsx',
       ],
       thresholds: {
-        // 排除清單已精準只留「本輪新增或重構的程式碼」，門檻只在剩餘程式生效
-        // 89/80/90 是基於本輪已寫 131 個測試的實際覆蓋率
-        // 下一輪如要再推高，可把以下三個舊檔加回覆蓋：
-        //   - src/common/libs/dashboard-data.ts (SWR hooks)
-        //   - src/common/libs/result-data.ts (client SWR + dev merge)
-        //   - src/common/hooks/** (zustand stores)
-        lines: 85,
-        branches: 78,
-        functions: 88,
-        statements: 85,
+        // v0.6 推高至 90/83/92/90
+        // Search 純函數（19 tests）+ Detail 部分組件 + stores 全部進覆蓋網
+        // branches 84% 略低是因為 latency / up/overlap / wordcloud routes 的
+        // catch paths（error handler）未在測試中觸發
+        // 下一輪若要再推：移除剩餘的 Detail 排除項並補 RTL
+        lines: 90,
+        branches: 83,
+        functions: 92,
+        statements: 90,
       },
     },
   },

@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   consumeNdjson,
   encodeNdjsonLine,
+  ndjsonStream,
   ndjsonStreamFromEvents,
 } from '@/common/libs/streaming';
 
@@ -121,5 +122,51 @@ describe('consumeNdjson', () => {
     expect(result.window).toBe(5);
     expect(result.data).toEqual([{ a: 1 }]);
     expect(result.ok).toBe(true);
+  });
+});
+
+describe('ndjsonStream', () => {
+  it('converts an AsyncGenerator into a ReadableStream Response', async () => {
+    async function* gen() {
+      yield { type: 'meta' as const, window: 30 };
+      yield { type: 'chunk' as const, data: { x: 1 } };
+      yield { type: 'done' as const, ok: true };
+    }
+    const res = ndjsonStream(gen());
+    expect(res.headers.get('Content-Type')).toBe(
+      'application/x-ndjson; charset=utf-8'
+    );
+    expect(res.headers.get('X-Content-Type-Options')).toBe('nosniff');
+    const text = await res.text();
+    expect(text).toBe(
+      '{"type":"meta","window":30}\n' +
+        '{"type":"chunk","data":{"x":1}}\n' +
+        '{"type":"done","ok":true}\n'
+    );
+  });
+
+  it('handles an empty generator', async () => {
+    async function* gen() {
+      // 立即 return → 不 yield 任何東西
+      return;
+    }
+    void gen;
+    const res = ndjsonStream(
+      (async function* () {
+        return;
+      })()
+    );
+    const text = await res.text();
+    expect(text).toBe('');
+  });
+
+  it('propagates errors from the generator', async () => {
+    const res = ndjsonStream(
+      (async function* () {
+        yield { type: 'meta' as const, ok: true };
+        throw new Error('boom');
+      })()
+    );
+    await expect(res.text()).rejects.toThrow('boom');
   });
 });
