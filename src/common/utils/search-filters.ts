@@ -72,20 +72,23 @@ export type FilterArgs<T extends VideoLike> = {
 export function filterVideos<T extends VideoLike>(args: FilterArgs<T>): T[] {
   const { videos, q, channels, tag } = args;
   const kw = q.trim().toLowerCase();
+  const matchTitle = (title: string) => title.toLowerCase().includes(kw);
+  const matchTagText = (tags: string[]) =>
+    tags.some((t) => t.toLowerCase().includes(kw));
+  const matchChannel = (v: VideoLike) =>
+    channels.length === 0 ||
+    channels.some(
+      ([first, second]) =>
+        v.tags.firstChannel === first &&
+        (v.tags.secondChannel === second || !second)
+    );
+  const matchTag = (tags: string[]) => !tag || tags.includes(tag);
   return videos.filter((v) => {
     const matchKw =
       !kw ||
-      v.title.toLowerCase().includes(kw) ||
-      v.UP.toLowerCase().includes(kw) ||
-      v.tags.ordinaryTags.some((t) => t.toLowerCase().includes(kw));
-    const matchChannel =
-      channels.length === 0 ||
-      channels.some(
-        ([first, second]) =>
-          v.tags.firstChannel === first &&
-          (v.tags.secondChannel === second || !second)
-      );
-    const matchTag = !tag || v.tags.ordinaryTags.includes(tag);
-    return matchKw && matchChannel && matchTag;
+      matchTitle(v.title) ||
+      matchTitle(v.UP) ||
+      matchTagText(v.tags.ordinaryTags);
+    return matchKw && matchChannel(v) && matchTag(v.tags.ordinaryTags);
   });
 }

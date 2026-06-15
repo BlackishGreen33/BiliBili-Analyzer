@@ -25,7 +25,7 @@ const Layout: React.FC<LayoutProps> = React.memo(({ children }) => {
     <div className="bg-main-bg dark:bg-main-dark-bg relative flex min-h-screen">
       <SkipToContent />
       <div
-        className={`dark:bg-secondary-dark-bg ${activeMenu ? 'sidebar fixed z-40 w-72 bg-white' : 'w-0'}`}
+        className={`dark:bg-secondary-dark-bg ${activeMenu ? 'fixed z-40 w-72 bg-white' : 'w-0'}`}
       >
         <Sidebar />
       </div>

@@ -98,7 +98,6 @@ for (let d = 1; d <= N; d++) {
   const r1 = jitter(d * 13);
   const r2 = jitter(d * 19);
   const r3 = jitter(d * 23);
-  const r4 = jitter(d * 29);
 
   const dayVideos = latestData.video.map((v) => {
     const v2 = { ...v };
@@ -137,9 +136,6 @@ for (let d = 1; d <= N; d++) {
 
   list.unshift(dayFile);
   generated++;
-  if (r4 < 0.3) {
-    // 偶爾加一條 hint
-  }
 }
 
 writeFileSync(listPath, JSON.stringify(list));
