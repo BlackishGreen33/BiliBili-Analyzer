@@ -7,15 +7,18 @@ import {
   fetchResultByName,
   fetchResultList,
 } from '@/common/libs/result-data.server';
+import {
+  createFiveMinCache,
+  withRouteErrorHandler,
+} from '@/common/libs/routes/create-cached-route';
 
-const CACHE_TTL_MS = 5 * 60 * 1000;
-let cached: { key: string; data: DashboardAgg; at: number } | null = null;
+const cache = createFiveMinCache<DashboardAgg>();
 
 export async function GET(req: Request) {
-  const url = new URL(req.url);
-  const filename = url.searchParams.get('file');
+  return withRouteErrorHandler('DASHBOARD', async () => {
+    const url = new URL(req.url);
+    const filename = url.searchParams.get('file');
 
-  try {
     let targetFile = filename;
     if (!targetFile) {
       const list = await fetchResultList();
@@ -26,9 +29,9 @@ export async function GET(req: Request) {
     }
 
     const key = 'dashboard:' + targetFile;
-    const now = Date.now();
-    if (cached && cached.key === key && now - cached.at < CACHE_TTL_MS) {
-      return NextResponse.json(cached.data);
+    const hit = cache.get(key);
+    if (hit) {
+      return NextResponse.json(hit);
     }
 
     const allData = await fetchResultByName(targetFile);
@@ -38,10 +41,7 @@ export async function GET(req: Request) {
       time: allData.time,
       ...agg,
     };
-    cached = { key, data: payload, at: now };
+    cache.set(key, payload);
     return NextResponse.json(payload);
-  } catch (error) {
-    console.error('DASHBOARD_GET', error);
-    return new NextResponse('Internal Error', { status: 500 });
-  }
+  });
 }

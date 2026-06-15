@@ -5,27 +5,29 @@ import {
   fetchResultList,
 } from '@/common/libs/result-data.server';
 import {
+  createFiveMinCache,
+  withRouteErrorHandler,
+} from '@/common/libs/routes/create-cached-route';
+import {
   aggregateUpOverlap,
   buildUpMap,
   parseOverlapParams,
   type UpOverlapPayload,
 } from '@/common/libs/routes/up-overlap';
 
-const CACHE_TTL_MS = 5 * 60 * 1000;
-const cache = new Map<string, { data: unknown; at: number }>();
+const cache = createFiveMinCache<UpOverlapPayload>();
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const params = parseOverlapParams(url);
 
   const cacheKey = `upoverlap:${params.window}:${params.minChannels}:${params.minCount}:${params.limit}`;
-  const now = Date.now();
   const hit = cache.get(cacheKey);
-  if (hit && now - hit.at < CACHE_TTL_MS) {
-    return NextResponse.json(hit.data);
+  if (hit) {
+    return NextResponse.json(hit);
   }
 
-  try {
+  return withRouteErrorHandler('UP_OVERLAP', async () => {
     const list = await fetchResultList();
     const target = list.slice(0, params.window);
     if (target.length === 0) {
@@ -36,7 +38,7 @@ export async function GET(req: Request) {
         totalUps: 0,
         items: [],
       };
-      cache.set(cacheKey, { data: empty, at: now });
+      cache.set(cacheKey, empty);
       return NextResponse.json(empty);
     }
 
@@ -62,10 +64,7 @@ export async function GET(req: Request) {
         limit: params.limit,
       }),
     };
-    cache.set(cacheKey, { data: payload, at: now });
+    cache.set(cacheKey, payload);
     return NextResponse.json(payload);
-  } catch (error) {
-    console.error('UP_OVERLAP_GET', error);
-    return new NextResponse('Internal Error', { status: 500 });
-  }
+  });
 }

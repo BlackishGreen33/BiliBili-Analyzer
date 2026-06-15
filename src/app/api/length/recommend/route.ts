@@ -6,13 +6,16 @@ import {
   fetchResultList,
 } from '@/common/libs/result-data.server';
 import {
+  createFiveMinCache,
+  withRouteErrorHandler,
+} from '@/common/libs/routes/create-cached-route';
+import {
   type LengthRecommendPayload,
   matchVideo,
   parseLengthParams,
 } from '@/common/libs/routes/length-recommend';
 
-const CACHE_TTL_MS = 5 * 60 * 1000;
-const cache = new Map<string, { data: unknown; at: number }>();
+const cache = createFiveMinCache<LengthRecommendPayload>();
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
@@ -23,13 +26,12 @@ export async function GET(req: Request) {
   const { type, value, window } = parsed;
 
   const cacheKey = `length:${type}:${value}:${window}`;
-  const now = Date.now();
   const hit = cache.get(cacheKey);
-  if (hit && now - hit.at < CACHE_TTL_MS) {
-    return NextResponse.json(hit.data);
+  if (hit) {
+    return NextResponse.json(hit);
   }
 
-  try {
+  return withRouteErrorHandler('LENGTH_RECOMMEND', async () => {
     const list = await fetchResultList();
     const target = list.slice(0, window);
     const scopeSamples: number[] = [];
@@ -74,10 +76,7 @@ export async function GET(req: Request) {
       p75: prediction.p75,
       rationaleKey: prediction.rationaleKey,
     };
-    cache.set(cacheKey, { data: payload, at: now });
+    cache.set(cacheKey, payload);
     return NextResponse.json(payload);
-  } catch (error) {
-    console.error('LENGTH_RECOMMEND_GET', error);
-    return new NextResponse('Internal Error', { status: 500 });
-  }
+  });
 }

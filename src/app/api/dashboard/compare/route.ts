@@ -7,17 +7,19 @@ import {
   fetchResultByName,
   fetchResultList,
 } from '@/common/libs/result-data.server';
+import {
+  createFiveMinCache,
+  withRouteErrorHandler,
+} from '@/common/libs/routes/create-cached-route';
 import { computeDiff } from '@/common/libs/routes/dashboard-compare';
-
-const CACHE_TTL_MS = 5 * 60 * 1000;
-type CacheEntry = { data: unknown; at: number };
-const cache = new Map<string, CacheEntry>();
 
 type ComparePayload = {
   a: DashboardAgg;
   b: DashboardAgg;
   diff: ReturnType<typeof computeDiff>;
 };
+
+const cache = createFiveMinCache<ComparePayload>();
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
@@ -32,13 +34,12 @@ export async function GET(req: Request) {
   }
 
   const cacheKey = `compare:${a}:${b}`;
-  const now = Date.now();
   const hit = cache.get(cacheKey);
-  if (hit && now - hit.at < CACHE_TTL_MS) {
-    return NextResponse.json(hit.data);
+  if (hit) {
+    return NextResponse.json(hit);
   }
 
-  try {
+  return withRouteErrorHandler('DASHBOARD_COMPARE', async () => {
     const list = await fetchResultList();
     if (!list.includes(a) || !list.includes(b)) {
       return new NextResponse('Unknown filename', { status: 404 });
@@ -67,10 +68,7 @@ export async function GET(req: Request) {
     );
 
     const payload: ComparePayload = { a: aggA, b: aggB, diff };
-    cache.set(cacheKey, { data: payload, at: now });
+    cache.set(cacheKey, payload);
     return NextResponse.json(payload);
-  } catch (error) {
-    console.error('DASHBOARD_COMPARE_GET', error);
-    return new NextResponse('Internal Error', { status: 500 });
-  }
+  });
 }
