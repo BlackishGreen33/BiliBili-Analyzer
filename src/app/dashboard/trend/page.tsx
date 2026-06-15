@@ -42,17 +42,8 @@ import {
   EASE_OUT_EXPO,
   fadeUp,
 } from '@/common/styles/motion';
+import { CHART_PALETTE } from '@/common/styles/palette';
 import { formatCompact, formatPercent } from '@/common/utils/format';
-
-const DURATION_COLORS = [
-  '#FB7299',
-  '#03C9D7',
-  '#7352FF',
-  '#FF5C8E',
-  '#1E4DB7',
-  '#FB9678',
-  '#1A97F5',
-];
 
 const WINDOW_OPTIONS = [7, 14, 30, 60, 90] as const;
 
@@ -246,8 +237,8 @@ const TrendPage: React.FC = React.memo(() => {
                             type="monotone"
                             dataKey={label}
                             stackId="1"
-                            stroke={DURATION_COLORS[i % DURATION_COLORS.length]}
-                            fill={DURATION_COLORS[i % DURATION_COLORS.length]}
+                            stroke={CHART_PALETTE[i % CHART_PALETTE.length]}
+                            fill={CHART_PALETTE[i % CHART_PALETTE.length]}
                             fillOpacity={0.6}
                           />
                         ))}

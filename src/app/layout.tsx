@@ -6,6 +6,7 @@ import { cookies } from 'next/headers';
 
 import '@/common/styles/globals.css';
 
+import { isSupportedLocale } from '@/common/i18n/locales';
 import Providers from '@/common/providers/Providers';
 
 const notoSC = Noto_Sans_SC({
@@ -29,13 +30,6 @@ export const metadata: Metadata = {
   ],
 };
 
-const SUPPORTED_LOCALES = ['zh-CN', 'zh-TW', 'en'] as const;
-type Locale = (typeof SUPPORTED_LOCALES)[number];
-
-function isSupportedLocale(value: string | undefined): value is Locale {
-  return !!value && (SUPPORTED_LOCALES as readonly string[]).includes(value);
-}
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -43,7 +37,7 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
   const raw = cookieStore.get('bili-analyzer-locale')?.value;
-  const locale: Locale = isSupportedLocale(raw) ? raw : 'zh-CN';
+  const locale = isSupportedLocale(raw) ? raw : 'zh-CN';
   const colorCookie = cookieStore.get('bili-analyzer-color')?.value;
   const accentStyle = colorCookie
     ? ({ '--accent-color': colorCookie } as React.CSSProperties)

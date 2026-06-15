@@ -19,6 +19,7 @@ import {
   resolveAccentColor,
   useThemeStore,
 } from '@/common/hooks/useThemeStore';
+import { type Locale, SUPPORTED_LOCALES } from '@/common/i18n/locales';
 import { EASE_OUT_EXPO, fadeUp } from '@/common/styles/motion';
 
 const ACCENT_COLORS = [
@@ -29,9 +30,6 @@ const ACCENT_COLORS = [
   { name: '深蓝', color: '#1E4DB7' },
   { name: '橘黄', color: '#FB9678' },
 ];
-
-const LOCALES = ['zh-CN', 'zh-TW', 'en'] as const;
-type Locale = (typeof LOCALES)[number];
 
 const ThemeSettings: React.FC = React.memo(() => {
   const { setCurrentColor, currentColor, themeSettings, setThemeSettings } =
@@ -160,7 +158,7 @@ const ThemeSettings: React.FC = React.memo(() => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {LOCALES.map((l) => (
+                    {SUPPORTED_LOCALES.map((l) => (
                       <SelectItem key={l} value={l} className="cursor-pointer">
                         {t(`theme.languageOptions.${l}`)}
                       </SelectItem>

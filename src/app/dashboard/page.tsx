@@ -48,25 +48,13 @@ import {
   EASE_OUT_EXPO,
   fadeUp,
 } from '@/common/styles/motion';
+import { CHART_PALETTE } from '@/common/styles/palette';
 import {
   formatCompact,
   formatDateTime,
   formatPercent,
   formatViews,
 } from '@/common/utils/format';
-
-const CHART_PALETTE = [
-  '#FB7299',
-  '#03C9D7',
-  '#7352FF',
-  '#FF5C8E',
-  '#1E4DB7',
-  '#FB9678',
-  '#1A97F5',
-  '#00C292',
-  '#FEC90F',
-  '#0FC941',
-];
 
 const DashboardPage: React.FC = React.memo(() => {
   const searchParams = useSearchParams();

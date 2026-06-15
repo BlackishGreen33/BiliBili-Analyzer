@@ -27,24 +27,12 @@ import {
   EASE_OUT_EXPO,
   fadeUp,
 } from '@/common/styles/motion';
+import { CHART_PALETTE } from '@/common/styles/palette';
 import { formatViews } from '@/common/utils/format';
 
 const WINDOW_OPTIONS = [7, 14, 30, 60, 90] as const;
 const MIN_CH_OPTIONS = [2, 3, 4, 5] as const;
 const MIN_COUNT_OPTIONS = [2, 3, 5, 10] as const;
-
-const CHANNEL_COLORS = [
-  '#FB7299',
-  '#03C9D7',
-  '#7352FF',
-  '#FF5C8E',
-  '#1E4DB7',
-  '#FB9678',
-  '#1A97F5',
-  '#00C292',
-  '#FEC90F',
-  '#0FC941',
-];
 
 const UpsPage: React.FC = React.memo(() => {
   const { t } = useTranslation();
@@ -64,7 +52,7 @@ const UpsPage: React.FC = React.memo(() => {
 
   const channelColor = (ch: string) => {
     const idx = allChannels.indexOf(ch);
-    return CHANNEL_COLORS[idx % CHANNEL_COLORS.length];
+    return CHART_PALETTE[idx % CHART_PALETTE.length];
   };
 
   return (
