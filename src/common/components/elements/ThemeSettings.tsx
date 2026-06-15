@@ -15,7 +15,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/common/components/ui/select';
-import { useThemeStore } from '@/common/hooks/useThemeStore';
+import {
+  resolveAccentColor,
+  useThemeStore,
+} from '@/common/hooks/useThemeStore';
 import { EASE_OUT_EXPO, fadeUp } from '@/common/styles/motion';
 
 const ACCENT_COLORS = [
@@ -115,7 +118,8 @@ const ThemeSettings: React.FC = React.memo(() => {
               <div className="mt-4 flex flex-wrap gap-3">
                 {ACCENT_COLORS.map((item) => {
                   const isActive =
-                    item.color.toLowerCase() === currentColor.toLowerCase();
+                    item.color.toLowerCase() ===
+                    resolveAccentColor(currentColor).toLowerCase();
                   return (
                     <motion.button
                       key={item.color}

@@ -44,10 +44,15 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const raw = cookieStore.get('bili-analyzer-locale')?.value;
   const locale: Locale = isSupportedLocale(raw) ? raw : 'zh-CN';
+  const colorCookie = cookieStore.get('bili-analyzer-color')?.value;
+  const accentStyle = colorCookie
+    ? ({ '--accent-color': colorCookie } as React.CSSProperties)
+    : undefined;
   return (
     <html
       lang={locale}
       className={`${GeistSans.variable} ${GeistMono.variable} ${notoSC.variable}`}
+      style={accentStyle}
       suppressHydrationWarning
     >
       <body className={`${GeistSans.className} ${notoSC.className}`}>

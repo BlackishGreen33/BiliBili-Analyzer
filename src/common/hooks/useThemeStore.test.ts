@@ -6,14 +6,14 @@ describe('useThemeStore', () => {
   beforeEach(() => {
     // 重置為初始狀態
     useThemeStore.setState({
-      currentColor: '#FB7299',
+      currentColor: 'var(--accent-color, #FB7299)',
       themeSettings: false,
     });
   });
 
   it('has the expected initial state', () => {
     const s = useThemeStore.getState();
-    expect(s.currentColor).toBe('#FB7299');
+    expect(s.currentColor).toBe('var(--accent-color, #FB7299)');
     expect(s.themeSettings).toBe(false);
   });
 

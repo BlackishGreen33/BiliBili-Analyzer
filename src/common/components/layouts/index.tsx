@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import {
   Footer,
@@ -19,23 +19,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = React.memo(({ children }) => {
   const { activeMenu } = useLayoutStore();
-  const { setCurrentColor, themeSettings } = useThemeStore();
-
-  useEffect(() => {
-    const stored = localStorage.getItem('bili-analyzer-theme');
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored) as {
-          state?: { currentColor?: string };
-        };
-        if (parsed.state?.currentColor) {
-          setCurrentColor(parsed.state.currentColor);
-        }
-      } catch {
-        // ignore parse errors
-      }
-    }
-  }, [setCurrentColor]);
+  const { themeSettings } = useThemeStore();
 
   return (
     <div className="bg-main-bg dark:bg-main-dark-bg relative flex min-h-screen">

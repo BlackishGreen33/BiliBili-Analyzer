@@ -61,8 +61,8 @@ describe('StackedChart', () => {
     renderWithProviders(<StackedChart stat={stat} />);
     const bar = screen.getByTestId('recharts-bar');
     expect(bar.getAttribute('data-key')).toBe('value');
-    // 顏色來自 useThemeStore default (#FB7299)
-    expect(bar.getAttribute('data-fill')).toBe('#FB7299');
+    // 顏色來自 useThemeStore default（CSS var with fallback）
+    expect(bar.getAttribute('data-fill')).toBe('var(--accent-color, #FB7299)');
   });
 
   it('sorts the max metric into the chart data', () => {
