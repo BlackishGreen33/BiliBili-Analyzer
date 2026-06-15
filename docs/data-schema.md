@@ -177,30 +177,25 @@ type DashboardAgg = {
 
 ## 变更历史
 
-- **v0.10**（2026-06-15）:
-  - README 重寫為 Conventional OSS 風 (zh-CN + en 雙檔, 11 章節, 共 -89 行)
-  - 新增 3 張截圖 hero (home / dashboard / detail)
-  - 拆 LengthRecommendCard 為 4 sub-component
-  - 補 5 條 api-routes 整合測試 (latency 78→93 / up-overlap 72→100 / wordcloud 83→100 branches)
-  - 引入 Playwright e2e 框架 + 13 個 smoke (4 page + 9 API route)
-  - branches 覆蓋率 90.72 → 92.04
-- **v0.9**（2026-06-14）:
-  - `formatDateTime` / `formatDate` 显式带 `timeZone: 'Asia/Shanghai'`,
-    修 CI (ubuntu-latest UTC) 失败
-  - 拆 6 个 route 内的纯函数到 `src/common/libs/routes/`,
-    7 个 helper 各补 RTL 测试 (`bucketFor` 10 桶边界、
-    `computeLatencyStats` 奇偶中位数、`buildTrendPoint` totalEngagement
-    计算、`parseOverlapParams` 4 链 fallback、`matchVideo` 3 type、
-    `computeDiff` 4 helper 拆解)
+- **v0.10**（2026-06-15）：
+  - README 重写为 Conventional OSS 风（zh-CN + en 双档，11 章节，共 -89 行）
+  - 新增 3 张截图 hero（home / dashboard / detail）
+  - 拆 LengthRecommendCard 为 4 sub-component
+  - 补 5 条 api-routes 整合测试（latency 78→93 / up-overlap 72→100 / wordcloud 83→100 branches）
+  - 引入 Playwright e2e 框架 + 13 个 smoke（4 page + 9 API route）
+  - branches 覆盖率 90.72 → 92.04
+- **v0.9**（2026-06-14）：
+  - `formatDateTime` / `formatDate` 显式带 `timeZone: 'Asia/Shanghai'`，修 CI（ubuntu-latest UTC）失败
+  - 拆 6 个 route 内的纯函数到 `src/common/libs/routes/`，7 个 helper 各补 RTL 测试（`bucketFor` 10 桶边界、`computeLatencyStats` 奇偶中位数、`buildTrendPoint` totalEngagement 计算、`parseOverlapParams` 4 链 fallback、`matchVideo` 3 type、`computeDiff` 4 helper 拆解）
   - branches 覆盖率 87 → 90
-- **v0.3**（2026-06-12）:
+- **v0.3**（2026-06-12）：
   - `summary.avgEngagement` — 加权平均互动率
   - `topEngagement[10]` — 视频级互动率排行
-- **v0.2**（2026-06-11）:
+- **v0.2**（2026-06-11）：
   - `views` 从 `string` 改为 `number`
   - 新增 `bvid`、`mid`、`duration`、`pubdate`、`dimension`、`pages`、
     `desc`、`tid`、`tid_v2`、`tnamev2`、`shortLink`、`honors`、
     `rights`、`pubLocation`、`upMeta`、`statLike`/`statCoin`/
     `statFavorite`/`statShare`/`statReply`/`statDanmaku`
   - 新增 `agg-latest.json` 预聚合文件
-- **v0.1**（2024）: 初始版本，仅有 `url/cover/title/UP/views/tags`
+- **v0.1**（2024）：初始版本，仅有 `url/cover/title/UP/views/tags`
