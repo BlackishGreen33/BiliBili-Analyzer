@@ -24,7 +24,7 @@
     "test:e2e": "playwright test",
     "test:e2e:install": "playwright install --with-deps chromium",
     "prepare": "husky",
-    "crawldata": "node CrawlPopular.cjs",
+    "crawldata": "node CrawlPopular.mjs",
     "build:mobile": "node scripts/build-mobile.mjs",
     "mock-second-day": "node scripts/mock-second-day.mjs",
     "mock-n-days": "node scripts/mock-n-days.mjs"

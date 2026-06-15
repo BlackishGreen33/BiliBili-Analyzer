@@ -1,6 +1,12 @@
-const axios = require('axios');
-const fs = require('fs');
-const path = require('path');
+import axios from 'axios';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { buildAggregations } from './src/common/aggregations/build.mjs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const POPULAR_API = 'https://api.bilibili.com/x/web-interface/popular';
 const TAGS_API = (bvid) =>
@@ -198,176 +204,6 @@ const enrichUpMeta = async (videos) => {
   }
 };
 
-const buildAggregations = (videos) => {
-  const safe = (n) => (Number.isFinite(n) ? n : 0);
-
-  // Channels
-  const channelMap = new Map();
-  for (const v of videos) {
-    const first = v.tags.firstChannel || '未分类';
-    const second = v.tags.secondChannel || '未分类';
-    const c = channelMap.get(first) || {
-      firstChannel: first,
-      count: 0,
-      views: 0,
-      like: 0,
-      coin: 0,
-      favorite: 0,
-      secondChannels: new Map(),
-    };
-    c.count++;
-    c.views += safe(v.views);
-    c.like += safe(v.statLike);
-    c.coin += safe(v.statCoin);
-    c.favorite += safe(v.statFavorite);
-    const sub = c.secondChannels.get(second) || {
-      secondChannel: second,
-      count: 0,
-      views: 0,
-    };
-    sub.count++;
-    sub.views += safe(v.views);
-    c.secondChannels.set(second, sub);
-    channelMap.set(first, c);
-  }
-  const channelAgg = Array.from(channelMap.values()).map((c) => ({
-    firstChannel: c.firstChannel,
-    count: c.count,
-    views: c.views,
-    avgViews: c.count > 0 ? Math.round(c.views / c.count) : 0,
-    like: c.like,
-    coin: c.coin,
-    favorite: c.favorite,
-    secondChannels: Array.from(c.secondChannels.values()).sort(
-      (a, b) => b.count - a.count
-    ),
-  }));
-
-  // Top UP
-  const upMap = new Map();
-  for (const v of videos) {
-    const key = v.UP || v.mid;
-    if (!key) continue;
-    const e = upMap.get(key) || {
-      name: v.UP,
-      mid: v.mid,
-      count: 0,
-      views: 0,
-      followers: v.upMeta?.followers,
-    };
-    e.count++;
-    e.views += safe(v.views);
-    upMap.set(key, e);
-  }
-  const topUps = Array.from(upMap.values())
-    .sort((a, b) => b.count - a.count || b.views - a.views)
-    .slice(0, 50);
-
-  // Duration histogram
-  const durationBuckets = [
-    { label: '<1 分钟', min: 0, max: 60, count: 0 },
-    { label: '1-3 分钟', min: 60, max: 180, count: 0 },
-    { label: '3-5 分钟', min: 180, max: 300, count: 0 },
-    { label: '5-10 分钟', min: 300, max: 600, count: 0 },
-    { label: '10-20 分钟', min: 600, max: 1200, count: 0 },
-    { label: '20-30 分钟', min: 1200, max: 1800, count: 0 },
-    { label: '>30 分钟', min: 1800, max: Infinity, count: 0 },
-  ];
-  for (const v of videos) {
-    const d = v.duration || 0;
-    const bucket = durationBuckets.find((b) => d >= b.min && d < b.max);
-    if (bucket) bucket.count++;
-  }
-
-  // Publish hour distribution
-  const hourHist = Array.from({ length: 24 }, (_, h) => ({
-    hour: h,
-    count: 0,
-  }));
-  for (const v of videos) {
-    if (!v.pubdate) continue;
-    const d = new Date(v.pubdate * 1000 + 8 * 60 * 60 * 1000); // UTC+8
-    hourHist[d.getUTCHours()].count++;
-  }
-
-  // Engagement metrics
-  const totalViews = videos.reduce((a, v) => a + safe(v.views), 0);
-  const totalLike = videos.reduce((a, v) => a + safe(v.statLike), 0);
-  const totalCoin = videos.reduce((a, v) => a + safe(v.statCoin), 0);
-  const totalFavorite = videos.reduce((a, v) => a + safe(v.statFavorite), 0);
-  const totalReply = videos.reduce((a, v) => a + safe(v.statReply), 0);
-  const totalDanmaku = videos.reduce((a, v) => a + safe(v.statDanmaku), 0);
-  const totalShare = videos.reduce((a, v) => a + safe(v.statShare), 0);
-
-  // Top tags
-  const tagCount = new Map();
-  for (const v of videos) {
-    for (const t of v.tags.ordinaryTags || []) {
-      tagCount.set(t, (tagCount.get(t) || 0) + 1);
-    }
-  }
-  const topTags = Array.from(tagCount.entries())
-    .map(([tag, count]) => ({ tag, count }))
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 100);
-
-  // Per-video engagement ranking
-  // engagement = (like + 2·coin + 2·favorite + share) / view
-  // 收藏與投幣加權 ×2（顯式 intent，權重應高於被動的 like）
-  const topEngagement = videos
-    .map((v) => {
-      const views = safe(v.views);
-      const eng =
-        views > 0
-          ? (safe(v.statLike) +
-              safe(v.statCoin) * 2 +
-              safe(v.statFavorite) * 2 +
-              safe(v.statShare)) /
-            views
-          : 0;
-      return {
-        bvid: v.bvid,
-        title: v.title,
-        UP: v.UP,
-        mid: v.mid,
-        views,
-        like: safe(v.statLike),
-        coin: safe(v.statCoin),
-        favorite: safe(v.statFavorite),
-        share: safe(v.statShare),
-        engagement: eng,
-      };
-    })
-    .filter((v) => v.views > 0)
-    .sort((a, b) => b.engagement - a.engagement || b.views - a.views)
-    .slice(0, 10);
-
-  return {
-    summary: {
-      totalVideos: videos.length,
-      totalUp: upMap.size,
-      totalViews,
-      totalLike,
-      totalCoin,
-      totalFavorite,
-      totalReply,
-      totalDanmaku,
-      totalShare,
-      avgEngagement:
-        totalViews > 0
-          ? (totalLike + totalCoin * 2 + totalFavorite * 2 + totalShare) /
-            totalViews
-          : 0,
-    },
-    channels: channelAgg,
-    topUps,
-    duration: durationBuckets,
-    hourHeatmap: hourHist,
-    topTags,
-    topEngagement,
-  };
-};
-
 const crawlData = async () => {
   console.log('开始获取热门视频');
 
@@ -404,8 +240,9 @@ const crawlData = async () => {
 
   console.log(`完成 ${resultArray.length} 支视频爬取，开始写入文件`);
 
-  if (!fs.existsSync('result')) {
-    fs.mkdirSync('result');
+  const resultDir = path.join(__dirname, 'result');
+  if (!fs.existsSync(resultDir)) {
+    fs.mkdirSync(resultDir);
   }
 
   const now = Date.now();
@@ -417,10 +254,10 @@ const crawlData = async () => {
 
   const formattedDate = currentDate.toISOString().slice(0, -5) + '+0800';
   const fileName = `${formattedDate.replace(/:/g, '-')}.json`;
-  const filePath = path.join('result', fileName);
+  const filePath = path.join(resultDir, fileName);
   fs.writeFileSync(filePath, JSON.stringify(resultObject, null, 2));
 
-  // 预聚合
+  // 预聚合 — 共享 src/common/aggregations/build.mjs
   const aggregations = buildAggregations(resultArray);
   const agg = {
     time: now,
@@ -428,13 +265,13 @@ const crawlData = async () => {
     ...aggregations,
   };
   fs.writeFileSync(
-    path.join('result', 'agg-latest.json'),
+    path.join(resultDir, 'agg-latest.json'),
     JSON.stringify(agg, null, 2)
   );
 
   // 维护 list.json
   let list = [];
-  const listFilePath = path.join('result', 'list.json');
+  const listFilePath = path.join(resultDir, 'list.json');
   if (fs.existsSync(listFilePath)) {
     list = JSON.parse(fs.readFileSync(listFilePath, 'utf-8'));
   }
