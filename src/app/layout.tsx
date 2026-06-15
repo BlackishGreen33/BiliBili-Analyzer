@@ -9,7 +9,7 @@ import '@/common/styles/globals.css';
 import Providers from '@/common/providers/Providers';
 
 const notoSC = Noto_Sans_SC({
-  subsets: ['latin'],
+  subsets: ['latin', 'chinese-simplified'],
   weight: ['400', '500', '700'],
   variable: '--font-noto-sc',
   display: 'swap',
