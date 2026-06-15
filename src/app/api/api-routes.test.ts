@@ -697,3 +697,115 @@ describe('GET /api/length/recommend error branches', () => {
     expect(res.status).toBe(400);
   });
 });
+
+// =====================================================================
+// v0.10: 補 latency / up-overlap / wordcloud branches
+// =====================================================================
+
+describe('API route branch coverage v0.10', () => {
+  it('latency: stream=1 path after fresh computation (line 82-84)', async () => {
+    // 用全新 window 確保 cache miss, 強制走 try block 的 stream 分支
+    const res = await callRoute(
+      latencyGET,
+      'http://localhost/api/latency?window=42&stream=1'
+    );
+    expect(res.headers.get('Content-Type')).toBe(
+      'application/x-ndjson; charset=utf-8'
+    );
+    const text = await res.text();
+    const events = text
+      .split('\n')
+      .filter(Boolean)
+      .map((l) => JSON.parse(l));
+    expect(events[0].type).toBe('meta');
+    expect(events[events.length - 1].type).toBe('done');
+  });
+
+  it('up/overlap: cache hit returns identical payload (line 25-26)', async () => {
+    // 第一次 call 填 cache, 第二次 call 走 cache hit 早返
+    const r1 = await callRoute(
+      overlapGET,
+      'http://localhost/api/up/overlap?window=43&minChannels=1&minCount=1&limit=10'
+    );
+    const d1 = await r1.json();
+    const r2 = await callRoute(
+      overlapGET,
+      'http://localhost/api/up/overlap?window=43&minChannels=1&minCount=1&limit=10'
+    );
+    const d2 = await r2.json();
+    expect(r2.status).toBe(200);
+    expect(d1).toEqual(d2);
+  });
+
+  it('up/overlap: empty list returns empty payload (line 32-41)', async () => {
+    const origListImpl = listImpl;
+    listImpl = async () => [];
+    try {
+      const res = await callRoute(
+        overlapGET,
+        'http://localhost/api/up/overlap?window=44&minChannels=2&minCount=2&limit=50'
+      );
+      const data = await res.json();
+      expect(data.totalUps).toBe(0);
+      expect(data.items).toEqual([]);
+      expect(data.window).toBe(44);
+      expect(data.minChannels).toBe(2);
+      expect(data.minCount).toBe(2);
+    } finally {
+      listImpl = origListImpl;
+    }
+  });
+
+  it('wordcloud: error path when fetchResultByName throws (line 35-37)', async () => {
+    // wordcloud 用固定 cache key 'wordcloud:latest',
+    // 必須 resetModules 才能清空 in-memory cache
+    vi.resetModules();
+    const origByName = byNameImpl;
+    byNameImpl = () => Promise.reject(new Error('fetch boom'));
+    try {
+      const reloaded = await import('@/app/api/wordcloud/route');
+      const res = await reloaded.GET();
+      expect(res.status).toBe(500);
+      expect(await res.text()).toBe('Internal Error');
+    } finally {
+      byNameImpl = origByName;
+      vi.resetModules();
+      await import('@/app/api/wordcloud/route');
+    }
+  });
+
+  it('latency: skips videos with invalid pubdate (line 60-61)', async () => {
+    // mockResults['2026-01-15'] 預設每支 video 都有 pubdate, 加 2 支無效的
+    const origList = mockList.slice();
+    const origError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    mockList.length = 0;
+    mockList.push('2026-invalid');
+    mockResults['2026-invalid'] = {
+      time: Date.now(),
+      video: [
+        makeVideo({ bvid: 'BV-NO-PUBDATE', pubdate: 0 }),
+        makeVideo({ bvid: 'BV-NEG-PUBDATE', pubdate: -1 }),
+        makeVideo({
+          bvid: 'BV-FUTURE',
+          pubdate: Math.floor(Date.now() / 1000) + 86400 * 7,
+        }),
+      ],
+    };
+    try {
+      const res = await callRoute(
+        latencyGET,
+        'http://localhost/api/latency?window=80'
+      );
+      const data = await res.json();
+      expect(res.status).toBe(200);
+      expect(data.window).toBe(80);
+      // 三支都因不同原因被 skip: pubdate=0 / pubdate<0 / days<0
+      expect(data.total).toBe(0);
+    } finally {
+      mockList.length = 0;
+      mockList.push(...origList);
+      delete mockResults['2026-invalid'];
+      origError.mockRestore();
+    }
+  });
+});
