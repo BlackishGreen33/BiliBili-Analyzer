@@ -21,6 +21,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:install": "playwright install --with-deps chromium",
     "prepare": "husky",
     "crawldata": "node CrawlPopular.cjs",
     "build:mobile": "node scripts/build-mobile.mjs",
@@ -62,6 +64,7 @@
   "devDependencies": {
     "@capacitor/cli": "^8.4.0",
     "@eslint/eslintrc": "^3.3.5",
+    "@playwright/test": "^1.61.0",
     "@tailwindcss/postcss": "^4.3.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
