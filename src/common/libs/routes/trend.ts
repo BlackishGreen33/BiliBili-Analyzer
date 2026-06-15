@@ -6,14 +6,10 @@
 
 import type { DashboardAgg } from '@/common/libs/result-data.server';
 import type { StreamEvent } from '@/common/libs/streaming';
+import { dateStringUTC8 } from '@/common/utils/date';
 
-/**
- * 從爬取時刻 (Unix ms) 取 UTC+8 的 YYYY-MM-DD 字串。
- */
-export function dateStringUTC8(time: number): string {
-  const d = new Date(time + 8 * 60 * 60 * 1000);
-  return d.toISOString().slice(0, 10);
-}
+// Re-export for backwards compatibility (consumers in tests still reference it).
+export { dateStringUTC8 };
 
 export type TrendPoint = {
   file: string;
