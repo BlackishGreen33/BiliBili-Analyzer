@@ -6,6 +6,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { useDashboardTrend } from '@/common/libs/use-dashboard-trend';
+import { SwrTestWrapper } from '@/test/swr-test-wrapper';
 
 const REAL_FETCH = globalThis.fetch;
 
@@ -29,7 +30,7 @@ describe('useDashboardTrend', () => {
       );
     }) as unknown as typeof fetch;
 
-    renderHook(() => useDashboardTrend(7));
+    renderHook(() => useDashboardTrend(7), { wrapper: SwrTestWrapper });
 
     await waitFor(() => {
       expect(requestedUrl).toBe('/api/dashboard/trend?window=7');
@@ -61,7 +62,9 @@ describe('useDashboardTrend', () => {
         )
     ) as unknown as typeof fetch;
 
-    const { result } = renderHook(() => useDashboardTrend(14));
+    const { result } = renderHook(() => useDashboardTrend(14), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(result.current.data).toBeDefined();
@@ -76,11 +79,13 @@ describe('useDashboardTrend', () => {
       async () => new Response('', { status: 500 })
     ) as unknown as typeof fetch;
 
-    const { result } = renderHook(() => useDashboardTrend(21));
+    const { result } = renderHook(() => useDashboardTrend(21), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(result.current.error).toBeDefined();
     });
-    expect(result.current.error?.message).toBe('Failed to load trend data');
+    expect(result.current.error?.message).toBe('Request failed (500)');
   });
 });

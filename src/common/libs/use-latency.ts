@@ -28,18 +28,6 @@ export type LatencyData = {
   medianDays: number;
 };
 
-const latencyFetcher = async (url: string): Promise<LatencyData> => {
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text || 'Failed to load latency');
-  }
-  return (await res.json()) as LatencyData;
-};
-
 export function useLatency(window: number) {
-  return useSWR<LatencyData>(`/api/latency?window=${window}`, latencyFetcher, {
-    revalidateOnFocus: false,
-    dedupingInterval: 30_000,
-  });
+  return useSWR<LatencyData>(`/api/latency?window=${window}`);
 }

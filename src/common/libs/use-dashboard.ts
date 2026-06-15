@@ -63,19 +63,11 @@ export type DashboardData = {
   topEngagement: EngagementItem[];
 };
 
-const fetcher = async (url: string): Promise<DashboardData> => {
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) throw new Error('Failed to load dashboard');
-  return (await res.json()) as DashboardData;
-};
-
 export function useDashboard(filename: string | null) {
   return useSWR<DashboardData>(
     filename
       ? `/api/dashboard?file=${encodeURIComponent(filename)}`
-      : '/api/dashboard',
-    fetcher,
-    { revalidateOnFocus: false, dedupingInterval: 30_000 }
+      : '/api/dashboard'
   );
 }
 
@@ -122,21 +114,10 @@ export type CompareData = {
   };
 };
 
-const compareFetcher = async (url: string): Promise<CompareData> => {
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text || 'Failed to load compare data');
-  }
-  return (await res.json()) as CompareData;
-};
-
 export function useDashboardCompare(a: string | null, b: string | null) {
   return useSWR<CompareData>(
     a && b && a !== b
       ? `/api/dashboard/compare?a=${encodeURIComponent(a)}&b=${encodeURIComponent(b)}`
-      : null,
-    compareFetcher,
-    { revalidateOnFocus: false, dedupingInterval: 30_000 }
+      : null
   );
 }

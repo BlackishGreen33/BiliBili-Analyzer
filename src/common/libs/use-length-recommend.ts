@@ -31,15 +31,6 @@ export type LengthRecommendData = {
     | 'length.rationale.scope';
 };
 
-const lengthFetcher = async (url: string): Promise<LengthRecommendData> => {
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text || 'Failed to load length recommend');
-  }
-  return (await res.json()) as LengthRecommendData;
-};
-
 export function useLengthRecommend(
   type: 'up' | 'channel' | 'tag',
   value: string,
@@ -47,8 +38,6 @@ export function useLengthRecommend(
 ) {
   const params = new URLSearchParams({ type, value, window: String(window) });
   return useSWR<LengthRecommendData>(
-    type && value ? `/api/length/recommend?${params.toString()}` : null,
-    lengthFetcher,
-    { revalidateOnFocus: false, dedupingInterval: 30_000 }
+    type && value ? `/api/length/recommend?${params.toString()}` : null
   );
 }

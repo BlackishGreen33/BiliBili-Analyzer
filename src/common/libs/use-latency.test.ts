@@ -8,6 +8,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { useLatency } from '@/common/libs/use-latency';
+import { SwrTestWrapper } from '@/test/swr-test-wrapper';
 
 const REAL_FETCH = globalThis.fetch;
 
@@ -32,7 +33,7 @@ describe('useLatency', () => {
       );
     }) as unknown as typeof fetch;
 
-    renderHook(() => useLatency(30));
+    renderHook(() => useLatency(30), { wrapper: SwrTestWrapper });
 
     await waitFor(() => {
       expect(requestedUrl).toBe('/api/latency?window=30');
@@ -53,7 +54,9 @@ describe('useLatency', () => {
         )
     ) as unknown as typeof fetch;
 
-    const { result } = renderHook(() => useLatency(7));
+    const { result } = renderHook(() => useLatency(7), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(result.current.data).toBeDefined();
@@ -67,12 +70,13 @@ describe('useLatency', () => {
       async () => new Response('Internal Error', { status: 500 })
     ) as unknown as typeof fetch;
 
-    const { result } = renderHook(() => useLatency(60));
+    const { result } = renderHook(() => useLatency(60), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(result.current.error).toBeDefined();
     });
-    // fetcher 將 response body 寫入 Error message
     expect(result.current.error?.message).toBe('Internal Error');
   });
 
@@ -81,11 +85,13 @@ describe('useLatency', () => {
       async () => new Response('', { status: 500 })
     ) as unknown as typeof fetch;
 
-    const { result } = renderHook(() => useLatency(61));
+    const { result } = renderHook(() => useLatency(61), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(result.current.error).toBeDefined();
     });
-    expect(result.current.error?.message).toBe('Failed to load latency');
+    expect(result.current.error?.message).toBe('Request failed (500)');
   });
 });

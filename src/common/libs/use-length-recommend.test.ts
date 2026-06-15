@@ -6,6 +6,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { useLengthRecommend } from '@/common/libs/use-length-recommend';
+import { SwrTestWrapper } from '@/test/swr-test-wrapper';
 
 const REAL_FETCH = globalThis.fetch;
 
@@ -43,7 +44,9 @@ describe('useLengthRecommend', () => {
       return new Response(JSON.stringify(fakeData));
     }) as unknown as typeof fetch;
 
-    renderHook(() => useLengthRecommend('up', 'UP1', 30));
+    renderHook(() => useLengthRecommend('up', 'UP1', 30), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(requestedUrl).toBe(
@@ -59,7 +62,9 @@ describe('useLengthRecommend', () => {
       return new Response('{}');
     }) as unknown as typeof fetch;
 
-    renderHook(() => useLengthRecommend('' as 'up', 'UP1', 30));
+    renderHook(() => useLengthRecommend('' as 'up', 'UP1', 30), {
+      wrapper: SwrTestWrapper,
+    });
 
     await new Promise((r) => setTimeout(r, 100));
     expect(called).toBe(false);
@@ -72,7 +77,9 @@ describe('useLengthRecommend', () => {
       return new Response('{}');
     }) as unknown as typeof fetch;
 
-    renderHook(() => useLengthRecommend('up', '', 30));
+    renderHook(() => useLengthRecommend('up', '', 30), {
+      wrapper: SwrTestWrapper,
+    });
 
     await new Promise((r) => setTimeout(r, 100));
     expect(called).toBe(false);
@@ -83,7 +90,9 @@ describe('useLengthRecommend', () => {
       async () => new Response(JSON.stringify(fakeData))
     ) as unknown as typeof fetch;
 
-    const { result } = renderHook(() => useLengthRecommend('up', 'UP1', 7));
+    const { result } = renderHook(() => useLengthRecommend('up', 'UP1', 7), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(result.current.data).toBeDefined();
@@ -97,13 +106,13 @@ describe('useLengthRecommend', () => {
       async () => new Response('', { status: 500 })
     ) as unknown as typeof fetch;
 
-    const { result } = renderHook(() => useLengthRecommend('up', 'UP2', 7));
+    const { result } = renderHook(() => useLengthRecommend('up', 'UP2', 7), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(result.current.error).toBeDefined();
     });
-    expect(result.current.error?.message).toBe(
-      'Failed to load length recommend'
-    );
+    expect(result.current.error?.message).toBe('Request failed (500)');
   });
 });

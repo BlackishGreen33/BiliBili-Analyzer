@@ -6,6 +6,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { useDashboard, useDashboardCompare } from '@/common/libs/use-dashboard';
+import { SwrTestWrapper } from '@/test/swr-test-wrapper';
 
 const REAL_FETCH = globalThis.fetch;
 
@@ -44,7 +45,9 @@ describe('useDashboard', () => {
       return new Response(JSON.stringify(fakeDashboard));
     }) as unknown as typeof fetch;
 
-    renderHook(() => useDashboard('2026-01-15'));
+    renderHook(() => useDashboard('2026-01-15'), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(requestedUrl).toBe('/api/dashboard?file=2026-01-15');
@@ -58,7 +61,7 @@ describe('useDashboard', () => {
       return new Response(JSON.stringify(fakeDashboard));
     }) as unknown as typeof fetch;
 
-    renderHook(() => useDashboard(null));
+    renderHook(() => useDashboard(null), { wrapper: SwrTestWrapper });
 
     await waitFor(() => {
       expect(requestedUrl).toBe('/api/dashboard');
@@ -70,7 +73,9 @@ describe('useDashboard', () => {
       async () => new Response(JSON.stringify(fakeDashboard))
     ) as unknown as typeof fetch;
 
-    const { result } = renderHook(() => useDashboard('2026-01-15'));
+    const { result } = renderHook(() => useDashboard('2026-01-15'), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(result.current.data).toBeDefined();
@@ -78,18 +83,19 @@ describe('useDashboard', () => {
     expect(result.current.data?.summary.totalVideos).toBe(100);
   });
 
-  it('exposes error on 500', async () => {
+  it('exposes error on 500 with response body as message', async () => {
     globalThis.fetch = vi.fn(
       async () => new Response('boom', { status: 500 })
     ) as unknown as typeof fetch;
 
-    const { result } = renderHook(() => useDashboard('2026-01-99'));
+    const { result } = renderHook(() => useDashboard('2026-01-99'), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(result.current.error).toBeDefined();
     });
-    // fetcher 不帶 body, 固定丟 'Failed to load dashboard'
-    expect(result.current.error?.message).toBe('Failed to load dashboard');
+    expect(result.current.error?.message).toBe('boom');
   });
 });
 
@@ -129,7 +135,9 @@ describe('useDashboardCompare', () => {
       );
     }) as unknown as typeof fetch;
 
-    renderHook(() => useDashboardCompare('2026-01-14', '2026-01-15'));
+    renderHook(() => useDashboardCompare('2026-01-14', '2026-01-15'), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(requestedUrl).toBe(
@@ -145,7 +153,9 @@ describe('useDashboardCompare', () => {
       return new Response('{}');
     }) as unknown as typeof fetch;
 
-    renderHook(() => useDashboardCompare(null, '2026-01-15'));
+    renderHook(() => useDashboardCompare(null, '2026-01-15'), {
+      wrapper: SwrTestWrapper,
+    });
 
     await new Promise((r) => setTimeout(r, 100));
     expect(called).toBe(false);
@@ -158,7 +168,9 @@ describe('useDashboardCompare', () => {
       return new Response('{}');
     }) as unknown as typeof fetch;
 
-    renderHook(() => useDashboardCompare('2026-01-15', '2026-01-15'));
+    renderHook(() => useDashboardCompare('2026-01-15', '2026-01-15'), {
+      wrapper: SwrTestWrapper,
+    });
 
     await new Promise((r) => setTimeout(r, 100));
     expect(called).toBe(false);
@@ -171,7 +183,9 @@ describe('useDashboardCompare', () => {
       return new Response('{}');
     }) as unknown as typeof fetch;
 
-    renderHook(() => useDashboardCompare('2026-01-14', null));
+    renderHook(() => useDashboardCompare('2026-01-14', null), {
+      wrapper: SwrTestWrapper,
+    });
 
     await new Promise((r) => setTimeout(r, 100));
     expect(called).toBe(false);

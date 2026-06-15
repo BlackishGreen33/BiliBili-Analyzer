@@ -23,24 +23,11 @@ export type UpOverlapData = {
   items: UpOverlapItem[];
 };
 
-const upOverlapFetcher = async (url: string): Promise<UpOverlapData> => {
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text || 'Failed to load up overlap');
-  }
-  return (await res.json()) as UpOverlapData;
-};
-
 export function useUpOverlap(window: number, minChannels = 2, minCount = 2) {
   const params = new URLSearchParams({
     window: String(window),
     minChannels: String(minChannels),
     minCount: String(minCount),
   });
-  return useSWR<UpOverlapData>(
-    `/api/up/overlap?${params.toString()}`,
-    upOverlapFetcher,
-    { revalidateOnFocus: false, dedupingInterval: 30_000 }
-  );
+  return useSWR<UpOverlapData>(`/api/up/overlap?${params.toString()}`);
 }

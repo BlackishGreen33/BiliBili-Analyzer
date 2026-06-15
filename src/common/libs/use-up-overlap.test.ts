@@ -6,6 +6,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { useUpOverlap } from '@/common/libs/use-up-overlap';
+import { SwrTestWrapper } from '@/test/swr-test-wrapper';
 
 const REAL_FETCH = globalThis.fetch;
 
@@ -30,7 +31,7 @@ describe('useUpOverlap', () => {
       );
     }) as unknown as typeof fetch;
 
-    renderHook(() => useUpOverlap(7, 2, 2));
+    renderHook(() => useUpOverlap(7, 2, 2), { wrapper: SwrTestWrapper });
 
     await waitFor(() => {
       expect(requestedUrl).toBe(
@@ -54,7 +55,7 @@ describe('useUpOverlap', () => {
       );
     }) as unknown as typeof fetch;
 
-    renderHook(() => useUpOverlap(14));
+    renderHook(() => useUpOverlap(14), { wrapper: SwrTestWrapper });
 
     await waitFor(() => {
       expect(requestedUrl).toBe(
@@ -86,7 +87,9 @@ describe('useUpOverlap', () => {
         )
     ) as unknown as typeof fetch;
 
-    const { result } = renderHook(() => useUpOverlap(30));
+    const { result } = renderHook(() => useUpOverlap(30), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(result.current.data).toBeDefined();
@@ -100,7 +103,9 @@ describe('useUpOverlap', () => {
       async () => new Response('Server down', { status: 500 })
     ) as unknown as typeof fetch;
 
-    const { result } = renderHook(() => useUpOverlap(60));
+    const { result } = renderHook(() => useUpOverlap(60), {
+      wrapper: SwrTestWrapper,
+    });
 
     await waitFor(() => {
       expect(result.current.error).toBeDefined();

@@ -13,18 +13,8 @@ export type WordCloudData = {
   tokens: WordCloudToken[];
 };
 
-const wordcloudFetcher = async (url: string): Promise<WordCloudData> => {
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text || 'Failed to load wordcloud');
-  }
-  return (await res.json()) as WordCloudData;
-};
-
 export function useWordCloud() {
-  return useSWR<WordCloudData>('/api/wordcloud', wordcloudFetcher, {
-    revalidateOnFocus: false,
+  return useSWR<WordCloudData>('/api/wordcloud', undefined, {
     dedupingInterval: 60_000,
   });
 }

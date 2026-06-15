@@ -1,9 +1,8 @@
 /**
  * useWordCloud hook 測試
  *
- * 由於 useWordCloud 使用固定 URL (`/api/wordcloud`), SWR 的全域 cache
- * 會在多個 test 間共享而難以隔離。改用 vi.mock 直接替換 swr 模組,
- * 在每個 test 內完全控制 hook 的回傳值, 規避 cache 污染問題。
+ * 該 hook 使用 useSWR(key, undefined, options) 從全域 SWRConfig 抓 fetcher。
+ * 這裡直接 vi.mock 替換 swr 模組, 驗證 hook 傳入的 key 與 options。
  */
 
 import { renderHook } from '@testing-library/react';
@@ -39,11 +38,11 @@ describe('useWordCloud', () => {
 
     const { result } = renderHook(() => useWordCloud());
 
-    // 驗證 useSWR 用 /api/wordcloud 作為 cache key
+    // 驗證 useSWR 用 /api/wordcloud 作為 cache key（fetcher 來自 SWRConfig）
     expect(mockUseSWR).toHaveBeenCalledWith(
       '/api/wordcloud',
-      expect.any(Function),
-      expect.objectContaining({ revalidateOnFocus: false })
+      undefined,
+      expect.objectContaining({ dedupingInterval: 60_000 })
     );
     expect(result.current.data?.file).toBe('2026-01-15');
     expect(result.current.data?.tokens).toHaveLength(1);
@@ -73,7 +72,7 @@ describe('useWordCloud', () => {
 
     expect(mockUseSWR).toHaveBeenCalledWith(
       '/api/wordcloud',
-      expect.any(Function),
+      undefined,
       expect.objectContaining({ dedupingInterval: 60_000 })
     );
   });

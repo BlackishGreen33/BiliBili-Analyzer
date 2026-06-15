@@ -25,19 +25,6 @@ export type TrendData = {
   points: TrendPoint[];
 };
 
-const trendFetcher = async (url: string): Promise<TrendData> => {
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text || 'Failed to load trend data');
-  }
-  return (await res.json()) as TrendData;
-};
-
 export function useDashboardTrend(window: number) {
-  return useSWR<TrendData>(
-    `/api/dashboard/trend?window=${window}`,
-    trendFetcher,
-    { revalidateOnFocus: false, dedupingInterval: 30_000 }
-  );
+  return useSWR<TrendData>(`/api/dashboard/trend?window=${window}`);
 }
