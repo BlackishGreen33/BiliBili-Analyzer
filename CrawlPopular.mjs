@@ -269,6 +269,12 @@ const crawlData = async () => {
     JSON.stringify(agg, null, 2)
   );
 
+  // 同步把 agg-{date}.json 也寫一份（給未來歷史檔的 fast path 預留）
+  fs.writeFileSync(
+    path.join(resultDir, 'agg-' + fileName),
+    JSON.stringify(agg, null, 2)
+  );
+
   // 维护 list.json
   let list = [];
   const listFilePath = path.join(resultDir, 'list.json');
