@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import type { LengthRecommendData } from '@/common/libs/use-length-recommend';
 import { EASE_OUT_EXPO } from '@/common/styles/motion';
 import { formatDuration, formatPercent } from '@/common/utils/format';
 
@@ -12,7 +13,7 @@ type Props = {
   medianSeconds: number;
   p25: number;
   p75: number;
-  rationaleKey: string;
+  rationaleKey: LengthRecommendData['rationaleKey'];
 };
 
 const LengthRecommendPrimaryBlock: React.FC<Props> = React.memo(
