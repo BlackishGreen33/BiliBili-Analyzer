@@ -11,7 +11,7 @@
 ![license](https://img.shields.io/github/license/BlackishGreen33/BiliBili-Analyzer)
 ![last-commit](https://img.shields.io/github/last-commit/BlackishGreen33/BiliBili-Analyzer)
 ![build](https://img.shields.io/badge/build-passing-brightgreen)
-![version](https://img.shields.io/badge/version-0.9.0-blue)
+![version](https://img.shields.io/badge/version-0.10.0-blue)
 ![i18n](https://img.shields.io/badge/i18n-zh--CN%20%7C%20zh--TW%20%7C%20en-blueviolet)
 
 </div>

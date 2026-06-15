@@ -160,6 +160,22 @@ raw JSON as fallback) so the UI never goes 100% dark.
 
 ## Changelog
 
+- **v0.10** (2026-06-15):
+  - README rewritten to Conventional OSS style (zh-CN + en dual-file, 11 sections, -89 lines total)
+  - 3 screenshot hero (home / dashboard / detail)
+  - Split LengthRecommendCard into 4 sub-components
+  - Added 5 api-routes integration tests (latency 78→93 / up-overlap 72→100 / wordcloud 83→100 branches)
+  - Playwright e2e scaffold + 13 smoke tests (4 page + 9 API route)
+  - branches coverage 90.72 → 92.04
+- **v0.9** (2026-06-14):
+  - `formatDateTime` / `formatDate` explicitly set `timeZone: 'Asia/Shanghai'`,
+    fixing CI failure on ubuntu-latest (UTC) environment
+  - Extracted pure functions from 6 routes into `src/common/libs/routes/`
+    (7 new helper files, each < 100 lines). Routes went from 140-220 lines
+    to < 100 lines. 4 places of `parseInt ?? DEFAULT` chain unified to
+    `parseWindowParam`.
+  - 7 new RTL test files for the new pure helpers. `branches` coverage
+    87 → 90.
 - **v0.8** (2026-06-14):
   - Schema unchanged. Codebase: `dashboard-data.ts` split into 6
     single-responsibility hook files. Each hook now has its own

@@ -177,6 +177,13 @@ type DashboardAgg = {
 
 ## 变更历史
 
+- **v0.10**（2026-06-15）:
+  - README 重寫為 Conventional OSS 風 (zh-CN + en 雙檔, 11 章節, 共 -89 行)
+  - 新增 3 張截圖 hero (home / dashboard / detail)
+  - 拆 LengthRecommendCard 為 4 sub-component
+  - 補 5 條 api-routes 整合測試 (latency 78→93 / up-overlap 72→100 / wordcloud 83→100 branches)
+  - 引入 Playwright e2e 框架 + 13 個 smoke (4 page + 9 API route)
+  - branches 覆蓋率 90.72 → 92.04
 - **v0.9**（2026-06-14）:
   - `formatDateTime` / `formatDate` 显式带 `timeZone: 'Asia/Shanghai'`,
     修 CI (ubuntu-latest UTC) 失败
