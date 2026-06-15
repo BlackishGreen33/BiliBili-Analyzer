@@ -6,6 +6,7 @@ import {
   fetchResultByName,
   fetchResultList,
 } from '@/common/libs/result-data.server';
+import { pLimit } from '@/common/libs/routes/concurrency';
 import {
   createFiveMinCache,
   withRouteErrorHandler,
@@ -17,6 +18,8 @@ import {
   type TrendPayload,
 } from '@/common/libs/routes/trend';
 import { ndjsonStream, ndjsonStreamFromEvents } from '@/common/libs/streaming';
+
+const TREND_CONCURRENCY = 10;
 
 const cache = createFiveMinCache<TrendPayload>();
 
@@ -63,16 +66,14 @@ export async function GET(req: Request) {
 
       const isMock = target.length < window;
 
-      const results = await Promise.all(
-        target.map(async (file) => {
-          try {
-            return { file, data: await fetchResultByName(file) };
-          } catch (e) {
-            console.error('TREND fetch failed', file, e);
-            return null;
-          }
-        })
-      );
+      const results = await pLimit(target, TREND_CONCURRENCY, async (file) => {
+        try {
+          return { file, data: await fetchResultByName(file) };
+        } catch (e) {
+          console.error('TREND fetch failed', file, e);
+          return null;
+        }
+      });
 
       const points = results
         .filter(

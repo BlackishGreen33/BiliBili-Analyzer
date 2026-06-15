@@ -4,6 +4,18 @@ import {
   fetchResultByName,
   fetchResultList,
 } from '@/common/libs/result-data.server';
+import {
+  createFiveMinCache,
+  withRouteErrorHandler,
+} from '@/common/libs/routes/create-cached-route';
+
+type VideoResponse = {
+  file: string;
+  count: number;
+  video: Awaited<ReturnType<typeof fetchResultByName>>['video'];
+};
+
+const cache = createFiveMinCache<VideoResponse>();
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
@@ -15,7 +27,13 @@ export async function GET(req: Request) {
     return new NextResponse('Missing mode or value', { status: 400 });
   }
 
-  try {
+  const cacheKey = `video:${mode}:${value}:${filename ?? ''}`;
+  const hit = cache.get(cacheKey);
+  if (hit) {
+    return NextResponse.json(hit);
+  }
+
+  return withRouteErrorHandler('VIDEO_RELATED', async () => {
     const list = await fetchResultList();
     const target = filename || list[0];
     if (!target) {
@@ -38,13 +56,12 @@ export async function GET(req: Request) {
       return new NextResponse('Invalid mode', { status: 400 });
     }
 
-    return NextResponse.json({
+    const payload: VideoResponse = {
       file: target,
       count: matches.length,
       video: matches,
-    });
-  } catch (error) {
-    console.error('VIDEO_RELATED_GET', error);
-    return new NextResponse('Internal Error', { status: 500 });
-  }
+    };
+    cache.set(cacheKey, payload);
+    return NextResponse.json(payload);
+  });
 }

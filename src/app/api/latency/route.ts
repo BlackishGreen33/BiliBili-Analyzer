@@ -4,6 +4,7 @@ import {
   fetchResultByName,
   fetchResultList,
 } from '@/common/libs/result-data.server';
+import { pLimit } from '@/common/libs/routes/concurrency';
 import {
   createFiveMinCache,
   withRouteErrorHandler,
@@ -20,6 +21,7 @@ import { parseWindowParam } from '@/common/libs/routes/shared';
 import { ndjsonStream, ndjsonStreamFromEvents } from '@/common/libs/streaming';
 
 const cache = createFiveMinCache<LatencyPayload>();
+const LATENCY_CONCURRENCY = 10;
 
 function streamErrorResponse(): Response {
   return ndjsonStream(
@@ -54,13 +56,11 @@ export async function GET(req: Request) {
       const delays: number[] = [];
 
       if (target.length > 0) {
-        const results = await Promise.all(
-          target.map((f) =>
-            fetchResultByName(f).catch((e) => {
-              console.error('LATENCY fetch failed', f, e);
-              return null;
-            })
-          )
+        const results = await pLimit(target, LATENCY_CONCURRENCY, (f) =>
+          fetchResultByName(f).catch((e) => {
+            console.error('LATENCY fetch failed', f, e);
+            return null;
+          })
         );
 
         for (const r of results) {
