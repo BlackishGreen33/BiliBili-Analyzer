@@ -15,15 +15,28 @@ jobs:
     steps:
       - name: git checkout
         uses: actions/checkout@v4
+
       - name: pnpm setup
         uses: pnpm/action-setup@v3
         with:
           version: '9.1.2'
+
       - name: Install node modules
         run: pnpm install
+
       - name: Lint
         run: pnpm run lint
+
       - name: Test (with coverage)
         run: pnpm run test:coverage
+
       - name: Build
         run: pnpm run build
+
+      - name: Install Playwright
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: E2E
+        run: pnpm run test:e2e
+        env:
+          E2E_BASE_URL: https://bilibili-analyzer.vercel.app
