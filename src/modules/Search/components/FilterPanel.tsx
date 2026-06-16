@@ -52,7 +52,6 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   handleChangeDate,
 }) => {
   const { t } = useTranslation();
-  const { currentColor } = useThemeStore();
   const { toast } = useToast();
 
   const handleShare = React.useCallback(async () => {

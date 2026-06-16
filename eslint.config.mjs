@@ -1,4 +1,4 @@
-import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
+import next from 'eslint-config-next';
 import reactPlugin from 'eslint-plugin-react';
 
 const simpleImportSort = (await import('eslint-plugin-simple-import-sort'))
@@ -7,7 +7,7 @@ const unusedImports = (await import('eslint-plugin-unused-imports')).default;
 const tsPlugin = (await import('@typescript-eslint/eslint-plugin')).default;
 
 const config = [
-  ...nextCoreWebVitals,
+  ...next,
   {
     ignores: [
       '.next/**',
