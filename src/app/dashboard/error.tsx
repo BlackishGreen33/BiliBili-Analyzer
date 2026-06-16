@@ -1,42 +1,28 @@
 'use client';
 
-import { NextPage } from 'next';
-import Link from 'next/link';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button } from '@/common/components/ui/button';
+import RouteError from '@/common/components/feedback/RouteError';
 
 interface ErrorProps {
   error: Error & { digest?: string };
   reset: () => void;
 }
 
-const GlobalError: NextPage<ErrorProps> = ({ error, reset }) => {
+const DashboardError = ({ error, reset }: ErrorProps) => {
   const { t } = useTranslation();
   React.useEffect(() => {
-    console.error('Global error boundary caught:', error);
+    console.error('Dashboard error boundary caught:', error);
   }, [error]);
-
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 p-8 text-center">
-      <h1 className="text-3xl font-bold">{t('errors.serverError')}</h1>
-      <p className="text-muted-foreground max-w-md text-sm">
-        {error.message || t('errors.serverError')}
+    <div className="m-2 mt-24 p-2 md:m-10 md:p-10">
+      <RouteError error={error} reset={reset} />
+      <p className="text-muted-foreground mt-2 text-center text-[10px]">
+        {t('errors.serverError')}
       </p>
-      {error.digest && (
-        <p className="text-muted-foreground font-mono text-xs">
-          digest: {error.digest}
-        </p>
-      )}
-      <div className="mt-2 flex gap-3">
-        <Button onClick={reset}>{t('common.retry')}</Button>
-        <Button variant="outline" asChild>
-          <Link href="/">{t('errors.notFoundHint')}</Link>
-        </Button>
-      </div>
     </div>
   );
 };
 
-export default GlobalError;
+export default DashboardError;

@@ -112,7 +112,6 @@ const Search: React.FC = React.memo(() => {
         totalCount={result?.video.length ?? 0}
         setSearchValue={setSearchValue}
         setSelectedChannels={setSelectedChannels}
-        setActiveTag={setActiveTag}
         handleReset={handleReset}
         handleChangeDate={handleChangeDate}
       />

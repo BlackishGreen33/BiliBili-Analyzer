@@ -29,121 +29,123 @@ import {
 } from '@/common/libs/dashboard-stream';
 import { fadeUp } from '@/common/styles/motion';
 
-const LatencySection: React.FC<{ file: string }> = React.memo(({ file }) => {
-  const { t } = useTranslation();
-  const { currentColor } = useThemeStore();
-  const stream = useLatencyStream(30);
-  // 預設 30 天窗口
-  void file;
+const LatencySection: React.FC<{ file: string; window?: number }> = React.memo(
+  ({ file, window = 30 }) => {
+    const { t } = useTranslation();
+    const { currentColor } = useThemeStore();
+    const stream = useLatencyStream(window);
+    // 預設 30 天窗口
+    void file;
 
-  if (stream.error) {
+    if (stream.error) {
+      return (
+        <Card>
+          <CardContent className="text-muted-foreground flex h-40 items-center justify-center text-sm">
+            {t('latency.empty')}
+          </CardContent>
+        </Card>
+      );
+    }
+
+    if (!stream.meta) {
+      return (
+        <Card>
+          <CardContent className="flex h-40 items-center justify-center">
+            <Spinner />
+          </CardContent>
+        </Card>
+      );
+    }
+
+    const data = latencyStreamToData(stream);
+    if (!data) {
+      return (
+        <Card>
+          <CardContent className="flex h-40 items-center justify-center">
+            <Spinner />
+          </CardContent>
+        </Card>
+      );
+    }
+
+    const chartData = data.buckets.map((b) => ({
+      key: b.key,
+      label: t(`latency.buckets.${b.key}`),
+      count: b.count,
+    }));
+
     return (
-      <Card>
-        <CardContent className="text-muted-foreground flex h-40 items-center justify-center text-sm">
-          {t('latency.empty')}
-        </CardContent>
-      </Card>
+      <motion.div variants={fadeUp}>
+        <Card>
+          <CardHeader>
+            <CardTitle>{t('latency.title')}</CardTitle>
+            <CardDescription>
+              {t('latency.desc')} ·{' '}
+              {data.total > 0
+                ? t('latency.avgDays', { days: data.avgDays.toFixed(1) }) +
+                  ' · ' +
+                  t('latency.medianDays', { days: data.medianDays.toFixed(0) })
+                : t('latency.empty')}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            {data.total === 0 && stream.isComplete ? (
+              <p className="text-muted-foreground py-8 text-center text-sm">
+                {t('latency.empty')}
+              </p>
+            ) : (
+              <div className="h-56">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={chartData}
+                    margin={{ top: 8, right: 8, bottom: 8, left: 0 }}
+                  >
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      stroke="hsl(var(--border))"
+                    />
+                    <XAxis
+                      dataKey="label"
+                      stroke="hsl(var(--muted-foreground))"
+                      fontSize={10}
+                      tickLine={false}
+                      axisLine={false}
+                      interval={0}
+                    />
+                    <YAxis
+                      stroke="hsl(var(--muted-foreground))"
+                      fontSize={11}
+                      tickLine={false}
+                      axisLine={false}
+                      width={40}
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: 'hsl(var(--popover))',
+                        border: '1px solid hsl(var(--border))',
+                        borderRadius: '8px',
+                        fontSize: '12px',
+                      }}
+                    />
+                    <Bar dataKey="count" radius={[4, 4, 0, 0]}>
+                      {chartData.map((_, i) => (
+                        <Cell
+                          key={i}
+                          fill={currentColor}
+                          fillOpacity={0.6 + (i / chartData.length) * 0.4}
+                        />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </motion.div>
     );
   }
-
-  if (!stream.meta) {
-    return (
-      <Card>
-        <CardContent className="flex h-40 items-center justify-center">
-          <Spinner />
-        </CardContent>
-      </Card>
-    );
-  }
-
-  const data = latencyStreamToData(stream);
-  if (!data) {
-    return (
-      <Card>
-        <CardContent className="flex h-40 items-center justify-center">
-          <Spinner />
-        </CardContent>
-      </Card>
-    );
-  }
-
-  const chartData = data.buckets.map((b) => ({
-    key: b.key,
-    label: t(`latency.buckets.${b.key}`),
-    count: b.count,
-  }));
-
-  return (
-    <motion.div variants={fadeUp}>
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('latency.title')}</CardTitle>
-          <CardDescription>
-            {t('latency.desc')} ·{' '}
-            {data.total > 0
-              ? t('latency.avgDays', { days: data.avgDays.toFixed(1) }) +
-                ' · ' +
-                t('latency.medianDays', { days: data.medianDays.toFixed(0) })
-              : t('latency.empty')}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {data.total === 0 && stream.isComplete ? (
-            <p className="text-muted-foreground py-8 text-center text-sm">
-              {t('latency.empty')}
-            </p>
-          ) : (
-            <div className="h-56">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={chartData}
-                  margin={{ top: 8, right: 8, bottom: 8, left: 0 }}
-                >
-                  <CartesianGrid
-                    strokeDasharray="3 3"
-                    stroke="hsl(var(--border))"
-                  />
-                  <XAxis
-                    dataKey="label"
-                    stroke="hsl(var(--muted-foreground))"
-                    fontSize={10}
-                    tickLine={false}
-                    axisLine={false}
-                    interval={0}
-                  />
-                  <YAxis
-                    stroke="hsl(var(--muted-foreground))"
-                    fontSize={11}
-                    tickLine={false}
-                    axisLine={false}
-                    width={40}
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: 'hsl(var(--popover))',
-                      border: '1px solid hsl(var(--border))',
-                      borderRadius: '8px',
-                      fontSize: '12px',
-                    }}
-                  />
-                  <Bar dataKey="count" radius={[4, 4, 0, 0]}>
-                    {chartData.map((_, i) => (
-                      <Cell
-                        key={i}
-                        fill={currentColor}
-                        fillOpacity={0.6 + (i / chartData.length) * 0.4}
-                      />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </motion.div>
-  );
-});
+);
 LatencySection.displayName = 'LatencySection';
 
 export default LatencySection;

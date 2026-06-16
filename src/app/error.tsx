@@ -1,6 +1,5 @@
 'use client';
 
-import { NextPage } from 'next';
 import Link from 'next/link';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +11,7 @@ interface ErrorProps {
   reset: () => void;
 }
 
-const GlobalError: NextPage<ErrorProps> = ({ error, reset }) => {
+const GlobalError = ({ error, reset }: ErrorProps) => {
   const { t } = useTranslation();
   React.useEffect(() => {
     console.error('Global error boundary caught:', error);

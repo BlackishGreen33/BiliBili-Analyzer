@@ -1,28 +1,22 @@
 'use client';
 
-import { NextPage } from 'next';
 import { useTranslation } from 'react-i18next';
 
-import { Button } from '@/common/components/ui/button';
+import RouteError from '@/common/components/feedback/RouteError';
 
-interface ErrorProps {
+interface CompareErrorProps {
   error: Error & { digest?: string };
   reset: () => void;
 }
 
-const CompareError: NextPage<ErrorProps> = ({ error, reset }) => {
+const CompareError = ({ error, reset }: CompareErrorProps) => {
   const { t } = useTranslation();
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3 p-8 text-center">
-      <p className="text-muted-foreground text-sm font-medium">
+    <div className="m-2 mt-24 p-2 md:m-10 md:p-10">
+      <RouteError error={error} reset={reset} />
+      <p className="text-muted-foreground mt-2 text-center text-[10px]">
         {t('common.loading')}
       </p>
-      <p className="text-muted-foreground max-w-md text-xs">
-        {error.message || t('dashboard.error.hint')}
-      </p>
-      <Button size="sm" onClick={reset}>
-        {t('common.retry')}
-      </Button>
     </div>
   );
 };

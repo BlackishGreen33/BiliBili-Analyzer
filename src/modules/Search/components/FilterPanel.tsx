@@ -33,7 +33,6 @@ export type FilterPanelProps = {
   setSelectedChannels: (
     cs: ChannelSelection | ((prev: ChannelSelection) => ChannelSelection)
   ) => void;
-  setActiveTag: (t: string | null) => void;
   handleReset: () => void;
   handleChangeDate: (f: string) => void;
 };
@@ -49,7 +48,6 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   totalCount,
   setSearchValue,
   setSelectedChannels,
-  setActiveTag,
   handleReset,
   handleChangeDate,
 }) => {
