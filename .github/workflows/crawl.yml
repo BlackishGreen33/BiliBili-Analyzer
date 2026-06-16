@@ -33,12 +33,10 @@ jobs:
           cache: pnpm
       - name: Install node modules
         run: pnpm install
-      - name: Crawl data
-        run: pnpm run crawldata
-      - name: Save crawl output
-        run: |
-          mkdir -p /tmp/crawl-output
-          cp -r result/. /tmp/crawl-output/
+
+      # 先 checkout result 分支(包含歷史 list.json + 所有 raw 檔案),
+      # 再跑 crawler,這樣 CrawlPopular.mjs 才能讀到既有的 list.json 來累積,
+      # 而不是從 [新檔名] 開始(會讓 list.json 每次都被覆蓋成 1 條)。
       - name: Switch to result branch
         run: |
           git config user.name github-actions
@@ -49,12 +47,16 @@ jobs:
           else
             git checkout --orphan result
           fi
-      - name: Apply crawl output
-        run: |
-          mkdir -p result
-          cp -r /tmp/crawl-output/. result/
-      - name: Push to result branch
+
+      - name: Crawl data
+        run: pnpm run crawldata
+
+      - name: Commit and push
         run: |
           git add result/* -f
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
           git commit -m "$(TZ=Asia/Shanghai date +"%Y-%m-%d %H:%M:%S")"
           git push origin result
