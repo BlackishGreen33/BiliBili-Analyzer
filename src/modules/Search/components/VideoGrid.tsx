@@ -7,11 +7,12 @@ import { useTranslation } from 'react-i18next';
 import { Badge } from '@/common/components/ui/badge';
 import { Button } from '@/common/components/ui/button';
 import { containerStagger } from '@/common/styles/motion';
+import type { VideoData } from '@/common/types/video';
 
-import VideoCard, { type VideoItem } from './VideoCard';
+import VideoCard from './VideoCard';
 
 type VideoGridProps = {
-  visible: ReadonlyArray<VideoItem>;
+  visible: ReadonlyArray<VideoData>;
   filteredCount: number;
   hasMore: boolean;
   currentColor: string;

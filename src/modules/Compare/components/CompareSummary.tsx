@@ -7,15 +7,17 @@ import MetricCompareCard from '@/common/components/composed/MetricCompareCard';
 import { containerStagger, fadeUp } from '@/common/styles/motion';
 import { formatCompact, formatPercent } from '@/common/utils/format';
 
-type SummaryA = {
-  totalVideos: number;
-  totalUp: number;
-  totalViews: number;
-  totalLike: number;
-  totalCoin: number;
-  totalFavorite: number;
-  avgEngagement: number;
+type CompareSummaryFields = {
   file: string;
+  summary: {
+    totalVideos: number;
+    totalUp: number;
+    totalViews: number;
+    totalLike: number;
+    totalCoin: number;
+    totalFavorite: number;
+    avgEngagement: number;
+  };
 };
 
 type TotalsDelta = {
@@ -27,8 +29,8 @@ type TotalsDelta = {
 };
 
 type CompareSummaryProps = {
-  a: SummaryA;
-  b: SummaryA;
+  a: CompareSummaryFields;
+  b: CompareSummaryFields;
   totalsDelta: TotalsDelta;
 };
 
@@ -45,8 +47,8 @@ const CompareSummary: React.FC<CompareSummaryProps> = ({
     >
       <MetricCompareCard
         label={t('dashboard.summary.videos')}
-        aValue={formatCompact(a.totalVideos)}
-        bValue={formatCompact(b.totalVideos)}
+        aValue={formatCompact(a.summary.totalVideos)}
+        bValue={formatCompact(b.summary.totalVideos)}
         delta={totalsDelta.totalVideos}
         deltaFormatter={(n) => formatCompact(n)}
         aLabel={`A · ${a.file.slice(0, 10)}`}
@@ -54,8 +56,8 @@ const CompareSummary: React.FC<CompareSummaryProps> = ({
       />
       <MetricCompareCard
         label={t('dashboard.summary.ups')}
-        aValue={formatCompact(a.totalUp)}
-        bValue={formatCompact(b.totalUp)}
+        aValue={formatCompact(a.summary.totalUp)}
+        bValue={formatCompact(b.summary.totalUp)}
         delta={totalsDelta.totalUp}
         deltaFormatter={(n) => formatCompact(n)}
         aLabel={`A · ${a.file.slice(0, 10)}`}
@@ -63,8 +65,8 @@ const CompareSummary: React.FC<CompareSummaryProps> = ({
       />
       <MetricCompareCard
         label={t('dashboard.summary.views')}
-        aValue={formatCompact(a.totalViews)}
-        bValue={formatCompact(b.totalViews)}
+        aValue={formatCompact(a.summary.totalViews)}
+        bValue={formatCompact(b.summary.totalViews)}
         delta={totalsDelta.totalViews}
         deltaFormatter={(n) => formatCompact(n)}
         aLabel={`A · ${a.file.slice(0, 10)}`}
@@ -73,10 +75,14 @@ const CompareSummary: React.FC<CompareSummaryProps> = ({
       <MetricCompareCard
         label={t('dashboard.summary.engagement')}
         aValue={formatCompact(
-          a.totalLike + a.totalCoin * 2 + a.totalFavorite * 2
+          a.summary.totalLike +
+            a.summary.totalCoin * 2 +
+            a.summary.totalFavorite * 2
         )}
         bValue={formatCompact(
-          b.totalLike + b.totalCoin * 2 + b.totalFavorite * 2
+          b.summary.totalLike +
+            b.summary.totalCoin * 2 +
+            b.summary.totalFavorite * 2
         )}
         delta={totalsDelta.totalEngagement}
         deltaFormatter={(n) => formatCompact(n)}
@@ -86,8 +92,16 @@ const CompareSummary: React.FC<CompareSummaryProps> = ({
       <motion.div variants={fadeUp}>
         <MetricCompareCard
           label={t('dashboard.summary.avgEngagement')}
-          aValue={a.avgEngagement > 0 ? formatPercent(a.avgEngagement, 2) : '—'}
-          bValue={b.avgEngagement > 0 ? formatPercent(b.avgEngagement, 2) : '—'}
+          aValue={
+            a.summary.avgEngagement > 0
+              ? formatPercent(a.summary.avgEngagement, 2)
+              : '—'
+          }
+          bValue={
+            b.summary.avgEngagement > 0
+              ? formatPercent(b.summary.avgEngagement, 2)
+              : '—'
+          }
           delta={totalsDelta.avgEngagement}
           deltaFormatter={(n) => formatPercent(n, 2)}
           aLabel={`A · ${a.file.slice(0, 10)}`}

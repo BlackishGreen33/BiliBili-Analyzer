@@ -216,7 +216,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                             const currentEntry = copy[idx];
                             if (!currentEntry) return prev;
                             if (currentEntry[1] === sub.value) {
-                              copy[idx] = [currentEntry[0], ''];
+                              copy[idx] = [currentEntry[0] ?? '', ''];
                             } else {
                               copy[idx] = [parent.value, sub.value];
                             }

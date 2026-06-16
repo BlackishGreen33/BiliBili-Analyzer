@@ -1,7 +1,7 @@
 /**
  * useWordCloud hook 測試
  *
- * 該 hook 使用 useSWR(key, undefined, options) 從全域 SWRConfig 抓 fetcher。
+ * 該 hook 使用 useSWR(key, options) 從全域 SWRConfig 抓 fetcher。
  * 這裡直接 vi.mock 替換 swr 模組, 驗證 hook 傳入的 key 與 options。
  */
 
@@ -16,8 +16,7 @@ vi.mock('swr', async () => {
   const actual = await vi.importActual<typeof import('swr')>('swr');
   return {
     ...actual,
-    default: (key: unknown, fetcher: unknown, opts: unknown) =>
-      mockUseSWR(key, fetcher, opts),
+    default: (key: unknown, opts: unknown) => mockUseSWR(key, opts),
   };
 });
 
@@ -41,7 +40,6 @@ describe('useWordCloud', () => {
     // 驗證 useSWR 用 /api/wordcloud 作為 cache key（fetcher 來自 SWRConfig）
     expect(mockUseSWR).toHaveBeenCalledWith(
       '/api/wordcloud',
-      undefined,
       expect.objectContaining({ dedupingInterval: 60_000 })
     );
     expect(result.current.data?.file).toBe('2026-01-15');
@@ -72,7 +70,6 @@ describe('useWordCloud', () => {
 
     expect(mockUseSWR).toHaveBeenCalledWith(
       '/api/wordcloud',
-      undefined,
       expect.objectContaining({ dedupingInterval: 60_000 })
     );
   });

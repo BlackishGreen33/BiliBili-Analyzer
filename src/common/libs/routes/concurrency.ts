@@ -10,14 +10,16 @@ export async function pLimit<T, U>(
   limit: number,
   fn: (item: T, index: number) => Promise<U>
 ): Promise<U[]> {
-  const results = new Array<U>(items.length);
+  const results = new Array<U | undefined>(items.length);
   let next = 0;
 
   async function worker(): Promise<void> {
     while (true) {
       const i = next++;
       if (i >= items.length) return;
-      results[i] = await fn(items[i], i);
+      const item = items[i];
+      if (item === undefined) return;
+      results[i] = await fn(item, i);
     }
   }
 
@@ -26,5 +28,5 @@ export async function pLimit<T, U>(
     () => worker()
   );
   await Promise.all(workers);
-  return results;
+  return results as U[];
 }

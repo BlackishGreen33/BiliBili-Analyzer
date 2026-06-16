@@ -7,24 +7,11 @@ import { FaUserAlt } from 'react-icons/fa';
 import { Badge } from '@/common/components/ui/badge';
 import { Card, CardContent } from '@/common/components/ui/card';
 import { fadeUp } from '@/common/styles/motion';
+import type { VideoData } from '@/common/types/video';
 import { formatViews } from '@/common/utils/format';
 
-export type VideoItem = {
-  bvid: string;
-  url: string;
-  cover: string;
-  title: string;
-  UP: string;
-  views: number;
-  tags: {
-    firstChannel: string;
-    secondChannel: string;
-    ordinaryTags: string[];
-  };
-};
-
 type VideoCardProps = {
-  item: VideoItem;
+  item: VideoData;
   currentColor: string;
   onClick: () => void;
   onTagClick: (tag: string) => void;

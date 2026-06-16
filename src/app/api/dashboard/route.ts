@@ -24,7 +24,7 @@ export async function GET(req: Request) {
     let targetFile = filename;
     if (!targetFile) {
       const list = await fetchResultList();
-      targetFile = list[0];
+      targetFile = list[0] ?? null;
     }
     if (!targetFile) {
       return new NextResponse('No crawl data', { status: 404 });

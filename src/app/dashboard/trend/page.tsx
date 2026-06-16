@@ -68,7 +68,7 @@ const TrendPage: React.FC = React.memo(() => {
 
   const durationKeys = useMemo(() => {
     if (!data || data.points.length === 0) return [];
-    return data.points[0].duration.map((b) => b.label);
+    return data.points[0]?.duration.map((b) => b.label) ?? [];
   }, [data]);
 
   return (

@@ -253,6 +253,7 @@ export function ngrams(tokens: string[], minN = 2, maxN = 3): string[] {
       let hasCjk = false;
       for (let j = 0; j < n; j++) {
         const t = tokens[i + j];
+        if (t === undefined) continue;
         const firstChar = Array.from(t)[0] ?? '';
         if (isCjkChar(firstChar)) hasCjk = true;
         else allCjk = false;

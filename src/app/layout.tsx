@@ -10,7 +10,7 @@ import { isSupportedLocale } from '@/common/i18n/locales';
 import Providers from '@/common/providers/Providers';
 
 const notoSC = Noto_Sans_SC({
-  subsets: ['latin', 'chinese-simplified'],
+  subsets: ['latin'],
   weight: ['400', '500', '700'],
   variable: '--font-noto-sc',
   display: 'swap',

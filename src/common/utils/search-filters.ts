@@ -44,7 +44,7 @@ export function buildChannelOptions(
 export function encodeChannels(cs: ChannelSelection): string {
   return cs
     .map(([f, s]) => (s ? `${f}-${s}` : f))
-    .filter((s) => s.length > 0)
+    .filter((s): s is string => !!s && s.length > 0)
     .join(',');
 }
 

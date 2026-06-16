@@ -3,7 +3,7 @@ import path from 'node:path';
 import 'server-only';
 
 import type { AggregationResult } from '@/common/aggregations/build.d.ts';
-import { buildAggregations as buildAggregationsImpl } from '@/common/aggregations/build.mjs';
+import { buildAggregations as buildAggregationsRaw } from '@/common/aggregations/build.mjs';
 import { CrawlResultSchema } from '@/common/types/schema';
 import type { CrawlResult } from '@/common/types/video';
 
@@ -233,5 +233,5 @@ export type DashboardAgg = {
 export function buildAggregations(
   videos: CrawlVideo[]
 ): Omit<DashboardAgg, 'file' | 'time'> {
-  return buildAggregationsImpl(videos);
+  return buildAggregationsRaw(videos) as Omit<DashboardAgg, 'file' | 'time'>;
 }

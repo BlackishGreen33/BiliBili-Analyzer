@@ -43,16 +43,14 @@ const UpMovementCard: React.FC<{ buckets: UpBuckets }> = ({ buckets }) => {
               count={buckets.newUps.length}
               variant="new"
               items={buckets.newUps.slice(0, 10)}
-              t={t}
             />
             <UpColumn
               title={t('compare.upBucket.droppedUps')}
               count={buckets.droppedUps.length}
               variant="dropped"
               items={buckets.droppedUps.slice(0, 10)}
-              t={t}
             />
-            <PersistentColumn buckets={buckets} t={t} />
+            <PersistentColumn buckets={buckets} />
           </div>
         </CardContent>
       </Card>
@@ -67,14 +65,13 @@ function UpColumn({
   count,
   variant,
   items,
-  t,
 }: {
   title: string;
   count: number;
   variant: UpVariant;
   items: ReadonlyArray<UpItem>;
-  t: (k: string, opts?: Record<string, unknown>) => string;
 }) {
+  const { t } = useTranslation();
   const badgeCls =
     variant === 'new'
       ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400'
@@ -112,13 +109,8 @@ function UpColumn({
   );
 }
 
-function PersistentColumn({
-  buckets,
-  t,
-}: {
-  buckets: UpBuckets;
-  t: (k: string, opts?: Record<string, unknown>) => string;
-}) {
+function PersistentColumn({ buckets }: { buckets: UpBuckets }) {
+  const { t } = useTranslation();
   return (
     <div>
       <h4 className="mb-2 flex items-center gap-1.5 text-sm font-medium">

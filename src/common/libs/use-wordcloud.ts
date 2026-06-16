@@ -14,7 +14,5 @@ export type WordCloudData = {
 };
 
 export function useWordCloud() {
-  return useSWR<WordCloudData>('/api/wordcloud', undefined, {
-    dedupingInterval: 60_000,
-  });
+  return useSWR<WordCloudData>('/api/wordcloud', { dedupingInterval: 60_000 });
 }

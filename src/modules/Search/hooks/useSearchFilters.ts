@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
+import type { VideoData } from '@/common/types/video';
 import {
   type ChannelSelection,
   decodeChannels,
@@ -12,9 +13,7 @@ import {
 } from '@/common/utils/search-filters';
 
 export type SearchFilters = {
-  result: {
-    video: Array<Parameters<typeof filterVideos>[0]['videos'][number]>;
-  } | null;
+  result: { video: VideoData[] } | null;
   list: string[];
 };
 
@@ -24,8 +23,8 @@ export type SearchFiltersApi = {
   activeTag: string | null;
   selectedTime: string | null;
   effectiveTime: string | null;
-  filtered: unknown[];
-  visible: unknown[];
+  filtered: VideoData[];
+  visible: VideoData[];
   setSearchValue: (v: string) => void;
   setSelectedChannels: (
     cs: ChannelSelection | ((prev: ChannelSelection) => ChannelSelection)
@@ -73,16 +72,14 @@ export function useSearchFilters(
 
   const filtered = useMemo(() => {
     if (!result) return [];
-    return filterVideos({
-      videos: result.video as Parameters<typeof filterVideos>[0]['videos'],
+    return filterVideos<VideoData>({
+      videos: result.video,
       q: searchValue,
       channels: selectedChannelsState,
       tag: activeTag,
     });
   }, [result, searchValue, selectedChannelsState, activeTag]);
 
-  // 當篩選後的清單變小，動態調整 visibleCount
-  // 用 derived state 取代 setState-in-effect（避免 React 19 cascading render 警告）
   const effectiveVisibleCount =
     filtered.length > 0
       ? Math.min(visibleCount, filtered.length)

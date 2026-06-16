@@ -44,7 +44,6 @@ const TagShiftCard: React.FC<{
               tags={shift.newTags.slice(0, 30)}
               tagMap={tagMapB}
               variant="new"
-              t={t}
             />
             <TagColumn
               title={t('compare.tagsDropped')}
@@ -52,7 +51,6 @@ const TagShiftCard: React.FC<{
               tags={shift.droppedTags.slice(0, 30)}
               tagMap={tagMapA}
               variant="dropped"
-              t={t}
             />
           </div>
         </CardContent>
@@ -67,15 +65,14 @@ function TagColumn({
   tags,
   tagMap,
   variant,
-  t,
 }: {
   title: string;
   count: number;
   tags: ReadonlyArray<string>;
   tagMap: TagMap;
   variant: 'new' | 'dropped';
-  t: (k: string, opts?: Record<string, unknown>) => string;
 }) {
+  const { t } = useTranslation();
   const badgeCls =
     variant === 'new'
       ? 'text-emerald-700 dark:text-emerald-400'

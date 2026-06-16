@@ -23,12 +23,12 @@ export async function GET() {
       return NextResponse.json(hit);
     }
     const list = await fetchResultList();
-    if (list.length === 0) {
+    const file = list[0];
+    if (!file) {
       const empty: WordCloudPayload = buildWordCloudPayload('', []);
       cache.set(CACHE_KEY, empty);
       return NextResponse.json(empty);
     }
-    const file = list[0];
     const data = await fetchResultByName(file);
     const payload: WordCloudPayload = buildWordCloudPayload(file, data.video);
     cache.set(CACHE_KEY, payload);

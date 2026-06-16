@@ -58,10 +58,12 @@ export function computeLatencyStats(delays: number[]): {
   const sorted = [...delays].sort((a, b) => a - b);
   const total = sorted.length;
   const avgDays = sorted.reduce((a, b) => a + b, 0) / total;
+  const lower = sorted[Math.floor(total / 2) - 1];
+  const upper = sorted[Math.floor(total / 2)];
   const medianDays =
     total % 2 === 1
-      ? sorted[(total - 1) / 2]
-      : (sorted[total / 2 - 1] + sorted[total / 2]) / 2;
+      ? (sorted[(total - 1) / 2] ?? 0)
+      : ((lower ?? 0) + (upper ?? 0)) / 2;
   return { total, avgDays, medianDays };
 }
 

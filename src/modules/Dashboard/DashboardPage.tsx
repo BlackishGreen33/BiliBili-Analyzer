@@ -22,15 +22,15 @@ import { useDashboard } from '@/common/libs/use-dashboard';
 import { containerStagger, EASE_OUT_EXPO } from '@/common/styles/motion';
 import { formatDateTime } from '@/common/utils/format';
 
-import ChannelsCard from './ChannelsCard';
-import DashboardWordCloud from './DashboardWordCloud';
-import DurationCard from './DurationCard';
-import EngagementTopCard from './EngagementTopCard';
-import HourHeatmapCard from './HourHeatmapCard';
-import KpiSummary from './KpiSummary';
-import TopTagsCard from './TopTagsCard';
-import UpBarCard from './UpBarCard';
-import UpRankingCard from './UpRankingCard';
+import ChannelsCard from './components/ChannelsCard';
+import DashboardWordCloud from './components/DashboardWordCloud';
+import DurationCard from './components/DurationCard';
+import EngagementTopCard from './components/EngagementTopCard';
+import HourHeatmapCard from './components/HourHeatmapCard';
+import KpiSummary from './components/KpiSummary';
+import TopTagsCard from './components/TopTagsCard';
+import UpBarCard from './components/UpBarCard';
+import UpRankingCard from './components/UpRankingCard';
 
 const DashboardPage: React.FC = React.memo(() => {
   const searchParams = useSearchParams();
