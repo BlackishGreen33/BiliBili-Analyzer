@@ -3,7 +3,11 @@ import { describe, expect, it } from 'vitest';
 import {
   buildAggregations,
   type CrawlVideo,
+  fetchResultByName,
 } from '@/common/libs/result-data.server';
+
+const REAL_FETCH = globalThis.fetch;
+const ORIGINAL_ENV = { ...process.env };
 
 const makeVideo = (over: Partial<CrawlVideo> = {}): CrawlVideo => ({
   bvid: 'BV1wEEg62EDP',
@@ -212,4 +216,123 @@ describe('buildAggregations', () => {
     const total = agg.hourHeatmap.reduce((a, b) => a + b.count, 0);
     expect(total).toBe(0);
   });
+});
+
+describe('legacy Puppeteer data (no bvid, no stat fields)', () => {
+  it('buildAggregations ignores bvid and still produces topEngagement from views only', () => {
+    // 2024 Puppeteer-era schema: only url/cover/title/UP/views/tags
+    const legacy = {
+      url: 'https://www.bilibili.com/video/BV1Af421o7ki',
+      cover: 'https://i0.hdslb.com/cover.jpg',
+      title: 'legacy video',
+      UP: 'legacy UP',
+      views: 5000,
+      tags: {
+        firstChannel: '生活',
+        secondChannel: '搞笑',
+        ordinaryTags: [],
+      },
+    };
+    const agg = buildAggregations([
+      legacy as unknown as CrawlVideo,
+      legacy as unknown as CrawlVideo,
+    ]);
+    expect(agg.summary.totalVideos).toBe(2);
+    expect(agg.summary.totalViews).toBe(10_000);
+    // topEngagement may be empty since engagement requires stat fields
+    expect(Array.isArray(agg.topEngagement)).toBe(true);
+  });
+});
+
+describe('legacy bvid backfill (via fetchResultByName mocked fetch)', () => {
+  afterEach(() => {
+    globalThis.fetch = REAL_FETCH;
+    vi.restoreAllMocks();
+  });
+
+  it('backfills bvid from url when fetchResultByName receives legacy data', async () => {
+    const legacyPayload = {
+      time: Date.now(),
+      video: [
+        {
+          url: 'https://www.bilibili.com/video/BV1Af421o7ki',
+          cover: 'https://i0.hdslb.com/cover.jpg',
+          title: 'no bvid field',
+          UP: 'legacy UP',
+          views: 1000,
+          tags: {
+            firstChannel: '生活',
+            secondChannel: '搞笑',
+            ordinaryTags: [],
+          },
+        },
+      ],
+    };
+    globalThis.fetch = vi.fn(
+      async () => new Response(JSON.stringify(legacyPayload))
+    ) as unknown as typeof fetch;
+
+    const data = await fetchResultByName('2024-04-03T09-16-11+0800');
+    expect(data.video[0]?.bvid).toBe('BV1Af421o7ki');
+  });
+
+  it('leaves bvid untouched when already present', async () => {
+    const payload = {
+      time: Date.now(),
+      video: [
+        {
+          bvid: 'BV1Existing',
+          url: 'https://www.bilibili.com/video/BV1Existing',
+          cover: 'https://i0.hdslb.com/cover.jpg',
+          title: 'has bvid',
+          UP: 'modern UP',
+          views: 1000,
+          tags: {
+            firstChannel: '游戏',
+            secondChannel: 'a',
+            ordinaryTags: [],
+          },
+        },
+      ],
+    };
+    globalThis.fetch = vi.fn(
+      async () => new Response(JSON.stringify(payload))
+    ) as unknown as typeof fetch;
+
+    const data = await fetchResultByName('2026-06-15T01-36-32+0800');
+    expect(data.video[0]?.bvid).toBe('BV1Existing');
+  });
+
+  it('skips videos without url when both bvid and url are missing', async () => {
+    const payload = {
+      time: Date.now(),
+      video: [
+        {
+          cover: 'https://i0.hdslb.com/cover.jpg',
+          title: 'no bvid, no url',
+          UP: 'mystery',
+          views: 100,
+          tags: {
+            firstChannel: '游戏',
+            secondChannel: 'a',
+            ordinaryTags: [],
+          },
+        },
+      ],
+    };
+    globalThis.fetch = vi.fn(
+      async () => new Response(JSON.stringify(payload))
+    ) as unknown as typeof fetch;
+
+    const data = await fetchResultByName('2024-malformed');
+    // No bvid, no url → bvid remains undefined (we don't invent IDs)
+    expect(data.video[0]?.bvid).toBeUndefined();
+    // Aggregation still runs without throwing
+    const agg = buildAggregations(data.video as unknown as CrawlVideo[]);
+    expect(agg.summary.totalVideos).toBe(1);
+  });
+
+  // Suppress unused variable warning from the imported REAL_FETCH for the
+  // nested describe block's afterEach.
+  void ORIGINAL_ENV;
 });

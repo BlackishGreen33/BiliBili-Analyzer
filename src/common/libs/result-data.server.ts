@@ -6,6 +6,7 @@ import type { AggregationResult } from '@/common/aggregations/build.d.ts';
 import { buildAggregations as buildAggregationsRaw } from '@/common/aggregations/build.mjs';
 import { CrawlResultSchema } from '@/common/types/schema';
 import type { CrawlResult } from '@/common/types/video';
+import { extractBvid } from '@/common/utils/format';
 
 const RESULT_BASE_URL =
   'https://raw.githubusercontent.com/BlackishGreen33/BiliBili-Analyzer/result/result';
@@ -18,6 +19,20 @@ const AGG_TTL_MS = 5 * 60 * 1000;
 let cachedList: { filenames: string[]; fetchedAt: number } | null = null;
 let inFlightList: Promise<string[]> | null = null;
 const inFlightResults = new Map<string, Promise<CrawlResult>>();
+
+/**
+ * Backfill `bvid` from `url` for legacy Puppeteer-era data files
+ * (2024-04 ~ ~2025-01) that don't carry the field. Always applied
+ * at load time so consumers never see `bvid: undefined`.
+ */
+function backfillBvid(videos: Array<Record<string, unknown>>): void {
+  for (const v of videos) {
+    if (typeof v['bvid'] !== 'string' && typeof v['url'] === 'string') {
+      const fromUrl = extractBvid(v['url'] as string);
+      if (fromUrl) v['bvid'] = fromUrl;
+    }
+  }
+}
 
 /**
  * Dev-only escape hatch：當 `MOCK_LOCAL_FILES=1` 時，從本機 `result/` 讀資料
@@ -42,6 +57,9 @@ function readLocalResult(filename: string): CrawlResult {
     throw new Error(`${filename}.json not found in local result/`);
   }
   const raw = JSON.parse(readFileSync(p, 'utf-8')) as CrawlResult;
+  if (Array.isArray(raw?.video)) {
+    backfillBvid(raw.video as Array<Record<string, unknown>>);
+  }
   const parsed = CrawlResultSchema.safeParse(raw);
   if (!parsed.success) {
     console.error(
@@ -87,6 +105,9 @@ export async function fetchResultByName(
     .then(async (res) => {
       if (!res.ok) throw new Error(`${filename}.json ${res.status}`);
       const raw = await res.json();
+      if (Array.isArray(raw?.video)) {
+        backfillBvid(raw.video);
+      }
       const parsed = CrawlResultSchema.safeParse(raw);
       if (!parsed.success) {
         console.error(
