@@ -8,7 +8,14 @@ export const VideoTagsSchema = z.object({
 
 export const VideoDataSchema = z
   .object({
-    bvid: z.string().regex(/^BV[A-Za-z0-9]+$/),
+    /**
+     * bvid 為早期 Puppeteer 爬蟲 (2024-04 ~ 2025-01) 沒有的欄位。
+     * 對舊資料放寬成 optional,實際值由 fetchResultByName 從 url 反推。
+     */
+    bvid: z
+      .string()
+      .regex(/^BV[A-Za-z0-9]+$/)
+      .optional(),
     url: z.string().url(),
     cover: z.string().url(),
     title: z.string(),
