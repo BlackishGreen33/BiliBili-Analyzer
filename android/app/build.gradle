@@ -24,6 +24,17 @@ android {
     }
 }
 
+// kotlin-stdlib-jdk7 / kotlin-stdlib-jdk8 自 1.8+ 起已被合併進 kotlin-stdlib，
+// 但 Capacitor 8.4.0 的傳遞依賴仍會拉進 1.6.x，導致 duplicate class。
+// 強制將整個專案對齊到 1.8.22。
+configurations.configureEach {
+    resolutionStrategy {
+        force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22'
+        force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22'
+        force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22'
+    }
+}
+
 repositories {
     flatDir{
         dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
