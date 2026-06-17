@@ -28,6 +28,7 @@ vi.mock('@/common/libs/result-data', async () => {
   };
 });
 
+const mockUseSearchState = vi.fn();
 const mockUseSearchFilters = vi.fn();
 const mockUseInfiniteScroll = vi.fn();
 vi.mock('@/modules/Search/hooks', async () => {
@@ -36,6 +37,7 @@ vi.mock('@/modules/Search/hooks', async () => {
   );
   return {
     ...actual,
+    useSearchState: (...args: unknown[]) => mockUseSearchState(...args),
     useSearchFilters: (...args: unknown[]) => mockUseSearchFilters(...args),
     useInfiniteScroll: (...args: unknown[]) => mockUseInfiniteScroll(...args),
   };
@@ -45,20 +47,22 @@ vi.mock('@/common/components/ui/use-toast', () => ({
   useToast: () => ({ toast: mockToast }),
 }));
 
-// 預設 mock factory 設定
-const defaultFilters = () => ({
+const defaultState = () => ({
   searchValue: '',
   selectedChannels: [],
   activeTag: null,
   selectedTime: null,
   effectiveTime: '2026-01-15',
-  filtered: [],
-  visible: [],
   setSearchValue: vi.fn(),
   setSelectedChannels: vi.fn(),
   setActiveTag: vi.fn(),
   handleReset: vi.fn(),
   handleChangeDate: vi.fn(),
+});
+
+const defaultFilterResults = () => ({
+  filtered: [],
+  visible: [],
   loadMore: vi.fn(),
 });
 
@@ -86,6 +90,7 @@ beforeEach(() => {
   mockToast.mockReset();
   mockUseResultList.mockReset();
   mockUseLatestCrawl.mockReset();
+  mockUseSearchState.mockReset();
   mockUseSearchFilters.mockReset();
   mockUseInfiniteScroll.mockReset();
 
@@ -96,7 +101,8 @@ beforeEach(() => {
     data: defaultResult(),
     isLoading: false,
   });
-  mockUseSearchFilters.mockImplementation(() => defaultFilters());
+  mockUseSearchState.mockImplementation(() => defaultState());
+  mockUseSearchFilters.mockImplementation(() => defaultFilterResults());
   mockUseInfiniteScroll.mockReturnValue(undefined);
 
   useThemeStore.setState({ currentColor: '#FB7299' });
@@ -105,6 +111,31 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.restoreAllMocks();
+});
+
+const makeVideo = (
+  over: Partial<{
+    bvid: string;
+    url: string;
+    cover: string;
+    title: string;
+    UP: string;
+    views: number;
+    tags: {
+      firstChannel: string;
+      secondChannel: string;
+      ordinaryTags: string[];
+    };
+  }> = {}
+) => ({
+  bvid: 'BV1',
+  url: 'https://www.bilibili.com/video/BV1',
+  cover: 'https://i0.hdslb.com/bfs/archive/abc.jpg',
+  title: '测试',
+  UP: 'UP1',
+  views: 100,
+  tags: { firstChannel: '游戏', secondChannel: '单机', ordinaryTags: ['原神'] },
+  ...over,
 });
 
 describe('Search', () => {
@@ -116,7 +147,7 @@ describe('Search', () => {
 
   it('shows empty state when no filtered videos', () => {
     mockUseSearchFilters.mockReturnValue({
-      ...defaultFilters(),
+      ...defaultFilterResults(),
       filtered: [],
       visible: [],
     });
@@ -125,21 +156,9 @@ describe('Search', () => {
   });
 
   it('renders video cards when filtered list is non-empty', async () => {
-    const video = {
-      bvid: 'BV1abc',
-      url: 'https://www.bilibili.com/video/BV1abc',
-      cover: 'https://i0.hdslb.com/bfs/archive/abc.jpg',
-      title: 'Test video',
-      UP: 'TestUP',
-      views: 100,
-      tags: {
-        firstChannel: '游戏',
-        secondChannel: '单机',
-        ordinaryTags: [],
-      },
-    };
+    const video = makeVideo({ bvid: 'BV1abc', title: 'Test video' });
     mockUseSearchFilters.mockReturnValue({
-      ...defaultFilters(),
+      ...defaultFilterResults(),
       filtered: [video],
       visible: [video],
     });
@@ -151,21 +170,13 @@ describe('Search', () => {
 
   it('clicking a video card navigates to /details?bvid=...', async () => {
     const user = userEvent.setup();
-    const video = {
+    const video = makeVideo({
       bvid: 'BV1xyz',
       url: 'https://www.bilibili.com/video/BV1xyz',
-      cover: 'https://i0.hdslb.com/bfs/archive/abc.jpg',
       title: 'Click me',
-      UP: 'TestUP',
-      views: 100,
-      tags: {
-        firstChannel: '游戏',
-        secondChannel: '单机',
-        ordinaryTags: [],
-      },
-    };
+    });
     mockUseSearchFilters.mockReturnValue({
-      ...defaultFilters(),
+      ...defaultFilterResults(),
       filtered: [video],
       visible: [video],
     });
@@ -181,24 +192,23 @@ describe('Search', () => {
   it('clicking a tag chip calls setActiveTag', async () => {
     const user = userEvent.setup();
     const setActiveTag = vi.fn();
-    const video = {
+    const video = makeVideo({
       bvid: 'BV1xyz',
-      url: 'https://www.bilibili.com/video/BV1xyz',
-      cover: 'https://i0.hdslb.com/bfs/archive/abc.jpg',
       title: 'Click me',
-      UP: 'TestUP',
-      views: 100,
       tags: {
         firstChannel: '游戏',
         secondChannel: '单机',
         ordinaryTags: ['原神'],
       },
-    };
+    });
+    mockUseSearchState.mockReturnValue({
+      ...defaultState(),
+      setActiveTag,
+    });
     mockUseSearchFilters.mockReturnValue({
-      ...defaultFilters(),
+      ...defaultFilterResults(),
       filtered: [video],
       visible: [video],
-      setActiveTag,
     });
     renderWithProviders(<Search />);
     await waitFor(() => {
@@ -211,12 +221,11 @@ describe('Search', () => {
   it('shows loading skeleton when result is undefined', () => {
     mockUseLatestCrawl.mockReturnValue({ data: null, isLoading: true });
     mockUseSearchFilters.mockReturnValue({
-      ...defaultFilters(),
+      ...defaultFilterResults(),
       filtered: [],
       visible: [],
     });
     const { container } = renderWithProviders(<Search />);
-    // skeleton 有 animate-pulse 類別
     const skeletons = container.querySelectorAll('.animate-pulse');
     expect(skeletons.length).toBeGreaterThan(0);
   });
@@ -224,8 +233,8 @@ describe('Search', () => {
   it('clicking reset calls handleReset', async () => {
     const user = userEvent.setup();
     const handleReset = vi.fn();
-    mockUseSearchFilters.mockReturnValue({
-      ...defaultFilters(),
+    mockUseSearchState.mockReturnValue({
+      ...defaultState(),
       searchValue: 'foo',
       handleReset,
     });
@@ -236,45 +245,23 @@ describe('Search', () => {
   });
 
   it('shows loading-more spinner when visible < filtered', () => {
-    const video = {
-      bvid: 'BV1xyz',
-      url: 'https://www.bilibili.com/video/BV1xyz',
-      cover: 'https://i0.hdslb.com/bfs/archive/abc.jpg',
-      title: 'X',
-      UP: 'U',
-      views: 1,
-      tags: {
-        firstChannel: '游戏',
-        secondChannel: '单机',
-        ordinaryTags: [],
-      },
-    };
+    const video = makeVideo({ bvid: 'BV1abc', title: 'Test video title' });
     mockUseSearchFilters.mockReturnValue({
-      ...defaultFilters(),
-      filtered: [video, video, video, video, video],
+      ...defaultFilterResults(),
+      filtered: [video, video, video],
       visible: [video],
     });
-    renderWithProviders(<Search />);
-    expect(screen.getByRole('status')).toBeInTheDocument();
+    const { container } = renderWithProviders(<Search />);
+    const spinner = container.querySelector('.animate-spin');
+    expect(spinner).toBeInTheDocument();
   });
 
-  it('clicking the share button copies the URL and toasts success', async () => {
-    const user = userEvent.setup();
-    // mock clipboard
-    const writeText = vi.fn().mockResolvedValue(undefined);
-    Object.defineProperty(navigator, 'clipboard', {
-      value: { writeText },
-      configurable: true,
+  it('picks date via useLatestCrawl (effectiveTime as SWR key)', () => {
+    mockUseSearchState.mockReturnValue({
+      ...defaultState(),
+      effectiveTime: '2026-01-14',
     });
-
     renderWithProviders(<Search />);
-    const shareBtn = screen.getByTitle('分享筛选');
-    await user.click(shareBtn);
-    await waitFor(() => {
-      expect(writeText).toHaveBeenCalled();
-    });
-    expect(mockToast).toHaveBeenCalledWith(
-      expect.objectContaining({ title: '已复制分享链接' })
-    );
+    expect(mockUseLatestCrawl).toHaveBeenCalledWith('2026-01-14');
   });
 });

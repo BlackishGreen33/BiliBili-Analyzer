@@ -17,7 +17,7 @@ import { buildChannelOptions } from '@/common/utils/search-filters';
 
 import FilterPanel from './FilterPanel';
 import VideoGrid from './VideoGrid';
-import { useInfiniteScroll, useSearchFilters } from '../hooks';
+import { useInfiniteScroll, useSearchFilters, useSearchState } from '../hooks';
 
 const Search: React.FC = React.memo(() => {
   const router = useRouter();
@@ -27,24 +27,28 @@ const Search: React.FC = React.memo(() => {
   const { t } = useTranslation();
 
   const { data: list = [] } = useResultList();
-  const fallbackFile = list[0] ?? null;
-  const { data: result, isLoading } = useLatestCrawl(fallbackFile);
-
-  const filters = useSearchFilters({ result: result ?? null, list }, router);
+  // 先取 state (含 effectiveTime),再依 effectiveTime 去抓對應的 json,
+  // 這樣換日期才會真的換資料 (舊版用 list[0] 永遠抓最新一天)。
+  const state = useSearchState({ list }, router);
   const {
+    effectiveTime,
     searchValue,
     selectedChannels,
     activeTag,
-    visible,
-    filtered,
-    effectiveTime,
     setSearchValue,
     setSelectedChannels,
     setActiveTag,
     handleReset,
     handleChangeDate,
-    loadMore,
-  } = filters;
+  } = state;
+  const { data: result, isLoading } = useLatestCrawl(effectiveTime);
+
+  const { filtered, visible, loadMore } = useSearchFilters({
+    result: result ?? null,
+    searchValue,
+    selectedChannels,
+    activeTag,
+  });
 
   const channelOptions = useMemo(
     () => (result ? buildChannelOptions(result.video) : []),
