@@ -22,6 +22,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Default sparse-checkout (--cone) doesn't bring tracked files in
+          # subdirectories like result/ into the working tree. Disable so
+          # the subsequent `git checkout -B result origin/result` step can
+          # populate result/ correctly for the crawler to read.
+          sparse-checkout: false
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
         with:
