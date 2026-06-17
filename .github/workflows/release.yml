@@ -71,10 +71,12 @@ jobs:
       - name: Rename Android artifacts
         run: |
           mkdir -p dist
-          cp android/app/build/outputs/apk/release/app-release.apk \
+          find android/app/build/outputs -type f \( -name '*.apk' -o -name '*.aab' \) -print
+          cp android/app/build/outputs/apk/release/*.apk \
              dist/BiliBili-Analyzer-${{ github.ref_name }}.apk
-          cp android/app/build/outputs/bundle/release/app-release.aab \
+          cp android/app/build/outputs/bundle/release/*.aab \
              dist/BiliBili-Analyzer-${{ github.ref_name }}.aab
+          ls -la dist/
 
       - name: Package Chrome extension
         run: |
