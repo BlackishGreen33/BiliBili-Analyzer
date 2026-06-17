@@ -19,7 +19,11 @@ const cache = createFiveMinCache<DashboardAgg>();
 export async function GET(req: Request) {
   return withRouteErrorHandler('DASHBOARD', async () => {
     const url = new URL(req.url);
-    const filename = url.searchParams.get('file');
+    // Filenames like "2026-06-17T17-06-36+0800" contain a literal
+    // `+` which URLSearchParams decodes to a space. Restore it so
+    // downstream GitHub raw lookups don't 404 on the wrong path.
+    const rawFilename = url.searchParams.get('file');
+    const filename = rawFilename?.replace(/ /g, '+') ?? null;
 
     let targetFile = filename;
     if (!targetFile) {

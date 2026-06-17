@@ -44,7 +44,9 @@ const DashboardPage: React.FC = React.memo(() => {
 
   const handleFileChange = (value: string) => {
     setFile(value);
-    router.replace(`/dashboard?file=${value}`, { scroll: false });
+    router.replace(`/dashboard?file=${encodeURIComponent(value)}`, {
+      scroll: false,
+    });
   };
 
   return (
