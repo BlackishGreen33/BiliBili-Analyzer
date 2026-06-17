@@ -50,8 +50,8 @@ jobs:
         with:
           cmdline-tools-version: '11076708'
           packages: >-
-            platforms;android-34
-            build-tools;34.0.0
+            platforms;android-35
+            build-tools;35.0.0
 
       - name: Build static export + cap sync
         run: pnpm run build:mobile
