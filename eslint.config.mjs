@@ -21,6 +21,8 @@ const config = [
       'src/common/aggregations/build.test.mjs',
       '.github/skills/**',
       '.agents/skills/**',
+      'android/app/src/main/assets/**',
+      'ios/App/App/public/**',
     ],
   },
   {

@@ -1,0 +1,135 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to publish (e.g. v1.1.0)'
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  build-android:
+    name: Build Android (APK + AAB)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9.1.2
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          cmdline-tools-version: '11076708'
+          packages: >-
+            platforms;android-34
+            build-tools;34.0.0
+
+      - name: Build static export + cap sync
+        run: pnpm run build:mobile
+
+      - name: Assemble Android APK (debug-signed)
+        run: |
+          cd android
+          ./gradlew --no-daemon assembleRelease
+
+      - name: Bundle Android AAB (debug-signed)
+        run: |
+          cd android
+          ./gradlew --no-daemon bundleRelease
+
+      - name: Rename Android artifacts
+        run: |
+          mkdir -p dist
+          cp android/app/build/outputs/apk/release/app-release.apk \
+             dist/BiliBili-Analyzer-${{ github.ref_name }}.apk
+          cp android/app/build/outputs/bundle/release/app-release.aab \
+             dist/BiliBili-Analyzer-${{ github.ref_name }}.aab
+
+      - name: Package Chrome extension
+        run: |
+          mkdir -p dist
+          cd extension
+          zip -r ../dist/BiliBili-Analyzer-Chrome-Extension-${{ github.ref_name }}.zip . \
+            -x "*.DS_Store" "README.md"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: dist/
+
+  publish-release:
+    name: Publish GitHub Release
+    needs: build-android
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: release-artifacts
+          path: dist/
+
+      - name: List artifacts
+        run: ls -la dist/
+
+      - name: Create / Update GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          generate_release_notes: false
+          files: |
+            dist/BiliBili-Analyzer-${{ github.ref_name }}.apk
+            dist/BiliBili-Analyzer-${{ github.ref_name }}.aab
+            dist/BiliBili-Analyzer-Chrome-Extension-${{ github.ref_name }}.zip
+          body: |
+            ## ${{ github.ref_name }}
+
+            ### ✨ 主要內容 / Highlights
+            - 行動端：Android APK / AAB（基於 Capacitor 8）
+            - Chrome 插件：右鍵選單一鍵打開 `/details?bvid=…`
+
+            ### 📦 下載 / Downloads
+            | 平台 Platform | 文件 File |
+            |---|---|
+            | Android (APK) | `BiliBili-Analyzer-${{ github.ref_name }}.apk` |
+            | Android (AAB) | `BiliBili-Analyzer-${{ github.ref_name }}.aab` |
+            | Chrome 插件  | `BiliBili-Analyzer-Chrome-Extension-${{ github.ref_name }}.zip` |
+
+            > iOS Ad Hoc IPA 由維護者本地手動上傳（CI runner 不支援 Xcode archive）。
+
+            ### 📱 安裝方式 / Install
+            - **APK**：下載後允許「未知來源」安裝 / Enable "Install unknown apps" first
+            - **AAB**：上傳 Google Play Console / Upload to Google Play Console
+            - **Chrome 插件**：`chrome://extensions` → 開發者模式 → 載入解壓後的資料夾
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

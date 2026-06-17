@@ -59,3 +59,7 @@ public/assets/avatar*
 public/assets/product*
 public/next.svg
 public/vercel.svg
+
+# Release artifacts built by scripts/release.mjs or the release workflow
+/dist
+/release

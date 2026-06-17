@@ -2,11 +2,10 @@ import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
 import { Noto_Sans_SC } from 'next/font/google';
-import { cookies } from 'next/headers';
 
 import '@/common/styles/globals.css';
 
-import { isSupportedLocale } from '@/common/i18n/locales';
+import HtmlAttrs from '@/common/components/HtmlAttrs';
 import Providers from '@/common/providers/Providers';
 
 const notoSC = Noto_Sans_SC({
@@ -30,27 +29,24 @@ export const metadata: Metadata = {
   ],
 };
 
-export default async function RootLayout({
+const DEFAULT_LOCALE = 'zh-CN';
+
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const raw = cookieStore.get('bili-analyzer-locale')?.value;
-  const locale = isSupportedLocale(raw) ? raw : 'zh-CN';
-  const colorCookie = cookieStore.get('bili-analyzer-color')?.value;
-  const accentStyle = colorCookie
-    ? ({ '--accent-color': colorCookie } as React.CSSProperties)
-    : undefined;
   return (
     <html
-      lang={locale}
+      lang={DEFAULT_LOCALE}
       className={`${GeistSans.variable} ${GeistMono.variable} ${notoSC.variable}`}
-      style={accentStyle}
       suppressHydrationWarning
     >
       <body className={`${GeistSans.className} ${notoSC.className}`}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <HtmlAttrs />
+          {children}
+        </Providers>
       </body>
     </html>
   );

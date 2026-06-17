@@ -8,6 +8,10 @@ import path from 'node:path';
  *
  * Production build 仍然會包含此檔，但因為 dev 環境下 list.json 才有資料，
  * prod 端只會回空陣列（且不會被呼叫到 — 沒有 UI hook）。
+ *
+ * Mobile build (`pnpm build:mobile` → `output: "export"`) 會由
+ * `scripts/build-mobile.mjs` 暫時把 `src/app/api` 整個目錄搬走，所以這條
+ * route handler 不會進入 static export —— mobile shell 直接打 live API。
  */
 export async function GET() {
   if (process.env.NODE_ENV === 'production') {
