@@ -26,6 +26,7 @@
     "prepare": "husky",
     "crawldata": "node CrawlPopular.mjs",
     "build:mobile": "node scripts/build-mobile.mjs",
+    "build:ios": "node scripts/build-ios.mjs",
     "mock-second-day": "node scripts/mock-second-day.mjs",
     "mock-n-days": "node scripts/mock-n-days.mjs"
   },
