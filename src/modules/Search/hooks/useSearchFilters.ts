@@ -1,84 +1,52 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import type { VideoData } from '@/common/types/video';
 import {
   type ChannelSelection,
-  decodeChannels,
-  encodeChannels,
   filterVideos,
   PAGE_SIZE,
 } from '@/common/utils/search-filters';
 
 export type SearchFilters = {
   result: { video: VideoData[] } | null;
-  list: string[];
-};
-
-export type SearchFiltersApi = {
   searchValue: string;
   selectedChannels: ChannelSelection;
   activeTag: string | null;
-  selectedTime: string | null;
-  effectiveTime: string | null;
+};
+
+export type SearchFiltersApi = {
   filtered: VideoData[];
   visible: VideoData[];
-  setSearchValue: (v: string) => void;
-  setSelectedChannels: (
-    cs: ChannelSelection | ((prev: ChannelSelection) => ChannelSelection)
-  ) => void;
-  setActiveTag: (t: string | null) => void;
-  handleReset: () => void;
-  handleChangeDate: (f: string) => void;
   loadMore: () => void;
 };
 
 /**
- * 封裝 Search 頁的 state + URL sync + 自動 reset on date change
+ * 純粹把 result + filter state 算出 visible / filtered。
+ *
+ * 與原本 useSearchFilters 的差別:不再擁有 selectedTime / searchValue / channel
+ * state (改由 useSearchState 負責),也不再接 router 做 URL sync。
+ * 這樣可以確保 useLatestCrawl 在 useSearchState 之後呼叫,並用 effectiveTime
+ * 作為 SWR key,讓換日期能換資料。
  */
-export function useSearchFilters(
-  { result, list }: SearchFilters,
-  router: ReturnType<typeof useRouter>
-): SearchFiltersApi {
-  const searchParams = useSearchParams();
-  const initialQ = searchParams.get('q') ?? '';
-  const initialTag = searchParams.get('tag') ?? '';
-  const initialDate = searchParams.get('date') ?? '';
-  const initialChannels = decodeChannels(searchParams.get('c'));
-
-  const [selectedTime, setSelectedTime] = useState<string | null>(
-    initialDate || null
-  );
-  const effectiveTime = selectedTime ?? list[0] ?? null;
-  const [searchValue, setSearchValue] = useState(initialQ);
-  const [selectedChannelsState, setSelectedChannelsState] =
-    useState<ChannelSelection>(initialChannels);
-  const [activeTag, setActiveTag] = useState<string | null>(initialTag || null);
+export function useSearchFilters({
+  result,
+  searchValue,
+  selectedChannels,
+  activeTag,
+}: SearchFilters): SearchFiltersApi {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
-
-  const setSelectedChannels = (
-    cs: ChannelSelection | ((prev: ChannelSelection) => ChannelSelection)
-  ) => {
-    if (typeof cs === 'function') {
-      setSelectedChannelsState((prev) =>
-        (cs as (p: ChannelSelection) => ChannelSelection)(prev)
-      );
-    } else {
-      setSelectedChannelsState(cs);
-    }
-  };
 
   const filtered = useMemo(() => {
     if (!result) return [];
     return filterVideos<VideoData>({
       videos: result.video,
       q: searchValue,
-      channels: selectedChannelsState,
+      channels: selectedChannels,
       tag: activeTag,
     });
-  }, [result, searchValue, selectedChannelsState, activeTag]);
+  }, [result, searchValue, selectedChannels, activeTag]);
 
   const effectiveVisibleCount =
     filtered.length > 0
@@ -90,59 +58,9 @@ export function useSearchFilters(
     [filtered, effectiveVisibleCount]
   );
 
-  useEffect(() => {
-    if (!effectiveTime) return;
-    const params = new URLSearchParams();
-    if (searchValue.trim()) params.set('q', searchValue.trim());
-    if (selectedChannelsState.length > 0)
-      params.set('c', encodeChannels(selectedChannelsState));
-    if (activeTag) params.set('tag', activeTag);
-    if (selectedTime) params.set('date', selectedTime);
-    const qs = params.toString();
-    const target = qs ? `/?${qs}` : '/';
-    if (
-      typeof window !== 'undefined' &&
-      window.location.pathname + window.location.search !== target
-    ) {
-      router.replace(target, { scroll: false });
-    }
-  }, [
-    router,
-    searchValue,
-    selectedChannelsState,
-    activeTag,
-    selectedTime,
-    effectiveTime,
-  ]);
-
-  const handleReset = () => {
-    setSearchValue('');
-    setSelectedChannelsState([]);
-    setActiveTag(null);
-  };
-
-  const handleChangeDate = (filename: string) => {
-    setSelectedTime(filename);
-    handleReset();
-  };
-
   const loadMore = () => {
     setVisibleCount((c) => c + PAGE_SIZE);
   };
 
-  return {
-    searchValue,
-    selectedChannels: selectedChannelsState,
-    activeTag,
-    selectedTime,
-    effectiveTime,
-    filtered,
-    visible,
-    setSearchValue,
-    setSelectedChannels,
-    setActiveTag,
-    handleReset,
-    handleChangeDate,
-    loadMore,
-  };
+  return { filtered, visible, loadMore };
 }
