@@ -59,11 +59,13 @@ jobs:
       - name: Assemble Android APK (debug-signed)
         run: |
           cd android
+          chmod +x ./gradlew
           ./gradlew --no-daemon assembleRelease
 
       - name: Bundle Android AAB (debug-signed)
         run: |
           cd android
+          chmod +x ./gradlew
           ./gradlew --no-daemon bundleRelease
 
       - name: Rename Android artifacts
