@@ -152,8 +152,8 @@ jobs:
       - name: Build unsigned iOS app
         run: |
           xcodebuild \
-            -workspace ios/App/App.xcworkspace \
-            -scheme App \
+            -project ios/App/App.xcodeproj \
+            -target App \
             -configuration Release \
             -sdk iphoneos \
             -derivedDataPath build/ios-derived \
