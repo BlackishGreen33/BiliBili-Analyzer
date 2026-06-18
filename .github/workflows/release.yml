@@ -120,7 +120,7 @@ jobs:
         run: |
           CAP_IOS_ENTRY="$(basename "$(find node_modules/.pnpm -maxdepth 1 -type d -name '@capacitor+ios@*_@capacitor+core@*' | sort | tail -n 1)")"
           test -n "$CAP_IOS_ENTRY"
-          perl -0pi -e "s/@capacitor\+ios@[\d.]+_@capacitor\+core@[\d.]+/$ENV{CAP_IOS_ENTRY}/g" ios/App/Podfile
+          CAP_IOS_ENTRY="$CAP_IOS_ENTRY" perl -0pi -e 's/@capacitor\+ios@[\d.]+_@capacitor\+core@[\d.]+/$ENV{CAP_IOS_ENTRY}/g' ios/App/Podfile
 
       - name: Build static export + cap sync
         run: pnpm run build:mobile
@@ -129,7 +129,8 @@ jobs:
         run: |
           CAP_IOS_ENTRY="$(basename "$(find node_modules/.pnpm -maxdepth 1 -type d -name '@capacitor+ios@*_@capacitor+core@*' | sort | tail -n 1)")"
           test -n "$CAP_IOS_ENTRY"
-          perl -0pi -e "s/@capacitor\+ios@[\d.]+_@capacitor\+core@[\d.]+/$ENV{CAP_IOS_ENTRY}/g" ios/App/Podfile
+          CAP_IOS_ENTRY="$CAP_IOS_ENTRY" perl -0pi -e 's/@capacitor\+ios@[\d.]+_@capacitor\+core@[\d.]+/$ENV{CAP_IOS_ENTRY}/g' ios/App/Podfile
+          head -n 1 ios/App/Podfile
 
       - name: Install iOS pods
         run: pod install
