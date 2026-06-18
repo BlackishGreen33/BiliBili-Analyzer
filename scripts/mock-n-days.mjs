@@ -45,6 +45,17 @@ const args = process.argv.slice(2);
 const daysArg = args.find((a) => a.startsWith('--days='));
 const N = daysArg ? Math.max(1, parseInt(daysArg.split('=')[1], 10)) : 30;
 
+const formatError = (err) => (err instanceof Error ? err.message : String(err));
+
+const writeJsonFile = (filePath, value) => {
+  try {
+    writeFileSync(filePath, JSON.stringify(value));
+  } catch (err) {
+    console.error(`✗ 無法寫入 ${filePath}: ${formatError(err)}`);
+    process.exit(1);
+  }
+};
+
 if (!existsSync(resultDir)) {
   console.error('✗ result/ 目錄不存在。請先跑 pnpm crawldata 生成當日檔案。');
   process.exit(1);
@@ -129,16 +140,13 @@ for (let d = 1; d <= N; d++) {
   }
 
   const dayData = { time: dayTime, video: dayVideos };
-  writeFileSync(
-    path.join(resultDir, dayFile + '.json'),
-    JSON.stringify(dayData)
-  );
+  writeJsonFile(path.join(resultDir, dayFile + '.json'), dayData);
 
   list.unshift(dayFile);
   generated++;
 }
 
-writeFileSync(listPath, JSON.stringify(list));
+writeJsonFile(listPath, list);
 
 console.log(
   `✓ 已生成 ${generated} 天假資料（目標 ${N} 天；已存在 ${N - generated} 天）`

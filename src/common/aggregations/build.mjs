@@ -32,44 +32,55 @@ function safe(n) {
   return Number.isFinite(n) ? n : 0;
 }
 
-/**
- * Compute the 7 standard aggregation dimensions for a single day's crawl.
- *
- * @param {Array<object>} videos - Crawl video objects (must include
- *   statLike/Coin/Favorite/Reply/Danmaku/Share and tags.ordinaryTags).
- * @returns {object} summary, channels, topUps, duration, hourHeatmap,
- *   topTags, topEngagement
- */
-export function buildAggregations(videos) {
-  const channelMap = new Map();
-  for (const v of videos) {
-    const first = (v.tags && v.tags.firstChannel) || DEFAULT_CHANNEL;
-    const second = (v.tags && v.tags.secondChannel) || DEFAULT_CHANNEL;
-    const c = channelMap.get(first) || {
-      firstChannel: first,
-      count: 0,
-      views: 0,
-      like: 0,
-      coin: 0,
-      favorite: 0,
-      secondChannels: new Map(),
-    };
-    c.count++;
-    c.views += safe(v.views);
-    c.like += safe(v.statLike);
-    c.coin += safe(v.statCoin);
-    c.favorite += safe(v.statFavorite);
-    const sub = c.secondChannels.get(second) || {
-      secondChannel: second,
-      count: 0,
-      views: 0,
-    };
-    sub.count++;
-    sub.views += safe(v.views);
-    c.secondChannels.set(second, sub);
-    channelMap.set(first, c);
-  }
+function addChannel(channelMap, v) {
+  const first = (v.tags && v.tags.firstChannel) || DEFAULT_CHANNEL;
+  const second = (v.tags && v.tags.secondChannel) || DEFAULT_CHANNEL;
+  const channel = channelMap.get(first) || {
+    firstChannel: first,
+    count: 0,
+    views: 0,
+    like: 0,
+    coin: 0,
+    favorite: 0,
+    secondChannels: new Map(),
+  };
+  channel.count++;
+  channel.views += safe(v.views);
+  channel.like += safe(v.statLike);
+  channel.coin += safe(v.statCoin);
+  channel.favorite += safe(v.statFavorite);
 
+  const sub = channel.secondChannels.get(second) || {
+    secondChannel: second,
+    count: 0,
+    views: 0,
+  };
+  sub.count++;
+  sub.views += safe(v.views);
+  channel.secondChannels.set(second, sub);
+  channelMap.set(first, channel);
+}
+
+function buildChannels(videos) {
+  const channelMap = new Map();
+  for (const v of videos) addChannel(channelMap, v);
+  return Array.from(channelMap.values())
+    .map((c) => ({
+      firstChannel: c.firstChannel,
+      count: c.count,
+      views: c.views,
+      avgViews: c.count > 0 ? Math.round(c.views / c.count) : 0,
+      like: c.like,
+      coin: c.coin,
+      favorite: c.favorite,
+      secondChannels: Array.from(c.secondChannels.values()).sort(
+        (a, b) => b.count - a.count
+      ),
+    }))
+    .sort((a, b) => b.count - a.count);
+}
+
+function buildUpMap(videos) {
   const upMap = new Map();
   for (const v of videos) {
     const key = String(v.UP || v.mid || '');
@@ -85,14 +96,20 @@ export function buildAggregations(videos) {
     e.views += safe(v.views);
     upMap.set(key, e);
   }
+  return upMap;
+}
 
+function buildDurationBuckets(videos) {
   const durationBuckets = DURATION_BUCKETS.map((b) => ({ ...b, count: 0 }));
   for (const v of videos) {
     const d = v.duration || 0;
     const bucket = durationBuckets.find((b) => d >= b.min && d < b.max);
     if (bucket) bucket.count++;
   }
+  return durationBuckets;
+}
 
+function buildHourHeatmap(videos) {
   const hourHist = Array.from({ length: 24 }, (_, h) => ({
     hour: h,
     count: 0,
@@ -102,7 +119,10 @@ export function buildAggregations(videos) {
     const shifted = new Date(v.pubdate * 1000 + UTC8_OFFSET_MS);
     hourHist[shifted.getUTCHours()].count++;
   }
+  return hourHist;
+}
 
+function buildTopTags(videos) {
   const tagCount = new Map();
   for (const v of videos) {
     const tags = (v.tags && v.tags.ordinaryTags) || [];
@@ -110,48 +130,63 @@ export function buildAggregations(videos) {
       tagCount.set(t, (tagCount.get(t) || 0) + 1);
     }
   }
+  return Array.from(tagCount.entries())
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, TOP_TAG_LIMIT);
+}
 
-  const totalViewsAll = videos.reduce((a, v) => a + safe(v.views), 0);
-  const totalLikeAll = videos.reduce((a, v) => a + safe(v.statLike), 0);
-  const totalCoinAll = videos.reduce((a, v) => a + safe(v.statCoin), 0);
-  const totalFavoriteAll = videos.reduce(
-    (a, v) => a + safe(v.statFavorite),
-    0
-  );
-  const totalShareAll = videos.reduce((a, v) => a + safe(v.statShare), 0);
-  const totalReplyAll = videos.reduce((a, v) => a + safe(v.statReply), 0);
-  const totalDanmakuAll = videos.reduce(
-    (a, v) => a + safe(v.statDanmaku),
-    0
-  );
+function engagementFor(v) {
+  const views = safe(v.views);
+  return views > 0
+    ? (safe(v.statLike) +
+        safe(v.statCoin) * 2 +
+        safe(v.statFavorite) * 2 +
+        safe(v.statShare)) /
+        views
+    : 0;
+}
 
-  const topEngagement = videos
-    .map((v) => {
-      const views = safe(v.views);
-      const eng =
-        views > 0
-          ? (safe(v.statLike) +
-              safe(v.statCoin) * 2 +
-              safe(v.statFavorite) * 2 +
-              safe(v.statShare)) /
-            views
-          : 0;
-      return {
-        bvid: v.bvid,
-        title: v.title,
-        UP: v.UP,
-        mid: v.mid,
-        views,
-        like: safe(v.statLike),
-        coin: safe(v.statCoin),
-        favorite: safe(v.statFavorite),
-        share: safe(v.statShare),
-        engagement: eng,
-      };
-    })
+function buildTopEngagement(videos) {
+  return videos
+    .map((v) => ({
+      bvid: v.bvid,
+      title: v.title,
+      UP: v.UP,
+      mid: v.mid,
+      views: safe(v.views),
+      like: safe(v.statLike),
+      coin: safe(v.statCoin),
+      favorite: safe(v.statFavorite),
+      share: safe(v.statShare),
+      engagement: engagementFor(v),
+    }))
     .filter((v) => v.views > 0)
     .sort((a, b) => b.engagement - a.engagement || b.views - a.views)
     .slice(0, TOP_ENGAGEMENT_LIMIT);
+}
+
+function sumBy(videos, pick) {
+  return videos.reduce((total, v) => total + safe(pick(v)), 0);
+}
+
+/**
+ * Compute the 7 standard aggregation dimensions for a single day's crawl.
+ *
+ * @param {Array<object>} videos - Crawl video objects (must include
+ *   statLike/Coin/Favorite/Reply/Danmaku/Share and tags.ordinaryTags).
+ * @returns {object} summary, channels, topUps, duration, hourHeatmap,
+ *   topTags, topEngagement
+ */
+export function buildAggregations(videos) {
+  const upMap = buildUpMap(videos);
+  const totalViewsAll = sumBy(videos, (v) => v.views);
+  const totalLikeAll = sumBy(videos, (v) => v.statLike);
+  const totalCoinAll = sumBy(videos, (v) => v.statCoin);
+  const totalFavoriteAll = sumBy(videos, (v) => v.statFavorite);
+  const totalShareAll = sumBy(videos, (v) => v.statShare);
+  const totalReplyAll = sumBy(videos, (v) => v.statReply);
+  const totalDanmakuAll = sumBy(videos, (v) => v.statDanmaku);
 
   return {
     summary: {
@@ -172,30 +207,14 @@ export function buildAggregations(videos) {
             totalViewsAll
           : 0,
     },
-    channels: Array.from(channelMap.values())
-      .map((c) => ({
-        firstChannel: c.firstChannel,
-        count: c.count,
-        views: c.views,
-        avgViews: c.count > 0 ? Math.round(c.views / c.count) : 0,
-        like: c.like,
-        coin: c.coin,
-        favorite: c.favorite,
-        secondChannels: Array.from(c.secondChannels.values()).sort(
-          (a, b) => b.count - a.count
-        ),
-      }))
-      .sort((a, b) => b.count - a.count),
+    channels: buildChannels(videos),
     topUps: Array.from(upMap.values())
       .sort((a, b) => b.count - a.count || b.views - a.views)
       .slice(0, TOP_UP_LIMIT),
-    duration: durationBuckets,
-    hourHeatmap: hourHist,
-    topTags: Array.from(tagCount.entries())
-      .map(([tag, count]) => ({ tag, count }))
-      .sort((a, b) => b.count - a.count)
-      .slice(0, TOP_TAG_LIMIT),
-    topEngagement,
+    duration: buildDurationBuckets(videos),
+    hourHeatmap: buildHourHeatmap(videos),
+    topTags: buildTopTags(videos),
+    topEngagement: buildTopEngagement(videos),
   };
 }
 

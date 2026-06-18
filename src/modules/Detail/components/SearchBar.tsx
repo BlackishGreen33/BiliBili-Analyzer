@@ -40,8 +40,8 @@ const SearchBar: React.FC = React.memo(() => {
   };
 
   const handleSearch = () => {
-    const bvid = extractBvid(value);
-    if (!bvid) {
+    const targetBvid = extractBvid(value);
+    if (!targetBvid) {
       toast({
         variant: 'destructive',
         title: t('detail.search.invalidBvid.title'),
@@ -49,20 +49,13 @@ const SearchBar: React.FC = React.memo(() => {
       });
       return;
     }
-    router.push('/details?bvid=' + bvid);
+    navigateToBvid(targetBvid);
   };
 
   const handleRandom = async () => {
-    if (randomBvid) {
-      navigateToBvid(randomBvid);
-      return;
-    }
-    try {
-      const result = await refetchRandom();
-      navigateToBvid(result ?? null);
-    } catch {
-      navigateToBvid(null);
-    }
+    const targetBvid =
+      randomBvid ?? (await refetchRandom().catch(() => null)) ?? null;
+    navigateToBvid(targetBvid);
   };
 
   return (

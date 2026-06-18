@@ -204,6 +204,17 @@ function getSegmenter(): Intl.Segmenter | null {
   return _segmenter;
 }
 
+function fallbackTokens(text: string): string[] {
+  const tokens: string[] = [];
+  const cjkRuns = text.match(/[\u4e00-\u9fff]+/g) ?? [];
+  for (const run of cjkRuns) {
+    for (let i = 0; i + 2 <= run.length; i++) {
+      tokens.push(run.slice(i, i + 2));
+    }
+  }
+  return tokens.concat(text.match(/[A-Za-z0-9]+/g) ?? []);
+}
+
 /**
  * 把一段 CJK / 拉丁混雜的標題切成有意義的 token。
  * - CJK：用 Intl.Segmenter 切成「word」
@@ -212,30 +223,49 @@ function getSegmenter(): Intl.Segmenter | null {
  */
 export function tokenizeText(text: string): string[] {
   const seg = getSegmenter();
+  if (!seg) return fallbackTokens(text);
+
   const tokens: string[] = [];
-  if (!seg) {
-    // Fallback：粗略切
-    const cjkRuns = text.match(/[\u4e00-\u9fff]+/g) ?? [];
-    for (const run of cjkRuns) {
-      // 簡單 2-gram
-      for (let i = 0; i + 2 <= run.length; i++) {
-        tokens.push(run.slice(i, i + 2));
-      }
-    }
-    const latin = text.match(/[A-Za-z0-9]+/g) ?? [];
-    for (const l of latin) {
-      tokens.push(l);
-    }
-    return tokens;
-  }
-  const it = seg.segment(text);
-  for (const piece of it) {
+  const pieces = seg.segment(text);
+  for (const piece of pieces) {
     if (!piece.isWordLike) continue;
     const s = piece.segment.trim();
     if (s.length === 0) continue;
     tokens.push(s);
   }
   return tokens;
+}
+
+function firstChar(token: string): string {
+  return Array.from(token)[0] ?? '';
+}
+
+function summarizeGram(tokens: string[]): {
+  gram: string;
+  spacedGram: string;
+  hasCjk: boolean;
+  allCjk: boolean;
+} {
+  let hasCjk = false;
+  let allCjk = true;
+  for (const token of tokens) {
+    if (isCjkChar(firstChar(token))) {
+      hasCjk = true;
+    } else {
+      allCjk = false;
+    }
+  }
+  return {
+    gram: tokens.join(''),
+    spacedGram: tokens.join(' '),
+    hasCjk,
+    allCjk,
+  };
+}
+
+function shouldKeepGram(summary: ReturnType<typeof summarizeGram>): boolean {
+  if (!summary.hasCjk) return false;
+  return summary.allCjk || summary.spacedGram.length <= 24;
 }
 
 /**
@@ -248,21 +278,8 @@ export function ngrams(tokens: string[], minN = 2, maxN = 3): string[] {
   for (let n = minN; n <= maxN; n++) {
     if (n > tokens.length) break;
     for (let i = 0; i + n <= tokens.length; i++) {
-      const gram: string[] = [];
-      let allCjk = true;
-      let hasCjk = false;
-      for (let j = 0; j < n; j++) {
-        const t = tokens[i + j];
-        if (t === undefined) continue;
-        const firstChar = Array.from(t)[0] ?? '';
-        if (isCjkChar(firstChar)) hasCjk = true;
-        else allCjk = false;
-        gram.push(t);
-      }
-      if (!hasCjk) continue;
-      // 全拉丁且太長的略過
-      if (!allCjk && gram.join(' ').length > 24) continue;
-      out.push(gram.join(''));
+      const summary = summarizeGram(tokens.slice(i, i + n));
+      if (shouldKeepGram(summary)) out.push(summary.gram);
     }
   }
   return out;
@@ -282,9 +299,7 @@ export function segmentTitles(
   for (const title of titles) {
     if (!title) continue;
     const baseTokens = tokenizeText(title);
-    const grams = ngrams(baseTokens, minN, maxN);
-    for (const g of grams) {
-      if (!isMeaningfulToken(g)) continue;
+    for (const g of ngrams(baseTokens, minN, maxN).filter(isMeaningfulToken)) {
       counts.set(g, (counts.get(g) ?? 0) + 1);
     }
   }

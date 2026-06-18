@@ -45,10 +45,11 @@ const createTagsArray = (tags: VideoTags): WordTag[] => {
 };
 
 const fetcher = async <T,>(url: string, body: unknown): Promise<T> => {
+  const payload = JSON.stringify(body);
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
+    body: payload,
   });
   if (!res.ok) {
     throw new Error(`Request failed (${res.status})`);

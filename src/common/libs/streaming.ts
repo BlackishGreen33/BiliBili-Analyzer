@@ -39,7 +39,8 @@ export function ndjsonStream(generator: AsyncGenerator<StreamEvent>): Response {
           controller.close();
           return;
         }
-        controller.enqueue(encoder.encode(encodeNdjsonLine(value)));
+        const chunk = encoder.encode(encodeNdjsonLine(value));
+        controller.enqueue(chunk);
       } catch (err) {
         controller.error(err);
       }
@@ -67,6 +68,11 @@ export function ndjsonStreamFromEvents(
       'X-Content-Type-Options': 'nosniff',
     },
   });
+}
+
+function parseNdjsonLine(line: string): StreamEvent | null {
+  if (!line.trim()) return null;
+  return JSON.parse(line) as StreamEvent;
 }
 
 /**
@@ -129,13 +135,12 @@ export async function* parseNdjsonEvents(
       const lines = buffer.split('\n');
       buffer = lines.pop() ?? '';
       for (const line of lines) {
-        if (!line.trim()) continue;
-        yield JSON.parse(line) as StreamEvent;
+        const event = parseNdjsonLine(line);
+        if (event) yield event;
       }
     }
-    if (buffer.trim()) {
-      yield JSON.parse(buffer) as StreamEvent;
-    }
+    const finalEvent = parseNdjsonLine(buffer);
+    if (finalEvent) yield finalEvent;
   } finally {
     reader.releaseLock();
   }

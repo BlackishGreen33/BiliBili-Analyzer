@@ -11,7 +11,12 @@ const getBvidFromUrl = (currentURL) => {
 
 const openAnalysisPage = (bvid) => {
   const newUrl = `${ANALYZER_BASE_URL}/details?bvid=${bvid}`;
-  chrome.tabs.create({ url: newUrl });
+  chrome.tabs.create({ url: newUrl }, () => {
+    const lastError = chrome.runtime.lastError;
+    if (lastError) {
+      console.error(`Failed to open analyzer page: ${lastError.message}`);
+    }
+  });
 };
 
 const isBilibiliVideoPage = (url) =>
@@ -31,11 +36,19 @@ const handleContextMenuClick = (info, tab) => {
   openAnalysisPage(bvid);
 };
 
-chrome.contextMenus.create({
-  type: 'normal',
-  title: 'BiliBili Analyzer：打開視頻詳細分析',
-  id: 'open-bilibili-analyzer',
-  contexts: ['all'],
-});
+chrome.contextMenus.create(
+  {
+    type: 'normal',
+    title: 'BiliBili Analyzer：打開視頻詳細分析',
+    id: 'open-bilibili-analyzer',
+    contexts: ['all'],
+  },
+  () => {
+    const lastError = chrome.runtime.lastError;
+    if (lastError) {
+      console.error(`Failed to create context menu: ${lastError.message}`);
+    }
+  }
+);
 
 chrome.contextMenus.onClicked.addListener(handleContextMenuClick);

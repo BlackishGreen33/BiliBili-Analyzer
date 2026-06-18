@@ -18,6 +18,10 @@ export type CompareTotals = {
   avgEngagement: number;
 };
 
+function bvidsNotIn(source: CrawlVideo[], target: Set<string>): string[] {
+  return source.map((v) => v.bvid).filter((b) => !target.has(b));
+}
+
 export function extractBvidSets(
   rawA: CrawlVideo[],
   rawB: CrawlVideo[]
@@ -29,12 +33,10 @@ export function extractBvidSets(
 } {
   const setA = new Set(rawA.map((v) => v.bvid));
   const setB = new Set(rawB.map((v) => v.bvid));
-  const newBvids = rawB.map((v) => v.bvid).filter((b) => !setA.has(b));
-  const droppedBvids = rawA.map((v) => v.bvid).filter((b) => !setB.has(b));
   const persistentBvids = rawA.map((v) => v.bvid).filter((b) => setB.has(b));
   return {
-    newBvids,
-    droppedBvids,
+    newBvids: bvidsNotIn(rawB, setA),
+    droppedBvids: bvidsNotIn(rawA, setB),
     persistentBvids,
     persistentCount: persistentBvids.length,
   };

@@ -42,13 +42,7 @@ const useLocal =
   process.env.MOCK_LOCAL_FILES === '1' && process.env.NODE_ENV !== 'production';
 
 function readLocalList(): string[] {
-  const p = path.join(process.cwd(), 'result', 'list.json');
-  if (!existsSync(p)) return [];
-  try {
-    return JSON.parse(readFileSync(p, 'utf-8')) as string[];
-  } catch {
-    return [];
-  }
+  return readLocalJson(path.join(process.cwd(), 'result', 'list.json'), []);
 }
 
 function readLocalResult(filename: string): CrawlResult {
@@ -145,24 +139,27 @@ let inFlightAggLatest: Promise<PreAggregatedDay | null> | null = null;
 const aggByFileCache = new Map<string, AggCacheEntry>();
 const aggInFlightByFile = new Map<string, Promise<PreAggregatedDay | null>>();
 
-function readLocalAggLatest(): PreAggregatedDay | null {
-  const p = path.join(process.cwd(), 'result', 'agg-latest.json');
-  if (!existsSync(p)) return null;
+function readLocalJson<T>(filePath: string, fallback: T): T {
+  if (!existsSync(filePath)) return fallback;
   try {
-    return JSON.parse(readFileSync(p, 'utf-8')) as PreAggregatedDay;
+    return JSON.parse(readFileSync(filePath, 'utf-8')) as T;
   } catch {
-    return null;
+    return fallback;
   }
 }
 
+function readLocalAggLatest(): PreAggregatedDay | null {
+  return readLocalJson(
+    path.join(process.cwd(), 'result', 'agg-latest.json'),
+    null
+  );
+}
+
 function readLocalAggByName(filename: string): PreAggregatedDay | null {
-  const p = path.join(process.cwd(), 'result', `agg-${filename}.json`);
-  if (!existsSync(p)) return null;
-  try {
-    return JSON.parse(readFileSync(p, 'utf-8')) as PreAggregatedDay;
-  } catch {
-    return null;
-  }
+  return readLocalJson(
+    path.join(process.cwd(), 'result', `agg-${filename}.json`),
+    null
+  );
 }
 
 async function fetchAggRemote(url: string): Promise<PreAggregatedDay | null> {

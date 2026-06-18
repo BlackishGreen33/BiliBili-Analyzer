@@ -10,17 +10,33 @@ const configBackupPath = path.join(root, 'next.config.mjs.bak');
 const apiDir = path.join(root, 'src/app/api');
 const apiBackupDir = path.join(root, 'src/app/_api_disabled_for_mobile_build');
 
+const formatError = (err) => (err instanceof Error ? err.message : String(err));
+
+const runFileStep = async (label, step) => {
+  try {
+    return await step();
+  } catch (err) {
+    throw new Error(`${label} failed: ${formatError(err)}`);
+  }
+};
+
 const restoreApiDir = async () => {
   if (existsSync(apiBackupDir)) {
-    await rename(apiBackupDir, apiDir);
+    await runFileStep('restore src/app/api', () =>
+      rename(apiBackupDir, apiDir)
+    );
   }
 };
 
 const restoreConfig = async (original) => {
   if (existsSync(configBackupPath)) {
-    await rm(configBackupPath, { force: true });
+    await runFileStep('remove next.config.mjs backup', () =>
+      rm(configBackupPath, { force: true })
+    );
   }
-  await writeFile(configPath, original, 'utf-8');
+  await runFileStep('restore next.config.mjs', () =>
+    writeFile(configPath, original, 'utf-8')
+  );
   console.log(`  · next.config.mjs 還原完成（length=${original.length}）`);
 };
 
@@ -33,14 +49,18 @@ async function main() {
   const originalConfig = await readFile(configPath, 'utf-8');
 
   console.log('▸ 备份 next.config.mjs');
-  await writeFile(configBackupPath, originalConfig, 'utf-8');
+  await runFileStep('backup next.config.mjs', () =>
+    writeFile(configBackupPath, originalConfig, 'utf-8')
+  );
 
   // Patch config to enable static export
   const patchedConfig = originalConfig.replace(
     /\/\/ output: "export"/,
     'output: "export"'
   );
-  await writeFile(configPath, patchedConfig, 'utf-8');
+  await runFileStep('patch next.config.mjs', () =>
+    writeFile(configPath, patchedConfig, 'utf-8')
+  );
 
   // Next.js `output: "export"` cannot include any non-static route handler.
   // The Capacitor mobile shell hits the live web API at runtime, so we
@@ -49,9 +69,13 @@ async function main() {
   if (existsSync(apiDir)) {
     console.log('▸ 暂存 src/app/api → src/app/_api_disabled_for_mobile_build');
     if (existsSync(apiBackupDir)) {
-      await rm(apiBackupDir, { recursive: true, force: true });
+      await runFileStep('remove stale mobile API backup', () =>
+        rm(apiBackupDir, { recursive: true, force: true })
+      );
     }
-    await rename(apiDir, apiBackupDir);
+    await runFileStep('move src/app/api for mobile build', () =>
+      rename(apiDir, apiBackupDir)
+    );
   }
 
   let exitCode = 0;

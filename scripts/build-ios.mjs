@@ -25,20 +25,31 @@ const root = process.cwd();
 const podfilePath = path.join(root, 'ios/App/Podfile');
 const podfileBackupPath = path.join(root, 'ios/App/Podfile.bak');
 
+const formatError = (err) => (err instanceof Error ? err.message : String(err));
+
+const runFileStep = async (label, step) => {
+  try {
+    return await step();
+  } catch (err) {
+    throw new Error(`${label} failed: ${formatError(err)}`);
+  }
+};
+
 const detectCapacitorIosVersion = () => {
   // pnpm 會把每個 package 隔離在不同資料夾，掃 .pnpm 找出實際路徑
   const pnpmDir = path.join(root, 'node_modules/.pnpm');
   if (!existsSync(pnpmDir)) return null;
   for (const entry of readdirSync(pnpmDir)) {
-    if (entry.startsWith('@capacitor+ios@') && entry.includes('_@capacitor+core@')) {
-      const candidate = path.join(
-        pnpmDir,
-        entry,
-        'node_modules/@capacitor/ios/scripts/pods_helpers.rb'
-      );
-      if (existsSync(candidate)) {
-        return entry;
-      }
+    if (!entry.startsWith('@capacitor+ios@')) continue;
+    if (!entry.includes('_@capacitor+core@')) continue;
+
+    const candidate = path.join(
+      pnpmDir,
+      entry,
+      'node_modules/@capacitor/ios/scripts/pods_helpers.rb'
+    );
+    if (existsSync(candidate)) {
+      return entry;
     }
   }
   return null;
@@ -46,7 +57,9 @@ const detectCapacitorIosVersion = () => {
 
 async function main() {
   if (!existsSync(podfilePath)) {
-    console.error(`找不到 ${podfilePath}，請先在含 ios/ 的 repo 根目錄下執行此 script。`);
+    console.error(
+      `找不到 ${podfilePath}，請先在含 ios/ 的 repo 根目錄下執行此 script。`
+    );
     process.exit(1);
   }
 
@@ -61,18 +74,25 @@ async function main() {
     console.log(`▸ Podfile 已經指向 ${versioned}，無需 patch`);
   } else {
     console.log(`▸ 備份 Podfile → Podfile.bak`);
-    await writeFile(podfileBackupPath, original, 'utf-8');
+    await runFileStep('backup Podfile', () =>
+      writeFile(podfileBackupPath, original, 'utf-8')
+    );
     const patched = original.replace(
       /@capacitor\+ios@[\d.]+_@capacitor\+core@[\d.]+/g,
       versioned
     );
-    await writeFile(podfilePath, patched, 'utf-8');
+    await runFileStep('patch Podfile', () =>
+      writeFile(podfilePath, patched, 'utf-8')
+    );
     console.log(`▸ 已 patch Podfile → ${versioned}`);
   }
 
   try {
     console.log('▸ pod install');
-    execSync('pod install', { cwd: path.join(root, 'ios/App'), stdio: 'inherit' });
+    execSync('pod install', {
+      cwd: path.join(root, 'ios/App'),
+      stdio: 'inherit',
+    });
     console.log(
       '▸ Pods 安裝完成。接下來請執行：\n' +
         '    npx cap open ios\n' +
@@ -84,7 +104,9 @@ async function main() {
   } finally {
     if (existsSync(podfileBackupPath)) {
       console.log('▸ 還原 Podfile');
-      await writeFile(podfilePath, original, 'utf-8');
+      await runFileStep('restore Podfile', () =>
+        writeFile(podfilePath, original, 'utf-8')
+      );
     }
   }
 }

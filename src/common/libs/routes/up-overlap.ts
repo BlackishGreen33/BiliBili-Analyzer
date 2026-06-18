@@ -73,26 +73,24 @@ type UpAcc = {
 
 export function buildUpMap(videosList: CrawlVideo[][]): Map<string, UpAcc> {
   const upMap = new Map<string, UpAcc>();
-  for (const videos of videosList) {
-    for (const v of videos) {
-      const name = v.UP || '';
-      if (!name && !v.mid) continue;
-      const key = String(v.mid ?? name);
-      const ch = v.tags?.firstChannel || '未分类';
-      const e: UpAcc =
-        upMap.get(key) ??
-        ({
-          name: v.UP,
-          mid: v.mid,
-          channelMap: new Map(),
-          totalCount: 0,
-          views: 0,
-        } as UpAcc);
-      e.totalCount++;
-      e.views += Number.isFinite(v.views) ? v.views : 0;
-      e.channelMap.set(ch, (e.channelMap.get(ch) ?? 0) + 1);
-      upMap.set(key, e);
-    }
+  for (const v of videosList.flat()) {
+    const name = v.UP || '';
+    if (!name && !v.mid) continue;
+    const key = String(v.mid ?? name);
+    const ch = v.tags?.firstChannel || '未分类';
+    const e: UpAcc =
+      upMap.get(key) ??
+      ({
+        name: v.UP,
+        mid: v.mid,
+        channelMap: new Map(),
+        totalCount: 0,
+        views: 0,
+      } as UpAcc);
+    e.totalCount++;
+    e.views += Number.isFinite(v.views) ? v.views : 0;
+    e.channelMap.set(ch, (e.channelMap.get(ch) ?? 0) + 1);
+    upMap.set(key, e);
   }
   return upMap;
 }

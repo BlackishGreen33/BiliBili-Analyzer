@@ -9,11 +9,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const POPULAR_API = 'https://api.bilibili.com/x/web-interface/popular';
-const TAGS_API = (bvid) =>
+const tagsApi = (bvid) =>
   `https://api.bilibili.com/x/tag/archive/tags?bvid=${bvid}`;
-const UP_FOLLOWERS_API = (mid) =>
+const upFollowersApi = (mid) =>
   `https://api.bilibili.com/x/relation/stat?vmid=${mid}`;
-const UP_INFO_API = (mid) =>
+const upInfoApi = (mid) =>
   `https://api.bilibili.com/x/space/wbi/acc/info?mid=${mid}`;
 
 const PER_PAGE = 20;
@@ -30,6 +30,8 @@ const headers = {
 };
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const errorMessage = (error) =>
+  error instanceof Error ? error.message : String(error);
 
 const fetchWithRetry = async (url) => {
   let retries = 0;
@@ -45,7 +47,7 @@ const fetchWithRetry = async (url) => {
       lastErr = error;
       const delay = BACKOFF_MS[Math.min(retries, BACKOFF_MS.length - 1)];
       console.warn(
-        `请求失败 (${retries + 1}/${MAX_RETRIES})，${delay}ms 后重试：${error.message}`
+        `请求失败 (${retries + 1}/${MAX_RETRIES})，${delay}ms 后重试：${errorMessage(error)}`
       );
       await sleep(delay);
       retries++;
@@ -62,38 +64,37 @@ const fetchPopularPage = async (pn) => {
   return data.data?.list || [];
 };
 
-const fetchOrdinaryTags = async (bvid) => {
+const fetchOptional = async (url, label, fallback, pick) => {
   try {
-    const data = await fetchWithRetry(TAGS_API(bvid));
-    if (data.code !== 0) return [];
-    return (data.data || []).map((t) => t.tag_name);
+    const data = await fetchWithRetry(url);
+    if (data.code !== 0) return fallback;
+    return pick(data);
   } catch (error) {
-    console.warn(`获取标签失败 ${bvid}:`, error.message);
-    return [];
+    console.warn(`${label}:`, errorMessage(error));
+    return fallback;
   }
 };
 
-const fetchUpFollowers = async (mid) => {
-  try {
-    const data = await fetchWithRetry(UP_FOLLOWERS_API(mid));
-    if (data.code !== 0) return null;
-    return data.data?.following ?? null; // 0 if normal user
-  } catch (error) {
-    console.warn(`获取 UP 粉丝数失败 ${mid}:`, error.message);
-    return null;
-  }
-};
+const fetchOrdinaryTags = (bvid) =>
+  fetchOptional(tagsApi(bvid), `获取标签失败 ${bvid}`, [], (data) =>
+    (data.data || []).map((t) => t.tag_name)
+  );
 
-const fetchUpInfo = async (mid) => {
-  try {
-    const data = await fetchWithRetry(UP_INFO_API(mid));
-    if (data.code !== 0) return null;
-    return data.data || null;
-  } catch (error) {
-    console.warn(`获取 UP 信息失败 ${mid}:`, error.message);
-    return null;
-  }
-};
+const fetchUpFollowers = (mid) =>
+  fetchOptional(
+    upFollowersApi(mid),
+    `获取 UP 粉丝数失败 ${mid}`,
+    null,
+    (data) => data.data?.following ?? null
+  );
+
+const fetchUpInfo = (mid) =>
+  fetchOptional(
+    upInfoApi(mid),
+    `获取 UP 信息失败 ${mid}`,
+    null,
+    (data) => data.data || null
+  );
 
 const mapWithConcurrency = async (items, limit, fn) => {
   const results = new Array(items.length);
@@ -119,11 +120,35 @@ const normalizeDimension = (dim) =>
       }
     : undefined;
 
+const buildOptionalVideoFields = (video) => {
+  const dimension = normalizeDimension(video.dimension);
+  return {
+    ...(dimension && { dimension }),
+    ...(Array.isArray(video.pages) && { pages: video.pages.length }),
+    ...(video.desc && { desc: video.desc }),
+    ...(video.tid && { tid: video.tid }),
+    ...(video.tid_v2 && { tid_v2: video.tid_v2 }),
+    ...(video.tnamev2 && { tnamev2: video.tnamev2 }),
+    ...(video.short_link_v2 && { shortLink: video.short_link_v2 }),
+    ...(video.honor_reply?.honor?.length && {
+      honors: video.honor_reply.honor.map((h) => h.desc),
+    }),
+    ...(video.rights && {
+      rights: {
+        isCooperation: !!video.rights.is_cooperation,
+        isSteinGate: !!video.rights.stein_gate,
+        is360: !!video.rights.is_360,
+      },
+    }),
+    ...(video.pub_location && { pubLocation: video.pub_location }),
+  };
+};
+
 const processVideo = async (video) => {
   const bvid = video.bvid;
   const ordinaryTags = await fetchOrdinaryTags(bvid);
 
-  const base = {
+  return {
     bvid,
     url: `https://www.bilibili.com/video/${bvid}`,
     cover:
@@ -140,40 +165,8 @@ const processVideo = async (video) => {
       secondChannel: video.tnamev2 || '',
       ordinaryTags,
     },
+    ...buildOptionalVideoFields(video),
   };
-
-  // Optional fields (do not break the schema if missing)
-  const dimension = normalizeDimension(video.dimension);
-  if (dimension) base.dimension = dimension;
-
-  if (video.pages && Array.isArray(video.pages)) {
-    base.pages = video.pages.length;
-  }
-
-  if (video.desc) {
-    base.desc = video.desc;
-  }
-
-  if (video.tid) base.tid = video.tid;
-  if (video.tid_v2) base.tid_v2 = video.tid_v2;
-  if (video.tnamev2) base.tnamev2 = video.tnamev2;
-  if (video.short_link_v2) base.shortLink = video.short_link_v2;
-
-  if (video.honor_reply?.honor?.length) {
-    base.honors = video.honor_reply.honor.map((h) => h.desc);
-  }
-
-  if (video.rights) {
-    base.rights = {
-      isCooperation: !!video.rights.is_cooperation,
-      isSteinGate: !!video.rights.stein_gate,
-      is360: !!video.rights.is_360,
-    };
-  }
-
-  if (video.pub_location) base.pubLocation = video.pub_location;
-
-  return base;
 };
 
 const enrichUpMeta = async (videos) => {
@@ -201,6 +194,31 @@ const enrichUpMeta = async (videos) => {
     if (v.mid && upMeta[v.mid]) {
       v.upMeta = upMeta[v.mid];
     }
+  }
+};
+
+const ensureDir = (dir) => {
+  try {
+    fs.mkdirSync(dir, { recursive: true });
+  } catch (error) {
+    throw new Error(`创建目录失败 ${dir}: ${errorMessage(error)}`);
+  }
+};
+
+const writeJsonFile = (filePath, value) => {
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(value, null, 2));
+  } catch (error) {
+    throw new Error(`写入 JSON 失败 ${filePath}: ${errorMessage(error)}`);
+  }
+};
+
+const readJsonFile = (filePath, fallback) => {
+  if (!fs.existsSync(filePath)) return fallback;
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  } catch (error) {
+    throw new Error(`读取 JSON 失败 ${filePath}: ${errorMessage(error)}`);
   }
 };
 
@@ -241,9 +259,7 @@ const crawlData = async () => {
   console.log(`完成 ${resultArray.length} 支视频爬取，开始写入文件`);
 
   const resultDir = path.join(__dirname, 'result');
-  if (!fs.existsSync(resultDir)) {
-    fs.mkdirSync(resultDir);
-  }
+  ensureDir(resultDir);
 
   const now = Date.now();
   const currentDate = new Date(now + 8 * 60 * 60 * 1000);
@@ -255,7 +271,7 @@ const crawlData = async () => {
   const formattedDate = currentDate.toISOString().slice(0, -5) + '+0800';
   const fileName = `${formattedDate.replace(/:/g, '-')}.json`;
   const filePath = path.join(resultDir, fileName);
-  fs.writeFileSync(filePath, JSON.stringify(resultObject, null, 2));
+  writeJsonFile(filePath, resultObject);
 
   // 预聚合 — 共享 src/common/aggregations/build.mjs
   const aggregations = buildAggregations(resultArray);
@@ -264,25 +280,16 @@ const crawlData = async () => {
     file: fileName.replace('.json', ''),
     ...aggregations,
   };
-  fs.writeFileSync(
-    path.join(resultDir, 'agg-latest.json'),
-    JSON.stringify(agg, null, 2)
-  );
+  writeJsonFile(path.join(resultDir, 'agg-latest.json'), agg);
 
   // 同步把 agg-{date}.json 也寫一份（給未來歷史檔的 fast path 預留）
-  fs.writeFileSync(
-    path.join(resultDir, 'agg-' + fileName),
-    JSON.stringify(agg, null, 2)
-  );
+  writeJsonFile(path.join(resultDir, 'agg-' + fileName), agg);
 
   // 维护 list.json
-  let list = [];
   const listFilePath = path.join(resultDir, 'list.json');
-  if (fs.existsSync(listFilePath)) {
-    list = JSON.parse(fs.readFileSync(listFilePath, 'utf-8'));
-  }
+  const list = readJsonFile(listFilePath, []);
   list.unshift(fileName.replace('.json', ''));
-  fs.writeFileSync(listFilePath, JSON.stringify(list, null, 2));
+  writeJsonFile(listFilePath, list);
 
   console.log(`完成，已保存 ${resultArray.length} 个视频到 ${filePath}`);
 };
