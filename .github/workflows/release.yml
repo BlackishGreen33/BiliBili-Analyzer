@@ -125,6 +125,24 @@ jobs:
       - name: Build static export + cap sync
         run: pnpm run build:mobile
 
+      - name: Prepare iOS app resources
+        run: |
+          mkdir -p ios/App/App/public
+          rsync -a --delete out/ ios/App/App/public/
+          cat > ios/App/App/capacitor.config.json <<'EOF'
+          {"appId":"com.bilibilianalyzer.app","appName":"Bilibili Analyzer","webDir":"public","bundledWebRuntime":false}
+          EOF
+          APP_VERSION="${{ inputs.tag }}"
+          APP_VERSION="${APP_VERSION#v}"
+          cat > ios/App/App/config.xml <<EOF
+          <?xml version='1.0' encoding='utf-8'?>
+          <widget id="com.bilibilianalyzer.app" version="$APP_VERSION" xmlns="http://www.w3.org/ns/widgets">
+            <name>Bilibili Analyzer</name>
+            <content src="index.html" />
+            <access origin="*" />
+          </widget>
+          EOF
+
       - name: Patch synced iOS Podfile path
         run: |
           CAP_IOS_ENTRY="$(basename "$(find node_modules/.pnpm -maxdepth 1 -type d -name '@capacitor+ios@*_@capacitor+core@*' | sort | tail -n 1)")"
