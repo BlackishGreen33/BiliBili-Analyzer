@@ -130,6 +130,8 @@ jobs:
           CAP_IOS_ENTRY="$(basename "$(find node_modules/.pnpm -maxdepth 1 -type d -name '@capacitor+ios@*_@capacitor+core@*' | sort | tail -n 1)")"
           test -n "$CAP_IOS_ENTRY"
           CAP_IOS_ENTRY="$CAP_IOS_ENTRY" ruby -0pi -e 'gsub(/@capacitor\+ios@[\d.]+_@capacitor\+core@[\d.]+/, ENV.fetch("CAP_IOS_ENTRY"))' ios/App/Podfile
+          ruby -0pi -e "gsub(/platform :ios, '[\\d.]+'/, \"platform :ios, '15.0'\")" ios/App/Podfile
+          ruby -0pi -e 'gsub(/IPHONEOS_DEPLOYMENT_TARGET = [\d.]+;/, "IPHONEOS_DEPLOYMENT_TARGET = 15.0;")' ios/App/App.xcodeproj/project.pbxproj
           head -n 1 ios/App/Podfile
 
       - name: Install iOS pods
