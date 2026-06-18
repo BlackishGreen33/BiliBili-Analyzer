@@ -125,17 +125,43 @@ jobs:
       - name: Build static export + cap sync
         run: pnpm run build:mobile
 
+      - name: Patch synced iOS Podfile path
+        run: |
+          CAP_IOS_ENTRY="$(basename "$(find node_modules/.pnpm -maxdepth 1 -type d -name '@capacitor+ios@*_@capacitor+core@*' | sort | tail -n 1)")"
+          test -n "$CAP_IOS_ENTRY"
+          perl -0pi -e "s/@capacitor\+ios@[\d.]+_@capacitor\+core@[\d.]+/$ENV{CAP_IOS_ENTRY}/g" ios/App/Podfile
+
       - name: Install iOS pods
         run: pod install
         working-directory: ios/App
 
+      - name: Create shared iOS scheme
+        run: |
+          TARGET_ID="$(ruby -e 'text = File.read("ios/App/App.xcodeproj/project.pbxproj"); abort "App target not found" unless text =~ /([A-F0-9]+) \/\* App \*\/ = \{\n\s*isa = PBXNativeTarget;/; puts $1')"
+          mkdir -p ios/App/App.xcodeproj/xcshareddata/xcschemes
+          cat > ios/App/App.xcodeproj/xcshareddata/xcschemes/App.xcscheme <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <Scheme LastUpgradeVersion="1640" version="1.7">
+            <BuildAction parallelizeBuildables="YES" buildImplicitDependencies="YES">
+              <BuildActionEntries>
+                <BuildActionEntry buildForTesting="YES" buildForRunning="YES" buildForProfiling="YES" buildForArchiving="YES" buildForAnalyzing="YES">
+                  <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="$TARGET_ID" BuildableName="App.app" BlueprintName="App" ReferencedContainer="container:App.xcodeproj">
+                  </BuildableReference>
+                </BuildActionEntry>
+              </BuildActionEntries>
+            </BuildAction>
+          </Scheme>
+          EOF
+          xcodebuild -list -workspace ios/App/App.xcworkspace
+
       - name: Build unsigned iOS app
         run: |
           xcodebuild \
-            -project ios/App/App.xcodeproj \
-            -target App \
+            -workspace ios/App/App.xcworkspace \
+            -scheme App \
             -configuration Release \
             -sdk iphoneos \
+            -derivedDataPath build/ios-derived \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
@@ -144,7 +170,7 @@ jobs:
       - name: Package unsigned IPA
         run: |
           mkdir -p dist/Payload
-          APP_PATH="$(find ~/Library/Developer/Xcode/DerivedData -path '*/Build/Products/Release-iphoneos/*.app' -type d | head -n 1)"
+          APP_PATH="$(find build/ios-derived/Build/Products/Release-iphoneos -maxdepth 1 -type d -name '*.app' | head -n 1)"
           test -n "$APP_PATH"
           cp -R "$APP_PATH" dist/Payload/
           (cd dist && zip -qry "BiliBili-Analyzer-iOS-unsigned-${{ inputs.tag }}.ipa" Payload)
