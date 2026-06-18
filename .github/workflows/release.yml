@@ -122,6 +122,22 @@ jobs:
           test -n "$CAP_IOS_ENTRY"
           perl -0pi -e "s/@capacitor\+ios@[\d.]+_@capacitor\+core@[\d.]+/$ENV{CAP_IOS_ENTRY}/g" ios/App/Podfile
 
+      - name: Create shared iOS scheme
+        run: |
+          mkdir -p ios/App/App.xcodeproj/xcshareddata/xcschemes
+          cat > ios/App/App.xcodeproj/xcshareddata/xcschemes/App.xcscheme <<'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <Scheme LastUpgradeVersion="1640" version="1.7">
+            <BuildAction parallelizeBuildables="YES" buildImplicitDependencies="YES">
+              <BuildActionEntries>
+                <BuildActionEntry buildForTesting="YES" buildForRunning="YES" buildForProfiling="YES" buildForArchiving="YES" buildForAnalyzing="YES">
+                  <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="504EC3031FED79650016851F" BuildableName="App.app" BlueprintName="App" ReferencedContainer="container:App.xcodeproj"/>
+                </BuildActionEntry>
+              </BuildActionEntries>
+            </BuildAction>
+          </Scheme>
+          EOF
+
       - name: Build static export + cap sync
         run: pnpm run build:mobile
 
