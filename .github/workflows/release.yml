@@ -21,6 +21,7 @@ jobs:
   build-android:
     name: Build Android (APK + AAB)
     runs-on: ubuntu-latest
+    if: github.event_name == 'push'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -90,6 +91,66 @@ jobs:
         with:
           name: release-artifacts
           path: dist/
+
+  build-ios-unsigned:
+    name: Build iOS unsigned IPA
+    runs-on: macos-latest
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9.1.2
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Patch Capacitor iOS Podfile path
+        run: |
+          CAP_IOS_ENTRY="$(basename "$(find node_modules/.pnpm -maxdepth 1 -type d -name '@capacitor+ios@*_@capacitor+core@*' | sort | tail -n 1)")"
+          test -n "$CAP_IOS_ENTRY"
+          perl -0pi -e "s/@capacitor\+ios@[\d.]+_@capacitor\+core@[\d.]+/$ENV{CAP_IOS_ENTRY}/g" ios/App/Podfile
+
+      - name: Build static export + cap sync
+        run: pnpm run build:mobile
+
+      - name: Build unsigned iOS app
+        run: |
+          xcodebuild \
+            -workspace ios/App/App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build/ios-derived \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
+
+      - name: Package unsigned IPA
+        run: |
+          mkdir -p dist/Payload
+          APP_PATH="$(find build/ios-derived/Build/Products/Release-iphoneos -maxdepth 1 -type d -name '*.app' | head -n 1)"
+          test -n "$APP_PATH"
+          cp -R "$APP_PATH" dist/Payload/
+          (cd dist && zip -qry "BiliBili-Analyzer-iOS-unsigned-${{ inputs.tag }}.ipa" Payload)
+          shasum -a 256 dist/BiliBili-Analyzer-iOS-unsigned-${{ inputs.tag }}.ipa
+
+      - name: Upload to GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ inputs.tag }}" dist/BiliBili-Analyzer-iOS-unsigned-${{ inputs.tag }}.ipa --clobber
 
   publish-release:
     name: Publish GitHub Release
