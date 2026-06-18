@@ -8,7 +8,7 @@
  *   1. 先打 v*.*.* tag → 等 CI 跑完 Android + Chrome extension release
  *   2. 在 macOS 上 `git pull && pnpm install`
  *   3. `pnpm build:mobile`（產出 out/ 並 cap sync）
- *   4. `node scripts/build-ios.mjs`（做 cd ios/App && pod install）
+ *   4. `pnpm build:ios`（patch Podfile + pod install）
  *   5. `npx cap open ios` 開 Xcode，Product → Archive → Distribute App
  *      → Ad Hoc → 輸出 IPA
  *   6. `gh release upload vX.Y.Z BiliBili-Analyzer-iOS-vX.Y.Z.ipa`
@@ -17,7 +17,7 @@
  * 走 Xcode GUI / xcodebuild。
  */
 import { execSync } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -26,15 +26,19 @@ const podfilePath = path.join(root, 'ios/App/Podfile');
 const podfileBackupPath = path.join(root, 'ios/App/Podfile.bak');
 
 const detectCapacitorIosVersion = () => {
-  // pnpm 會把每個 package 隔離在不同資料夾，找 @capacitor/ios 實際路徑
-  const candidates = [
-    'node_modules/.pnpm/@capacitor+ios@8.4.0_@capacitor+core@8.4.0',
-    'node_modules/@capacitor/ios',
-  ];
-  for (const rel of candidates) {
-    const full = path.join(root, rel);
-    if (existsSync(path.join(full, 'scripts/pods_helpers'))) {
-      return rel.replace('node_modules/.pnpm/', '').replace(/^@capacitor\+ios@/, '@capacitor/ios@');
+  // pnpm 會把每個 package 隔離在不同資料夾，掃 .pnpm 找出實際路徑
+  const pnpmDir = path.join(root, 'node_modules/.pnpm');
+  if (!existsSync(pnpmDir)) return null;
+  for (const entry of readdirSync(pnpmDir)) {
+    if (entry.startsWith('@capacitor+ios@') && entry.includes('_@capacitor+core@')) {
+      const candidate = path.join(
+        pnpmDir,
+        entry,
+        'node_modules/@capacitor/ios/scripts/pods_helpers.rb'
+      );
+      if (existsSync(candidate)) {
+        return entry;
+      }
     }
   }
   return null;
@@ -60,7 +64,7 @@ async function main() {
     await writeFile(podfileBackupPath, original, 'utf-8');
     const patched = original.replace(
       /@capacitor\+ios@[\d.]+_@capacitor\+core@[\d.]+/g,
-      versioned.replace('@capacitor/ios@', '@capacitor+ios@').replace('@capacitor/core@', '_@capacitor+core@')
+      versioned
     );
     await writeFile(podfilePath, patched, 'utf-8');
     console.log(`▸ 已 patch Podfile → ${versioned}`);
