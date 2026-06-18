@@ -122,6 +122,9 @@ jobs:
           test -n "$CAP_IOS_ENTRY"
           perl -0pi -e "s/@capacitor\+ios@[\d.]+_@capacitor\+core@[\d.]+/$ENV{CAP_IOS_ENTRY}/g" ios/App/Podfile
 
+      - name: Build static export + cap sync
+        run: pnpm run build:mobile
+
       - name: Create shared iOS scheme
         run: |
           mkdir -p ios/App/App.xcodeproj/xcshareddata/xcschemes
@@ -137,9 +140,6 @@ jobs:
             </BuildAction>
           </Scheme>
           EOF
-
-      - name: Build static export + cap sync
-        run: pnpm run build:mobile
 
       - name: Build unsigned iOS app
         run: |
