@@ -1,0 +1,35 @@
+{
+  "exclude": [
+    "**/*.test.*",
+    "android/**",
+    "coverage/**",
+    "docs/**",
+    "e2e/**",
+    "extension/**",
+    "fuck-u-code-report.md",
+    "ios/**",
+    "node_modules/**",
+    "out/**",
+    "playwright-report/**",
+    "public/**",
+    "scripts/**",
+    "test-results/**"
+  ],
+  "metrics": {
+    "weights": {
+      "complexity": 0.38,
+      "documentation": 0.01,
+      "duplication": 0.18,
+      "error": 0.06,
+      "naming": 0.05,
+      "size": 0.18,
+      "structure": 0.14
+    }
+  },
+  "output": {
+    "format": "markdown",
+    "maxIssues": 8,
+    "showDetails": true,
+    "top": 20
+  }
+}
