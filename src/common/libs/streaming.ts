@@ -75,6 +75,24 @@ function parseNdjsonLine(line: string): StreamEvent | null {
   return JSON.parse(line) as StreamEvent;
 }
 
+async function* readNdjsonLines(
+  reader: ReadableStreamDefaultReader<Uint8Array>
+): AsyncGenerator<string> {
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  for (;;) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop() ?? '';
+    yield* lines;
+  }
+
+  if (buffer) yield buffer;
+}
+
 /**
  * 給 client 端：把 NDJSON response body 累積成一個最終物件
  *   - 'meta' event 合併進 base
@@ -124,23 +142,12 @@ export async function* parseNdjsonEvents(
     throw new Error('Stream has no body');
   }
   const reader = body.getReader();
-  const decoder = new TextDecoder();
-  let buffer = '';
 
   try {
-    for (;;) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split('\n');
-      buffer = lines.pop() ?? '';
-      for (const line of lines) {
-        const event = parseNdjsonLine(line);
-        if (event) yield event;
-      }
+    for await (const line of readNdjsonLines(reader)) {
+      const event = parseNdjsonLine(line);
+      if (event) yield event;
     }
-    const finalEvent = parseNdjsonLine(buffer);
-    if (finalEvent) yield finalEvent;
   } finally {
     reader.releaseLock();
   }
