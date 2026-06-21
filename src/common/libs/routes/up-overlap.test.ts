@@ -38,6 +38,12 @@ describe('parseOverlapParams', () => {
     expect(p.limit).toBe(200);
   });
 
+  it('caps minChannels and minCount at domain-specific maxima', () => {
+    const p = parseOverlapParams(makeUrl('minChannels=999999&minCount=999999'));
+    expect(p.minChannels).toBe(20);
+    expect(p.minCount).toBe(1000);
+  });
+
   it('falls back to defaults for non-numeric', () => {
     const p = parseOverlapParams(
       makeUrl('window=abc&minChannels=xyz&minCount=NaN&limit=oops')

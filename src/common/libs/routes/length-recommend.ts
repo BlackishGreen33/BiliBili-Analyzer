@@ -10,6 +10,7 @@ import { parseWindowParam } from '@/common/libs/routes/shared';
 
 export const LENGTH_TYPES = ['up', 'channel', 'tag'] as const;
 export type LengthType = (typeof LENGTH_TYPES)[number];
+export const MAX_LENGTH_VALUE_LENGTH = 120;
 
 type VideoLike = {
   UP: string;
@@ -64,12 +65,15 @@ export type LengthRecommendPayload = {
 
 export function parseLengthParams(url: URL): ParseLengthResult {
   const type = url.searchParams.get('type') ?? '';
-  const value = url.searchParams.get('value') ?? '';
+  const value = (url.searchParams.get('value') ?? '').trim();
   if (!LENGTH_TYPES.includes(type as LengthType)) {
     return { ok: false, status: 400, message: 'Invalid type' };
   }
   if (!value) {
     return { ok: false, status: 400, message: 'Missing value' };
+  }
+  if (value.length > MAX_LENGTH_VALUE_LENGTH) {
+    return { ok: false, status: 400, message: 'Value too long' };
   }
   const window = parseWindowParam(url, 'window', { default: 30, max: 90 });
   return { ok: true, type: type as LengthType, value, window };

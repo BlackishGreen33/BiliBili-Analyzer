@@ -16,6 +16,10 @@ import {
 
 const cache = createFiveMinCache<DashboardAgg>();
 
+function isKnownResultFile(filename: string, list: string[]): boolean {
+  return list.includes(filename);
+}
+
 export async function GET(req: Request) {
   return withRouteErrorHandler('DASHBOARD', async () => {
     const url = new URL(req.url);
@@ -25,10 +29,10 @@ export async function GET(req: Request) {
     const rawFilename = url.searchParams.get('file');
     const filename = rawFilename?.replace(/ /g, '+') ?? null;
 
-    let targetFile = filename;
-    if (!targetFile) {
-      const list = await fetchResultList();
-      targetFile = list[0] ?? null;
+    const list = await fetchResultList();
+    const targetFile = filename ?? list[0] ?? null;
+    if (filename && !isKnownResultFile(filename, list)) {
+      return new NextResponse('Unknown filename', { status: 404 });
     }
     if (!targetFile) {
       return new NextResponse('No crawl data', { status: 404 });

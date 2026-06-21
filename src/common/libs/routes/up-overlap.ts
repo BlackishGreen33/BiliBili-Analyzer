@@ -35,12 +35,12 @@ export const OVERLAP_DEFAULTS = {
   minChannels: {
     default: 2,
     min: 2,
-    max: Number.MAX_SAFE_INTEGER,
+    max: 20,
   } satisfies IntRangeOpts,
   minCount: {
     default: 2,
     min: 1,
-    max: Number.MAX_SAFE_INTEGER,
+    max: 1000,
   } satisfies IntRangeOpts,
   limit: { default: 50, min: 1, max: 200 } satisfies IntRangeOpts,
 };

@@ -13,7 +13,10 @@ export type CacheEntry<T> = { data: T; at: number };
 export class RouteCache<T> {
   private readonly cache = new Map<string, CacheEntry<T>>();
 
-  constructor(private readonly ttlMs: number) {}
+  constructor(
+    private readonly ttlMs: number,
+    private readonly maxEntries = 200
+  ) {}
 
   get(key: string): T | undefined {
     const hit = this.cache.get(key);
@@ -26,7 +29,21 @@ export class RouteCache<T> {
   }
 
   set(key: string, data: T): void {
-    this.cache.set(key, { data, at: Date.now() });
+    const now = Date.now();
+    for (const [entryKey, entry] of this.cache) {
+      if (now - entry.at >= this.ttlMs) {
+        this.cache.delete(entryKey);
+      }
+    }
+    if (this.cache.has(key)) {
+      this.cache.delete(key);
+    }
+    this.cache.set(key, { data, at: now });
+    while (this.cache.size > this.maxEntries) {
+      const oldest = this.cache.keys().next();
+      if (oldest.done) break;
+      this.cache.delete(oldest.value);
+    }
   }
 }
 
@@ -56,6 +73,6 @@ export async function withRouteErrorHandler(
  * Convenience: create a fresh cache with a 5-minute TTL.
  * Centralizes the (previously duplicated) constant.
  */
-export function createFiveMinCache<T>(): RouteCache<T> {
-  return new RouteCache<T>(5 * 60 * 1000);
+export function createFiveMinCache<T>(maxEntries?: number): RouteCache<T> {
+  return new RouteCache<T>(5 * 60 * 1000, maxEntries);
 }

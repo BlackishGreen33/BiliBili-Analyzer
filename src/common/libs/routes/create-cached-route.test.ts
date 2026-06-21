@@ -33,6 +33,26 @@ describe('RouteCache', () => {
     expect(c.get('a')).toBeUndefined();
   });
 
+  it('evicts the oldest entry when max entries is exceeded', () => {
+    const c = new RouteCache<string>(1000, 2);
+    c.set('a', 'a');
+    c.set('b', 'b');
+    c.set('c', 'c');
+    expect(c.get('a')).toBeUndefined();
+    expect(c.get('b')).toBe('b');
+    expect(c.get('c')).toBe('c');
+  });
+
+  it('cleans expired entries before set', () => {
+    const c = new RouteCache<string>(1000, 3);
+    c.set('a', 'a');
+    vi.advanceTimersByTime(1001);
+    c.set('b', 'b');
+    const internal = c as unknown as { cache: Map<string, unknown> };
+    expect(internal.cache.has('a')).toBe(false);
+    expect(internal.cache.size).toBe(1);
+  });
+
   it('createFiveMinCache uses 5-minute TTL', () => {
     const c = createFiveMinCache<string>();
     c.set('a', 'value');

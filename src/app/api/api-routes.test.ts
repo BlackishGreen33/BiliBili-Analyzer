@@ -9,10 +9,12 @@ import {
   vi,
 } from 'vitest';
 
+import { GET as dashboardGET } from '@/app/api/dashboard/route';
 import { GET as trendGET } from '@/app/api/dashboard/trend/route';
 import { GET as latencyGET } from '@/app/api/latency/route';
 import { GET as lengthGET } from '@/app/api/length/recommend/route';
 import { GET as overlapGET } from '@/app/api/up/overlap/route';
+import { GET as videoGET } from '@/app/api/video/route';
 import { GET as wordcloudGET } from '@/app/api/wordcloud/route';
 import {
   buildAggregations,
@@ -61,15 +63,20 @@ const mockResults: Record<string, ReturnType<typeof buildCrawlResult>> = {
 };
 
 // 動態替換的 hooks（給 catch path 測試用）
+const listCalls: string[] = [];
+const byNameCalls: string[] = [];
+const aggByNameCalls: string[] = [];
 let listImpl: () => Promise<string[]> = async () => mockList.slice();
 let byNameImpl: (
   name: string
 ) => Promise<ReturnType<typeof buildCrawlResult>> = async (name: string) => {
+  byNameCalls.push(name);
   if (!mockResults[name]) {
     throw new Error('Unknown filename: ' + name);
   }
   return mockResults[name];
 };
+let aggByNameImpl: () => Promise<null> = async () => null;
 
 vi.mock('@/common/libs/result-data.server', async () => {
   const actual = await vi.importActual<
@@ -77,17 +84,100 @@ vi.mock('@/common/libs/result-data.server', async () => {
   >('@/common/libs/result-data.server');
   return {
     ...actual,
-    fetchResultList: () => listImpl(),
+    fetchAggByName: (name: string) => {
+      aggByNameCalls.push(name);
+      return aggByNameImpl();
+    },
+    fetchAggLatest: () => Promise.resolve(null),
+    fetchResultList: () => {
+      listCalls.push('list');
+      return listImpl();
+    },
     fetchResultByName: (name: string) => byNameImpl(name),
   };
 });
 
 beforeAll(() => {});
-afterEach(() => {});
+afterEach(() => {
+  listCalls.length = 0;
+  byNameCalls.length = 0;
+  aggByNameCalls.length = 0;
+});
 afterAll(() => {});
 
 const callRoute = (handler: (req: Request) => Promise<Response>, url: string) =>
   handler(new Request(url));
+
+describe('GET /api/dashboard', () => {
+  it('rejects unknown file before fetching aggregations or results', async () => {
+    const res = await callRoute(
+      dashboardGET,
+      'http://localhost/api/dashboard?file=../../main/package.json?x='
+    );
+    expect(res.status).toBe(404);
+    expect(await res.text()).toBe('Unknown filename');
+    expect(aggByNameCalls).toEqual([]);
+    expect(byNameCalls).toEqual([]);
+  });
+
+  it('allows a known file and returns dashboard data', async () => {
+    const res = await callRoute(
+      dashboardGET,
+      'http://localhost/api/dashboard?file=2026-01-15'
+    );
+    const data = await res.json();
+    expect(res.status).toBe(200);
+    expect(data.file).toBe('2026-01-15');
+    expect(aggByNameCalls).toEqual(['2026-01-15']);
+    expect(byNameCalls).toEqual(['2026-01-15']);
+  });
+});
+
+describe('GET /api/video', () => {
+  it('rejects invalid mode before fetching the result list', async () => {
+    const res = await callRoute(
+      videoGET,
+      'http://localhost/api/video?mode=foo&value=UP0'
+    );
+    expect(res.status).toBe(400);
+    expect(await res.text()).toBe('Invalid mode');
+    expect(listCalls).toEqual([]);
+    expect(byNameCalls).toEqual([]);
+  });
+
+  it('rejects oversized value before fetching the result list', async () => {
+    const res = await callRoute(
+      videoGET,
+      `http://localhost/api/video?mode=up&value=${'x'.repeat(121)}`
+    );
+    expect(res.status).toBe(400);
+    expect(await res.text()).toBe('Value too long');
+    expect(listCalls).toEqual([]);
+    expect(byNameCalls).toEqual([]);
+  });
+
+  it('rejects unknown file before fetching results', async () => {
+    const res = await callRoute(
+      videoGET,
+      'http://localhost/api/video?mode=up&value=UP0&file=../../main/package.json'
+    );
+    expect(res.status).toBe(404);
+    expect(await res.text()).toBe('Unknown filename');
+    expect(byNameCalls).toEqual([]);
+  });
+
+  it('allows a known file and returns matching videos', async () => {
+    const res = await callRoute(
+      videoGET,
+      'http://localhost/api/video?mode=up&value=UP0&file=2026-01-15'
+    );
+    const data = await res.json();
+    expect(res.status).toBe(200);
+    expect(data.file).toBe('2026-01-15');
+    expect(data.count).toBeGreaterThan(0);
+    expect(byNameCalls).toEqual(['2026-01-15']);
+  });
+});
 
 describe('GET /api/dashboard/trend', () => {
   it('returns an empty payload when list is empty', async () => {

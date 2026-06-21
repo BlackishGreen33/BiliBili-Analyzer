@@ -55,6 +55,12 @@ describe('parseLengthParams', () => {
     expect(r).toEqual({ ok: true, type: 'up', value: 'foo', window: 30 });
   });
 
+  it('trims value before returning it', () => {
+    const r = parseLengthParams(makeUrl('type=up&value=%20foo%20'));
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.value).toBe('foo');
+  });
+
   it('returns 400 for invalid type', () => {
     const r = parseLengthParams(makeUrl('type=foo&value=bar'));
     expect(r.ok).toBe(false);
@@ -63,6 +69,18 @@ describe('parseLengthParams', () => {
 
   it('returns 400 when value is missing', () => {
     const r = parseLengthParams(makeUrl('type=up&value='));
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(r.status).toBe(400);
+  });
+
+  it('returns 400 when value is only whitespace', () => {
+    const r = parseLengthParams(makeUrl('type=up&value=%20%20'));
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(r.status).toBe(400);
+  });
+
+  it('returns 400 when value is too long', () => {
+    const r = parseLengthParams(makeUrl(`type=up&value=${'x'.repeat(121)}`));
     expect(r.ok).toBe(false);
     if (!r.ok) expect(r.status).toBe(400);
   });
