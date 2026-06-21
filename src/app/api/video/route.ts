@@ -57,7 +57,7 @@ export async function GET(req: Request) {
 
     const data = await fetchResultByName(target);
 
-    let matches;
+    let matches: VideoResponse['video'] = [];
     if (mode === 'up') {
       matches = data.video.filter(
         (v) => v.UP === value || String(v.mid) === value
