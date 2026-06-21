@@ -53,6 +53,17 @@ describe('RouteCache', () => {
     expect(internal.cache.size).toBe(1);
   });
 
+  it('refreshes an existing key before enforcing max entries', () => {
+    const c = new RouteCache<string>(1000, 2);
+    c.set('a', 'old');
+    c.set('b', 'b');
+    c.set('a', 'new');
+    c.set('c', 'c');
+    expect(c.get('a')).toBe('new');
+    expect(c.get('b')).toBeUndefined();
+    expect(c.get('c')).toBe('c');
+  });
+
   it('createFiveMinCache uses 5-minute TTL', () => {
     const c = createFiveMinCache<string>();
     c.set('a', 'value');
