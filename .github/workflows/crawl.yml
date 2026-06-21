@@ -40,29 +40,32 @@ jobs:
       - name: Install node modules
         run: pnpm install
 
-      # 先 checkout result 分支(包含歷史 list.json + 所有 raw 檔案),
-      # 再跑 crawler,這樣 CrawlPopular.mjs 才能讀到既有的 list.json 來累積,
-      # 而不是從 [新檔名] 開始(會讓 list.json 每次都被覆蓋成 1 條)。
-      - name: Switch to result branch
+      # 先還原 result 分支裡的歷史資料，但不要切走 main checkout；
+      # crawler 仍需要 main 上的 package.json / CrawlPopular.mjs / src。
+      - name: Restore result data
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git fetch origin result
-          if git show-ref --verify --quiet refs/remotes/origin/result; then
-            git checkout -B result origin/result
-          else
-            git checkout --orphan result
-          fi
+          git fetch origin result:refs/remotes/origin/result
+          rm -rf result
+          git archive origin/result result | tar -x
 
       - name: Crawl data
         run: pnpm run crawldata
 
       - name: Commit and push
         run: |
-          git add result/* -f
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          result_worktree="$(mktemp -d)"
+          rm -rf "$result_worktree"
+          git worktree add "$result_worktree" origin/result
+          rm -rf "$result_worktree/result"
+          mkdir -p "$result_worktree/result"
+          cp -a result/. "$result_worktree/result/"
+          cd "$result_worktree"
+          git add result -f
           if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0
           fi
           git commit -m "$(TZ=Asia/Shanghai date +"%Y-%m-%d %H:%M:%S")"
-          git push origin result
+          git push origin HEAD:result
