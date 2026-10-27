@@ -1,2740 +1,2658 @@
 {
-  "time": 1793008594097,
-  "file": "2026-10-26T17-56-34+0800",
+  "time": 1793094137414,
+  "file": "2026-10-27T17-42-17+0800",
   "summary": {
-    "totalVideos": 656,
-    "totalUp": 579,
-    "totalViews": 610243455,
-    "totalLike": 35083082,
-    "totalCoin": 6161455,
-    "totalFavorite": 7906631,
-    "totalReply": 1680467,
-    "totalDanmaku": 1424587,
-    "avgEngagement": 0.10825076362351153
+    "totalVideos": 653,
+    "totalUp": 581,
+    "totalViews": 608079586,
+    "totalLike": 33568369,
+    "totalCoin": 6286002,
+    "totalFavorite": 7663715,
+    "totalReply": 1675469,
+    "totalDanmaku": 1340245,
+    "avgEngagement": 0.10561249461184839
   },
   "channels": [
     {
       "firstChannel": "日常",
       "count": 98,
-      "views": 84595016,
-      "avgViews": 863214,
-      "like": 5748937,
-      "coin": 580357,
-      "favorite": 951701,
+      "views": 85756975,
+      "avgViews": 875071,
+      "like": 5250590,
+      "coin": 565925,
+      "favorite": 775340,
       "secondChannels": [
         {
           "secondChannel": "剧情演绎",
-          "count": 7,
-          "views": 10090083
+          "count": 9,
+          "views": 13368279
         },
         {
           "secondChannel": "同人动画",
-          "count": 6,
-          "views": 5263627
+          "count": 7,
+          "views": 6611908
         },
         {
           "secondChannel": "随拍·综合",
           "count": 5,
-          "views": 7593820
+          "views": 8529983
         },
         {
           "secondChannel": "社会观察",
           "count": 4,
-          "views": 2226039
+          "views": 3423679
         },
         {
-          "secondChannel": "其他手工",
-          "count": 3,
-          "views": 2938027
+          "secondChannel": "语言类小剧场",
+          "count": 4,
+          "views": 3000039
         },
         {
-          "secondChannel": "鬼畜综合",
+          "secondChannel": "AI杂谈",
+          "count": 4,
+          "views": 559548
+        },
+        {
+          "secondChannel": "MOBA游戏",
+          "count": 4,
+          "views": 1679128
+        },
+        {
+          "secondChannel": "美食记录",
+          "count": 4,
+          "views": 1156960
+        },
+        {
+          "secondChannel": "AI影视",
           "count": 3,
-          "views": 5768358
+          "views": 1587091
         },
         {
           "secondChannel": "影视解读",
           "count": 3,
-          "views": 1442185
-        },
-        {
-          "secondChannel": "语言类小剧场",
-          "count": 2,
-          "views": 2084503
-        },
-        {
-          "secondChannel": "UP主小综艺",
-          "count": 2,
-          "views": 1136468
-        },
-        {
-          "secondChannel": "影视资讯",
-          "count": 2,
-          "views": 1592463
-        },
-        {
-          "secondChannel": "MOBA游戏",
-          "count": 2,
-          "views": 958338
-        },
-        {
-          "secondChannel": "AI影视",
-          "count": 2,
-          "views": 929193
-        },
-        {
-          "secondChannel": "翻唱",
-          "count": 2,
-          "views": 2265523
-        },
-        {
-          "secondChannel": "美食记录",
-          "count": 2,
-          "views": 2261427
-        },
-        {
-          "secondChannel": "音乐现场",
-          "count": 2,
-          "views": 1017330
-        },
-        {
-          "secondChannel": "海外资讯",
-          "count": 2,
-          "views": 340024
-        },
-        {
-          "secondChannel": "中外生活vlog",
-          "count": 2,
-          "views": 967852
-        },
-        {
-          "secondChannel": "休闲/小游戏",
-          "count": 1,
-          "views": 3371016
-        },
-        {
-          "secondChannel": "漫画·动态漫",
-          "count": 1,
-          "views": 1284520
-        },
-        {
-          "secondChannel": "旅游记录",
-          "count": 1,
-          "views": 356977
-        },
-        {
-          "secondChannel": "射击游戏",
-          "count": 1,
-          "views": 247344
-        },
-        {
-          "secondChannel": "舞蹈综合",
-          "count": 1,
-          "views": 1819268
-        },
-        {
-          "secondChannel": "护肤",
-          "count": 1,
-          "views": 88472
-        },
-        {
-          "secondChannel": "综合资讯",
-          "count": 1,
-          "views": 436993
-        },
-        {
-          "secondChannel": "户外探险",
-          "count": 1,
-          "views": 1883091
-        },
-        {
-          "secondChannel": "演奏",
-          "count": 1,
-          "views": 1021848
-        },
-        {
-          "secondChannel": "婚嫁",
-          "count": 1,
-          "views": 347897
-        },
-        {
-          "secondChannel": "美食测评",
-          "count": 1,
-          "views": 1343397
-        },
-        {
-          "secondChannel": "社会资讯",
-          "count": 1,
-          "views": 3785216
-        },
-        {
-          "secondChannel": "时政解读",
-          "count": 1,
-          "views": 273966
-        },
-        {
-          "secondChannel": "心理健康",
-          "count": 1,
-          "views": 142517
-        },
-        {
-          "secondChannel": "美食制作",
-          "count": 1,
-          "views": 481542
+          "views": 1348941
         },
         {
           "secondChannel": "猫",
-          "count": 1,
-          "views": 111835
+          "count": 3,
+          "views": 868773
         },
         {
-          "secondChannel": "电台·歌单",
-          "count": 1,
-          "views": 1036039
+          "secondChannel": "射击游戏",
+          "count": 3,
+          "views": 1210548
         },
         {
-          "secondChannel": "时尚解读",
-          "count": 1,
-          "views": 316200
+          "secondChannel": "户外探险",
+          "count": 2,
+          "views": 2290421
         },
         {
-          "secondChannel": "露营",
-          "count": 1,
-          "views": 159749
+          "secondChannel": "美食测评",
+          "count": 2,
+          "views": 1685719
         },
         {
-          "secondChannel": "汽车文化",
-          "count": 1,
-          "views": 64464
-        },
-        {
-          "secondChannel": "助眠视频·ASMR",
-          "count": 1,
-          "views": 81484
-        },
-        {
-          "secondChannel": "武术",
-          "count": 1,
-          "views": 3188962
-        },
-        {
-          "secondChannel": "仿妆cos",
-          "count": 1,
-          "views": 701798
+          "secondChannel": "颜值·网红舞",
+          "count": 2,
+          "views": 611928
         },
         {
           "secondChannel": "体育资讯",
           "count": 1,
-          "views": 191954
+          "views": 1123595
         },
         {
-          "secondChannel": "健康科普",
+          "secondChannel": "休闲/小游戏",
           "count": 1,
-          "views": 1979861
+          "views": 4599723
         },
         {
-          "secondChannel": "其他vlog",
+          "secondChannel": "狗",
           "count": 1,
-          "views": 88843
-        },
-        {
-          "secondChannel": "明星剪辑",
-          "count": 1,
-          "views": 169143
-        },
-        {
-          "secondChannel": "动物综合·二创",
-          "count": 1,
-          "views": 164262
-        },
-        {
-          "secondChannel": "商业财经",
-          "count": 1,
-          "views": 97412
-        },
-        {
-          "secondChannel": "旅游攻略",
-          "count": 1,
-          "views": 192678
-        },
-        {
-          "secondChannel": "二次元其他",
-          "count": 1,
-          "views": 1808883
-        },
-        {
-          "secondChannel": "美妆",
-          "count": 1,
-          "views": 1772619
-        },
-        {
-          "secondChannel": "徒步",
-          "count": 1,
-          "views": 14718
-        },
-        {
-          "secondChannel": "AI杂谈",
-          "count": 1,
-          "views": 132480
-        },
-        {
-          "secondChannel": "体育赛事",
-          "count": 1,
-          "views": 149482
-        },
-        {
-          "secondChannel": "农村生活",
-          "count": 1,
-          "views": 187694
+          "views": 72943
         },
         {
           "secondChannel": "cosplay",
           "count": 1,
-          "views": 833340
-        },
-        {
-          "secondChannel": "美食探店",
-          "count": 1,
-          "views": 80032
-        },
-        {
-          "secondChannel": "宅舞",
-          "count": 1,
-          "views": 135746
-        },
-        {
-          "secondChannel": "篮球",
-          "count": 1,
-          "views": 627904
-        },
-        {
-          "secondChannel": "时政资讯",
-          "count": 1,
-          "views": 199172
+          "views": 242806
         },
         {
           "secondChannel": "汽车生活",
           "count": 1,
-          "views": 848302
+          "views": 99219
         },
         {
-          "secondChannel": "其他游戏",
+          "secondChannel": "UP主小综艺",
           "count": 1,
-          "views": 435361
+          "views": 1000896
         },
         {
-          "secondChannel": "人文历史",
+          "secondChannel": "其他手工",
           "count": 1,
-          "views": 84670
+          "views": 2631249
         },
         {
-          "secondChannel": "手机",
+          "secondChannel": "仿妆cos",
           "count": 1,
-          "views": 2381828
+          "views": 964259
         },
         {
-          "secondChannel": "颜值·网红舞",
+          "secondChannel": "其他知识杂谈",
           "count": 1,
-          "views": 320856
+          "views": 169296
         },
         {
-          "secondChannel": "动作竞技游戏",
+          "secondChannel": "旅游记录",
           "count": 1,
-          "views": 277921
+          "views": 563021
+        },
+        {
+          "secondChannel": "舞蹈综合",
+          "count": 1,
+          "views": 2467393
+        },
+        {
+          "secondChannel": "汽车文化",
+          "count": 1,
+          "views": 231974
+        },
+        {
+          "secondChannel": "科学科普",
+          "count": 1,
+          "views": 82750
+        },
+        {
+          "secondChannel": "影视资讯",
+          "count": 1,
+          "views": 1232876
+        },
+        {
+          "secondChannel": "娱乐评论",
+          "count": 1,
+          "views": 419941
+        },
+        {
+          "secondChannel": "演奏",
+          "count": 1,
+          "views": 1224845
+        },
+        {
+          "secondChannel": "跑步",
+          "count": 1,
+          "views": 191681
+        },
+        {
+          "secondChannel": "亲子互动",
+          "count": 1,
+          "views": 587856
+        },
+        {
+          "secondChannel": "漫画·动态漫",
+          "count": 1,
+          "views": 1571587
+        },
+        {
+          "secondChannel": "鬼畜综合",
+          "count": 1,
+          "views": 2907616
+        },
+        {
+          "secondChannel": "回合制策略游戏",
+          "count": 1,
+          "views": 93740
+        },
+        {
+          "secondChannel": "汽车技术",
+          "count": 1,
+          "views": 252480
+        },
+        {
+          "secondChannel": "美食探店",
+          "count": 1,
+          "views": 315169
+        },
+        {
+          "secondChannel": "时政解读",
+          "count": 1,
+          "views": 397477
+        },
+        {
+          "secondChannel": "科技数码综合",
+          "count": 1,
+          "views": 112115
+        },
+        {
+          "secondChannel": "翻唱",
+          "count": 1,
+          "views": 2441190
+        },
+        {
+          "secondChannel": "助眠视频·ASMR",
+          "count": 1,
+          "views": 210511
+        },
+        {
+          "secondChannel": "社会资讯",
+          "count": 1,
+          "views": 4086466
+        },
+        {
+          "secondChannel": "护肤",
+          "count": 1,
+          "views": 219556
+        },
+        {
+          "secondChannel": "婚嫁",
+          "count": 1,
+          "views": 534285
+        },
+        {
+          "secondChannel": "体育赛事",
+          "count": 1,
+          "views": 229848
+        },
+        {
+          "secondChannel": "美食制作",
+          "count": 1,
+          "views": 607197
+        },
+        {
+          "secondChannel": "职业vlog",
+          "count": 1,
+          "views": 99804
+        },
+        {
+          "secondChannel": "动漫剪辑",
+          "count": 1,
+          "views": 114628
+        },
+        {
+          "secondChannel": "武术",
+          "count": 1,
+          "views": 3425620
+        },
+        {
+          "secondChannel": "美妆",
+          "count": 1,
+          "views": 1914550
+        },
+        {
+          "secondChannel": "明星剪辑",
+          "count": 1,
+          "views": 69060
+        },
+        {
+          "secondChannel": "汽车测评",
+          "count": 1,
+          "views": 122421
+        },
+        {
+          "secondChannel": "心理健康",
+          "count": 1,
+          "views": 192387
         }
       ]
     },
     {
       "firstChannel": "单机游戏",
-      "count": 50,
-      "views": 55335571,
-      "avgViews": 1106711,
-      "like": 2545740,
-      "coin": 472727,
-      "favorite": 644693,
+      "count": 41,
+      "views": 45484187,
+      "avgViews": 1109370,
+      "like": 1961587,
+      "coin": 317861,
+      "favorite": 491876,
       "secondChannels": [
-        {
-          "secondChannel": "沙盒类",
-          "count": 15,
-          "views": 16328484
-        },
         {
           "secondChannel": "其他游戏",
           "count": 14,
-          "views": 24413046
+          "views": 13459075
         },
         {
-          "secondChannel": "单机主机类游戏",
-          "count": 5,
-          "views": 3946566
+          "secondChannel": "沙盒类",
+          "count": 9,
+          "views": 13762597
         },
         {
           "secondChannel": "休闲/小游戏",
-          "count": 4,
-          "views": 3802496
+          "count": 6,
+          "views": 4995776
         },
         {
           "secondChannel": "MOBA游戏",
-          "count": 3,
-          "views": 1991381
+          "count": 4,
+          "views": 3316434
         },
         {
-          "secondChannel": "单人RPG游戏",
+          "secondChannel": "单机主机类游戏",
           "count": 3,
-          "views": 1001188
-        },
-        {
-          "secondChannel": "同人动画",
-          "count": 3,
-          "views": 687236
+          "views": 2183094
         },
         {
           "secondChannel": "射击游戏",
           "count": 2,
-          "views": 2945994
+          "views": 3241901
         },
         {
-          "secondChannel": "短剧短片",
+          "secondChannel": "模拟经营游戏",
           "count": 1,
-          "views": 219180
+          "views": 656899
+        },
+        {
+          "secondChannel": "AI杂谈",
+          "count": 1,
+          "views": 3814050
+        },
+        {
+          "secondChannel": "单人RPG游戏",
+          "count": 1,
+          "views": 54361
         }
       ]
     },
     {
-      "firstChannel": "手机游戏",
-      "count": 49,
-      "views": 39983363,
-      "avgViews": 815987,
-      "like": 2975212,
-      "coin": 1335098,
-      "favorite": 816427,
+      "firstChannel": "电子竞技",
+      "count": 37,
+      "views": 31366381,
+      "avgViews": 847740,
+      "like": 931844,
+      "coin": 168221,
+      "favorite": 128800,
       "secondChannels": [
         {
-          "secondChannel": "单人RPG游戏",
-          "count": 32,
-          "views": 28395382
-        },
-        {
-          "secondChannel": "女性向游戏",
-          "count": 3,
-          "views": 686692
-        },
-        {
-          "secondChannel": "动作竞技游戏",
-          "count": 3,
-          "views": 2089007
-        },
-        {
           "secondChannel": "MOBA游戏",
-          "count": 2,
-          "views": 3757468
-        },
-        {
-          "secondChannel": "其他游戏",
-          "count": 2,
-          "views": 965435
-        },
-        {
-          "secondChannel": "漫画·动态漫",
-          "count": 1,
-          "views": 427847
+          "count": 29,
+          "views": 27000784
         },
         {
           "secondChannel": "即时策略游戏",
-          "count": 1,
-          "views": 89690
-        },
-        {
-          "secondChannel": "演奏",
-          "count": 1,
-          "views": 97474
-        },
-        {
-          "secondChannel": "原创音乐",
-          "count": 1,
-          "views": 582254
+          "count": 2,
+          "views": 782911
         },
         {
           "secondChannel": "射击游戏",
-          "count": 1,
-          "views": 567050
+          "count": 2,
+          "views": 489617
         },
         {
-          "secondChannel": "同人动画",
-          "count": 1,
-          "views": 291109
+          "secondChannel": "翻唱",
+          "count": 2,
+          "views": 2108518
         },
         {
-          "secondChannel": "随拍·综合",
+          "secondChannel": "娱乐综艺正片",
           "count": 1,
-          "views": 2033955
+          "views": 569480
+        },
+        {
+          "secondChannel": "其他游戏",
+          "count": 1,
+          "views": 415071
         }
       ]
     },
     {
       "firstChannel": "搞笑",
       "count": 35,
-      "views": 41122188,
-      "avgViews": 1174920,
-      "like": 2305297,
-      "coin": 151371,
-      "favorite": 254855,
+      "views": 39182454,
+      "avgViews": 1119499,
+      "like": 2100762,
+      "coin": 154122,
+      "favorite": 273714,
       "secondChannels": [
         {
-          "secondChannel": "剧情演绎",
-          "count": 5,
-          "views": 3989808
+          "secondChannel": "随拍·综合",
+          "count": 7,
+          "views": 10606927
         },
         {
-          "secondChannel": "随拍·综合",
-          "count": 4,
-          "views": 8290746
+          "secondChannel": "剧情演绎",
+          "count": 6,
+          "views": 5217346
         },
         {
           "secondChannel": "语言类小剧场",
-          "count": 4,
-          "views": 14597449
+          "count": 3,
+          "views": 7584575
         },
         {
           "secondChannel": "鬼畜综合",
-          "count": 4,
-          "views": 1824099
+          "count": 3,
+          "views": 1580090
         },
         {
-          "secondChannel": "UP主小综艺",
-          "count": 3,
-          "views": 2300567
+          "secondChannel": "AI影视",
+          "count": 2,
+          "views": 1749431
+        },
+        {
+          "secondChannel": "农村生活",
+          "count": 2,
+          "views": 1740681
+        },
+        {
+          "secondChannel": "同人动画",
+          "count": 2,
+          "views": 763831
+        },
+        {
+          "secondChannel": "射击游戏",
+          "count": 1,
+          "views": 751477
+        },
+        {
+          "secondChannel": "其他游戏",
+          "count": 1,
+          "views": 787747
         },
         {
           "secondChannel": "MOBA游戏",
           "count": 1,
-          "views": 318283
+          "views": 666858
+        },
+        {
+          "secondChannel": "二次元其他",
+          "count": 1,
+          "views": 186853
+        },
+        {
+          "secondChannel": "UP主小综艺",
+          "count": 1,
+          "views": 2130814
         },
         {
           "secondChannel": "翻唱",
           "count": 1,
-          "views": 1292370
+          "views": 1607070
         },
         {
           "secondChannel": "中外生活vlog",
           "count": 1,
-          "views": 955828
-        },
-        {
-          "secondChannel": "农村生活",
-          "count": 1,
-          "views": 1120600
-        },
-        {
-          "secondChannel": "同人动画",
-          "count": 1,
-          "views": 477161
+          "views": 1105417
         },
         {
           "secondChannel": "其他vlog",
           "count": 1,
-          "views": 615891
-        },
-        {
-          "secondChannel": "其他游戏",
-          "count": 1,
-          "views": 70836
+          "views": 732629
         },
         {
           "secondChannel": "学生vlog",
           "count": 1,
-          "views": 1207204
-        },
-        {
-          "secondChannel": "AI杂谈",
-          "count": 1,
-          "views": 138466
-        },
-        {
-          "secondChannel": "影视综合",
-          "count": 1,
-          "views": 369395
-        },
-        {
-          "secondChannel": "短剧短片",
-          "count": 1,
-          "views": 730214
-        },
-        {
-          "secondChannel": "社会观察",
-          "count": 1,
-          "views": 258890
+          "views": 1339716
         },
         {
           "secondChannel": "职场发展",
           "count": 1,
-          "views": 558965
+          "views": 630992
+        }
+      ]
+    },
+    {
+      "firstChannel": "手机游戏",
+      "count": 34,
+      "views": 32695611,
+      "avgViews": 961636,
+      "like": 2344624,
+      "coin": 1309784,
+      "favorite": 715260,
+      "secondChannels": [
+        {
+          "secondChannel": "单人RPG游戏",
+          "count": 21,
+          "views": 24578252
         },
         {
-          "secondChannel": "AI影视",
-          "count": 1,
-          "views": 1422205
+          "secondChannel": "MOBA游戏",
+          "count": 2,
+          "views": 4695297
+        },
+        {
+          "secondChannel": "即时策略游戏",
+          "count": 2,
+          "views": 304433
+        },
+        {
+          "secondChannel": "动作竞技游戏",
+          "count": 2,
+          "views": 732882
         },
         {
           "secondChannel": "亲子互动",
           "count": 1,
-          "views": 583211
-        }
-      ]
-    },
-    {
-      "firstChannel": "电子竞技",
-      "count": 34,
-      "views": 30900923,
-      "avgViews": 908851,
-      "like": 891863,
-      "coin": 165372,
-      "favorite": 120507,
-      "secondChannels": [
-        {
-          "secondChannel": "MOBA游戏",
-          "count": 28,
-          "views": 26345273
-        },
-        {
-          "secondChannel": "射击游戏",
-          "count": 2,
-          "views": 1297713
-        },
-        {
-          "secondChannel": "翻唱",
-          "count": 2,
-          "views": 2475734
-        },
-        {
-          "secondChannel": "AI音乐",
-          "count": 1,
-          "views": 616511
+          "views": 506467
         },
         {
           "secondChannel": "其他游戏",
           "count": 1,
-          "views": 165692
-        }
-      ]
-    },
-    {
-      "firstChannel": "影视杂谈",
-      "count": 25,
-      "views": 19252175,
-      "avgViews": 770087,
-      "like": 773330,
-      "coin": 178268,
-      "favorite": 197674,
-      "secondChannels": [
-        {
-          "secondChannel": "影视解读",
-          "count": 9,
-          "views": 8392040
+          "views": 146213
         },
         {
-          "secondChannel": "娱乐评论",
-          "count": 3,
-          "views": 2783339
-        },
-        {
-          "secondChannel": "音乐综合",
+          "secondChannel": "同人动画",
           "count": 1,
-          "views": 825675
+          "views": 126253
         },
         {
-          "secondChannel": "户外探险",
+          "secondChannel": "女性向游戏",
           "count": 1,
-          "views": 3222747
+          "views": 305857
         },
         {
-          "secondChannel": "鬼畜综合",
+          "secondChannel": "原创音乐",
           "count": 1,
-          "views": 130524
+          "views": 637568
         },
         {
-          "secondChannel": "AI影视",
+          "secondChannel": "漫画·动态漫",
           "count": 1,
-          "views": 298379
-        },
-        {
-          "secondChannel": "MMORPG游戏",
-          "count": 1,
-          "views": 130411
-        },
-        {
-          "secondChannel": "社会观察",
-          "count": 1,
-          "views": 1174624
-        },
-        {
-          "secondChannel": "娱乐reaction",
-          "count": 1,
-          "views": 263457
-        },
-        {
-          "secondChannel": "影视剪辑",
-          "count": 1,
-          "views": 86316
-        },
-        {
-          "secondChannel": "人文历史",
-          "count": 1,
-          "views": 62572
-        },
-        {
-          "secondChannel": "网文解读",
-          "count": 1,
-          "views": 334489
-        },
-        {
-          "secondChannel": "时政解读",
-          "count": 1,
-          "views": 510213
-        },
-        {
-          "secondChannel": "美食综合",
-          "count": 1,
-          "views": 559341
-        },
-        {
-          "secondChannel": "动漫评论",
-          "count": 1,
-          "views": 478048
-        }
-      ]
-    },
-    {
-      "firstChannel": "影视剪辑",
-      "count": 25,
-      "views": 22223514,
-      "avgViews": 888941,
-      "like": 1489671,
-      "coin": 287733,
-      "favorite": 392612,
-      "secondChannels": [
-        {
-          "secondChannel": "AI影视",
-          "count": 9,
-          "views": 5117754
-        },
-        {
-          "secondChannel": "影视剪辑",
-          "count": 4,
-          "views": 7185828
-        },
-        {
-          "secondChannel": "短剧短片",
-          "count": 4,
-          "views": 2319245
-        },
-        {
-          "secondChannel": "鬼畜综合",
-          "count": 2,
-          "views": 1686140
-        },
-        {
-          "secondChannel": "MOBA游戏",
-          "count": 1,
-          "views": 369216
-        },
-        {
-          "secondChannel": "AI音乐",
-          "count": 1,
-          "views": 3527620
-        },
-        {
-          "secondChannel": "娱乐评论",
-          "count": 1,
-          "views": 75186
+          "views": 600634
         },
         {
           "secondChannel": "翻唱",
           "count": 1,
-          "views": 1329319
-        },
-        {
-          "secondChannel": "影视正片搬运",
-          "count": 1,
-          "views": 129122
-        },
-        {
-          "secondChannel": "动漫剪辑",
-          "count": 1,
-          "views": 484084
+          "views": 61755
         }
       ]
     },
     {
       "firstChannel": "网络游戏",
-      "count": 24,
-      "views": 16525263,
-      "avgViews": 688553,
-      "like": 641370,
-      "coin": 59431,
-      "favorite": 203802,
+      "count": 29,
+      "views": 16837808,
+      "avgViews": 580614,
+      "like": 592774,
+      "coin": 47198,
+      "favorite": 195649,
       "secondChannels": [
         {
           "secondChannel": "射击游戏",
-          "count": 12,
-          "views": 9176517
+          "count": 16,
+          "views": 11479841
         },
         {
           "secondChannel": "MOBA游戏",
-          "count": 4,
-          "views": 1574488
-        },
-        {
-          "secondChannel": "AI音乐",
-          "count": 2,
-          "views": 380546
+          "count": 8,
+          "views": 3529990
         },
         {
           "secondChannel": "其他游戏",
           "count": 2,
-          "views": 401574
+          "views": 736441
         },
         {
-          "secondChannel": "单人RPG游戏",
-          "count": 2,
-          "views": 3442792
+          "secondChannel": "AI音乐",
+          "count": 1,
+          "views": 292268
         },
         {
           "secondChannel": "AI影视",
           "count": 1,
-          "views": 1014305
+          "views": 673359
         },
         {
-          "secondChannel": "动漫评论",
+          "secondChannel": "MMORPG游戏",
           "count": 1,
-          "views": 535041
+          "views": 125909
+        }
+      ]
+    },
+    {
+      "firstChannel": "影视杂谈",
+      "count": 27,
+      "views": 22046100,
+      "avgViews": 816522,
+      "like": 892216,
+      "coin": 190571,
+      "favorite": 221311,
+      "secondChannels": [
+        {
+          "secondChannel": "影视解读",
+          "count": 17,
+          "views": 11476022
+        },
+        {
+          "secondChannel": "娱乐评论",
+          "count": 3,
+          "views": 2248340
+        },
+        {
+          "secondChannel": "人文历史",
+          "count": 2,
+          "views": 593731
+        },
+        {
+          "secondChannel": "音乐综合",
+          "count": 1,
+          "views": 1789279
+        },
+        {
+          "secondChannel": "鬼畜综合",
+          "count": 1,
+          "views": 399636
+        },
+        {
+          "secondChannel": "随拍·综合",
+          "count": 1,
+          "views": 366904
+        },
+        {
+          "secondChannel": "户外探险",
+          "count": 1,
+          "views": 3901720
+        },
+        {
+          "secondChannel": "社会观察",
+          "count": 1,
+          "views": 1270468
         }
       ]
     },
     {
       "firstChannel": "人文历史",
-      "count": 24,
-      "views": 25512810,
-      "avgViews": 1063034,
-      "like": 1326561,
-      "coin": 200010,
-      "favorite": 453137,
+      "count": 22,
+      "views": 18589400,
+      "avgViews": 844973,
+      "like": 1027311,
+      "coin": 160943,
+      "favorite": 428063,
       "secondChannels": [
         {
-          "secondChannel": "时政解读",
-          "count": 7,
-          "views": 5789872
-        },
-        {
           "secondChannel": "人文历史",
-          "count": 7,
-          "views": 11141289
+          "count": 9,
+          "views": 9842780
         },
         {
           "secondChannel": "社会观察",
-          "count": 4,
-          "views": 1645034
+          "count": 5,
+          "views": 2612773
         },
         {
-          "secondChannel": "美食综合",
+          "secondChannel": "时政解读",
+          "count": 3,
+          "views": 1928739
+        },
+        {
+          "secondChannel": "科学科普",
           "count": 1,
-          "views": 1531376
+          "views": 250887
         },
         {
           "secondChannel": "AI杂谈",
           "count": 1,
-          "views": 211130
+          "views": 441804
         },
         {
-          "secondChannel": "人际关系",
+          "secondChannel": "美食综合",
           "count": 1,
-          "views": 1546052
-        },
-        {
-          "secondChannel": "商业财经",
-          "count": 1,
-          "views": 1132605
-        },
-        {
-          "secondChannel": "影视解读",
-          "count": 1,
-          "views": 2401412
+          "views": 1832155
         },
         {
           "secondChannel": "AI影视",
           "count": 1,
-          "views": 114040
-        }
-      ]
-    },
-    {
-      "firstChannel": "数码",
-      "count": 16,
-      "views": 22068008,
-      "avgViews": 1379251,
-      "like": 1085453,
-      "coin": 314781,
-      "favorite": 465590,
-      "secondChannels": [
-        {
-          "secondChannel": "电脑",
-          "count": 5,
-          "views": 4605607
+          "views": 56033
         },
         {
-          "secondChannel": "手机",
-          "count": 5,
-          "views": 12933184
-        },
-        {
-          "secondChannel": "剧情演绎",
+          "secondChannel": "人际关系",
           "count": 1,
-          "views": 2235330
-        },
-        {
-          "secondChannel": "AI音乐",
-          "count": 1,
-          "views": 542153
-        },
-        {
-          "secondChannel": "MOBA游戏",
-          "count": 1,
-          "views": 863336
-        },
-        {
-          "secondChannel": "商业财经",
-          "count": 1,
-          "views": 480546
-        },
-        {
-          "secondChannel": "工程机械",
-          "count": 1,
-          "views": 309078
-        },
-        {
-          "secondChannel": "家用电器",
-          "count": 1,
-          "views": 98774
+          "views": 1624229
         }
       ]
     },
     {
       "firstChannel": "同人·手书",
-      "count": 14,
-      "views": 7885165,
-      "avgViews": 563226,
-      "like": 821881,
-      "coin": 174055,
-      "favorite": 248703,
+      "count": 20,
+      "views": 9323981,
+      "avgViews": 466199,
+      "like": 944872,
+      "coin": 186718,
+      "favorite": 268887,
       "secondChannels": [
         {
           "secondChannel": "同人动画",
-          "count": 6,
-          "views": 2273521
+          "count": 10,
+          "views": 2973215
         },
         {
           "secondChannel": "科学科普",
           "count": 2,
-          "views": 706050
+          "views": 542519
+        },
+        {
+          "secondChannel": "单人RPG游戏",
+          "count": 2,
+          "views": 1321936
+        },
+        {
+          "secondChannel": "漫画·动态漫",
+          "count": 2,
+          "views": 1256856
+        },
+        {
+          "secondChannel": "AI影视",
+          "count": 1,
+          "views": 1041719
         },
         {
           "secondChannel": "二次元其他",
           "count": 1,
-          "views": 965911
+          "views": 1239708
+        },
+        {
+          "secondChannel": "鬼畜综合",
+          "count": 1,
+          "views": 817943
+        },
+        {
+          "secondChannel": "其他游戏",
+          "count": 1,
+          "views": 130085
+        }
+      ]
+    },
+    {
+      "firstChannel": "影视剪辑",
+      "count": 20,
+      "views": 18753962,
+      "avgViews": 937698,
+      "like": 1130500,
+      "coin": 235029,
+      "favorite": 340888,
+      "secondChannels": [
+        {
+          "secondChannel": "AI影视",
+          "count": 7,
+          "views": 4120098
+        },
+        {
+          "secondChannel": "鬼畜综合",
+          "count": 3,
+          "views": 2916787
+        },
+        {
+          "secondChannel": "影视剪辑",
+          "count": 2,
+          "views": 5379570
+        },
+        {
+          "secondChannel": "同人动画",
+          "count": 2,
+          "views": 294556
+        },
+        {
+          "secondChannel": "动漫剪辑",
+          "count": 2,
+          "views": 1239444
+        },
+        {
+          "secondChannel": "特摄",
+          "count": 1,
+          "views": 162634
+        },
+        {
+          "secondChannel": "AI音乐",
+          "count": 1,
+          "views": 3735298
+        },
+        {
+          "secondChannel": "娱乐评论",
+          "count": 1,
+          "views": 157416
+        },
+        {
+          "secondChannel": "短剧短片",
+          "count": 1,
+          "views": 748159
+        }
+      ]
+    },
+    {
+      "firstChannel": "社科·法律·心理",
+      "count": 15,
+      "views": 11648757,
+      "avgViews": 776584,
+      "like": 906722,
+      "coin": 252498,
+      "favorite": 151710,
+      "secondChannels": [
+        {
+          "secondChannel": "海外资讯",
+          "count": 5,
+          "views": 4144012
+        },
+        {
+          "secondChannel": "时政解读",
+          "count": 2,
+          "views": 1450079
+        },
+        {
+          "secondChannel": "社会观察",
+          "count": 2,
+          "views": 4183156
+        },
+        {
+          "secondChannel": "剧情演绎",
+          "count": 1,
+          "views": 1061510
+        },
+        {
+          "secondChannel": "影视资讯",
+          "count": 1,
+          "views": 207388
+        },
+        {
+          "secondChannel": "AI杂谈",
+          "count": 1,
+          "views": 210750
         },
         {
           "secondChannel": "自我成长",
           "count": 1,
-          "views": 449201
+          "views": 158971
         },
         {
-          "secondChannel": "单人RPG游戏",
+          "secondChannel": "人文历史",
           "count": 1,
-          "views": 1202553
+          "views": 134251
         },
         {
-          "secondChannel": "漫画·动态漫",
+          "secondChannel": "社会资讯",
           "count": 1,
-          "views": 1000899
-        },
-        {
-          "secondChannel": "AI杂谈",
-          "count": 1,
-          "views": 674055
-        },
-        {
-          "secondChannel": "鬼畜综合",
-          "count": 1,
-          "views": 612975
+          "views": 98640
         }
       ]
     },
     {
-      "firstChannel": "出行",
+      "firstChannel": "数码",
       "count": 13,
-      "views": 15639379,
-      "avgViews": 1203029,
-      "like": 1011422,
-      "coin": 190009,
-      "favorite": 186158,
+      "views": 24395814,
+      "avgViews": 1876601,
+      "like": 1295549,
+      "coin": 372143,
+      "favorite": 482113,
       "secondChannels": [
         {
-          "secondChannel": "旅游记录",
-          "count": 6,
-          "views": 8112465
+          "secondChannel": "电脑",
+          "count": 4,
+          "views": 5481334
         },
         {
-          "secondChannel": "摄影摄像",
-          "count": 1,
-          "views": 4910862
-        },
-        {
-          "secondChannel": "社会观察",
-          "count": 1,
-          "views": 312785
-        },
-        {
-          "secondChannel": "职业vlog",
-          "count": 1,
-          "views": 505215
-        },
-        {
-          "secondChannel": "随拍·综合",
-          "count": 1,
-          "views": 500256
-        },
-        {
-          "secondChannel": "钓鱼",
-          "count": 1,
-          "views": 713510
-        },
-        {
-          "secondChannel": "户外探险",
-          "count": 1,
-          "views": 515419
-        },
-        {
-          "secondChannel": "电台·歌单",
-          "count": 1,
-          "views": 68867
-        }
-      ]
-    },
-    {
-      "firstChannel": "综合",
-      "count": 12,
-      "views": 5849956,
-      "avgViews": 487496,
-      "like": 465430,
-      "coin": 66787,
-      "favorite": 107605,
-      "secondChannels": [
-        {
-          "secondChannel": "动漫评论",
+          "secondChannel": "手机",
           "count": 3,
-          "views": 959425
+          "views": 12454502
         },
         {
-          "secondChannel": "单人RPG游戏",
-          "count": 3,
-          "views": 1149303
-        },
-        {
-          "secondChannel": "同人动画",
-          "count": 3,
-          "views": 2127604
-        },
-        {
-          "secondChannel": "虚拟UP主",
-          "count": 2,
-          "views": 1316002
-        },
-        {
-          "secondChannel": "动漫剪辑",
+          "secondChannel": "平板电脑",
           "count": 1,
-          "views": 297622
-        }
-      ]
-    },
-    {
-      "firstChannel": "鬼畜剧场",
-      "count": 11,
-      "views": 9728696,
-      "avgViews": 884427,
-      "like": 594169,
-      "coin": 94481,
-      "favorite": 146684,
-      "secondChannels": [
-        {
-          "secondChannel": "鬼畜综合",
-          "count": 9,
-          "views": 8434724
+          "views": 1019467
         },
         {
-          "secondChannel": "同人动画",
+          "secondChannel": "时尚综合",
           "count": 1,
-          "views": 936585
+          "views": 1716248
+        },
+        {
+          "secondChannel": "演奏",
+          "count": 1,
+          "views": 693530
+        },
+        {
+          "secondChannel": "剧情演绎",
+          "count": 1,
+          "views": 2498464
         },
         {
           "secondChannel": "AI杂谈",
           "count": 1,
-          "views": 357387
+          "views": 392518
+        },
+        {
+          "secondChannel": "科技数码综合",
+          "count": 1,
+          "views": 139751
         }
       ]
     },
     {
       "firstChannel": "科学科普",
       "count": 11,
-      "views": 13916965,
-      "avgViews": 1265179,
-      "like": 722501,
-      "coin": 238908,
-      "favorite": 148177,
+      "views": 18249678,
+      "avgViews": 1659062,
+      "like": 923173,
+      "coin": 265840,
+      "favorite": 172480,
       "secondChannels": [
         {
           "secondChannel": "科学科普",
-          "count": 3,
-          "views": 3085097
-        },
-        {
-          "secondChannel": "人文历史",
-          "count": 2,
-          "views": 1617805
+          "count": 5,
+          "views": 5713746
         },
         {
           "secondChannel": "AI杂谈",
           "count": 1,
-          "views": 516261
+          "views": 724136
         },
         {
           "secondChannel": "心理杂谈",
           "count": 1,
-          "views": 2212113
+          "views": 2464395
         },
         {
-          "secondChannel": "综合资讯",
+          "secondChannel": "人文历史",
           "count": 1,
-          "views": 298957
+          "views": 1426664
+        },
+        {
+          "secondChannel": "其他知识杂谈",
+          "count": 1,
+          "views": 1814854
         },
         {
           "secondChannel": "随拍·综合",
           "count": 1,
-          "views": 5400688
+          "views": 5742836
         },
         {
-          "secondChannel": "健康科普",
+          "secondChannel": "综合资讯",
           "count": 1,
-          "views": 269049
-        },
-        {
-          "secondChannel": "工程机械",
-          "count": 1,
-          "views": 516995
+          "views": 363047
         }
       ]
     },
     {
-      "firstChannel": "社科·法律·心理",
+      "firstChannel": "GMV",
       "count": 11,
-      "views": 9019287,
-      "avgViews": 819935,
-      "like": 777041,
-      "coin": 219138,
-      "favorite": 126579,
+      "views": 5606590,
+      "avgViews": 509690,
+      "like": 240570,
+      "coin": 68170,
+      "favorite": 67847,
       "secondChannels": [
         {
-          "secondChannel": "海外资讯",
+          "secondChannel": "音乐现场",
           "count": 4,
-          "views": 2880263
+          "views": 462520
         },
         {
-          "secondChannel": "时政解读",
+          "secondChannel": "单人RPG游戏",
+          "count": 3,
+          "views": 936215
+        },
+        {
+          "secondChannel": "MOBA游戏",
           "count": 2,
-          "views": 2503530
+          "views": 1251929
+        },
+        {
+          "secondChannel": "其他游戏",
+          "count": 1,
+          "views": 2469724
+        },
+        {
+          "secondChannel": "女性向游戏",
+          "count": 1,
+          "views": 486202
+        }
+      ]
+    },
+    {
+      "firstChannel": "综合",
+      "count": 10,
+      "views": 4319037,
+      "avgViews": 431904,
+      "like": 371583,
+      "coin": 42277,
+      "favorite": 90180,
+      "secondChannels": [
+        {
+          "secondChannel": "同人动画",
+          "count": 3,
+          "views": 581496
+        },
+        {
+          "secondChannel": "单人RPG游戏",
+          "count": 2,
+          "views": 819379
+        },
+        {
+          "secondChannel": "动漫剪辑",
+          "count": 1,
+          "views": 647456
+        },
+        {
+          "secondChannel": "AI音乐",
+          "count": 1,
+          "views": 128736
+        },
+        {
+          "secondChannel": "动漫评论",
+          "count": 1,
+          "views": 801882
+        },
+        {
+          "secondChannel": "动画配音",
+          "count": 1,
+          "views": 232034
+        },
+        {
+          "secondChannel": "虚拟UP主",
+          "count": 1,
+          "views": 1108054
+        }
+      ]
+    },
+    {
+      "firstChannel": "财经商业",
+      "count": 9,
+      "views": 14936311,
+      "avgViews": 1659590,
+      "like": 567084,
+      "coin": 256613,
+      "favorite": 213964,
+      "secondChannels": [
+        {
+          "secondChannel": "商业财经",
+          "count": 4,
+          "views": 5601321
+        },
+        {
+          "secondChannel": "AI影视",
+          "count": 2,
+          "views": 7645250
+        },
+        {
+          "secondChannel": "剧情演绎",
+          "count": 1,
+          "views": 106766
+        },
+        {
+          "secondChannel": "其他知识杂谈",
+          "count": 1,
+          "views": 1502678
         },
         {
           "secondChannel": "社会观察",
           "count": 1,
-          "views": 2945105
-        },
-        {
-          "secondChannel": "AI杂谈",
-          "count": 1,
-          "views": 136035
-        },
-        {
-          "secondChannel": "自我成长",
-          "count": 1,
-          "views": 97610
-        },
-        {
-          "secondChannel": "心理杂谈",
-          "count": 1,
-          "views": 103861
-        },
-        {
-          "secondChannel": "时政资讯",
-          "count": 1,
-          "views": 352883
+          "views": 80296
         }
       ]
     },
     {
-      "firstChannel": "美食制作",
+      "firstChannel": "出行",
       "count": 9,
-      "views": 7134730,
-      "avgViews": 792748,
-      "like": 456217,
-      "coin": 49564,
-      "favorite": 124249,
+      "views": 17751949,
+      "avgViews": 1972439,
+      "like": 1051634,
+      "coin": 149360,
+      "favorite": 190461,
       "secondChannels": [
         {
-          "secondChannel": "美食制作",
-          "count": 8,
-          "views": 5178554
+          "secondChannel": "旅游记录",
+          "count": 5,
+          "views": 9768433
         },
         {
-          "secondChannel": "美食记录",
+          "secondChannel": "随拍·综合",
+          "count": 2,
+          "views": 2415470
+        },
+        {
+          "secondChannel": "中外生活vlog",
           "count": 1,
-          "views": 1956176
+          "views": 331664
+        },
+        {
+          "secondChannel": "摄影摄像",
+          "count": 1,
+          "views": 5236382
         }
       ]
     },
     {
       "firstChannel": "美食侦探",
-      "count": 8,
-      "views": 8733511,
-      "avgViews": 1091689,
-      "like": 305832,
-      "coin": 53076,
-      "favorite": 39854,
+      "count": 9,
+      "views": 11371569,
+      "avgViews": 1263508,
+      "like": 402433,
+      "coin": 69742,
+      "favorite": 51094,
       "secondChannels": [
         {
           "secondChannel": "美食探店",
-          "count": 7,
-          "views": 8341296
+          "count": 8,
+          "views": 11166038
+        },
+        {
+          "secondChannel": "旅游记录",
+          "count": 1,
+          "views": 205531
+        }
+      ]
+    },
+    {
+      "firstChannel": "音乐现场",
+      "count": 9,
+      "views": 5131289,
+      "avgViews": 570143,
+      "like": 341841,
+      "coin": 46697,
+      "favorite": 55154,
+      "secondChannels": [
+        {
+          "secondChannel": "音乐现场",
+          "count": 9,
+          "views": 5131289
+        }
+      ]
+    },
+    {
+      "firstChannel": "美食记录",
+      "count": 9,
+      "views": 5737502,
+      "avgViews": 637500,
+      "like": 299556,
+      "coin": 15410,
+      "favorite": 27032,
+      "secondChannels": [
+        {
+          "secondChannel": "美食制作",
+          "count": 4,
+          "views": 1851598
+        },
+        {
+          "secondChannel": "美食探店",
+          "count": 2,
+          "views": 899791
+        },
+        {
+          "secondChannel": "养生",
+          "count": 1,
+          "views": 506726
         },
         {
           "secondChannel": "美食记录",
           "count": 1,
-          "views": 392215
+          "views": 1644492
+        },
+        {
+          "secondChannel": "娱乐评论",
+          "count": 1,
+          "views": 834895
+        }
+      ]
+    },
+    {
+      "firstChannel": "鬼畜剧场",
+      "count": 8,
+      "views": 9235624,
+      "avgViews": 1154453,
+      "like": 467533,
+      "coin": 138327,
+      "favorite": 131630,
+      "secondChannels": [
+        {
+          "secondChannel": "鬼畜综合",
+          "count": 6,
+          "views": 8141349
+        },
+        {
+          "secondChannel": "短剧短片",
+          "count": 1,
+          "views": 49346
+        },
+        {
+          "secondChannel": "同人动画",
+          "count": 1,
+          "views": 1044929
         }
       ]
     },
     {
       "firstChannel": "翻唱",
       "count": 8,
-      "views": 7790671,
-      "avgViews": 973834,
-      "like": 470490,
-      "coin": 62036,
-      "favorite": 105252,
+      "views": 9339112,
+      "avgViews": 1167389,
+      "like": 592797,
+      "coin": 68886,
+      "favorite": 115822,
       "secondChannels": [
         {
           "secondChannel": "翻唱",
           "count": 5,
-          "views": 7224586
+          "views": 8069262
         },
         {
           "secondChannel": "AI音乐",
           "count": 2,
-          "views": 505477
+          "views": 828278
+        },
+        {
+          "secondChannel": "随拍·综合",
+          "count": 1,
+          "views": 441572
+        }
+      ]
+    },
+    {
+      "firstChannel": "美食制作",
+      "count": 8,
+      "views": 8537818,
+      "avgViews": 1067227,
+      "like": 476886,
+      "coin": 47554,
+      "favorite": 138243,
+      "secondChannels": [
+        {
+          "secondChannel": "美食制作",
+          "count": 7,
+          "views": 6347554
+        },
+        {
+          "secondChannel": "美食记录",
+          "count": 1,
+          "views": 2190264
+        }
+      ]
+    },
+    {
+      "firstChannel": "音乐综合",
+      "count": 7,
+      "views": 2268409,
+      "avgViews": 324058,
+      "like": 138269,
+      "coin": 28076,
+      "favorite": 45697,
+      "secondChannels": [
+        {
+          "secondChannel": "电台·歌单",
+          "count": 2,
+          "views": 1070918
+        },
+        {
+          "secondChannel": "AI音乐",
+          "count": 1,
+          "views": 578770
+        },
+        {
+          "secondChannel": "原创音乐",
+          "count": 1,
+          "views": 132961
+        },
+        {
+          "secondChannel": "音乐教学",
+          "count": 1,
+          "views": 339850
+        },
+        {
+          "secondChannel": "MV",
+          "count": 1,
+          "views": 79396
+        },
+        {
+          "secondChannel": "娱乐综艺正片",
+          "count": 1,
+          "views": 66514
+        }
+      ]
+    },
+    {
+      "firstChannel": "运动综合",
+      "count": 7,
+      "views": 8577407,
+      "avgViews": 1225344,
+      "like": 391337,
+      "coin": 48201,
+      "favorite": 51012,
+      "secondChannels": [
+        {
+          "secondChannel": "钓鱼",
+          "count": 2,
+          "views": 827578
+        },
+        {
+          "secondChannel": "打野采摘",
+          "count": 1,
+          "views": 175035
+        },
+        {
+          "secondChannel": "wota艺",
+          "count": 1,
+          "views": 2533810
+        },
+        {
+          "secondChannel": "户外探险",
+          "count": 1,
+          "views": 772070
+        },
+        {
+          "secondChannel": "体育综合",
+          "count": 1,
+          "views": 515099
+        },
+        {
+          "secondChannel": "其他手工",
+          "count": 1,
+          "views": 3753815
+        }
+      ]
+    },
+    {
+      "firstChannel": "绘画",
+      "count": 7,
+      "views": 3453515,
+      "avgViews": 493359,
+      "like": 431556,
+      "coin": 43189,
+      "favorite": 46477,
+      "secondChannels": [
+        {
+          "secondChannel": "二次元绘画",
+          "count": 3,
+          "views": 2580579
+        },
+        {
+          "secondChannel": "漫画·动态漫",
+          "count": 1,
+          "views": 336044
+        },
+        {
+          "secondChannel": "音乐综合",
+          "count": 1,
+          "views": 368401
         },
         {
           "secondChannel": "AI学习",
           "count": 1,
-          "views": 60608
+          "views": 85047
+        },
+        {
+          "secondChannel": "绘画学习",
+          "count": 1,
+          "views": 83444
         }
       ]
     },
     {
-      "firstChannel": "GMV",
+      "firstChannel": "足球",
       "count": 7,
-      "views": 1618477,
-      "avgViews": 231211,
-      "like": 93186,
-      "coin": 29367,
-      "favorite": 28916,
+      "views": 1216561,
+      "avgViews": 173794,
+      "like": 61272,
+      "coin": 14491,
+      "favorite": 8258,
       "secondChannels": [
+        {
+          "secondChannel": "体育赛事",
+          "count": 6,
+          "views": 1062639
+        },
+        {
+          "secondChannel": "音乐现场",
+          "count": 1,
+          "views": 153922
+        }
+      ]
+    },
+    {
+      "firstChannel": "小剧场",
+      "count": 7,
+      "views": 4642148,
+      "avgViews": 663164,
+      "like": 251017,
+      "coin": 52203,
+      "favorite": 55802,
+      "secondChannels": [
+        {
+          "secondChannel": "AI影视",
+          "count": 2,
+          "views": 650432
+        },
+        {
+          "secondChannel": "其他vlog",
+          "count": 1,
+          "views": 1944331
+        },
         {
           "secondChannel": "单人RPG游戏",
-          "count": 3,
-          "views": 514946
-        },
-        {
-          "secondChannel": "MOBA游戏",
-          "count": 2,
-          "views": 394744
-        },
-        {
-          "secondChannel": "其他游戏",
           "count": 1,
-          "views": 338627
+          "views": 921088
         },
         {
-          "secondChannel": "女性向游戏",
+          "secondChannel": "短剧短片",
           "count": 1,
-          "views": 370160
-        }
-      ]
-    },
-    {
-      "firstChannel": "动漫杂谈",
-      "count": 7,
-      "views": 3031152,
-      "avgViews": 433022,
-      "like": 155364,
-      "coin": 17214,
-      "favorite": 28947,
-      "secondChannels": [
+          "views": 835904
+        },
         {
-          "secondChannel": "动漫评论",
-          "count": 4,
-          "views": 2141084
+          "secondChannel": "同人动画",
+          "count": 1,
+          "views": 274610
         },
         {
           "secondChannel": "单机主机类游戏",
           "count": 1,
-          "views": 68442
-        },
-        {
-          "secondChannel": "动漫速读",
-          "count": 1,
-          "views": 237711
-        },
-        {
-          "secondChannel": "特摄",
-          "count": 1,
-          "views": 583915
-        }
-      ]
-    },
-    {
-      "firstChannel": "美食记录",
-      "count": 7,
-      "views": 3116351,
-      "avgViews": 445193,
-      "like": 209109,
-      "coin": 17669,
-      "favorite": 21720,
-      "secondChannels": [
-        {
-          "secondChannel": "美食探店",
-          "count": 3,
-          "views": 953164
-        },
-        {
-          "secondChannel": "美食制作",
-          "count": 3,
-          "views": 1402779
-        },
-        {
-          "secondChannel": "娱乐评论",
-          "count": 1,
-          "views": 760408
+          "views": 15783
         }
       ]
     },
     {
       "firstChannel": "MAD·AMV",
       "count": 7,
-      "views": 4499100,
-      "avgViews": 642729,
-      "like": 261652,
-      "coin": 35686,
-      "favorite": 69167,
+      "views": 5288782,
+      "avgViews": 755540,
+      "like": 345277,
+      "coin": 44096,
+      "favorite": 93542,
       "secondChannels": [
         {
           "secondChannel": "同人动画",
-          "count": 2,
-          "views": 244152
+          "count": 3,
+          "views": 628698
         },
         {
           "secondChannel": "AI影视",
           "count": 2,
-          "views": 3440105
+          "views": 3825924
         },
         {
           "secondChannel": "动漫速读",
-          "count": 2,
-          "views": 535182
+          "count": 1,
+          "views": 368472
         },
         {
           "secondChannel": "动漫剪辑",
           "count": 1,
-          "views": 279661
+          "views": 465688
         }
       ]
     },
     {
-      "firstChannel": "喵星人",
+      "firstChannel": "鬼畜调教",
       "count": 6,
-      "views": 4938404,
-      "avgViews": 823067,
-      "like": 411317,
-      "coin": 28433,
-      "favorite": 58130,
+      "views": 8591376,
+      "avgViews": 1431896,
+      "like": 392789,
+      "coin": 22871,
+      "favorite": 112503,
       "secondChannels": [
         {
-          "secondChannel": "猫",
+          "secondChannel": "鬼畜综合",
           "count": 5,
-          "views": 2778575
+          "views": 7984120
         },
         {
           "secondChannel": "AI影视",
           "count": 1,
-          "views": 2159829
-        }
-      ]
-    },
-    {
-      "firstChannel": "小剧场",
-      "count": 6,
-      "views": 5304640,
-      "avgViews": 884107,
-      "like": 255676,
-      "coin": 61065,
-      "favorite": 48386,
-      "secondChannels": [
-        {
-          "secondChannel": "其他vlog",
-          "count": 1,
-          "views": 1535612
-        },
-        {
-          "secondChannel": "单人RPG游戏",
-          "count": 1,
-          "views": 672944
-        },
-        {
-          "secondChannel": "AI影视",
-          "count": 1,
-          "views": 300464
-        },
-        {
-          "secondChannel": "短剧短片",
-          "count": 1,
-          "views": 721621
-        },
-        {
-          "secondChannel": "剧情演绎",
-          "count": 1,
-          "views": 518637
-        },
-        {
-          "secondChannel": "同人动画",
-          "count": 1,
-          "views": 1555362
-        }
-      ]
-    },
-    {
-      "firstChannel": "短片",
-      "count": 6,
-      "views": 2967903,
-      "avgViews": 494651,
-      "like": 173602,
-      "coin": 51252,
-      "favorite": 52260,
-      "secondChannels": [
-        {
-          "secondChannel": "AI影视",
-          "count": 1,
-          "views": 356694
-        },
-        {
-          "secondChannel": "传统手工艺",
-          "count": 1,
-          "views": 902943
-        },
-        {
-          "secondChannel": "短剧短片",
-          "count": 1,
-          "views": 362510
-        },
-        {
-          "secondChannel": "剧情演绎",
-          "count": 1,
-          "views": 263344
-        },
-        {
-          "secondChannel": "户外探险",
-          "count": 1,
-          "views": 299437
-        },
-        {
-          "secondChannel": "同人动画",
-          "count": 1,
-          "views": 782975
-        }
-      ]
-    },
-    {
-      "firstChannel": "运动综合",
-      "count": 6,
-      "views": 7157684,
-      "avgViews": 1192947,
-      "like": 306954,
-      "coin": 38789,
-      "favorite": 39937,
-      "secondChannels": [
-        {
-          "secondChannel": "钓鱼",
-          "count": 2,
-          "views": 708842
-        },
-        {
-          "secondChannel": "户外探险",
-          "count": 1,
-          "views": 579185
-        },
-        {
-          "secondChannel": "wota艺",
-          "count": 1,
-          "views": 2006505
-        },
-        {
-          "secondChannel": "体育综合",
-          "count": 1,
-          "views": 333167
-        },
-        {
-          "secondChannel": "其他手工",
-          "count": 1,
-          "views": 3529985
+          "views": 607256
         }
       ]
     },
     {
       "firstChannel": "计算机技术",
       "count": 6,
-      "views": 2277458,
-      "avgViews": 379576,
-      "like": 114097,
-      "coin": 22034,
-      "favorite": 56571,
+      "views": 2987886,
+      "avgViews": 497981,
+      "like": 113075,
+      "coin": 19628,
+      "favorite": 62680,
       "secondChannels": [
         {
           "secondChannel": "AI学习",
-          "count": 3,
-          "views": 884854
+          "count": 2,
+          "views": 1347096
         },
         {
           "secondChannel": "AI杂谈",
           "count": 2,
-          "views": 1017665
+          "views": 959764
         },
         {
-          "secondChannel": "电脑",
+          "secondChannel": "AI影视",
           "count": 1,
-          "views": 374939
-        }
-      ]
-    },
-    {
-      "firstChannel": "音乐现场",
-      "count": 6,
-      "views": 4069810,
-      "avgViews": 678302,
-      "like": 275538,
-      "coin": 21016,
-      "favorite": 37704,
-      "secondChannels": [
-        {
-          "secondChannel": "音乐现场",
-          "count": 6,
-          "views": 4069810
-        }
-      ]
-    },
-    {
-      "firstChannel": "绘画",
-      "count": 6,
-      "views": 2030411,
-      "avgViews": 338402,
-      "like": 254195,
-      "coin": 6335,
-      "favorite": 30073,
-      "secondChannels": [
-        {
-          "secondChannel": "二次元绘画",
-          "count": 2,
-          "views": 1222783
-        },
-        {
-          "secondChannel": "同人动画",
-          "count": 2,
-          "views": 337414
-        },
-        {
-          "secondChannel": "音乐综合",
-          "count": 1,
-          "views": 49018
-        },
-        {
-          "secondChannel": "其他游戏",
-          "count": 1,
-          "views": 421196
-        }
-      ]
-    },
-    {
-      "firstChannel": "音乐综合",
-      "count": 5,
-      "views": 6589324,
-      "avgViews": 1317865,
-      "like": 143489,
-      "coin": 11693,
-      "favorite": 75721,
-      "secondChannels": [
-        {
-          "secondChannel": "电台·歌单",
-          "count": 2,
-          "views": 5685182
+          "views": 467937
         },
         {
           "secondChannel": "AI音乐",
           "count": 1,
-          "views": 147290
-        },
-        {
-          "secondChannel": "乐评盘点",
-          "count": 1,
-          "views": 540080
-        },
-        {
-          "secondChannel": "音乐教学",
-          "count": 1,
-          "views": 216772
+          "views": 213089
         }
       ]
     },
     {
-      "firstChannel": "鬼畜调教",
+      "firstChannel": "喵星人",
       "count": 5,
-      "views": 7319424,
-      "avgViews": 1463885,
-      "like": 335600,
-      "coin": 17592,
-      "favorite": 94299,
+      "views": 3894715,
+      "avgViews": 778943,
+      "like": 335091,
+      "coin": 25747,
+      "favorite": 61226,
       "secondChannels": [
         {
-          "secondChannel": "鬼畜综合",
+          "secondChannel": "猫",
           "count": 4,
-          "views": 6968207
+          "views": 1251957
         },
         {
           "secondChannel": "AI影视",
           "count": 1,
-          "views": 351217
-        }
-      ]
-    },
-    {
-      "firstChannel": "娱乐杂谈",
-      "count": 5,
-      "views": 4634750,
-      "avgViews": 926950,
-      "like": 124456,
-      "coin": 10241,
-      "favorite": 19332,
-      "secondChannels": [
-        {
-          "secondChannel": "娱乐综艺正片",
-          "count": 1,
-          "views": 380865
-        },
-        {
-          "secondChannel": "时尚解读",
-          "count": 1,
-          "views": 194321
-        },
-        {
-          "secondChannel": "剧情演绎",
-          "count": 1,
-          "views": 162054
-        },
-        {
-          "secondChannel": "娱乐评论",
-          "count": 1,
-          "views": 2384526
-        },
-        {
-          "secondChannel": "美食探店",
-          "count": 1,
-          "views": 1512984
-        }
-      ]
-    },
-    {
-      "firstChannel": "财经商业",
-      "count": 4,
-      "views": 12163535,
-      "avgViews": 3040884,
-      "like": 446854,
-      "coin": 206324,
-      "favorite": 160133,
-      "secondChannels": [
-        {
-          "secondChannel": "AI影视",
-          "count": 2,
-          "views": 6089055
-        },
-        {
-          "secondChannel": "其他知识杂谈",
-          "count": 1,
-          "views": 1266563
-        },
-        {
-          "secondChannel": "商业财经",
-          "count": 1,
-          "views": 4807917
+          "views": 2642758
         }
       ]
     },
     {
       "firstChannel": "汽车生活",
-      "count": 4,
-      "views": 4525774,
-      "avgViews": 1131444,
-      "like": 202570,
-      "coin": 61207,
-      "favorite": 73739,
+      "count": 5,
+      "views": 5631945,
+      "avgViews": 1126389,
+      "like": 226020,
+      "coin": 67140,
+      "favorite": 81763,
       "secondChannels": [
         {
+          "secondChannel": "汽车文化",
+          "count": 2,
+          "views": 507268
+        },
+        {
           "secondChannel": "汽车生活",
-          "count": 4,
-          "views": 4525774
+          "count": 2,
+          "views": 4937267
+        },
+        {
+          "secondChannel": "体育竞速游戏",
+          "count": 1,
+          "views": 187410
         }
       ]
     },
     {
-      "firstChannel": "预告·资讯",
-      "count": 4,
-      "views": 4491469,
-      "avgViews": 1122867,
-      "like": 150250,
-      "coin": 23104,
-      "favorite": 66507,
+      "firstChannel": "仿妆cos",
+      "count": 5,
+      "views": 4293220,
+      "avgViews": 858644,
+      "like": 385471,
+      "coin": 20894,
+      "favorite": 105969,
       "secondChannels": [
         {
-          "secondChannel": "模拟经营游戏",
+          "secondChannel": "AI影视",
           "count": 1,
-          "views": 433392
+          "views": 446880
         },
         {
-          "secondChannel": "MOBA游戏",
+          "secondChannel": "二次元绘画",
           "count": 1,
-          "views": 1140855
+          "views": 1709673
+        },
+        {
+          "secondChannel": "鬼畜综合",
+          "count": 1,
+          "views": 1485395
+        },
+        {
+          "secondChannel": "cosplay",
+          "count": 1,
+          "views": 611063
+        },
+        {
+          "secondChannel": "同人动画",
+          "count": 1,
+          "views": 40209
+        }
+      ]
+    },
+    {
+      "firstChannel": "短片",
+      "count": 5,
+      "views": 3145499,
+      "avgViews": 629100,
+      "like": 227446,
+      "coin": 60010,
+      "favorite": 63399,
+      "secondChannels": [
+        {
+          "secondChannel": "剧情演绎",
+          "count": 2,
+          "views": 903357
         },
         {
           "secondChannel": "AI影视",
           "count": 1,
-          "views": 2714786
+          "views": 497972
         },
         {
-          "secondChannel": "影视剪辑",
+          "secondChannel": "短剧短片",
           "count": 1,
-          "views": 202436
+          "views": 561171
+        },
+        {
+          "secondChannel": "传统手工艺",
+          "count": 1,
+          "views": 1182999
         }
       ]
     },
     {
-      "firstChannel": "MV",
+      "firstChannel": "动漫杂谈",
       "count": 4,
-      "views": 401914,
-      "avgViews": 100479,
-      "like": 49192,
-      "coin": 29510,
-      "favorite": 17316,
+      "views": 2050632,
+      "avgViews": 512658,
+      "like": 70728,
+      "coin": 5975,
+      "favorite": 21444,
       "secondChannels": [
         {
-          "secondChannel": "MV",
+          "secondChannel": "动漫评论",
           "count": 2,
-          "views": 185908
+          "views": 1822061
         },
         {
-          "secondChannel": "娱乐综艺正片",
+          "secondChannel": "动漫速读",
           "count": 1,
-          "views": 167875
+          "views": 32315
         },
         {
-          "secondChannel": "音乐现场",
+          "secondChannel": "单机主机类游戏",
           "count": 1,
-          "views": 48131
+          "views": 196256
         }
       ]
     },
     {
       "firstChannel": "美食测评",
       "count": 4,
-      "views": 5254179,
-      "avgViews": 1313545,
-      "like": 105027,
-      "coin": 7835,
-      "favorite": 25538,
+      "views": 6005427,
+      "avgViews": 1501357,
+      "like": 117954,
+      "coin": 8073,
+      "favorite": 24943,
       "secondChannels": [
         {
           "secondChannel": "美食测评",
           "count": 3,
-          "views": 4315363
-        },
-        {
-          "secondChannel": "AI影视",
-          "count": 1,
-          "views": 938816
-        }
-      ]
-    },
-    {
-      "firstChannel": "乐评盘点",
-      "count": 4,
-      "views": 1778106,
-      "avgViews": 444527,
-      "like": 68074,
-      "coin": 14231,
-      "favorite": 23651,
-      "secondChannels": [
-        {
-          "secondChannel": "其他游戏",
-          "count": 1,
-          "views": 137466
-        },
-        {
-          "secondChannel": "单人RPG游戏",
-          "count": 1,
-          "views": 175477
-        },
-        {
-          "secondChannel": "娱乐评论",
-          "count": 1,
-          "views": 941243
-        },
-        {
-          "secondChannel": "旅游记录",
-          "count": 1,
-          "views": 523920
-        }
-      ]
-    },
-    {
-      "firstChannel": "校园学习",
-      "count": 4,
-      "views": 10224744,
-      "avgViews": 2556186,
-      "like": 909474,
-      "coin": 24083,
-      "favorite": 102645,
-      "secondChannels": [
-        {
-          "secondChannel": "鬼畜综合",
-          "count": 3,
-          "views": 10096257
+          "views": 5835614
         },
         {
           "secondChannel": "美食制作",
           "count": 1,
-          "views": 128487
+          "views": 169813
         }
       ]
     },
     {
-      "firstChannel": "亲子",
+      "firstChannel": "MV",
       "count": 4,
-      "views": 5928229,
-      "avgViews": 1482057,
-      "like": 251069,
-      "coin": 15582,
-      "favorite": 43102,
+      "views": 654692,
+      "avgViews": 163673,
+      "like": 50803,
+      "coin": 32634,
+      "favorite": 17363,
       "secondChannels": [
-        {
-          "secondChannel": "剧情演绎",
-          "count": 1,
-          "views": 3603497
-        },
-        {
-          "secondChannel": "随拍·综合",
-          "count": 1,
-          "views": 1492869
-        },
-        {
-          "secondChannel": "AI影视",
-          "count": 1,
-          "views": 80455
-        },
-        {
-          "secondChannel": "珠宝首饰",
-          "count": 1,
-          "views": 751408
-        }
-      ]
-    },
-    {
-      "firstChannel": "赛车",
-      "count": 3,
-      "views": 890805,
-      "avgViews": 296935,
-      "like": 20608,
-      "coin": 7955,
-      "favorite": 5741,
-      "secondChannels": [
-        {
-          "secondChannel": "汽车文化",
-          "count": 3,
-          "views": 890805
-        }
-      ]
-    },
-    {
-      "firstChannel": "VOCALOID·UTAU",
-      "count": 3,
-      "views": 375882,
-      "avgViews": 125294,
-      "like": 89373,
-      "coin": 26998,
-      "favorite": 47377,
-      "secondChannels": [
-        {
-          "secondChannel": "VOCALOID",
-          "count": 2,
-          "views": 172856
-        },
         {
           "secondChannel": "MV",
-          "count": 1,
-          "views": 203026
-        }
-      ]
-    },
-    {
-      "firstChannel": "足球",
-      "count": 3,
-      "views": 808640,
-      "avgViews": 269547,
-      "like": 22501,
-      "coin": 5717,
-      "favorite": 3091,
-      "secondChannels": [
-        {
-          "secondChannel": "体育赛事",
-          "count": 3,
-          "views": 808640
-        }
-      ]
-    },
-    {
-      "firstChannel": "仿妆cos",
-      "count": 3,
-      "views": 2948205,
-      "avgViews": 982735,
-      "like": 245296,
-      "coin": 14044,
-      "favorite": 64857,
-      "secondChannels": [
-        {
-          "secondChannel": "二次元绘画",
-          "count": 1,
-          "views": 1286024
+          "count": 2,
+          "views": 368402
         },
         {
-          "secondChannel": "鬼畜综合",
+          "secondChannel": "其他游戏",
           "count": 1,
-          "views": 1306616
+          "views": 221853
         },
         {
-          "secondChannel": "cosplay",
+          "secondChannel": "动物综合·二创",
           "count": 1,
-          "views": 355565
-        }
-      ]
-    },
-    {
-      "firstChannel": "特摄",
-      "count": 3,
-      "views": 249634,
-      "avgViews": 83211,
-      "like": 27010,
-      "coin": 7681,
-      "favorite": 7028,
-      "secondChannels": [
-        {
-          "secondChannel": "随拍·综合",
-          "count": 1,
-          "views": 36892
-        },
-        {
-          "secondChannel": "动漫评论",
-          "count": 1,
-          "views": 173309
-        },
-        {
-          "secondChannel": "特摄",
-          "count": 1,
-          "views": 39433
+          "views": 64437
         }
       ]
     },
     {
       "firstChannel": "明星综合",
       "count": 3,
-      "views": 2858329,
-      "avgViews": 952776,
-      "like": 205966,
-      "coin": 4907,
-      "favorite": 18240,
+      "views": 3267698,
+      "avgViews": 1089233,
+      "like": 217257,
+      "coin": 16463,
+      "favorite": 26811,
       "secondChannels": [
         {
+          "secondChannel": "MV",
+          "count": 1,
+          "views": 680463
+        },
+        {
           "secondChannel": "音乐现场",
-          "count": 2,
-          "views": 2448135
+          "count": 1,
+          "views": 1930722
         },
         {
           "secondChannel": "翻唱",
           "count": 1,
-          "views": 410194
-        }
-      ]
-    },
-    {
-      "firstChannel": "软件应用",
-      "count": 3,
-      "views": 872363,
-      "avgViews": 290788,
-      "like": 71700,
-      "coin": 14008,
-      "favorite": 63019,
-      "secondChannels": [
-        {
-          "secondChannel": "AI学习",
-          "count": 1,
-          "views": 491800
-        },
-        {
-          "secondChannel": "AI音乐",
-          "count": 1,
-          "views": 316119
-        },
-        {
-          "secondChannel": "工程机械",
-          "count": 1,
-          "views": 64444
-        }
-      ]
-    },
-    {
-      "firstChannel": "汪星人",
-      "count": 3,
-      "views": 6834557,
-      "avgViews": 2278186,
-      "like": 383478,
-      "coin": 4428,
-      "favorite": 42254,
-      "secondChannels": [
-        {
-          "secondChannel": "狗",
-          "count": 2,
-          "views": 5810468
-        },
-        {
-          "secondChannel": "美食记录",
-          "count": 1,
-          "views": 1024089
-        }
-      ]
-    },
-    {
-      "firstChannel": "家居房产",
-      "count": 2,
-      "views": 655162,
-      "avgViews": 327581,
-      "like": 67697,
-      "coin": 3452,
-      "favorite": 17501,
-      "secondChannels": [
-        {
-          "secondChannel": "其他知识杂谈",
-          "count": 1,
-          "views": 534163
-        },
-        {
-          "secondChannel": "DIY玩具",
-          "count": 1,
-          "views": 120999
+          "views": 656513
         }
       ]
     },
     {
       "firstChannel": "科工机械",
-      "count": 2,
-      "views": 6495572,
-      "avgViews": 3247786,
-      "like": 174516,
-      "coin": 7611,
-      "favorite": 21797,
+      "count": 3,
+      "views": 8466308,
+      "avgViews": 2822103,
+      "like": 212032,
+      "coin": 10240,
+      "favorite": 28182,
       "secondChannels": [
+        {
+          "secondChannel": "AI影视",
+          "count": 2,
+          "views": 768040
+        },
         {
           "secondChannel": "汽车生活",
           "count": 1,
-          "views": 5895796
+          "views": 7698268
+        }
+      ]
+    },
+    {
+      "firstChannel": "特摄",
+      "count": 3,
+      "views": 1152355,
+      "avgViews": 384118,
+      "like": 154169,
+      "coin": 64114,
+      "favorite": 41537,
+      "secondChannels": [
+        {
+          "secondChannel": "特摄",
+          "count": 2,
+          "views": 913637
+        },
+        {
+          "secondChannel": "随拍·综合",
+          "count": 1,
+          "views": 238718
+        }
+      ]
+    },
+    {
+      "firstChannel": "娱乐杂谈",
+      "count": 3,
+      "views": 1090739,
+      "avgViews": 363580,
+      "like": 29147,
+      "coin": 4945,
+      "favorite": 6344,
+      "secondChannels": [
+        {
+          "secondChannel": "娱乐评论",
+          "count": 1,
+          "views": 92136
+        },
+        {
+          "secondChannel": "娱乐综艺正片",
+          "count": 1,
+          "views": 610059
+        },
+        {
+          "secondChannel": "时尚解读",
+          "count": 1,
+          "views": 388544
+        }
+      ]
+    },
+    {
+      "firstChannel": "校园学习",
+      "count": 3,
+      "views": 6452333,
+      "avgViews": 2150778,
+      "like": 698698,
+      "coin": 16523,
+      "favorite": 68001,
+      "secondChannels": [
+        {
+          "secondChannel": "鬼畜综合",
+          "count": 2,
+          "views": 6204452
+        },
+        {
+          "secondChannel": "娱乐饭拍&现场",
+          "count": 1,
+          "views": 247881
+        }
+      ]
+    },
+    {
+      "firstChannel": "VOCALOID·UTAU",
+      "count": 3,
+      "views": 418970,
+      "avgViews": 139657,
+      "like": 110033,
+      "coin": 24196,
+      "favorite": 47579,
+      "secondChannels": [
+        {
+          "secondChannel": "VOCALOID",
+          "count": 2,
+          "views": 329257
+        },
+        {
+          "secondChannel": "鬼畜综合",
+          "count": 1,
+          "views": 89713
+        }
+      ]
+    },
+    {
+      "firstChannel": "田园美食",
+      "count": 3,
+      "views": 636029,
+      "avgViews": 212010,
+      "like": 53559,
+      "coin": 4104,
+      "favorite": 4662,
+      "secondChannels": [
+        {
+          "secondChannel": "美食制作",
+          "count": 1,
+          "views": 239588
+        },
+        {
+          "secondChannel": "农村生活",
+          "count": 1,
+          "views": 158056
+        },
+        {
+          "secondChannel": "赶海捕鱼",
+          "count": 1,
+          "views": 238385
+        }
+      ]
+    },
+    {
+      "firstChannel": "家居房产",
+      "count": 3,
+      "views": 1618111,
+      "avgViews": 539370,
+      "like": 154924,
+      "coin": 7864,
+      "favorite": 35703,
+      "secondChannels": [
+        {
+          "secondChannel": "其他知识杂谈",
+          "count": 1,
+          "views": 1302048
+        },
+        {
+          "secondChannel": "农村生活",
+          "count": 1,
+          "views": 180851
+        },
+        {
+          "secondChannel": "家用电器",
+          "count": 1,
+          "views": 135212
+        }
+      ]
+    },
+    {
+      "firstChannel": "乐评盘点",
+      "count": 3,
+      "views": 2399669,
+      "avgViews": 799890,
+      "like": 56271,
+      "coin": 8793,
+      "favorite": 20140,
+      "secondChannels": [
+        {
+          "secondChannel": "娱乐评论",
+          "count": 1,
+          "views": 1122825
+        },
+        {
+          "secondChannel": "音乐现场",
+          "count": 1,
+          "views": 1009433
+        },
+        {
+          "secondChannel": "其他游戏",
+          "count": 1,
+          "views": 267411
+        }
+      ]
+    },
+    {
+      "firstChannel": "亲子",
+      "count": 3,
+      "views": 4426784,
+      "avgViews": 1475595,
+      "like": 139168,
+      "coin": 8496,
+      "favorite": 30296,
+      "secondChannels": [
+        {
+          "secondChannel": "剧情演绎",
+          "count": 1,
+          "views": 4137496
+        },
+        {
+          "secondChannel": "家庭关系",
+          "count": 1,
+          "views": 155031
         },
         {
           "secondChannel": "AI影视",
           "count": 1,
-          "views": 599776
-        }
-      ]
-    },
-    {
-      "firstChannel": "设计·创意",
-      "count": 2,
-      "views": 1810138,
-      "avgViews": 905069,
-      "like": 83084,
-      "coin": 30576,
-      "favorite": 62739,
-      "secondChannels": [
-        {
-          "secondChannel": "AI杂谈",
-          "count": 2,
-          "views": 1810138
-        }
-      ]
-    },
-    {
-      "firstChannel": "健身",
-      "count": 2,
-      "views": 4745488,
-      "avgViews": 2372744,
-      "like": 328554,
-      "coin": 4575,
-      "favorite": 13858,
-      "secondChannels": [
-        {
-          "secondChannel": "农村生活",
-          "count": 1,
-          "views": 1394630
-        },
-        {
-          "secondChannel": "健身记录",
-          "count": 1,
-          "views": 3350858
-        }
-      ]
-    },
-    {
-      "firstChannel": "娱乐粉丝创作",
-      "count": 2,
-      "views": 1780944,
-      "avgViews": 890472,
-      "like": 78568,
-      "coin": 9652,
-      "favorite": 14468,
-      "secondChannels": [
-        {
-          "secondChannel": "明星舞蹈",
-          "count": 1,
-          "views": 1344544
-        },
-        {
-          "secondChannel": "影视解读",
-          "count": 1,
-          "views": 436400
-        }
-      ]
-    },
-    {
-      "firstChannel": "原创音乐",
-      "count": 2,
-      "views": 775242,
-      "avgViews": 387621,
-      "like": 138761,
-      "coin": 3120,
-      "favorite": 7799,
-      "secondChannels": [
-        {
-          "secondChannel": "AI音乐",
-          "count": 1,
-          "views": 536677
-        },
-        {
-          "secondChannel": "明星舞蹈",
-          "count": 1,
-          "views": 238565
+          "views": 134257
         }
       ]
     },
     {
       "firstChannel": "时尚潮流",
-      "count": 2,
-      "views": 6392798,
-      "avgViews": 3196399,
-      "like": 239441,
-      "coin": 74538,
-      "favorite": 89474,
+      "count": 3,
+      "views": 7228973,
+      "avgViews": 2409658,
+      "like": 289150,
+      "coin": 81746,
+      "favorite": 99096,
       "secondChannels": [
         {
           "secondChannel": "美食记录",
           "count": 1,
-          "views": 753725
+          "views": 952459
+        },
+        {
+          "secondChannel": "鞋服穿搭",
+          "count": 1,
+          "views": 283930
         },
         {
           "secondChannel": "随拍·综合",
           "count": 1,
-          "views": 5639073
+          "views": 5992584
+        }
+      ]
+    },
+    {
+      "firstChannel": "综艺",
+      "count": 2,
+      "views": 1113030,
+      "avgViews": 556515,
+      "like": 27377,
+      "coin": 12092,
+      "favorite": 10480,
+      "secondChannels": [
+        {
+          "secondChannel": "未分类",
+          "count": 1,
+          "views": 646861
+        },
+        {
+          "secondChannel": "娱乐评论",
+          "count": 1,
+          "views": 466169
         }
       ]
     },
     {
       "firstChannel": "社会",
       "count": 2,
-      "views": 1154224,
-      "avgViews": 577112,
-      "like": 302815,
-      "coin": 17475,
-      "favorite": 8640,
+      "views": 614976,
+      "avgViews": 307488,
+      "like": 133519,
+      "coin": 13474,
+      "favorite": 5244,
       "secondChannels": [
         {
-          "secondChannel": "娱乐资讯",
+          "secondChannel": "社会资讯",
           "count": 1,
-          "views": 606415
-        },
-        {
-          "secondChannel": "时政资讯",
-          "count": 1,
-          "views": 547809
-        }
-      ]
-    },
-    {
-      "firstChannel": "田园美食",
-      "count": 2,
-      "views": 120738,
-      "avgViews": 60369,
-      "like": 16005,
-      "coin": 1571,
-      "favorite": 1458,
-      "secondChannels": [
-        {
-          "secondChannel": "农村生活",
-          "count": 1,
-          "views": 71629
-        },
-        {
-          "secondChannel": "美食制作",
-          "count": 1,
-          "views": 49109
-        }
-      ]
-    },
-    {
-      "firstChannel": "三农",
-      "count": 2,
-      "views": 588350,
-      "avgViews": 294175,
-      "like": 50942,
-      "coin": 1868,
-      "favorite": 4431,
-      "secondChannels": [
-        {
-          "secondChannel": "动物综合·二创",
-          "count": 1,
-          "views": 300832
+          "views": 454531
         },
         {
           "secondChannel": "综合资讯",
           "count": 1,
-          "views": 287518
+          "views": 160445
+        }
+      ]
+    },
+    {
+      "firstChannel": "人力VOCALOID",
+      "count": 2,
+      "views": 5139343,
+      "avgViews": 2569672,
+      "like": 394759,
+      "coin": 24069,
+      "favorite": 71848,
+      "secondChannels": [
+        {
+          "secondChannel": "鬼畜综合",
+          "count": 1,
+          "views": 1305052
+        },
+        {
+          "secondChannel": "电台·歌单",
+          "count": 1,
+          "views": 3834291
         }
       ]
     },
     {
       "firstChannel": "演奏",
       "count": 2,
-      "views": 4063153,
-      "avgViews": 2031577,
-      "like": 388540,
-      "coin": 140084,
-      "favorite": 69104,
+      "views": 4499452,
+      "avgViews": 2249726,
+      "like": 387198,
+      "coin": 152424,
+      "favorite": 71449,
       "secondChannels": [
-        {
-          "secondChannel": "音乐现场",
-          "count": 1,
-          "views": 3757619
-        },
         {
           "secondChannel": "演奏",
           "count": 1,
-          "views": 305534
+          "views": 421179
+        },
+        {
+          "secondChannel": "音乐现场",
+          "count": 1,
+          "views": 4078273
         }
       ]
     },
     {
-      "firstChannel": "人力VOCALOID",
-      "count": 1,
-      "views": 3245768,
-      "avgViews": 3245768,
-      "like": 300307,
-      "coin": 10053,
-      "favorite": 51853,
+      "firstChannel": "设计·创意",
+      "count": 2,
+      "views": 2145422,
+      "avgViews": 1072711,
+      "like": 95960,
+      "coin": 35571,
+      "favorite": 73983,
       "secondChannels": [
         {
-          "secondChannel": "电台·歌单",
-          "count": 1,
-          "views": 3245768
+          "secondChannel": "AI杂谈",
+          "count": 2,
+          "views": 2145422
         }
       ]
     },
     {
       "firstChannel": "国产原创相关",
-      "count": 1,
-      "views": 394159,
-      "avgViews": 394159,
-      "like": 38316,
-      "coin": 1475,
-      "favorite": 6712,
+      "count": 2,
+      "views": 773824,
+      "avgViews": 386912,
+      "like": 65886,
+      "coin": 4010,
+      "favorite": 13432,
       "secondChannels": [
         {
           "secondChannel": "AI影视",
           "count": 1,
-          "views": 394159
+          "views": 647444
+        },
+        {
+          "secondChannel": "短剧短片",
+          "count": 1,
+          "views": 126380
         }
       ]
     },
     {
-      "firstChannel": "手工",
-      "count": 1,
-      "views": 4665678,
-      "avgViews": 4665678,
-      "like": 499767,
-      "coin": 58003,
-      "favorite": 178815,
+      "firstChannel": "健身",
+      "count": 2,
+      "views": 5238525,
+      "avgViews": 2619263,
+      "like": 361010,
+      "coin": 5274,
+      "favorite": 15516,
       "secondChannels": [
         {
-          "secondChannel": "休闲玩乐",
+          "secondChannel": "农村生活",
           "count": 1,
-          "views": 4665678
+          "views": 1626343
+        },
+        {
+          "secondChannel": "健身记录",
+          "count": 1,
+          "views": 3612182
         }
       ]
     },
     {
-      "firstChannel": "动物二创",
-      "count": 1,
-      "views": 1267445,
-      "avgViews": 1267445,
-      "like": 80562,
-      "coin": 794,
-      "favorite": 6697,
+      "firstChannel": "软件应用",
+      "count": 2,
+      "views": 729427,
+      "avgViews": 364714,
+      "like": 30519,
+      "coin": 5149,
+      "favorite": 45720,
       "secondChannels": [
         {
-          "secondChannel": "动物综合·二创",
+          "secondChannel": "科学科普",
           "count": 1,
-          "views": 1267445
-        }
-      ]
-    },
-    {
-      "firstChannel": "音MAD",
-      "count": 1,
-      "views": 135317,
-      "avgViews": 135317,
-      "like": 16497,
-      "coin": 2428,
-      "favorite": 4010,
-      "secondChannels": [
+          "views": 133536
+        },
         {
-          "secondChannel": "鬼畜综合",
+          "secondChannel": "AI学习",
           "count": 1,
-          "views": 135317
-        }
-      ]
-    },
-    {
-      "firstChannel": "桌游棋牌",
-      "count": 1,
-      "views": 2157781,
-      "avgViews": 2157781,
-      "like": 102058,
-      "coin": 26786,
-      "favorite": 58194,
-      "secondChannels": [
-        {
-          "secondChannel": "网文解读",
-          "count": 1,
-          "views": 2157781
-        }
-      ]
-    },
-    {
-      "firstChannel": "竞技体育",
-      "count": 1,
-      "views": 1542355,
-      "avgViews": 1542355,
-      "like": 61273,
-      "coin": 550,
-      "favorite": 1488,
-      "secondChannels": [
-        {
-          "secondChannel": "体育综合",
-          "count": 1,
-          "views": 1542355
-        }
-      ]
-    },
-    {
-      "firstChannel": "篮球",
-      "count": 1,
-      "views": 219079,
-      "avgViews": 219079,
-      "like": 6298,
-      "coin": 724,
-      "favorite": 874,
-      "secondChannels": [
-        {
-          "secondChannel": "体育赛事",
-          "count": 1,
-          "views": 219079
-        }
-      ]
-    },
-    {
-      "firstChannel": "MMD·3D",
-      "count": 1,
-      "views": 1050799,
-      "avgViews": 1050799,
-      "like": 53751,
-      "coin": 731,
-      "favorite": 10909,
-      "secondChannels": [
-        {
-          "secondChannel": "AI杂谈",
-          "count": 1,
-          "views": 1050799
+          "views": 595891
         }
       ]
     },
     {
       "firstChannel": "新能源车",
-      "count": 1,
-      "views": 840450,
-      "avgViews": 840450,
-      "like": 29564,
-      "coin": 1379,
-      "favorite": 2803,
+      "count": 2,
+      "views": 1242500,
+      "avgViews": 621250,
+      "like": 38302,
+      "coin": 2863,
+      "favorite": 4215,
       "secondChannels": [
         {
-          "secondChannel": "旅游记录",
+          "secondChannel": "汽车技术",
           "count": 1,
-          "views": 840450
+          "views": 1011918
+        },
+        {
+          "secondChannel": "汽车测评",
+          "count": 1,
+          "views": 230582
         }
       ]
     },
     {
-      "firstChannel": "舞蹈综合",
-      "count": 1,
-      "views": 1201389,
-      "avgViews": 1201389,
-      "like": 67594,
-      "coin": 6357,
-      "favorite": 48951,
+      "firstChannel": "预告·资讯",
+      "count": 2,
+      "views": 2156669,
+      "avgViews": 1078335,
+      "like": 71458,
+      "coin": 19273,
+      "favorite": 11888,
       "secondChannels": [
         {
-          "secondChannel": "宅舞",
+          "secondChannel": "模拟经营游戏",
           "count": 1,
-          "views": 1201389
+          "views": 609873
+        },
+        {
+          "secondChannel": "MOBA游戏",
+          "count": 1,
+          "views": 1546796
+        }
+      ]
+    },
+    {
+      "firstChannel": "桌游棋牌",
+      "count": 2,
+      "views": 2673555,
+      "avgViews": 1336778,
+      "like": 125549,
+      "coin": 32129,
+      "favorite": 67470,
+      "secondChannels": [
+        {
+          "secondChannel": "网文解读",
+          "count": 1,
+          "views": 2474023
+        },
+        {
+          "secondChannel": "回合制策略游戏",
+          "count": 1,
+          "views": 199532
+        }
+      ]
+    },
+    {
+      "firstChannel": "汪星人",
+      "count": 2,
+      "views": 2285364,
+      "avgViews": 1142682,
+      "like": 143478,
+      "coin": 1893,
+      "favorite": 9517,
+      "secondChannels": [
+        {
+          "secondChannel": "美食记录",
+          "count": 1,
+          "views": 1123087
+        },
+        {
+          "secondChannel": "狗",
+          "count": 1,
+          "views": 1162277
+        }
+      ]
+    },
+    {
+      "firstChannel": "手工",
+      "count": 2,
+      "views": 5296616,
+      "avgViews": 2648308,
+      "like": 561421,
+      "coin": 68351,
+      "favorite": 204322,
+      "secondChannels": [
+        {
+          "secondChannel": "休闲玩乐",
+          "count": 1,
+          "views": 5247962
+        },
+        {
+          "secondChannel": "自制发明/设备",
+          "count": 1,
+          "views": 48654
+        }
+      ]
+    },
+    {
+      "firstChannel": "篮球",
+      "count": 2,
+      "views": 403278,
+      "avgViews": 201639,
+      "like": 12579,
+      "coin": 1674,
+      "favorite": 1968,
+      "secondChannels": [
+        {
+          "secondChannel": "体育赛事",
+          "count": 2,
+          "views": 403278
+        }
+      ]
+    },
+    {
+      "firstChannel": "音MAD",
+      "count": 2,
+      "views": 910016,
+      "avgViews": 455008,
+      "like": 54757,
+      "coin": 5699,
+      "favorite": 19934,
+      "secondChannels": [
+        {
+          "secondChannel": "鬼畜综合",
+          "count": 1,
+          "views": 237708
+        },
+        {
+          "secondChannel": "电台·歌单",
+          "count": 1,
+          "views": 672308
+        }
+      ]
+    },
+    {
+      "firstChannel": "原创音乐",
+      "count": 2,
+      "views": 215605,
+      "avgViews": 107803,
+      "like": 20541,
+      "coin": 5210,
+      "favorite": 3432,
+      "secondChannels": [
+        {
+          "secondChannel": "AI音乐",
+          "count": 1,
+          "views": 193023
+        },
+        {
+          "secondChannel": "原创音乐",
+          "count": 1,
+          "views": 22582
+        }
+      ]
+    },
+    {
+      "firstChannel": "野生技能协会",
+      "count": 2,
+      "views": 546015,
+      "avgViews": 273008,
+      "like": 21403,
+      "coin": 3865,
+      "favorite": 7502,
+      "secondChannels": [
+        {
+          "secondChannel": "AI影视",
+          "count": 1,
+          "views": 453658
+        },
+        {
+          "secondChannel": "原创音乐",
+          "count": 1,
+          "views": 92357
+        }
+      ]
+    },
+    {
+      "firstChannel": "国产动画",
+      "count": 1,
+      "views": 229568,
+      "avgViews": 229568,
+      "like": 1304,
+      "coin": 572,
+      "favorite": 294,
+      "secondChannels": [
+        {
+          "secondChannel": "未分类",
+          "count": 1,
+          "views": 229568
         }
       ]
     },
     {
       "firstChannel": "模玩·周边",
       "count": 1,
-      "views": 304660,
-      "avgViews": 304660,
-      "like": 14706,
-      "coin": 5969,
-      "favorite": 8215,
+      "views": 224272,
+      "avgViews": 224272,
+      "like": 12117,
+      "coin": 2227,
+      "favorite": 3632,
       "secondChannels": [
         {
           "secondChannel": "模玩周边",
           "count": 1,
-          "views": 304660
+          "views": 224272
         }
       ]
     },
     {
-      "firstChannel": "美妆护肤",
+      "firstChannel": "明星舞蹈",
       "count": 1,
-      "views": 70737,
-      "avgViews": 70737,
-      "like": 8448,
-      "coin": 1310,
-      "favorite": 5403,
+      "views": 191108,
+      "avgViews": 191108,
+      "like": 19336,
+      "coin": 4143,
+      "favorite": 4253,
       "secondChannels": [
         {
-          "secondChannel": "护肤",
+          "secondChannel": "AI音乐",
           "count": 1,
-          "views": 70737
+          "views": 191108
         }
       ]
     },
     {
-      "firstChannel": "国风舞蹈",
+      "firstChannel": "赛车",
       "count": 1,
-      "views": 305569,
-      "avgViews": 305569,
-      "like": 42606,
-      "coin": 1855,
-      "favorite": 8970,
+      "views": 403560,
+      "avgViews": 403560,
+      "like": 7917,
+      "coin": 4354,
+      "favorite": 1253,
       "secondChannels": [
         {
-          "secondChannel": "国风舞蹈",
+          "secondChannel": "汽车文化",
           "count": 1,
-          "views": 305569
+          "views": 403560
         }
       ]
     },
     {
-      "firstChannel": "小宠异宠",
+      "firstChannel": "三农",
       "count": 1,
-      "views": 119491,
-      "avgViews": 119491,
-      "like": 16197,
-      "coin": 2585,
-      "favorite": 693,
+      "views": 378376,
+      "avgViews": 378376,
+      "like": 24666,
+      "coin": 1535,
+      "favorite": 2163,
       "secondChannels": [
         {
-          "secondChannel": "农村生活",
+          "secondChannel": "动物综合·二创",
           "count": 1,
-          "views": 119491
+          "views": 378376
         }
       ]
     },
     {
-      "firstChannel": "音游",
+      "firstChannel": "娱乐粉丝创作",
       "count": 1,
-      "views": 762525,
-      "avgViews": 762525,
-      "like": 105121,
-      "coin": 16732,
-      "favorite": 41115,
+      "views": 1503488,
+      "avgViews": 1503488,
+      "like": 60279,
+      "coin": 7941,
+      "favorite": 11533,
       "secondChannels": [
         {
-          "secondChannel": "同人动画",
+          "secondChannel": "明星舞蹈",
           "count": 1,
-          "views": 762525
+          "views": 1503488
+        }
+      ]
+    },
+    {
+      "firstChannel": "竞技体育",
+      "count": 1,
+      "views": 1772055,
+      "avgViews": 1772055,
+      "like": 68850,
+      "coin": 664,
+      "favorite": 1689,
+      "secondChannels": [
+        {
+          "secondChannel": "体育综合",
+          "count": 1,
+          "views": 1772055
+        }
+      ]
+    },
+    {
+      "firstChannel": "MMD·3D",
+      "count": 1,
+      "views": 1235450,
+      "avgViews": 1235450,
+      "like": 61230,
+      "coin": 945,
+      "favorite": 13031,
+      "secondChannels": [
+        {
+          "secondChannel": "AI杂谈",
+          "count": 1,
+          "views": 1235450
         }
       ]
     }
   ],
   "topUps": [
     {
-      "name": "明日方舟",
-      "mid": 161775300,
-      "count": 8,
-      "views": 6233580,
-      "followers": 4
-    },
-    {
-      "name": "哔哩哔哩英雄联盟赛事",
-      "mid": 50329118,
-      "count": 6,
-      "views": 10875674,
-      "followers": 114
-    },
-    {
       "name": "王者荣耀",
       "mid": 57863910,
-      "count": 6,
-      "views": 1724302,
+      "count": 10,
+      "views": 3759003,
       "followers": 464
     },
     {
-      "name": "伤心欲茄222",
-      "mid": 3493260618106936,
-      "count": 4,
-      "views": 15439924,
-      "followers": 290
-    },
-    {
-      "name": "赛博鸭子cyberduck",
-      "mid": 514805125,
-      "count": 4,
-      "views": 5645352,
+      "name": "明日方舟",
+      "mid": 161775300,
+      "count": 7,
+      "views": 6377034,
       "followers": 4
     },
     {
       "name": "俊俊和朗朗",
       "mid": 3747566785138431,
+      "count": 5,
+      "views": 3933775,
+      "followers": 5
+    },
+    {
+      "name": "哔哩哔哩英雄联盟赛事",
+      "mid": 50329118,
       "count": 4,
-      "views": 2889842,
-      "followers": 2
-    },
-    {
-      "name": "考研英语晓燕",
-      "mid": 1080316566,
-      "count": 3,
-      "views": 10096257,
-      "followers": 39
-    },
-    {
-      "name": "九夜听风",
-      "mid": 593987248,
-      "count": 3,
-      "views": 4006962,
-      "followers": 234
+      "views": 10044732,
+      "followers": 114
     },
     {
       "name": "波士顿圆脸",
       "mid": 346563107,
-      "count": 3,
-      "views": 2568144,
-      "followers": 45
-    },
-    {
-      "name": "猫子柒来了",
-      "mid": 313310554,
-      "count": 3,
-      "views": 2142785,
+      "count": 4,
+      "views": 3729722,
       "followers": 45
     },
     {
       "name": "磊哥游戏",
       "mid": 268941858,
-      "count": 3,
-      "views": 1991381,
+      "count": 4,
+      "views": 3316434,
       "followers": 15
     },
     {
-      "name": "央视新闻",
-      "mid": 456664753,
+      "name": "伤心欲茄222",
+      "mid": 3493260618106936,
       "count": 3,
-      "views": 1743043,
-      "followers": 29
+      "views": 8769272,
+      "followers": 290
     },
     {
-      "name": "只因寄太美哦",
-      "mid": 476775070,
+      "name": "李诺Noomi",
+      "mid": 249082219,
       "count": 3,
-      "views": 1726166,
-      "followers": 48
+      "views": 5657098,
+      "followers": 300
     },
     {
-      "name": "阿猪的人生公式",
-      "mid": 130918911,
+      "name": "iG电子竞技俱乐部",
+      "mid": 29992385,
       "count": 3,
-      "views": 1155251,
-      "followers": 3521
+      "views": 1213453,
+      "followers": 57
     },
     {
-      "name": "英雄联盟赛事",
-      "mid": 108532523,
-      "count": 3,
-      "views": 1054444,
-      "followers": 53
-    },
-    {
-      "name": "抽象历史人物志",
-      "mid": 230191841,
+      "name": "影视飓风",
+      "mid": 946974,
       "count": 2,
-      "views": 6950309,
-      "followers": 30
+      "views": 11794906,
+      "followers": 687
     },
     {
       "name": "Foyege弗曳哥",
       "mid": 1383971575,
       "count": 2,
-      "views": 6089055,
+      "views": 7645250,
       "followers": 4
     },
     {
-      "name": "李诺Noomi",
-      "mid": 249082219,
+      "name": "考研英语晓燕",
+      "mid": 1080316566,
       "count": 2,
-      "views": 5118918,
-      "followers": 299
+      "views": 6204452,
+      "followers": 39
     },
     {
-      "name": "原神",
-      "mid": 401742377,
+      "name": "文西与阿漆",
+      "mid": 94281836,
       "count": 2,
-      "views": 4369375,
-      "followers": 60
+      "views": 4528428,
+      "followers": 544
     },
     {
-      "name": "洛克王国世界",
-      "mid": 626796832,
+      "name": "瑄羽猫",
+      "mid": 431233688,
       "count": 2,
-      "views": 3442792,
-      "followers": 16
+      "views": 4061600,
+      "followers": 79
     },
     {
-      "name": "绝区零第一可爱兔宝",
-      "mid": 3546687932991974,
+      "name": "极速拍档",
+      "mid": 25150941,
       "count": 2,
-      "views": 3186095,
-      "followers": 6
+      "views": 4053507,
+      "followers": 244
+    },
+    {
+      "name": "鸣潮",
+      "mid": 1955897084,
+      "count": 2,
+      "views": 3924955,
+      "followers": 11
     },
     {
       "name": "嘞是唐孃孃",
       "mid": 70429299,
       "count": 2,
-      "views": 3150328,
+      "views": 3797941,
       "followers": 133
     },
     {
-      "name": "在下易某很细",
-      "mid": 254420382,
+      "name": "小易EXS",
+      "mid": 1833034220,
       "count": 2,
-      "views": 2837160,
-      "followers": 62
-    },
-    {
-      "name": "世界见闻录",
-      "mid": 316627722,
-      "count": 2,
-      "views": 2663981,
-      "followers": 212
-    },
-    {
-      "name": "树深时见鹿dear",
-      "mid": 1398957,
-      "count": 2,
-      "views": 2633893,
-      "followers": 426
-    },
-    {
-      "name": "麻薯波比呀",
-      "mid": 703186600,
-      "count": 2,
-      "views": 2503530,
-      "followers": 30
-    },
-    {
-      "name": "你是想气死1酱么",
-      "mid": 375040863,
-      "count": 2,
-      "views": 2306446,
-      "followers": 687
+      "views": 3448028,
+      "followers": 329
     },
     {
       "name": "三代鹿人",
       "mid": 5870268,
       "count": 2,
-      "views": 2271455,
+      "views": 3086342,
       "followers": 184
     },
     {
-      "name": "星辰趣味屋",
-      "mid": 212345699,
+      "name": "大圆镜科普",
+      "mid": 1208823126,
       "count": 2,
-      "views": 2054766,
-      "followers": 295
+      "views": 2960203,
+      "followers": 177
+    },
+    {
+      "name": "胡子也沉默",
+      "mid": 3747573051428296,
+      "count": 2,
+      "views": 2587235,
+      "followers": 2
     },
     {
       "name": "沙雕Sanscul",
       "mid": 1438874274,
       "count": 2,
-      "views": 1992277,
+      "views": 2106574,
       "followers": 264
+    },
+    {
+      "name": "真实电竞",
+      "mid": 1628139107,
+      "count": 2,
+      "views": 1771881,
+      "followers": 78
+    },
+    {
+      "name": "喵仙人ovo",
+      "mid": 8599153,
+      "count": 2,
+      "views": 1436163,
+      "followers": 1538
+    },
+    {
+      "name": "只因寄太美哦",
+      "mid": 476775070,
+      "count": 2,
+      "views": 1416097,
+      "followers": 48
+    },
+    {
+      "name": "所长Wy",
+      "mid": 497525820,
+      "count": 2,
+      "views": 1242189,
+      "followers": 599
+    },
+    {
+      "name": "Karsa",
+      "mid": 1722516565,
+      "count": 2,
+      "views": 1218235,
+      "followers": 3
+    },
+    {
+      "name": "老实憨厚的笑笑",
+      "mid": 8739477,
+      "count": 2,
+      "views": 1194684,
+      "followers": 48
+    },
+    {
+      "name": "崩坏星穹铁道",
+      "mid": 1340190821,
+      "count": 2,
+      "views": 1187638,
+      "followers": 19
+    },
+    {
+      "name": "萧然Q",
+      "mid": 31009079,
+      "count": 2,
+      "views": 1185692,
+      "followers": 223
     }
   ],
   "duration": [
@@ -2742,31 +2660,31 @@
       "label": "<1 分钟",
       "min": 0,
       "max": 60,
-      "count": 58
+      "count": 57
     },
     {
       "label": "1-3 分钟",
       "min": 60,
       "max": 180,
-      "count": 154
+      "count": 147
     },
     {
       "label": "3-5 分钟",
       "min": 180,
       "max": 300,
-      "count": 94
+      "count": 104
     },
     {
       "label": "5-10 分钟",
       "min": 300,
       "max": 600,
-      "count": 117
+      "count": 119
     },
     {
       "label": "10-20 分钟",
       "min": 600,
       "max": 1200,
-      "count": 126
+      "count": 114
     },
     {
       "label": "20-30 分钟",
@@ -2778,17 +2696,17 @@
       "label": ">30 分钟",
       "min": 1800,
       "max": null,
-      "count": 60
+      "count": 65
     }
   ],
   "hourHeatmap": [
     {
       "hour": 0,
-      "count": 7
+      "count": 6
     },
     {
       "hour": 1,
-      "count": 5
+      "count": 9
     },
     {
       "hour": 2,
@@ -2796,43 +2714,43 @@
     },
     {
       "hour": 3,
-      "count": 5
+      "count": 4
     },
     {
       "hour": 4,
-      "count": 5
+      "count": 2
     },
     {
       "hour": 5,
-      "count": 3
+      "count": 4
     },
     {
       "hour": 6,
-      "count": 5
+      "count": 4
     },
     {
       "hour": 7,
-      "count": 11
+      "count": 14
     },
     {
       "hour": 8,
-      "count": 19
+      "count": 23
     },
     {
       "hour": 9,
-      "count": 16
+      "count": 22
     },
     {
       "hour": 10,
-      "count": 41
+      "count": 31
     },
     {
       "hour": 11,
-      "count": 57
+      "count": 58
     },
     {
       "hour": 12,
-      "count": 66
+      "count": 50
     },
     {
       "hour": 13,
@@ -2840,31 +2758,31 @@
     },
     {
       "hour": 14,
-      "count": 17
+      "count": 18
     },
     {
       "hour": 15,
-      "count": 12
+      "count": 10
     },
     {
       "hour": 16,
-      "count": 30
+      "count": 29
     },
     {
       "hour": 17,
-      "count": 75
+      "count": 87
     },
     {
       "hour": 18,
-      "count": 102
+      "count": 97
     },
     {
       "hour": 19,
-      "count": 57
+      "count": 61
     },
     {
       "hour": 20,
-      "count": 30
+      "count": 35
     },
     {
       "hour": 21,
@@ -2872,184 +2790,172 @@
     },
     {
       "hour": 22,
-      "count": 21
+      "count": 16
     },
     {
       "hour": 23,
-      "count": 16
+      "count": 17
     }
   ],
   "topTags": [
     {
       "tag": "搞笑",
-      "count": 101
+      "count": 94
     },
     {
       "tag": "电子竞技",
-      "count": 35
-    },
-    {
-      "tag": "英雄联盟",
-      "count": 30
-    },
-    {
-      "tag": "娱乐",
-      "count": 28
-    },
-    {
-      "tag": "LPL",
-      "count": 27
-    },
-    {
-      "tag": "生活记录",
-      "count": 26
+      "count": 40
     },
     {
       "tag": "英雄联盟S16",
+      "count": 32
+    },
+    {
+      "tag": "娱乐",
+      "count": 27
+    },
+    {
+      "tag": "原创",
+      "count": 26
+    },
+    {
+      "tag": "IG",
       "count": 25
     },
     {
       "tag": "updream",
-      "count": 23
+      "count": 25
     },
     {
-      "tag": "明日方舟",
-      "count": 23
-    },
-    {
-      "tag": "游戏",
-      "count": 22
-    },
-    {
-      "tag": "鬼畜星探企划",
-      "count": 21
-    },
-    {
-      "tag": "大肥鱼",
-      "count": 20
-    },
-    {
-      "tag": "IG",
-      "count": 19
-    },
-    {
-      "tag": "音乐",
-      "count": 19
+      "tag": "英雄联盟",
+      "count": 24
     },
     {
       "tag": "王者荣耀",
-      "count": 19
+      "count": 24
     },
     {
-      "tag": "抽象",
-      "count": 19
+      "tag": "生活记录",
+      "count": 24
     },
     {
-      "tag": "原创",
-      "count": 19
-    },
-    {
-      "tag": "MOBA",
-      "count": 19
+      "tag": "LPL",
+      "count": 23
     },
     {
       "tag": "科普",
-      "count": 18
+      "count": 23
+    },
+    {
+      "tag": "AI",
+      "count": 22
+    },
+    {
+      "tag": "明日方舟",
+      "count": 21
+    },
+    {
+      "tag": "MOBA",
+      "count": 20
+    },
+    {
+      "tag": "抽象",
+      "count": 20
     },
     {
       "tag": "三角洲行动",
       "count": 18
     },
     {
-      "tag": "我的世界",
+      "tag": "搞笑小剧场",
       "count": 17
+    },
+    {
+      "tag": "大肥鱼",
+      "count": 17
+    },
+    {
+      "tag": "沙雕",
+      "count": 16
     },
     {
       "tag": "鬼畜",
       "count": 16
     },
     {
-      "tag": "AI",
+      "tag": "鬼畜星探企划",
       "count": 16
-    },
-    {
-      "tag": "沙雕",
-      "count": 15
     },
     {
       "tag": "TES",
       "count": 15
     },
     {
-      "tag": "明日方舟创作者应援计划",
+      "tag": "音乐",
       "count": 15
     },
     {
-      "tag": "历史",
+      "tag": "游戏杂谈",
       "count": 15
-    },
-    {
-      "tag": "吐槽",
-      "count": 13
-    },
-    {
-      "tag": "搞笑小剧场",
-      "count": 13
-    },
-    {
-      "tag": "美食",
-      "count": 12
-    },
-    {
-      "tag": "动画",
-      "count": 12
     },
     {
       "tag": "美国",
+      "count": 15
+    },
+    {
+      "tag": "游戏",
+      "count": 14
+    },
+    {
+      "tag": "HLE",
+      "count": 13
+    },
+    {
+      "tag": "校园",
       "count": 12
     },
     {
-      "tag": "二次元",
-      "count": 11
+      "tag": "单机游戏",
+      "count": 12
+    },
+    {
+      "tag": "吐槽",
+      "count": 12
+    },
+    {
+      "tag": "历史",
+      "count": 12
+    },
+    {
+      "tag": "明日方舟创作者应援计划",
+      "count": 12
+    },
+    {
+      "tag": "可爱",
+      "count": 12
     },
     {
       "tag": "万物研究所",
       "count": 11
     },
     {
-      "tag": "可爱",
+      "tag": "高能",
       "count": 11
     },
     {
-      "tag": "单机游戏",
-      "count": 10
-    },
-    {
-      "tag": "日本",
-      "count": 10
-    },
-    {
-      "tag": "高能",
-      "count": 10
-    },
-    {
-      "tag": "生活",
-      "count": 10
-    },
-    {
-      "tag": "TheShy",
-      "count": 10
-    },
-    {
       "tag": "社会",
+      "count": 11
+    },
+    {
+      "tag": "记录",
+      "count": 11
+    },
+    {
+      "tag": "中国",
       "count": 10
     },
     {
-      "tag": "沙盒游戏",
-      "count": 10
-    },
-    {
-      "tag": "旅游",
+      "tag": "二次元",
       "count": 10
     },
     {
@@ -3057,190 +2963,202 @@
       "count": 10
     },
     {
-      "tag": "绝区零",
+      "tag": "动画",
       "count": 10
-    },
-    {
-      "tag": "手机游戏",
-      "count": 10
-    },
-    {
-      "tag": "HLE",
-      "count": 9
-    },
-    {
-      "tag": "美食制作",
-      "count": 9
-    },
-    {
-      "tag": "UP主IP企划",
-      "count": 9
-    },
-    {
-      "tag": "记录",
-      "count": 9
-    },
-    {
-      "tag": "挑战",
-      "count": 9
-    },
-    {
-      "tag": "影视剪辑",
-      "count": 9
     },
     {
       "tag": "翻唱",
+      "count": 10
+    },
+    {
+      "tag": "AL",
       "count": 9
     },
     {
-      "tag": "米哈游",
+      "tag": "足球",
       "count": 9
     },
     {
-      "tag": "篮球",
+      "tag": "TheShy",
       "count": 9
     },
     {
-      "tag": "校园",
+      "tag": "我的世界",
       "count": 9
     },
     {
-      "tag": "DeepSeek",
+      "tag": "人文",
       "count": 9
     },
     {
-      "tag": "FPS",
+      "tag": "犯罪",
       "count": 9
     },
     {
-      "tag": "lol",
+      "tag": "必剪创作",
+      "count": 9
+    },
+    {
+      "tag": "旅游",
+      "count": 9
+    },
+    {
+      "tag": "十级学者影视详解",
+      "count": 9
+    },
+    {
+      "tag": "剧情",
+      "count": 9
+    },
+    {
+      "tag": "复仇者联盟",
       "count": 8
     },
     {
-      "tag": "中国",
+      "tag": "BLG",
+      "count": 8
+    },
+    {
+      "tag": "王者荣耀UP主激励计划",
+      "count": 8
+    },
+    {
+      "tag": "美食",
+      "count": 8
+    },
+    {
+      "tag": "DeepSeek",
+      "count": 8
+    },
+    {
+      "tag": "日本",
+      "count": 8
+    },
+    {
+      "tag": "探店",
       "count": 8
     }
   ],
   "topEngagement": [
     {
-      "bvid": "BV15fnU6SEux",
-      "title": "《渝制朋友圈》第二十一回上新：秋山拾栗小鱼揽得林间趣，溪边漂石少年坐看半山秋～",
-      "UP": "梓渝工作室",
-      "mid": 3546972954823646,
-      "views": 14718,
-      "like": 5360,
-      "coin": 6413,
-      "favorite": 2681,
-      "share": 866,
-      "engagement": 1.6587851610273134
+      "bvid": "BV1pind6UEDb",
+      "title": "【周深｜现场】2026王者荣耀共创之夜演唱《有你在的世界》",
+      "UP": "周深工作室",
+      "mid": 3546694058773380,
+      "views": 35387,
+      "like": 9250,
+      "coin": 7660,
+      "favorite": 3449,
+      "share": 413,
+      "engagement": 0.900924068160624
     },
     {
-      "bvid": "BV1sNnX6GEhM",
-      "title": "肖俊《Hey, Somebody (English Ver.)》MV",
-      "UP": "SMTOWN",
-      "mid": 3493085782739496,
-      "views": 27813,
-      "like": 6472,
-      "coin": 7073,
-      "favorite": 2830,
-      "share": 1958,
-      "engagement": 1.0152087153489375
+      "bvid": "BV16CnZ6DEc2",
+      "title": "来唱轻松快乐的生日快乐歌吧！[UPOWER_53456_酷]",
+      "UP": "warma养鸽场",
+      "mid": 106320250,
+      "views": 92470,
+      "like": 42189,
+      "coin": 12791,
+      "favorite": 5639,
+      "share": 963,
+      "engagement": 0.8652752243971018
+    },
+    {
+      "bvid": "BV1DxH366EyH",
+      "title": "“ULTRAMAN——与你同行的光之轨迹…”",
+      "UP": "洋OCEAN666",
+      "mid": 3546947432482907,
+      "views": 162634,
+      "like": 59332,
+      "coin": 11662,
+      "favorite": 25705,
+      "share": 1459,
+      "engagement": 0.8333128374140708
     },
     {
       "bvid": "BV1fCnW6XExH",
       "title": "【GUMI】コンパクトミラ（便携化妆镜）",
       "UP": "Kopherly",
       "mid": 3706991606238012,
-      "views": 119043,
-      "like": 44156,
-      "coin": 4838,
-      "favorite": 21074,
-      "share": 1837,
-      "engagement": 0.821694681753652
+      "views": 150854,
+      "like": 54556,
+      "coin": 6191,
+      "favorite": 25894,
+      "share": 2383,
+      "engagement": 0.8028225966828855
     },
     {
-      "bvid": "BV1mLnQ61Ek3",
-      "title": "三体20周年主题曲｜洛天依《谁听》",
-      "UP": "洛天依",
-      "mid": 36081646,
-      "views": 53813,
-      "like": 11527,
-      "coin": 7055,
-      "favorite": 5854,
-      "share": 1818,
-      "engagement": 0.7277609499563302
+      "bvid": "BV1ifHF6EEKq",
+      "title": "《七根火柴》长征胜利90周年！",
+      "UP": "小少焱",
+      "mid": 457027794,
+      "views": 22582,
+      "like": 4496,
+      "coin": 4285,
+      "favorite": 1699,
+      "share": 262,
+      "engagement": 0.7406784164378709
+    },
+    {
+      "bvid": "BV1eZnZ63EEL",
+      "title": "《荒 野 大 嘎 客 ：救赎2 》终极典藏版",
+      "UP": "皮蛋瘦肉粥煎鸡蛋",
+      "mid": 3706988932368570,
+      "views": 15783,
+      "like": 2350,
+      "coin": 2390,
+      "favorite": 1342,
+      "share": 255,
+      "engagement": 0.6379648989418996
+    },
+    {
+      "bvid": "BV1kMxM6FECM",
+      "title": "旗舰手机芯片大横评：苹果高通发哥玄戒谁最强？",
+      "UP": "极客湾Geekerwan",
+      "mid": 25876945,
+      "views": 276909,
+      "like": 41554,
+      "coin": 45672,
+      "favorite": 15260,
+      "share": 11696,
+      "engagement": 0.6323882575142015
     },
     {
       "bvid": "BV1U3n46GEzY",
       "title": "《绝区零》先导演示丨挽昼",
       "UP": "绝区零",
       "mid": 1636034895,
-      "views": 5431630,
-      "like": 700888,
-      "coin": 901822,
-      "favorite": 423286,
-      "share": 217804,
-      "engagement": 0.657060219492123
+      "views": 5959984,
+      "like": 732691,
+      "coin": 936880,
+      "favorite": 438492,
+      "share": 223315,
+      "engagement": 0.621939589099568
     },
     {
-      "bvid": "BV1caH56PELw",
-      "title": "【异世界情绪】日文翻唱《ファタール/Fatal》covered by ヰ世界情緒 × 夜乃くろむ",
-      "UP": "异世界情绪",
-      "mid": 488978908,
-      "views": 42111,
-      "like": 7885,
-      "coin": 3422,
-      "favorite": 5069,
-      "share": 1288,
-      "engagement": 0.6210966255847641
+      "bvid": "BV19Vnd6YEDv",
+      "title": "【周深｜现场】2026王者荣耀共创之夜演唱《曹操》",
+      "UP": "周深工作室",
+      "mid": 3546694058773380,
+      "views": 114672,
+      "like": 18224,
+      "coin": 15567,
+      "favorite": 7559,
+      "share": 1857,
+      "engagement": 0.5784585600669736
     },
     {
-      "bvid": "BV1swnX65EUR",
-      "title": "华晨宇新歌《不奉陪》 26巡演·南京站 多机位饭拍混剪【直拍星计划】",
-      "UP": "MARS草台班子筹备组",
-      "mid": 1927400409,
-      "views": 35616,
-      "like": 4900,
-      "coin": 4976,
-      "favorite": 2853,
-      "share": 1011,
-      "engagement": 0.6055986073674753
-    },
-    {
-      "bvid": "BV1zrHN6KEHm",
-      "title": "【花谱】日文翻唱《ダイダイダイダイダイキライ/超级超级超级超级超级讨厌》",
-      "UP": "花谱_kaf",
-      "mid": 488970166,
-      "views": 113234,
-      "like": 27955,
-      "coin": 5335,
-      "favorite": 13428,
-      "share": 2244,
-      "engagement": 0.5980977444937033
-    },
-    {
-      "bvid": "BV1BFnc69Edn",
-      "title": "你这一生会和很多条线相交，但没有一条能陪你走到最后",
-      "UP": "阿猪的人生公式",
-      "mid": 130918911,
-      "views": 449201,
-      "like": 90013,
-      "coin": 39799,
-      "favorite": 43365,
-      "share": 6220,
-      "engagement": 0.5845067130304696
-    },
-    {
-      "bvid": "BV1VsHw6nEZB",
-      "title": "请停留3秒向他献花，今天是毛岸英同志诞辰104周年，他生前常自问“我做毛泽东的儿子合格吗？”，毛泽东回答：合格！他是我的骄傲（编辑：卓光）",
-      "UP": "大象新闻",
-      "mid": 522653994,
-      "views": 547809,
-      "like": 265211,
-      "coin": 16122,
-      "favorite": 4945,
-      "share": 1183,
-      "engagement": 0.563203598334456
+      "bvid": "BV1mLnQ61Ek3",
+      "title": "三体20周年主题曲｜洛天依《谁听》",
+      "UP": "洛天依",
+      "mid": 36081646,
+      "views": 178403,
+      "like": 31356,
+      "coin": 15457,
+      "favorite": 16018,
+      "share": 4347,
+      "engagement": 0.5529783691978274
     }
   ]
 }
